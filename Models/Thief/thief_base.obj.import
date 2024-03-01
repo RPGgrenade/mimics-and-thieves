@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dikske4wvor7l"
+path="res://.godot/imported/thief_base.obj-0f8122aa63e20026b77cf9123c8cabed.mesh"
+
+[deps]
+
+files=["res://.godot/imported/thief_base.obj-0f8122aa63e20026b77cf9123c8cabed.mesh"]
+
+source_file="res://Models/Thief/thief_base.obj"
+dest_files=["res://.godot/imported/thief_base.obj-0f8122aa63e20026b77cf9123c8cabed.mesh", "res://.godot/imported/thief_base.obj-0f8122aa63e20026b77cf9123c8cabed.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

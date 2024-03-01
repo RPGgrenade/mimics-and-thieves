@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnettdkcw5eks"]
+
+[ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_mdb1k"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ncx2d"]
+sky_top_color = Color(0.180392, 0.486275, 0.619608, 1)
+sky_horizon_color = Color(0.435294, 0.713726, 0.694118, 1)
+ground_bottom_color = Color(0.2, 0.364706, 0.207843, 1)
+ground_horizon_color = Color(0.505882, 0.72549, 0.443137, 1)
+
+[sub_resource type="Sky" id="Sky_yii83"]
+sky_material = SubResource("ProceduralSkyMaterial_ncx2d")
+
+[sub_resource type="Environment" id="Environment_ml18f"]
+background_mode = 2
+sky = SubResource("Sky_yii83")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bftlq"]
+albedo_color = Color(0, 0.34902, 0.172549, 1)
+
+[node name="Testing Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ml18f")
+
+[node name="Level" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25089, -0.479765, -0.607428)
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_bftlq")
+
+[node name="Thief" parent="." instance=ExtResource("1_mdb1k")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.216474, 0.976288, 0, -0.976288, 0.216474, 0, 0, 0)
+shadow_enabled = true
