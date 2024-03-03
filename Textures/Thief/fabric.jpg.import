@@ -2,7 +2,7 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://du0s1qyux3c8i"
+uid="uid://cr31hdlj0fbju"
 path.s3tc="res://.godot/imported/fabric.jpg-c4c0f43088228a8dc38df526b65580b9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
@@ -20,7 +20,7 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=1
+compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1

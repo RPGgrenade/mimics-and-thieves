@@ -24,6 +24,10 @@ public partial class ThiefInputs : Node
     [Export] public bool CycleRight = false;
     [Export] public float CycleCooldown = 0.25f;
 
+    [ExportGroup("Utility")]
+    [Export] public bool JustGrabbed = false;
+    [Export] public bool JustDropped = false;
+
 
     private float cycleCooldown = 0.0f;
 
@@ -44,19 +48,22 @@ public partial class ThiefInputs : Node
         // Consume action check is for things that stop after being processed
         // Is buffered is for held things
         Jump = InputActionBuffer.Instance.ConsumeAction("Jump");
-        Run = InputActionBuffer.Instance.IsActionBuffered("Run");
+        Run = Input.IsActionPressed("Run");
         Dodge = InputActionBuffer.Instance.ConsumeAction("Dodge");
-        Grab = InputActionBuffer.Instance.IsActionBuffered("Grab");
-        Bag = InputActionBuffer.Instance.IsActionBuffered("Bag");
+        Grab = Input.IsActionPressed("Grab");
+        JustGrabbed = Input.IsActionJustPressed("Grab");
+        JustDropped = Input.IsActionJustReleased("Grab");
+        Bag = Input.IsActionPressed("Bag");
         Swing = InputActionBuffer.Instance.ConsumeAction("Swing");
 
         // UI input grabbing
         Pause = Input.IsActionJustPressed("Pause");
 
-        if(Input.IsActionJustReleased("CycleLeft") || Input.IsActionJustReleased("CycleRight"))
+        if (cycleCooldown > 0f) cycleCooldown -= (float)delta;
+        if(Input.IsActionJustReleased("CycleLeft") || Input.IsActionJustReleased("CycleRight")) cycleCooldown = 0f;
 
-        CycleLeft = Input.IsActionPressed("CycleLeft") && CycleCooldown <= 0f;
-        CycleRight = Input.IsActionPressed("CycleRight") && CycleCooldown <= 0f;
+        CycleLeft = Input.IsActionPressed("CycleLeft") && cycleCooldown <= 0f;
+        CycleRight = Input.IsActionPressed("CycleRight") && cycleCooldown <= 0f;
 
         if ((CycleLeft || CycleRight)) cycleCooldown = CycleCooldown;
     }

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=3 format=3 uid="uid://ccwytyxbbu3i"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="1_jmbhv"]
+[ext_resource type="Resource" uid="uid://cg3koxu33a72v" path="res://Resources/Relics/Magic/Reveal.tres" id="1_tdgph"]
+
+[resource]
+script = ExtResource("1_jmbhv")
+name = "Revelation Eye"
+description = "Eye of an baby devil frog. Quite valuable for its size."
+RelicPath = "res://Prefabs/Relics/revelation_eye.tscn"
+Money = 250
+Category = 3
+magic = ExtResource("1_tdgph")

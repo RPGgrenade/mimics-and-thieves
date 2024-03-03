@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=2 format=3 uid="uid://bgkl2cvl1wava"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="1_dpix6"]
+
+[resource]
+script = ExtResource("1_dpix6")
+name = "Blue Jewel"
+description = "A rare blue jewel that has some value, and maybe some magic?"
+RelicPath = "res://Prefabs/Relics/jewel_blue.tscn"
+Money = 150
+Category = 0

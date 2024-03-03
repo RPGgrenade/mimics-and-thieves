@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=2 format=3 uid="uid://vs2ixlabjc8s"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Magic.cs" id="1_qppd3"]
+
+[resource]
+script = ExtResource("1_qppd3")
+name = "Protection"
+type = 0
+Description = "Protects the user from physical attacks for 8 seconds."

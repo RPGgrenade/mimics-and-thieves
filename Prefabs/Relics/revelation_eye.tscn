@@ -1,0 +1,143 @@
+[gd_scene load_steps=23 format=3 uid="uid://c6h8hd4bby33l"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_22ovn"]
+[ext_resource type="Resource" uid="uid://ccwytyxbbu3i" path="res://Resources/Relics/Revelation Eye.tres" id="2_jaki8"]
+[ext_resource type="Script" path="res://Scripts/Relics/Effects/RevealEffect.cs" id="3_ufdgf"]
+[ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="4_0my6e"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="6_accdp"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="7_kvxlr"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="8_o5i7w"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="9_mgpqd"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="10_xsyl1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h7436"]
+radius = 0.172818
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32qts"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.2, 0.2, 0.2, 1)
+metallic = 0.5
+roughness = 0.31
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = ExtResource("4_0my6e")
+clearcoat_enabled = true
+clearcoat = 0.65
+clearcoat_roughness = 0.44
+backlight = Color(0.54902, 0.321569, 0.239216, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ahalq"]
+load_path = "res://.godot/imported/hair_n.jpg-e853b287ffd36a7c6b1d6c548c2f1b53.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ub0w8"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.992157, 0.54902, 0.235294, 1)
+metallic = 0.5
+roughness = 0.31
+normal_enabled = true
+normal_scale = 0.2
+normal_texture = SubResource("CompressedTexture2D_ahalq")
+clearcoat_enabled = true
+clearcoat = 0.65
+clearcoat_roughness = 0.44
+backlight = Color(0.54902, 0.321569, 0.239216, 1)
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
+
+[sub_resource type="Resource" id="Resource_76rnk"]
+script = ExtResource("9_mgpqd")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_o2k08"]
+resource_name = "Use"
+script = ExtResource("10_xsyl1")
+Name = "Use"
+Sounds = Array[Object]([SubResource("Resource_76rnk")])
+
+[sub_resource type="Resource" id="Resource_roj5q"]
+script = ExtResource("9_mgpqd")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_efuyy"]
+resource_name = "Grab"
+script = ExtResource("10_xsyl1")
+Name = "Grab"
+Sounds = Array[Object]([SubResource("Resource_roj5q")])
+
+[sub_resource type="Resource" id="Resource_sfr58"]
+script = ExtResource("9_mgpqd")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_qqw1t"]
+resource_name = "Break"
+script = ExtResource("10_xsyl1")
+Name = "Break"
+Sounds = Array[Object]([SubResource("Resource_sfr58")])
+
+[sub_resource type="Resource" id="Resource_d5gy7"]
+script = ExtResource("9_mgpqd")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_y4gmc"]
+resource_name = "Collide"
+script = ExtResource("10_xsyl1")
+Name = "Collide"
+Sounds = Array[Object]([SubResource("Resource_d5gy7")])
+
+[node name="Revelation Eye" type="CharacterBody3D" node_paths=PackedStringArray("effect", "Manager") groups=["Relic"]]
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+script = ExtResource("1_22ovn")
+loot = ExtResource("2_jaki8")
+effect = NodePath("Magic")
+Friction = 0.1
+FrictionLimit = 0.9
+RotationSpeed = 0.5
+BounceAmount = 0.6
+BounceThreshold = 1.0
+Gravity = 11.0
+Manager = NodePath("Sounds")
+
+[node name="Magic" type="Node3D" parent="."]
+script = ExtResource("3_ufdgf")
+EffectGroups = PackedStringArray("Mimic", "Relic")
+Radius = 15.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_h7436")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGSphere3D" parent="Model"]
+radius = 0.17
+radial_segments = 8
+material = SubResource("StandardMaterial3D_32qts")
+
+[node name="CSGBox3D2" type="CSGSphere3D" parent="Model/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0, 0.107215)
+radius = 0.13
+rings = 11
+material = SubResource("StandardMaterial3D_ub0w8")
+
+[node name="Glow" type="Node3D" parent="."]
+script = ExtResource("6_accdp")
+
+[node name="CSGBox3D2" type="CSGSphere3D" parent="Glow"]
+radius = 0.17
+radial_segments = 8
+material = ExtResource("7_kvxlr")
+
+[node name="CSGBox3D2" type="CSGSphere3D" parent="Glow/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 0, 0.107215)
+radius = 0.13
+rings = 11
+material = ExtResource("7_kvxlr")
+
+[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_k0gv2")
+autoplay = true
+script = ExtResource("8_o5i7w")
+Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

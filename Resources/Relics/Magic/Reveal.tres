@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=2 format=3 uid="uid://cg3koxu33a72v"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Magic.cs" id="1_hon8h"]
+
+[resource]
+script = ExtResource("1_hon8h")
+name = "Revelation"
+type = 0
+Description = "Reveals nearby lurkers and loot for about 5 seconds."

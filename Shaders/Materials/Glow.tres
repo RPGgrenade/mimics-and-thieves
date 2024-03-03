@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://2l53ugu5c5tw"]
+
+[resource]
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0.713726, 0.247059, 1, 1)
+refraction_scale = 1.0
+grow = true
+grow_amount = 0.05
+point_size = 9.3
+proximity_fade_distance = 476.3
+distance_fade_mode = 1
+distance_fade_min_distance = 1.0
+distance_fade_max_distance = 5.0

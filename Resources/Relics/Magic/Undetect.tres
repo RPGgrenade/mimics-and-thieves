@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=2 format=3 uid="uid://cr8xn6crpumhy"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Magic.cs" id="1_u0gtk"]
+
+[resource]
+script = ExtResource("1_u0gtk")
+name = "Undetection"
+type = 0
+Description = "Makes the user undetectable for 10 seconds."

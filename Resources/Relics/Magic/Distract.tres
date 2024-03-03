@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=2 format=3 uid="uid://c4f1tw3x5ueid"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Magic.cs" id="1_1v513"]
+
+[resource]
+script = ExtResource("1_1v513")
+name = "Distraction"
+type = 0
+Description = "Produces an object that will distract any nearby lurkers for 10 seconds."
