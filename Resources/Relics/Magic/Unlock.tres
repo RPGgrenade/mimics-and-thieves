@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Magic" load_steps=2 format=3 uid="uid://b1k7mya26o3y8"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Magic.cs" id="1_1comi"]
+
+[resource]
+script = ExtResource("1_1comi")
+name = "Unlock"
+type = 1
+Description = "Unlocks a singular door inside the magic manor"

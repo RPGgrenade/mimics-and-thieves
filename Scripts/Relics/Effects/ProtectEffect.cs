@@ -23,6 +23,7 @@ public partial class ProtectEffect : MagicEffect
                     Barrier barrierScript = barrier as Barrier;
                     barrierScript.Time = Duration;
                     target3D.AddChild(barrierScript);
+                    barrierScript.controller = target3D as ThiefController;
                     barrierScript.RotationDegrees = Vector3.Zero;
                     barrierScript.Position = new Vector3(0f, 1f, 0f);
                 }

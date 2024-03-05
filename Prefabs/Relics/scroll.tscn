@@ -1,0 +1,222 @@
+[gd_scene load_steps=26 format=3 uid="uid://cl7lrgi537jr4"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_yk4dm"]
+[ext_resource type="Resource" uid="uid://ckl5u1xnb5fgb" path="res://Resources/Relics/Stealth Scroll.tres" id="2_i8va0"]
+[ext_resource type="Script" path="res://Scripts/Relics/Effects/UndetectEffect.cs" id="3_8q4o6"]
+[ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="5_wfiyc"]
+[ext_resource type="Texture2D" uid="uid://cr31hdlj0fbju" path="res://Textures/Thief/fabric.jpg" id="6_b8mnq"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_8hojo"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="9_8wctp"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="10_5x85s"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="11_ymq4t"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="12_anneq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxbyp"]
+size = Vector3(0.3, 0.15, 0.875)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cfxt"]
+albedo_color = Color(0.890196, 0.709804, 0.4, 1)
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("5_wfiyc")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wqkw6"]
+load_path = "res://.godot/imported/wood_n.jpg-fa4a0755b839030a497050a87d6de580.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfpe5"]
+albedo_color = Color(0.482353, 0.0509804, 0, 1)
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = SubResource("CompressedTexture2D_wqkw6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iwrtr"]
+albedo_color = Color(0.482353, 0.0509804, 0, 1)
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = SubResource("CompressedTexture2D_wqkw6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0lhx"]
+albedo_color = Color(0.890196, 0.709804, 0.4, 1)
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("6_b8mnq")
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
+
+[sub_resource type="Resource" id="Resource_76rnk"]
+script = ExtResource("11_ymq4t")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_o2k08"]
+resource_name = "Use"
+script = ExtResource("12_anneq")
+Name = "Use"
+Sounds = Array[Object]([SubResource("Resource_76rnk")])
+
+[sub_resource type="Resource" id="Resource_roj5q"]
+script = ExtResource("11_ymq4t")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_efuyy"]
+resource_name = "Grab"
+script = ExtResource("12_anneq")
+Name = "Grab"
+Sounds = Array[Object]([SubResource("Resource_roj5q")])
+
+[sub_resource type="Resource" id="Resource_sfr58"]
+script = ExtResource("11_ymq4t")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_qqw1t"]
+resource_name = "Break"
+script = ExtResource("12_anneq")
+Name = "Break"
+Sounds = Array[Object]([SubResource("Resource_sfr58")])
+
+[sub_resource type="Resource" id="Resource_d5gy7"]
+script = ExtResource("11_ymq4t")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_y4gmc"]
+resource_name = "Collide"
+script = ExtResource("12_anneq")
+Name = "Collide"
+Sounds = Array[Object]([SubResource("Resource_d5gy7")])
+
+[node name="Stealth Scroll" type="CharacterBody3D" node_paths=PackedStringArray("effect", "Manager") groups=["Relic"]]
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+script = ExtResource("1_yk4dm")
+loot = ExtResource("2_i8va0")
+effect = NodePath("Magic")
+Friction = 0.19
+FrictionLimit = 0.9
+RotationSpeed = 4.79
+BounceAmount = 0.33
+BounceThreshold = 0.96
+Gravity = 11.0
+Manager = NodePath("Sounds")
+
+[node name="Magic" type="Node3D" parent="."]
+script = ExtResource("3_8q4o6")
+EffectGroup = "player"
+ExcludeEffectGroup = "balloon"
+Duration = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0702141, 0)
+shape = SubResource("BoxShape3D_gxbyp")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CSGCylinder3D3" type="CSGBox3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.17, 0.6, 0.01)
+material = SubResource("StandardMaterial3D_2cfxt")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.065, -2.57103e-09, -0.0588182)
+radius = 0.07
+height = 0.6
+material = SubResource("StandardMaterial3D_2cfxt")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/CSGCylinder3D3/CSGCylinder3D"]
+radius = 0.02
+height = 0.72
+material = SubResource("StandardMaterial3D_wfpe5")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Model/CSGCylinder3D3/CSGCylinder3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = SubResource("StandardMaterial3D_iwrtr")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model/CSGCylinder3D3/CSGCylinder3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = SubResource("StandardMaterial3D_iwrtr")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.065, -2.57103e-09, -0.0588182)
+radius = 0.07
+height = 0.6
+material = SubResource("StandardMaterial3D_c0lhx")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/CSGCylinder3D3/CSGCylinder3D2"]
+radius = 0.02
+height = 0.72
+material = SubResource("StandardMaterial3D_wfpe5")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Model/CSGCylinder3D3/CSGCylinder3D2/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = SubResource("StandardMaterial3D_iwrtr")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model/CSGCylinder3D3/CSGCylinder3D2/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = SubResource("StandardMaterial3D_iwrtr")
+
+[node name="Glow" type="Node3D" parent="."]
+script = ExtResource("8_8hojo")
+
+[node name="CSGCylinder3D3" type="CSGBox3D" parent="Glow"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.17, 0.6, 0.01)
+material = ExtResource("9_8wctp")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Glow/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.065, -2.57103e-09, -0.0588182)
+radius = 0.07
+height = 0.6
+material = ExtResource("9_8wctp")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Glow/CSGCylinder3D3/CSGCylinder3D"]
+radius = 0.02
+height = 0.72
+material = ExtResource("9_8wctp")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Glow/CSGCylinder3D3/CSGCylinder3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = ExtResource("9_8wctp")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Glow/CSGCylinder3D3/CSGCylinder3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = ExtResource("9_8wctp")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Glow/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.065, -2.57103e-09, -0.0588182)
+radius = 0.07
+height = 0.6
+material = ExtResource("9_8wctp")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Glow/CSGCylinder3D3/CSGCylinder3D2"]
+radius = 0.02
+height = 0.72
+material = ExtResource("9_8wctp")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Glow/CSGCylinder3D3/CSGCylinder3D2/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = ExtResource("9_8wctp")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Glow/CSGCylinder3D3/CSGCylinder3D2/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39, 0)
+radius = 0.04
+radial_segments = 10
+material = ExtResource("9_8wctp")
+
+[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_k0gv2")
+autoplay = true
+script = ExtResource("10_5x85s")
+Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

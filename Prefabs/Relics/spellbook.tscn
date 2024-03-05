@@ -1,0 +1,164 @@
+[gd_scene load_steps=26 format=3 uid="uid://bohw01wm1a7ns"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_aude1"]
+[ext_resource type="Resource" uid="uid://dthqvd42qjlfh" path="res://Resources/Relics/Spell Book.tres" id="2_lh6co"]
+[ext_resource type="Script" path="res://Scripts/Relics/Effects/DistractEffect.cs" id="3_u2mcr"]
+[ext_resource type="PackedScene" uid="uid://cqg6dvy04wnnw" path="res://Prefabs/Thief/thief_balloon.tscn" id="4_gnps0"]
+[ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="5_rqpb3"]
+[ext_resource type="Texture2D" uid="uid://c83l21pddpuki" path="res://Textures/Materials/magic_01.png" id="6_pjaav"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="7_0rjpx"]
+[ext_resource type="Texture2D" uid="uid://dw8mbw21o6oyf" path="res://Textures/Materials/magic_03.png" id="7_42yki"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="8_8ad67"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="9_xj1l3"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="10_bjdmi"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="11_1tjd0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxbyp"]
+size = Vector3(0.5, 0.15, 0.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isfir"]
+albedo_color = Color(0.901961, 0.819608, 0.698039, 1)
+metallic_specular = 0.0
+roughness = 0.45
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("5_rqpb3")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y8ce1"]
+load_path = "res://.godot/imported/hair_n.jpg-e853b287ffd36a7c6b1d6c548c2f1b53.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oivie"]
+albedo_color = Color(0.14902, 0.262745, 0.45098, 1)
+metallic_specular = 0.0
+roughness = 0.45
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = SubResource("CompressedTexture2D_y8ce1")
+uv1_scale = Vector3(1.745, 1.745, 1.745)
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
+
+[sub_resource type="Resource" id="Resource_76rnk"]
+script = ExtResource("10_bjdmi")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_o2k08"]
+resource_name = "Use"
+script = ExtResource("11_1tjd0")
+Name = "Use"
+Sounds = Array[Object]([SubResource("Resource_76rnk")])
+
+[sub_resource type="Resource" id="Resource_roj5q"]
+script = ExtResource("10_bjdmi")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_efuyy"]
+resource_name = "Grab"
+script = ExtResource("11_1tjd0")
+Name = "Grab"
+Sounds = Array[Object]([SubResource("Resource_roj5q")])
+
+[sub_resource type="Resource" id="Resource_sfr58"]
+script = ExtResource("10_bjdmi")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_qqw1t"]
+resource_name = "Break"
+script = ExtResource("11_1tjd0")
+Name = "Break"
+Sounds = Array[Object]([SubResource("Resource_sfr58")])
+
+[sub_resource type="Resource" id="Resource_d5gy7"]
+script = ExtResource("10_bjdmi")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_y4gmc"]
+resource_name = "Collide"
+script = ExtResource("11_1tjd0")
+Name = "Collide"
+Sounds = Array[Object]([SubResource("Resource_d5gy7")])
+
+[node name="Spell Book" type="CharacterBody3D" node_paths=PackedStringArray("effect", "Manager") groups=["Relic"]]
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+script = ExtResource("1_aude1")
+loot = ExtResource("2_lh6co")
+effect = NodePath("Magic")
+Friction = 0.25
+FrictionLimit = 0.9
+BounceAmount = 0.2
+BounceThreshold = 1.0
+Gravity = 11.0
+Manager = NodePath("Sounds")
+
+[node name="Magic" type="Node3D" parent="."]
+script = ExtResource("3_u2mcr")
+Balloon = ExtResource("4_gnps0")
+Duration = 10.0
+OffsetForward = -2.0
+OffsetUp = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gxbyp")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model"]
+size = Vector3(0.4, 0.1, 0.6)
+material = SubResource("StandardMaterial3D_isfir")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Model/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0532759, 0)
+size = Vector3(0.42, 0.03, 0.62)
+material = SubResource("StandardMaterial3D_oivie")
+
+[node name="Decal" type="Decal" parent="Model/CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0270666, 0)
+size = Vector3(0.6, 0.04, 0.6)
+texture_albedo = ExtResource("6_pjaav")
+modulate = Color(0.796078, 0.152941, 0, 1)
+
+[node name="Decal2" type="Decal" parent="Model/CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0270666, 0)
+size = Vector3(0.3, 0.04, 0.3)
+texture_albedo = ExtResource("7_42yki")
+modulate = Color(0.796078, 0.152941, 0, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Model/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0571202, 0)
+size = Vector3(0.42, 0.03, 0.62)
+material = SubResource("StandardMaterial3D_oivie")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Model/CSGBox3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.208199, -0.000210784, 0)
+size = Vector3(0.12, 0.03, 0.62)
+material = SubResource("StandardMaterial3D_oivie")
+
+[node name="Glow" type="Node3D" parent="."]
+script = ExtResource("7_0rjpx")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Glow"]
+size = Vector3(0.4, 0.1, 0.6)
+material = ExtResource("8_8ad67")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Glow/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0532759, 0)
+size = Vector3(0.42, 0.03, 0.62)
+material = ExtResource("8_8ad67")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Glow/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0571202, 0)
+size = Vector3(0.42, 0.03, 0.62)
+material = ExtResource("8_8ad67")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Glow/CSGBox3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.208199, -0.000210784, 0)
+size = Vector3(0.12, 0.03, 0.62)
+material = ExtResource("8_8ad67")
+
+[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_k0gv2")
+autoplay = true
+script = ExtResource("9_xj1l3")
+Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

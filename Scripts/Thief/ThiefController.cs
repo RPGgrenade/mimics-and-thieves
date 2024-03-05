@@ -6,6 +6,7 @@ public partial class ThiefController : CharacterBody3D
     [ExportCategory("Scripts")]
     [Export] public ThiefInputs inputs;
     [Export] public AnimVariables variables;
+    [Export] public Node3D Undetect;
     [Export] public Inventory loot;
     [Export] public Grab grab;
     [Export] public ThiefUI UI;
@@ -16,6 +17,7 @@ public partial class ThiefController : CharacterBody3D
     [Export] public bool IsDodging = false;
     [Export] public bool IsProtected = false;
     [Export] public bool IsUndetectable = false;
+    [Export] public float UndetectSpeed = 4f;
     [Export] private float MomentumReducitonSpeed = 15.0f;
     [Export] private float MomentumAirReducitonSpeed = 3.0f;
     [ExportSubgroup("Walking")]
@@ -57,6 +59,14 @@ public partial class ThiefController : CharacterBody3D
     private Vector3 momentum = Vector3.Zero;
     private Vector3 move_direction = Vector3.Zero;
     private Vector3 stored_move_direction = Vector3.Zero;
+
+    private Vector3 undetectSize = Vector3.Zero;
+
+    public override void _Ready()
+    {
+        undetectSize = Undetect.Scale;
+        Undetect.Scale = Vector3.Zero;
+    }
 
     public override void _Process(double delta)
     {
@@ -115,11 +125,31 @@ public partial class ThiefController : CharacterBody3D
                         selected.UI ?? null
                     );
             }
+
+            Undetect.Scale = Undetect.Scale.Lerp(IsUndetectable ? undetectSize : Vector3.Zero, (float)delta * UndetectSpeed);
         }
     }
 
     public void SlowDodge() {
         move_direction = Vector3.Zero;
+    }
+
+    public void SetUndetectable(float duration)
+    {
+        IsUndetectable = true;
+        Timer timer = new Timer();
+        timer.Connect("timeout", new Callable(this, "Detectable"));
+        timer.WaitTime = duration;
+        timer.Autostart = true;
+        timer.OneShot = true;
+        this.AddChild(timer);
+    }
+
+    private void Detectable()
+    {
+        // Particles
+        // Sound
+        IsUndetectable = false;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -170,8 +200,8 @@ public partial class ThiefController : CharacterBody3D
                 rotationDifferenceVelocityChange(IsRunning ? RunningRotationDifferenceSpeedMultiplier : WalkingRotationDifferenceSpeedMultiplier);
                 Velocity = (_velocity + momentum);
             }
-            GD.Print("Momentum: " + momentum);
-            GD.Print("Velocity: " + _velocity);
+            //GD.Print("Momentum: " + momentum);
+            //GD.Print("Velocity: " + _velocity);
             MoveAndSlide();
         }
     }

@@ -95,12 +95,12 @@ slide_on_ceiling = false
 script = ExtResource("1_2eyl3")
 loot = ExtResource("2_fv4a8")
 effect = NodePath("Magic")
-Friction = 0.1
+Friction = 0.15
 FrictionLimit = 0.9
-RotationSpeed = 0.5
+RotationSpeed = 3.0
 BounceAmount = 0.6
 BounceThreshold = 1.0
-Gravity = 11.0
+Gravity = 10.0
 Manager = NodePath("Sounds")
 
 [node name="Magic" type="Node3D" parent="."]

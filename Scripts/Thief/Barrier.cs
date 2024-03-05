@@ -9,13 +9,12 @@ public partial class Barrier : Node3D
     [Export] public float Time = 8f;
 
 	private float time = 0f;
-	private ThiefController controller;
+	public ThiefController controller;
 
 	public override void _Ready()
 	{
 		time = Time;
 		Visual.Scale = Vector3.Zero;
-		controller = Owner as ThiefController;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

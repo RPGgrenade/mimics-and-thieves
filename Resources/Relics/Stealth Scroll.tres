@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=4 format=3 uid="uid://ckl5u1xnb5fgb"]
+
+[ext_resource type="Texture2D" uid="uid://cqobsac1fhqc4" path="res://Textures/UI/Items/scroll.png" id="1_ycl2q"]
+[ext_resource type="Resource" uid="uid://cr8xn6crpumhy" path="res://Resources/Relics/Magic/Undetect.tres" id="2_xq1j7"]
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="3_607no"]
+
+[resource]
+script = ExtResource("3_607no")
+name = "Stealth Scroll"
+description = "A scroll of ancient spells. One seems to be readable.
+[350 Coins]"
+UI = ExtResource("1_ycl2q")
+RelicPath = "res://Prefabs/Relics/scroll.tscn"
+Money = 350
+Category = 1
+magic = ExtResource("2_xq1j7")

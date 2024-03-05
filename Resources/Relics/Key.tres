@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=4 format=3 uid="uid://cgel4eix6t7qb"]
+
+[ext_resource type="Resource" uid="uid://b1k7mya26o3y8" path="res://Resources/Relics/Magic/Unlock.tres" id="1_ha4fj"]
+[ext_resource type="Texture2D" uid="uid://bk2o5i3kaq7ik" path="res://Textures/UI/Items/key.png" id="1_n5sbc"]
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="2_4gya8"]
+
+[resource]
+script = ExtResource("2_4gya8")
+name = "Magic Key"
+description = "A magical key made of gold and other valuable materials
+[750 coins]"
+UI = ExtResource("1_n5sbc")
+RelicPath = "res://Prefabs/Relics/key.tscn"
+Money = 750
+Category = 2
+magic = ExtResource("1_ha4fj")

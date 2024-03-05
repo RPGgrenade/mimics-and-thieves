@@ -175,6 +175,8 @@ public partial class Inventory : Node
                     .Rotated(Vector3.Up, GD.RandRange(-180,180)).Normalized() 
                     * (float)GD.RandRange(LossPower.X, LossPower.Y);
                 item.Used = true;
+                item.UsedTimeout = 4f;
+                item.IsUsed();
                 item.SetVelocity(throwVector + (Owner as ThiefController).Velocity);
             }
         }

@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-[GlobalClass]
 public partial class RevealEffect : MagicEffect
 {
     [Export] public string[] EffectGroups;

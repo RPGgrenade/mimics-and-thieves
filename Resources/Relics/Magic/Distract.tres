@@ -6,4 +6,4 @@
 script = ExtResource("1_1v513")
 name = "Distraction"
 type = 0
-Description = "Produces an object that will distract any nearby lurkers for 10 seconds."
+Description = "Produces an object that will distract any nearby lurkens for 10 seconds."

@@ -11,6 +11,6 @@ description = "A ball made of a magical crystal. Seems sturdy.
 [400 Coins]"
 UI = ExtResource("1_q52jg")
 RelicPath = "res://Prefabs/Relics/crystal_ball.tscn"
-Money = 250
+Money = 400
 Category = 1
 magic = ExtResource("2_7wfo6")
