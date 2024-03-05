@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=4 format=3 uid="uid://caqdcofdlj85k"]
+
+[ext_resource type="Texture2D" uid="uid://bwmnkxqbbpamj" path="res://Textures/UI/Items/crystal_ball.png" id="1_q52jg"]
+[ext_resource type="Resource" uid="uid://vs2ixlabjc8s" path="res://Resources/Relics/Magic/Protect.tres" id="2_7wfo6"]
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="3_6tgp1"]
+
+[resource]
+script = ExtResource("3_6tgp1")
+name = "Crystal Ball"
+description = "A ball made of a magical crystal. Seems sturdy.
+[400 Coins]"
+UI = ExtResource("1_q52jg")
+RelicPath = "res://Prefabs/Relics/crystal_ball.tscn"
+Money = 250
+Category = 1
+magic = ExtResource("2_7wfo6")

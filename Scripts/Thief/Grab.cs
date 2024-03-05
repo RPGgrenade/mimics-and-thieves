@@ -24,6 +24,7 @@ public partial class Grab : Area3D
 
     public void OnHit(Node3D body)
     {
+        GD.Print("Grab");
         if (body.IsInGroup(RelicGroup) && Item == null)
         {
             grabItem(body);
@@ -32,6 +33,7 @@ public partial class Grab : Area3D
 
     private void grabItem(Node3D item)
     {
+        GD.Print("Grab "+item.Name);
         Item = item;
         Item.Reparent(Grip);
 

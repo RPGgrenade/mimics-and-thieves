@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnettdkcw5eks"]
+[gd_scene load_steps=12 format=3 uid="uid://cnettdkcw5eks"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_mdb1k"]
 [ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="2_uwt82"]
 [ext_resource type="PackedScene" uid="uid://c6h8hd4bby33l" path="res://Prefabs/Relics/revelation_eye.tscn" id="3_tomiv"]
 [ext_resource type="PackedScene" uid="uid://b3l7sejy6ceif" path="res://Prefabs/Relics/jewel_blue.tscn" id="4_u1qby"]
 [ext_resource type="PackedScene" uid="uid://cr8qg0160hn07" path="res://Prefabs/Relics/jewel_red.tscn" id="5_7al0w"]
+[ext_resource type="PackedScene" uid="uid://ddx5ikc2wmrsy" path="res://Prefabs/Relics/crystal_ball.tscn" id="6_rljel"]
+[ext_resource type="PackedScene" uid="uid://cqg6dvy04wnnw" path="res://Prefabs/Thief/thief_balloon.tscn" id="7_uxjbf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ncx2d"]
 sky_top_color = Color(0.180392, 0.486275, 0.619608, 1)
@@ -109,3 +111,9 @@ Manager = NodePath("../Jewel Red/Sounds")
 [node name="Jewel Red4" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("5_7al0w")]
 transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 5.06866, 0.112932, -6.61606)
 Manager = NodePath("../Jewel Red2/Sounds")
+
+[node name="Crystal Ball" parent="." instance=ExtResource("6_rljel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8728, 0.354067, -2.55063)
+
+[node name="Thief Decoy" parent="." instance=ExtResource("7_uxjbf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.694147, -1)

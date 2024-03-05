@@ -166,23 +166,23 @@ advance_mode = 2
 advance_expression = "Get(\"OnGround\") && Get(\"HorizontalSpeed\") >= 0.05"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ofk24"]
-xfade_time = 0.15
+xfade_time = 0.3
 advance_mode = 2
-advance_expression = "Get(\"Dodge\")"
+advance_expression = "Get(\"Dodge\") && Get(\"HorizontalSpeed\") > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_be1mk"]
-xfade_time = 0.15
+xfade_time = 0.5
 switch_mode = 2
 advance_mode = 2
 advance_expression = "Get(\"HorizontalSpeed\") < 0.05"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1y2rg"]
-xfade_time = 0.15
+xfade_time = 0.3
 advance_mode = 2
-advance_expression = "Get(\"Dodge\")"
+advance_expression = "Get(\"Dodge\") && Get(\"HorizontalSpeed\") > 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0d6hj"]
-xfade_time = 0.15
+xfade_time = 0.5
 switch_mode = 2
 advance_mode = 2
 advance_expression = "Get(\"HorizontalSpeed\") >= 0.05"
@@ -193,9 +193,9 @@ advance_mode = 2
 advance_expression = "Get(\"Jump\")"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kquqy"]
-xfade_time = 0.15
+xfade_time = 0.3
 advance_mode = 2
-advance_expression = "Get(\"Dodge\")"
+advance_expression = "Get(\"Dodge\") && Get(\"HorizontalSpeed\") > 0"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q06na"]
 states/Dodge/node = SubResource("AnimationNodeAnimation_xmkvu")
@@ -208,10 +208,10 @@ states/Jump/position = Vector2(579, -75)
 states/Walk/node = SubResource("AnimationNodeBlendTree_xmdcj")
 states/Walk/position = Vector2(864, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_o0ajl"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_13cvi"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_qu50o"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_3gao7"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_weqys"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_4216y"), "Jump", "Walk", SubResource("AnimationNodeStateMachineTransition_b3q0s"), "Idle", "Dodge", SubResource("AnimationNodeStateMachineTransition_ofk24"), "Dodge", "Idle", SubResource("AnimationNodeStateMachineTransition_be1mk"), "Walk", "Dodge", SubResource("AnimationNodeStateMachineTransition_1y2rg"), "Dodge", "Walk", SubResource("AnimationNodeStateMachineTransition_0d6hj"), "Dodge", "Jump", SubResource("AnimationNodeStateMachineTransition_ug08o"), "Jump", "Dodge", SubResource("AnimationNodeStateMachineTransition_kquqy")]
-graph_offset = Vector2(-3, -137)
+graph_offset = Vector2(-177.998, 29)
 
 [resource]
-graph_offset = Vector2(-329, -23)
+graph_offset = Vector2(-530.709, -31.4091)
 nodes/Arm/node = SubResource("AnimationNodeStateMachine_u2d57")
 nodes/Arm/position = Vector2(-340, 160)
 "nodes/Arm Blend/node" = SubResource("AnimationNodeBlend2_sxw84")

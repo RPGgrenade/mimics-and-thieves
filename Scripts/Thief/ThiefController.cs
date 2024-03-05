@@ -12,8 +12,12 @@ public partial class ThiefController : CharacterBody3D
 
     [ExportCategory("Movement")]
     [ExportGroup("Ground")]
-    [Export] private bool IsRunning = false;
-    [Export] private bool IsDodging = false;
+    [Export] public bool IsRunning = false;
+    [Export] public bool IsDodging = false;
+    [Export] public bool IsProtected = false;
+    [Export] public bool IsUndetectable = false;
+    [Export] private float MomentumReducitonSpeed = 15.0f;
+    [Export] private float MomentumAirReducitonSpeed = 3.0f;
     [ExportSubgroup("Walking")]
     [Export] private float WalkingAcceleration = 2.0f;
     [Export] private float WalkingDecceleration = 14.0f;
@@ -32,6 +36,8 @@ public partial class ThiefController : CharacterBody3D
     [Export] private float DodgingMaxSpeed = 15.0f;
     [Export] private float DodgingRotationSpeed = 10.0f;
     [ExportGroup("Air")]
+    [Export] private float CoyoteTime = 0.1f; //6 Frames
+    [Export] private float DodgeCoyoteTime = 1.0f; //6 Frames
     [Export] private float JumpVelocity = 4.5f;
     [Export] private float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
@@ -46,7 +52,7 @@ public partial class ThiefController : CharacterBody3D
     private float _current_speed = 0.0f;
     private float _current_rotation_difference = 1.0f;
 
-    private float _shoot_cooldown = 0.0f;
+    private float _coyote_time = 0.0f;
 
     private Vector3 momentum = Vector3.Zero;
     private Vector3 move_direction = Vector3.Zero;
@@ -121,7 +127,14 @@ public partial class ThiefController : CharacterBody3D
         if (!UI.Paused)
         {
             IsRunning = inputs.Run;
-            if (momentum == Vector3.Zero)
+            if (IsOnFloor())
+            {
+                stored_move_direction = stored_move_direction.Lerp(move_direction, (float)delta * 5f);
+                _coyote_time = IsDodging ? DodgeCoyoteTime : CoyoteTime;
+            }
+            else
+                _coyote_time -= (float)delta;
+            if (momentum.Length() <= 0.1f || !IsOnFloor())
             {
                 move_direction = Vector3.Zero;
                 // Get inputs and create rotation based on camera (spring) rotation
@@ -145,7 +158,7 @@ public partial class ThiefController : CharacterBody3D
             }
             else
             {
-                momentum = Vector3.Zero;
+                momentum = momentum.Lerp(Vector3.Zero,(float)delta * (IsOnFloor() ? MomentumReducitonSpeed : MomentumAirReducitonSpeed));
                 accelerationControl(move_direction, (float)delta,
                     IsRunning ? RunningAcceleration : WalkingAcceleration,
                     IsRunning ? RunningDecceleration : WalkingDecceleration,
@@ -155,8 +168,10 @@ public partial class ThiefController : CharacterBody3D
                 jumping(JumpVelocity);
                 rotating((float)delta, IsRunning ? RunningRotationSpeed : WalkingRotationSpeed);
                 rotationDifferenceVelocityChange(IsRunning ? RunningRotationDifferenceSpeedMultiplier : WalkingRotationDifferenceSpeedMultiplier);
-                Velocity = _velocity;
+                Velocity = (_velocity + momentum);
             }
+            GD.Print("Momentum: " + momentum);
+            GD.Print("Velocity: " + _velocity);
             MoveAndSlide();
         }
     }
@@ -176,6 +191,13 @@ public partial class ThiefController : CharacterBody3D
             _velocity.X = move_direction.X * _current_speed;
             _velocity.Z = move_direction.Z * _current_speed;
         }
+        //else if (!use_momentum && !IsOnFloor())
+        //{
+        //    momentum.X = stored_move_direction.X * _current_speed/2f;
+        //    momentum.Z = stored_move_direction.Z * _current_speed/2f;
+        //    _velocity.X = move_direction.X * _current_speed;
+        //    _velocity.Z = move_direction.Z * _current_speed;
+        //}
         else
         {
             momentum.X = stored_move_direction.X * _current_speed;
@@ -187,12 +209,15 @@ public partial class ThiefController : CharacterBody3D
     private void jumping(float jumpVelocity)
     {
         // Jumping logic
-        bool just_landed = IsOnFloor() && _snap_vector == Vector3.Zero;
-        bool is_jumping = IsOnFloor() && inputs.Jump;
+        bool just_landed = (IsOnFloor() || _coyote_time > 0f) && _snap_vector == Vector3.Zero;
+        bool is_jumping = (IsOnFloor() || _coyote_time > 0f) && inputs.Jump;
         if (is_jumping)
         {
-            _velocity.Y = jumpVelocity;
+            _velocity.Y = IsDodging ? 0f : jumpVelocity;
+            momentum.Y = IsDodging ? jumpVelocity : 0f;
             _snap_vector = Vector3.Zero;
+            momentum.X = stored_move_direction.X * _current_speed;
+            momentum.Z = stored_move_direction.Z * _current_speed;
         }
         else _snap_vector = Vector3.Down;
         FloorSnapLength = _snap_vector.Length();

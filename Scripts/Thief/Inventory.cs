@@ -21,6 +21,9 @@ public partial class Inventory : Node
     [Export] public Loot SelectedLoot;
     [Export] public int SelectedCount; 
     [Export] public int TotalValue;
+    [Export] public Vector2 LossCount = new Vector2(2, 4);
+    [Export] public Vector2 LossPower = new Vector2(4, 10);
+    [Export] public Vector2 LossAngle = new Vector2(30f, 50f);
 
     [ExportCategory("Bag Visuals")]
     [ExportGroup("Bag")]
@@ -105,10 +108,10 @@ public partial class Inventory : Node
         countTotals();
     }
 
-    public Node3D RemoveLoot()
+    public Node3D RemoveLoot(Loot selected = null)
     {
         Node3D relic = new Node3D();
-        Loot loot = SelectedLoot;
+        Loot loot = selected ?? SelectedLoot;
         GD.Print("Loot: "+_allLoot);
         if (_allLoot.ContainsKey(loot.name))
         {
@@ -150,6 +153,31 @@ public partial class Inventory : Node
         }
         countTotals();
         return relic;
+    }
+
+    public void LoseLoot()
+    {
+        int lost_amount = (int)GD.RandRange(LossCount.X, LossCount.Y);
+        for (int i = 0; i < lost_amount; i++)
+        {
+            var keys = _allLoot.Keys.ToList();
+            int index = GD.RandRange(0, keys.Count-1);
+            Relic item = RemoveLoot(_allLoot[keys[index]].loot) as Relic;
+            if (item != null)
+            {
+                item.Position = new Vector3(0f, 1f, 0f);
+                item.Rotation = new Vector3(0f, 0f, 0f);
+                Vector3 forward = ((Owner as Node3D).Basis * Vector3.Back).Normalized();
+                Vector3 right = ((Owner as Node3D).Basis * Vector3.Right).Normalized();
+                float angle = Mathf.DegToRad((float)GD.RandRange(LossAngle.X, LossAngle.Y));
+
+                Vector3 throwVector = forward.Rotated(right, angle).Normalized()
+                    .Rotated(Vector3.Up, GD.RandRange(-180,180)).Normalized() 
+                    * (float)GD.RandRange(LossPower.X, LossPower.Y);
+                item.Used = true;
+                item.SetVelocity(throwVector + (Owner as ThiefController).Velocity);
+            }
+        }
     }
 
     private void countTotals()

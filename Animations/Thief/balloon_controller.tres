@@ -1,0 +1,8 @@
+[gd_resource type="AnimationLibrary" load_steps=2 format=3 uid="uid://cwjs58ekcpqm3"]
+
+[ext_resource type="Animation" uid="uid://bsh2xywedm544" path="res://Animations/Thief/baloon_idle.res" id="1_d5wir"]
+
+[resource]
+_data = {
+"baloon_idle": ExtResource("1_d5wir")
+}
