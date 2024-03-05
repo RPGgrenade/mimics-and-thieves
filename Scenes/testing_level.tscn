@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnettdkcw5eks"]
+[gd_scene load_steps=10 format=3 uid="uid://cnettdkcw5eks"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_mdb1k"]
 [ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="2_uwt82"]
 [ext_resource type="PackedScene" uid="uid://c6h8hd4bby33l" path="res://Prefabs/Relics/revelation_eye.tscn" id="3_tomiv"]
 [ext_resource type="PackedScene" uid="uid://b3l7sejy6ceif" path="res://Prefabs/Relics/jewel_blue.tscn" id="4_u1qby"]
 [ext_resource type="PackedScene" uid="uid://cr8qg0160hn07" path="res://Prefabs/Relics/jewel_red.tscn" id="5_7al0w"]
-[ext_resource type="Texture2D" uid="uid://kjf6mqw5e22p" path="res://Textures/Thief/Eye.png" id="6_m45b2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ncx2d"]
 sky_top_color = Color(0.180392, 0.486275, 0.619608, 1)
@@ -42,7 +41,7 @@ material = SubResource("StandardMaterial3D_bftlq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.52277, 0.233437, 0.186848)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.86805, 0, 3.42093)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10801, 0, 0.882435)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35678, 0, -7.31355)
@@ -71,7 +70,7 @@ sides = 18
 cone = true
 
 [node name="Thief" parent="." instance=ExtResource("1_mdb1k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.815276, 0.0309805, 0.0234609)
+transform = Transform3D(-0.298191, 0, -0.954506, 0, 1, 0, 0.954506, 0, -0.298191, 7.34199, 0.0309805, 0.848182)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.534943, 0.844888, 0, -0.844888, 0.534943, 0, 0, 0)
@@ -81,7 +80,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48139, 1.15941, 0.259087)
 
 [node name="Revelation Eye" parent="." instance=ExtResource("3_tomiv")]
-transform = Transform3D(-0.785349, 0, -0.619053, 0, 1, 0, 0.619053, 0, -0.785349, 2.84762, 1.13913, 3.42827)
+transform = Transform3D(-0.785349, 0, -0.619053, 0, 1, 0, 0.619053, 0, -0.785349, 5.08758, 1.13913, 0.889775)
 
 [node name="Jewel Blue" parent="." instance=ExtResource("4_u1qby")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22427, 0.172839, 2.86161)
@@ -95,60 +94,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.732333, 0.153748, 1.8399)
 [node name="Jewel Red2" parent="." instance=ExtResource("5_7al0w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681752, 0.112932, 3.59945)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
+[node name="Jewel Blue3" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("4_u1qby")]
+transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 4.58893, 0.794396, -7.36322)
+Manager = NodePath("../Jewel Blue/Sounds")
 
-[node name="Play" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.455933
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Jewel Blue4" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("4_u1qby")]
+transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 4.59444, 0.129782, -6.45717)
+Manager = NodePath("../Jewel Blue2/Sounds")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Play"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -199.0
-offset_right = 179.595
-grow_vertical = 0
+[node name="Jewel Red3" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("5_7al0w")]
+transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 3.66749, 0.153748, -7.68156)
+Manager = NodePath("../Jewel Red/Sounds")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Play/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Play/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Play/PanelContainer/MarginContainer/GridContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Name2" type="Label" parent="CanvasLayer/Play/PanelContainer/MarginContainer/GridContainer/HBoxContainer"]
-custom_minimum_size = Vector2(140, 40)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "dfaf"
-horizontal_alignment = 1
-autowrap_mode = 2
-visible_characters = 0
-visible_ratio = 0.0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Play/PanelContainer/MarginContainer/GridContainer"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-texture = ExtResource("6_m45b2")
-expand_mode = 4
-
-[node name="Pause" type="Control" parent="CanvasLayer"]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.455933
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Jewel Red4" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("5_7al0w")]
+transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 5.06866, 0.112932, -6.61606)
+Manager = NodePath("../Jewel Red2/Sounds")

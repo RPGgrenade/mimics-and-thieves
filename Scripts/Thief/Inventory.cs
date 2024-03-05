@@ -18,18 +18,20 @@ public partial class Inventory : Node
 
 	[Export] public bool Open = false;
 
-	[Export] public Loot SelectedLoot;
-	[Export] public int TotalValue;
+    [Export] public Loot SelectedLoot;
+    [Export] public int SelectedCount; 
+    [Export] public int TotalValue;
 
     [ExportCategory("Bag Visuals")]
+    [ExportGroup("Bag")]
     [Export] public Node3D Hole;
     [Export] public Node3D Opening;
     [Export] public Node3D Bag;
-
+    [ExportGroup("Size")]
     [Export] public float HoleLargeSize = 1.5f;
     [Export] public float OpeningLargeSize = 1.75f;
     [Export] public float BagLargeSize = 1.15f;
-
+    [ExportGroup("Speed")]
     [Export] public float HoleSizeSpeed = 5f;
     [Export] public float OpeningSizeSpeed = 6f;
     [Export] public float BagSizeSpeed = 4f;
@@ -38,7 +40,7 @@ public partial class Inventory : Node
     private Vector3 openScale;
     private Vector3 bagScale;
 
-    private Dictionary<string, InventorySlot> _allLoot = new Dictionary<string, InventorySlot>();
+    public Dictionary<string, InventorySlot> _allLoot = new Dictionary<string, InventorySlot>();
 
     public override void _Ready()
     {
@@ -62,6 +64,7 @@ public partial class Inventory : Node
             if (index >= _allLoot.Keys.Count) index = 0;
             string key = _allLoot.Keys.ToList()[index];
             SelectedLoot = _allLoot[key].loot;
+            SelectedCount = _allLoot[key].count;
         }
         GD.Print("Selected Loot is " + SelectedLoot.name);
     }
@@ -74,6 +77,7 @@ public partial class Inventory : Node
             if (index < 0) index = _allLoot.Keys.Count - 1;
             string key = _allLoot.Keys.ToList()[index];
             SelectedLoot = _allLoot[key].loot;
+            SelectedCount = _allLoot[key].count;
         }
         GD.Print("Selected Loot is " + SelectedLoot.name);
     }
@@ -85,10 +89,17 @@ public partial class Inventory : Node
         {
             InventorySlot slot = new InventorySlot(relic);
             _allLoot.Add(loot.name, slot);
-            if (_allLoot.Count == 1) SelectedLoot = loot;
+            if (_allLoot.Count == 1)
+            {
+                SelectedLoot = loot;
+                SelectedCount = 1;
+            }
         }
         else
+        {
             _allLoot[loot.name].count += 1;
+            if (loot.name == SelectedLoot.name) SelectedCount = _allLoot[loot.name].count;
+        }
         Bag.Scale *= BagLargeSize;
         relic.QueueFree();
         countTotals();
@@ -123,12 +134,20 @@ public partial class Inventory : Node
                 {
                     string rand_key = keys[GD.RandRange(0, key_count - 1)];
                     SelectedLoot = _allLoot[rand_key].loot;
+                    SelectedCount = _allLoot[rand_key].count;
                 }
-                else SelectedLoot = null;
+                else { SelectedLoot = null; SelectedCount = 0; }
             }
+            else
+                SelectedCount = _allLoot[loot.name].count;
 
         }
-        else return null;
+        else {
+            SelectedLoot = null; 
+            SelectedCount = 0;
+            countTotals();
+            return null;
+        }
         countTotals();
         return relic;
     }

@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://c7isbnsfek1o1"]
+
+[ext_resource type="Texture2D" uid="uid://dpdkxsnu6msan" path="res://Textures/UI/fabric_bg.png" id="1_0ymhd"]
+
+[resource]
+texture = ExtResource("1_0ymhd")
+expand_margin_left = 10.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+modulate_color = Color(0.980392, 0.733333, 0.823529, 1)

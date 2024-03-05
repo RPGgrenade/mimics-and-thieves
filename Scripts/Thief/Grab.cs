@@ -64,8 +64,21 @@ public partial class Grab : Area3D
             }
             else relic.SetVelocity(controller.Velocity);
 
-            if (controller.loot.Open)
+            GD.Print("Item is used: "+ relic.Used);
+            if (controller.loot.Open && !relic.Used)
+            {
                 controller.loot.AddLoot(relic);
+                Loot selected = controller.loot.SelectedLoot;
+                if (selected != null)
+                    controller.UI.UpdateSelectedItem(
+                        selected?.name ?? "",
+                        controller.loot.SelectedCount,
+                        selected.magic?.name ?? "",
+                        selected.UI ?? null
+                    );
+                else
+                    controller.UI.UpdateSelectedItem("", 0, "", null);
+            }
 
             clearItem();
         }
@@ -111,6 +124,16 @@ public partial class Grab : Area3D
             {
                 Item = item;
                 grabItem(item);
+                Loot selected = controller.loot.SelectedLoot;
+                if(selected != null)
+                    controller.UI.UpdateSelectedItem(
+                        selected?.name ?? "",
+                        controller.loot.SelectedCount,
+                        selected.magic?.name ?? "",
+                        selected.UI ?? null
+                    );
+                else
+                    controller.UI.UpdateSelectedItem("", 0, "", null);
             }
         }
     }

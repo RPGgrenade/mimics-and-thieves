@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="Loot" load_steps=2 format=3 uid="uid://bcgpg5a5h1wlu"]
+[gd_resource type="Resource" script_class="Loot" load_steps=3 format=3 uid="uid://bcgpg5a5h1wlu"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="1_ifof6"]
+[ext_resource type="Texture2D" uid="uid://dwv8rkjycu02k" path="res://Textures/UI/Items/gold_statue.png" id="1_tlv5e"]
 
 [resource]
 script = ExtResource("1_ifof6")
 name = "Gold Statue"
-description = "An expensive idol in the shape of... something..."
+description = "An expensive idol in the shape of... something...
+[900 Coins]"
+UI = ExtResource("1_tlv5e")
 RelicPath = "res://Prefabs/Relics/gold_statue.tscn"
 Money = 900
 Category = 2

@@ -72,6 +72,7 @@ public partial class Relic : CharacterBody3D
 
     public void IsUsed()
     {
+        Used = true;
         Timer timer = new Timer();
         timer.Connect("timeout", new Callable(this, "Despawn"));
         timer.WaitTime = UsedTimeout;

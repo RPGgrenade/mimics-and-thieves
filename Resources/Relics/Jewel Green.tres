@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=3 format=3 uid="uid://c6tfdonktpyun"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="1_8timn"]
+[ext_resource type="Texture2D" uid="uid://du7jpug6mm35j" path="res://Textures/UI/Items/green_jewel.png" id="1_whtbb"]
+
+[resource]
+script = ExtResource("1_8timn")
+name = "Green Jewel"
+description = "A rare green jewel that has some value, and maybe some magic?
+[150 Coins]"
+UI = ExtResource("1_whtbb")
+RelicPath = "res://Prefabs/Relics/jewel_green.tscn"
+Money = 150
+Category = 0

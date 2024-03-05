@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 InputActionBuffer="*res://addons/input_buffer/global.tscn"
 MusicHandler="*res://addons/music_handler/music.tscn"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+
 [dotnet]
 
 project/assembly_name="Mimics & Thieves"

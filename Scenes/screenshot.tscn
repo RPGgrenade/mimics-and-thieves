@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bghkxpa0a7vmq"]
+
+[sub_resource type="Environment" id="Environment_cea2g"]
+background_mode = 1
+background_color = Color(0.717647, 0.145098, 0.768627, 1)
+
+[node name="Screenshot" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cea2g")

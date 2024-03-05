@@ -6,4 +6,4 @@
 script = ExtResource("1_hon8h")
 name = "Revelation"
 type = 0
-Description = "Reveals nearby lurkers and loot for about 5 seconds."
+Description = "Reveals nearby lurkens and loot for 5 seconds."

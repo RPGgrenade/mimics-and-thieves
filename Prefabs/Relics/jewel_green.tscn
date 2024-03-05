@@ -1,0 +1,121 @@
+[gd_scene load_steps=21 format=3 uid="uid://bnqjibltf2k5d"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_14ef6"]
+[ext_resource type="Resource" uid="uid://bgkl2cvl1wava" path="res://Resources/Relics/Jewel Blue.tres" id="2_gbif7"]
+[ext_resource type="Script" path="res://Scripts/Relics/MagicEffect.cs" id="3_pdijw"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="4_pqaj0"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="5_bni5y"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="6_1c1dp"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="7_2j27l"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="8_qe2xb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h7436"]
+radius = 0.1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_na7xf"]
+load_path = "res://.godot/imported/hair_n.jpg-e853b287ffd36a7c6b1d6c548c2f1b53.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hcvu"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.533333, 0.184314, 0.521569)
+metallic = 0.07
+metallic_specular = 0.79
+roughness = 0.11
+normal_enabled = true
+normal_scale = 3.26
+normal_texture = SubResource("CompressedTexture2D_na7xf")
+rim_enabled = true
+clearcoat_enabled = true
+clearcoat = 0.63
+clearcoat_roughness = 0.44
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+backlight = Color(0.54902, 0.321569, 0.239216, 1)
+refraction_enabled = true
+refraction_scale = 0.2
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
+
+[sub_resource type="Resource" id="Resource_76rnk"]
+script = ExtResource("7_2j27l")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_o2k08"]
+resource_name = "Use"
+script = ExtResource("8_qe2xb")
+Name = "Use"
+Sounds = Array[Object]([SubResource("Resource_76rnk")])
+
+[sub_resource type="Resource" id="Resource_roj5q"]
+script = ExtResource("7_2j27l")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_efuyy"]
+resource_name = "Grab"
+script = ExtResource("8_qe2xb")
+Name = "Grab"
+Sounds = Array[Object]([SubResource("Resource_roj5q")])
+
+[sub_resource type="Resource" id="Resource_sfr58"]
+script = ExtResource("7_2j27l")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_qqw1t"]
+resource_name = "Break"
+script = ExtResource("8_qe2xb")
+Name = "Break"
+Sounds = Array[Object]([SubResource("Resource_sfr58")])
+
+[sub_resource type="Resource" id="Resource_d5gy7"]
+script = ExtResource("7_2j27l")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_y4gmc"]
+resource_name = "Collide"
+script = ExtResource("8_qe2xb")
+Name = "Collide"
+Sounds = Array[Object]([SubResource("Resource_d5gy7")])
+
+[node name="Jewel Green" type="CharacterBody3D" node_paths=PackedStringArray("Manager") groups=["Relic"]]
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+script = ExtResource("1_14ef6")
+loot = ExtResource("2_gbif7")
+Friction = 0.2
+FrictionLimit = 1.0
+BounceAmount = 0.3
+BounceThreshold = 0.8
+Gravity = 9.8
+Manager = NodePath("Sounds")
+
+[node name="Magic" type="Node3D" parent="."]
+script = ExtResource("3_pdijw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_h7436")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGSphere3D" parent="Model"]
+radius = 0.1
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_3hcvu")
+
+[node name="Glow" type="Node3D" parent="."]
+script = ExtResource("4_pqaj0")
+
+[node name="CSGBox3D2" type="CSGSphere3D" parent="Glow"]
+radius = 0.1
+radial_segments = 4
+rings = 3
+material = ExtResource("5_bni5y")
+
+[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_k0gv2")
+autoplay = true
+script = ExtResource("6_1c1dp")
+Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

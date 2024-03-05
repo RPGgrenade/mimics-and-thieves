@@ -8,6 +8,7 @@ public partial class ThiefController : CharacterBody3D
     [Export] public AnimVariables variables;
     [Export] public Inventory loot;
     [Export] public Grab grab;
+    [Export] public ThiefUI UI;
 
     [ExportCategory("Movement")]
     [ExportGroup("Ground")]
@@ -53,30 +54,62 @@ public partial class ThiefController : CharacterBody3D
 
     public override void _Process(double delta)
     {
-        if (Camera is Node3D)
+
+        if (inputs.Pause)
         {
-            Camera.Position = Position;
+            UI.Paused = !UI.Paused;
+            UI.UpdateInventory(loot._allLoot);
         }
 
-        if (variables != null)
+        if (!UI.Paused)
         {
-            Vector3 hor_speed = new Vector3(Velocity.X, 0, Velocity.Z);
+            if (Camera is Node3D)
+            {
+                Camera.Position = Position;
+            }
 
-            variables.Set("HorizontalSpeed", hor_speed.Length());
-            variables.Set("VerticalSpeed", Velocity.Y);
-            variables.Set("OnGround", IsOnFloor());
-            variables.Set("Jump", inputs.Jump);
-            variables.Set("Dodge", inputs.Dodge);
+            if (variables != null)
+            {
+                Vector3 hor_speed = new Vector3(Velocity.X, 0, Velocity.Z);
 
-            variables.Set("Grab", inputs.Grab);
-            variables.Set("Bag", inputs.Bag);
-            variables.Set("Swing", inputs.Swing);
+                variables.Set("HorizontalSpeed", hor_speed.Length());
+                variables.Set("VerticalSpeed", Velocity.Y);
+                variables.Set("OnGround", IsOnFloor());
+                variables.Set("Jump", inputs.Jump);
+                variables.Set("Dodge", inputs.Dodge);
 
-            variables.Set("JustGrabbed", inputs.JustGrabbed);
+                variables.Set("Grab", inputs.Grab);
+                variables.Set("Bag", inputs.Bag);
+                variables.Set("Swing", inputs.Swing);
+
+                variables.Set("JustGrabbed", inputs.JustGrabbed);
+            }
+
+            if (inputs.CycleLeft)
+            {
+                loot.CycleLeft();
+                Loot selected = loot.SelectedLoot;
+                if (selected != null)
+                    UI.UpdateSelectedItem(
+                        selected?.name ?? "",
+                        loot.SelectedCount,
+                        selected.magic?.name ?? "",
+                        selected.UI ?? null
+                    );
+            }
+            if (inputs.CycleRight)
+            {
+                loot.CycleRight();
+                Loot selected = loot.SelectedLoot;
+                if (selected != null)
+                    UI.UpdateSelectedItem(
+                        selected?.name ?? "",
+                        loot.SelectedCount,
+                        selected.magic?.name ?? "",
+                        selected.UI ?? null
+                    );
+            }
         }
-
-        if (inputs.CycleLeft) loot.CycleLeft();
-        if (inputs.CycleRight) loot.CycleRight();
     }
 
     public void SlowDodge() {
@@ -85,44 +118,47 @@ public partial class ThiefController : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        IsRunning = inputs.Run;
-        if (momentum == Vector3.Zero)
+        if (!UI.Paused)
         {
-            move_direction = Vector3.Zero;
-            // Get inputs and create rotation based on camera (spring) rotation
-            float move_dir_amount = inputs.LeftStick.Length();
-            move_direction.X = inputs.LeftStick.X;
-            move_direction.Z = inputs.LeftStick.Y;
-            move_direction = move_direction.Normalized().Rotated(Vector3.Up, Camera.Rotation.Y).Normalized() * move_dir_amount;
-            stored_move_direction = move_direction;
+            IsRunning = inputs.Run;
+            if (momentum == Vector3.Zero)
+            {
+                move_direction = Vector3.Zero;
+                // Get inputs and create rotation based on camera (spring) rotation
+                float move_dir_amount = inputs.LeftStick.Length();
+                move_direction.X = inputs.LeftStick.X;
+                move_direction.Z = inputs.LeftStick.Y;
+                move_direction = move_direction.Normalized().Rotated(Vector3.Up, Camera.Rotation.Y).Normalized() * move_dir_amount;
+                stored_move_direction = move_direction;
+            }
+            if (IsDodging)
+            {
+                accelerationControl(move_direction, (float)delta,
+                    DodgingAcceleration,
+                    DodgingDecceleration,
+                    DodgingMaxSpeed
+                );
+                setVelocityValues(move_direction, (float)delta, true);
+                jumping(JumpVelocity);
+                rotating((float)delta, DodgingRotationSpeed);
+                Velocity = momentum;
+            }
+            else
+            {
+                momentum = Vector3.Zero;
+                accelerationControl(move_direction, (float)delta,
+                    IsRunning ? RunningAcceleration : WalkingAcceleration,
+                    IsRunning ? RunningDecceleration : WalkingDecceleration,
+                    IsRunning ? RunningMaxSpeed : WalkingMaxSpeed
+                );
+                setVelocityValues(move_direction, (float)delta);
+                jumping(JumpVelocity);
+                rotating((float)delta, IsRunning ? RunningRotationSpeed : WalkingRotationSpeed);
+                rotationDifferenceVelocityChange(IsRunning ? RunningRotationDifferenceSpeedMultiplier : WalkingRotationDifferenceSpeedMultiplier);
+                Velocity = _velocity;
+            }
+            MoveAndSlide();
         }
-        if (IsDodging)
-        {
-            accelerationControl(move_direction, (float)delta,
-                DodgingAcceleration,
-                DodgingDecceleration,
-                DodgingMaxSpeed
-            );
-            setVelocityValues(move_direction, (float)delta, true);
-            jumping(JumpVelocity);
-            rotating((float)delta, DodgingRotationSpeed);
-            Velocity = momentum;
-        }
-        else
-        {
-            momentum = Vector3.Zero;
-            accelerationControl(move_direction, (float)delta,
-                IsRunning ? RunningAcceleration : WalkingAcceleration,
-                IsRunning ? RunningDecceleration : WalkingDecceleration,
-                IsRunning ? RunningMaxSpeed : WalkingMaxSpeed
-            );
-            setVelocityValues(move_direction, (float)delta);
-            jumping(JumpVelocity);
-            rotating((float)delta, IsRunning ? RunningRotationSpeed : WalkingRotationSpeed);
-            rotationDifferenceVelocityChange(IsRunning ? RunningRotationDifferenceSpeedMultiplier : WalkingRotationDifferenceSpeedMultiplier);
-            Velocity = _velocity;
-        }
-        MoveAndSlide();
     }
 
     private void accelerationControl(Vector3 move_direction, float delta, float acceleration, float decceleration, float maxSpeed)
