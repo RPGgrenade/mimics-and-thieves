@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=3 format=3 uid="uid://qe21eiy0xlfg"]
+
+[ext_resource type="Texture2D" uid="uid://duycmyuja6d85" path="res://Textures/UI/Items/tesseract.png" id="1_tp8q6"]
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="2_dv6pn"]
+
+[resource]
+script = ExtResource("2_dv6pn")
+name = "Power Cube"
+description = "A cube filled in incredible magic power. Probably.
+[700 coins]"
+UI = ExtResource("1_tp8q6")
+RelicPath = "res://Prefabs/Relics/tesseract.tscn"
+Money = 700
+Category = 2

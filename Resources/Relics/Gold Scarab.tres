@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=3 format=3 uid="uid://bsqf7oxlj3ipe"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="1_6nrg7"]
+[ext_resource type="Texture2D" uid="uid://b0536i6en18u5" path="res://Textures/UI/Items/scarab.png" id="1_6qrs8"]
+
+[resource]
+script = ExtResource("1_6nrg7")
+name = "Gold Scarab"
+description = "An ancient item that's said to contain curses
+[650 coins]"
+UI = ExtResource("1_6qrs8")
+RelicPath = "res://Prefabs/Relics/scarab.tscn"
+Money = 650
+Category = 2

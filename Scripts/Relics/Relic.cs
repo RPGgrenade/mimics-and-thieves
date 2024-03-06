@@ -28,6 +28,8 @@ public partial class Relic : CharacterBody3D
     private bool is_colliding_wall = false;
     private bool has_collided_wall = false;
 
+    private bool has_been_grabbed = false;
+
     private Vector3 originalRotation = Vector3.Zero;
 
     private Vector3 velocity = Vector3.Zero;
@@ -79,12 +81,15 @@ public partial class Relic : CharacterBody3D
         timer.Autostart = true;
         timer.OneShot = true;
         this.AddChild(timer);
+        Manager.PlayRandom("Use", minpitch: 0.95f, maxpitch: 1.05f);
+        Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
     }
 
     private void Despawn()
     {
         // Particles
-        // Sound
+        Manager.PlayRandom("Break", minpitch: 0.95f, maxpitch: 1.05f);
+        Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
         QueueFree();
     }
 
@@ -96,6 +101,7 @@ public partial class Relic : CharacterBody3D
     {
         if (!IsGrabbed)
         {
+            has_been_grabbed = false;
             setCollisionFrame();
 
             // Add the gravity.
@@ -122,6 +128,8 @@ public partial class Relic : CharacterBody3D
                 {
                     velocity = velocity.Bounce(GetWallNormal()) * BounceAmount;
                 }
+                Manager.PlayRandom("Collide", minpitch: 0.95f, maxpitch: 1.05f);
+                Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
                 //GD.Print("Speed is "+ velocity.Length());
             }
 
@@ -132,6 +140,12 @@ public partial class Relic : CharacterBody3D
         {
             Velocity = Vector3.Zero;
             velocity = Vector3.Zero;
+            if (!has_been_grabbed)
+            {
+                Manager.PlayRandom("Grab", minpitch: 0.95f, maxpitch: 1.05f);
+                Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
+                has_been_grabbed = true;
+            }
         }
     }
 }

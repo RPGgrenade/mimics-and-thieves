@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnqjibltf2k5d"]
+[gd_scene load_steps=22 format=3 uid="uid://bnqjibltf2k5d"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_14ef6"]
 [ext_resource type="Resource" uid="uid://c6tfdonktpyun" path="res://Resources/Relics/Jewel Green.tres" id="2_d7gts"]
 [ext_resource type="Script" path="res://Scripts/Relics/MagicEffect.cs" id="3_pdijw"]
+[ext_resource type="ArrayMesh" uid="uid://bhc0vtnkqmlpx" path="res://Models/Relics/jewel.res" id="4_44sts"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="4_pqaj0"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="5_bni5y"]
 [ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="6_1c1dp"]
@@ -99,20 +100,16 @@ shape = SubResource("SphereShape3D_h7436")
 
 [node name="Model" type="Node3D" parent="."]
 
-[node name="CSGBox3D" type="CSGSphere3D" parent="Model"]
-radius = 0.1
-radial_segments = 4
-rings = 3
-material = SubResource("StandardMaterial3D_3hcvu")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+mesh = ExtResource("4_44sts")
+surface_material_override/0 = SubResource("StandardMaterial3D_3hcvu")
 
 [node name="Glow" type="Node3D" parent="."]
 script = ExtResource("4_pqaj0")
 
-[node name="CSGBox3D2" type="CSGSphere3D" parent="Glow"]
-radius = 0.1
-radial_segments = 4
-rings = 3
-material = ExtResource("5_bni5y")
+[node name="CSGBox3D3" type="MeshInstance3D" parent="Glow"]
+mesh = ExtResource("4_44sts")
+surface_material_override/0 = ExtResource("5_bni5y")
 
 [node name="Sounds" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamPolyphonic_k0gv2")

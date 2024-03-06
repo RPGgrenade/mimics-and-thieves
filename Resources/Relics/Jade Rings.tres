@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Loot" load_steps=3 format=3 uid="uid://tgw0xegxlone"]
+
+[ext_resource type="Texture2D" uid="uid://cj6rh7duseml3" path="res://Textures/UI/Items/jade_rings.png" id="1_5aoms"]
+[ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="2_nib0d"]
+
+[resource]
+script = ExtResource("2_nib0d")
+name = "Jade Rings"
+description = "A jade sculpture for channeling ancient magics
+[600 Coins]"
+UI = ExtResource("1_5aoms")
+RelicPath = "res://Prefabs/Relics/jade_ring.tscn"
+Money = 600
+Category = 2

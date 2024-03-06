@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://p026rx4ef5oh"]
+[gd_scene load_steps=25 format=3 uid="uid://p026rx4ef5oh"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_xb8bv"]
 [ext_resource type="Resource" uid="uid://cgel4eix6t7qb" path="res://Resources/Relics/Key.tres" id="2_xan1m"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/UnlockEffect.cs" id="3_fpftf"]
+[ext_resource type="ArrayMesh" uid="uid://db2xuglorg2ge" path="res://Models/Relics/key.res" id="4_lcaeu"]
 [ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="5_npw38"]
 [ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="6_7obk0"]
+[ext_resource type="ArrayMesh" uid="uid://bp7xkwglgarxd" path="res://Models/Relics/key_jewel.res" id="7_te8ut"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_ootes"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="9_3fsaa"]
 [ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="10_n0dal"]
@@ -15,17 +17,6 @@
 size = Vector3(0.5, 0.15, 0.835425)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bouhx"]
-albedo_color = Color(1, 0.709804, 0.309804, 1)
-albedo_texture = ExtResource("5_npw38")
-metallic = 0.7
-metallic_specular = 0.66
-roughness = 0.5
-normal_enabled = true
-normal_scale = 0.75
-normal_texture = ExtResource("6_7obk0")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7kn3"]
 albedo_color = Color(1, 0.709804, 0.309804, 1)
 albedo_texture = ExtResource("5_npw38")
 metallic = 0.7
@@ -113,72 +104,30 @@ shape = SubResource("BoxShape3D_gxbyp")
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0548897)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model"]
+[node name="Key" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-radius = 0.07
-height = 0.75
-sides = 12
-material = SubResource("StandardMaterial3D_bouhx")
+mesh = ExtResource("4_lcaeu")
+surface_material_override/0 = SubResource("StandardMaterial3D_bouhx")
+surface_material_override/1 = SubResource("StandardMaterial3D_bouhx")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Model/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13157, 0.276701, -1.05719e-08)
-size = Vector3(0.165, 0.06, 0.06)
-material = SubResource("StandardMaterial3D_f7kn3")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Model/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13157, 0.156172, -1.05719e-08)
-size = Vector3(0.265, 0.06, 0.06)
-material = SubResource("StandardMaterial3D_f7kn3")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.252162, -1.10223e-08)
-radius = 0.2
-height = 0.146
-sides = 12
-material = SubResource("StandardMaterial3D_bouhx")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2.20447e-08, -0.252162)
-radius = 0.15
-radial_segments = 6
-rings = 4
-smooth_faces = false
-material = SubResource("StandardMaterial3D_pjn7u")
+[node name="Jewel" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.252)
+mesh = ExtResource("7_te8ut")
+surface_material_override/0 = SubResource("StandardMaterial3D_pjn7u")
 
 [node name="Glow" type="Node3D" parent="."]
 script = ExtResource("8_ootes")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Glow"]
+[node name="Key" type="MeshInstance3D" parent="Glow"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-radius = 0.07
-height = 0.75
-sides = 12
-material = ExtResource("9_3fsaa")
+mesh = ExtResource("4_lcaeu")
+surface_material_override/0 = ExtResource("9_3fsaa")
+surface_material_override/1 = ExtResource("9_3fsaa")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Glow/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13157, 0.276701, -1.05719e-08)
-size = Vector3(0.165, 0.06, 0.06)
-material = ExtResource("9_3fsaa")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Glow/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13157, 0.156172, -1.05719e-08)
-size = Vector3(0.265, 0.06, 0.06)
-material = ExtResource("9_3fsaa")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Glow/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.252162, -1.10223e-08)
-radius = 0.2
-height = 0.146
-sides = 12
-material = ExtResource("9_3fsaa")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Glow"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 2.20447e-08, -0.252162)
-radius = 0.15
-radial_segments = 6
-rings = 4
-smooth_faces = false
-material = ExtResource("9_3fsaa")
+[node name="Jewel" type="MeshInstance3D" parent="Glow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.252)
+mesh = ExtResource("7_te8ut")
+surface_material_override/0 = ExtResource("9_3fsaa")
 
 [node name="Sounds" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamPolyphonic_k0gv2")

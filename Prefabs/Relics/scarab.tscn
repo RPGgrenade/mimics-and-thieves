@@ -1,0 +1,326 @@
+[gd_scene load_steps=27 format=3 uid="uid://b31itd4t7c5lm"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_w1t7k"]
+[ext_resource type="Resource" uid="uid://bsqf7oxlj3ipe" path="res://Resources/Relics/Gold Scarab.tres" id="2_4y2cw"]
+[ext_resource type="Script" path="res://Scripts/Relics/MagicEffect.cs" id="3_hqaf7"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="4_51ja6"]
+[ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="4_c2amo"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="5_k84fd"]
+[ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="5_x570p"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="6_juwnl"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="7_0c3ul"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="8_cvr1a"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7vhfo"]
+height = 0.102749
+radius = 0.192261
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kw3hb"]
+albedo_color = Color(1, 0.709804, 0.305882, 1)
+albedo_texture = ExtResource("4_c2amo")
+metallic = 0.92
+metallic_specular = 1.0
+roughness = 0.49
+normal_enabled = true
+normal_scale = 0.86
+normal_texture = ExtResource("5_x570p")
+rim_tint = 0.17
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rqh0"]
+albedo_color = Color(1, 0.709804, 0.305882, 1)
+albedo_texture = ExtResource("4_c2amo")
+metallic = 0.92
+metallic_specular = 1.0
+roughness = 0.49
+normal_enabled = true
+normal_scale = 0.86
+normal_texture = ExtResource("5_x570p")
+rim_tint = 0.17
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf4ey"]
+albedo_color = Color(1, 0.709804, 0.305882, 1)
+albedo_texture = ExtResource("4_c2amo")
+metallic = 0.92
+metallic_specular = 1.0
+roughness = 0.49
+normal_enabled = true
+normal_scale = 0.86
+normal_texture = ExtResource("5_x570p")
+rim_tint = 0.17
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ni45x"]
+albedo_color = Color(1, 0.709804, 0.305882, 1)
+albedo_texture = ExtResource("4_c2amo")
+metallic = 0.92
+metallic_specular = 1.0
+roughness = 0.49
+normal_enabled = true
+normal_scale = 0.86
+normal_texture = ExtResource("5_x570p")
+rim_tint = 0.17
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_clk3u"]
+albedo_color = Color(1, 0.709804, 0.305882, 1)
+albedo_texture = ExtResource("4_c2amo")
+metallic = 0.92
+metallic_specular = 1.0
+roughness = 0.49
+normal_enabled = true
+normal_scale = 0.86
+normal_texture = ExtResource("5_x570p")
+rim_tint = 0.17
+clearcoat_enabled = true
+clearcoat_roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckumt"]
+transparency = 1
+albedo_color = Color(0.866667, 0, 0.470588, 0.74902)
+metallic = 0.36
+roughness = 0.41
+clearcoat_enabled = true
+clearcoat = 0.63
+refraction_enabled = true
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
+
+[sub_resource type="Resource" id="Resource_76rnk"]
+script = ExtResource("7_0c3ul")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_o2k08"]
+resource_name = "Use"
+script = ExtResource("8_cvr1a")
+Name = "Use"
+Sounds = Array[Object]([SubResource("Resource_76rnk")])
+
+[sub_resource type="Resource" id="Resource_roj5q"]
+script = ExtResource("7_0c3ul")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_efuyy"]
+resource_name = "Grab"
+script = ExtResource("8_cvr1a")
+Name = "Grab"
+Sounds = Array[Object]([SubResource("Resource_roj5q")])
+
+[sub_resource type="Resource" id="Resource_sfr58"]
+script = ExtResource("7_0c3ul")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_qqw1t"]
+resource_name = "Break"
+script = ExtResource("8_cvr1a")
+Name = "Break"
+Sounds = Array[Object]([SubResource("Resource_sfr58")])
+
+[sub_resource type="Resource" id="Resource_d5gy7"]
+script = ExtResource("7_0c3ul")
+Weight = 1.0
+
+[sub_resource type="Resource" id="Resource_y4gmc"]
+resource_name = "Collide"
+script = ExtResource("8_cvr1a")
+Name = "Collide"
+Sounds = Array[Object]([SubResource("Resource_d5gy7")])
+
+[node name="Gold Scarab" type="CharacterBody3D" node_paths=PackedStringArray("Manager") groups=["Relic"]]
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+script = ExtResource("1_w1t7k")
+loot = ExtResource("2_4y2cw")
+Friction = 0.2
+FrictionLimit = 1.0
+RotationSpeed = 2.0
+BounceAmount = 0.3
+BounceThreshold = 1.0
+Gravity = 9.8
+Manager = NodePath("Sounds")
+
+[node name="Magic" type="Node3D" parent="."]
+script = ExtResource("3_hqaf7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0495466, 0)
+shape = SubResource("CylinderShape3D_7vhfo")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.4499, 0, 0, 0, 0.4499, 0, 0, 0, 0.4499, 0, 0, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Model"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.785, 0, 0, 0, 1.2, 0, 0, 0)
+radius = 0.3
+material = SubResource("StandardMaterial3D_kw3hb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4912, 0)
+operation = 2
+material = SubResource("StandardMaterial3D_7rqh0")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0663017, 0.178075)
+operation = 2
+inner_radius = 0.266
+outer_radius = 0.282
+sides = 13
+material = SubResource("StandardMaterial3D_xf4ey")
+
+[node name="CSGTorus3D5" type="CSGTorus3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(-5.87918e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1.345, -4.37114e-08, 1.91069e-15, 0, -0.0580297, -0.203942)
+operation = 2
+inner_radius = 0.266
+outer_radius = 0.282
+sides = 13
+material = SubResource("StandardMaterial3D_xf4ey")
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.563375)
+inner_radius = 0.476
+outer_radius = 0.553
+material = SubResource("StandardMaterial3D_ni45x")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model/CSGCombiner3D/CSGTorus3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.228036)
+operation = 2
+size = Vector3(1.43, 1, 1)
+material = SubResource("StandardMaterial3D_clk3u")
+
+[node name="CSGTorus3D3" type="CSGTorus3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.385947)
+inner_radius = 0.476
+outer_radius = 0.553
+material = SubResource("StandardMaterial3D_ni45x")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model/CSGCombiner3D/CSGTorus3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.228036)
+operation = 2
+size = Vector3(1.43, 1, 1)
+material = SubResource("StandardMaterial3D_clk3u")
+
+[node name="CSGTorus3D4" type="CSGTorus3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0.518395)
+inner_radius = 0.476
+outer_radius = 0.553
+material = SubResource("StandardMaterial3D_ni45x")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model/CSGCombiner3D/CSGTorus3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.228036)
+operation = 2
+size = Vector3(1.43, 1, 1)
+material = SubResource("StandardMaterial3D_clk3u")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.103, 0.26)
+radius = 0.07
+radial_segments = 4
+rings = 3
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ckumt")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.103, 0.26)
+radius = 0.07
+radial_segments = 4
+rings = 3
+smooth_faces = false
+material = SubResource("StandardMaterial3D_ckumt")
+
+[node name="Glow" type="Node3D" parent="."]
+transform = Transform3D(0.4499, 0, 0, 0, 0.4499, 0, 0, 0, 0.4499, 0, 0, 0)
+script = ExtResource("4_51ja6")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Glow"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.785, 0, 0, 0, 1.2, 0, 0, 0)
+radius = 0.3
+material = ExtResource("5_k84fd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4912, 0)
+operation = 2
+material = ExtResource("5_k84fd")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.0663017, 0.178075)
+operation = 2
+inner_radius = 0.266
+outer_radius = 0.282
+sides = 13
+material = ExtResource("5_k84fd")
+
+[node name="CSGTorus3D5" type="CSGTorus3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(-5.87918e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1.345, -4.37114e-08, 1.91069e-15, 0, -0.0580297, -0.203942)
+operation = 2
+inner_radius = 0.266
+outer_radius = 0.282
+sides = 13
+material = ExtResource("5_k84fd")
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.563375)
+inner_radius = 0.476
+outer_radius = 0.553
+material = ExtResource("5_k84fd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Glow/CSGCombiner3D/CSGTorus3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.228036)
+operation = 2
+size = Vector3(1.43, 1, 1)
+material = ExtResource("5_k84fd")
+
+[node name="CSGTorus3D3" type="CSGTorus3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.385947)
+inner_radius = 0.476
+outer_radius = 0.553
+material = ExtResource("5_k84fd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Glow/CSGCombiner3D/CSGTorus3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.228036)
+operation = 2
+size = Vector3(1.43, 1, 1)
+material = ExtResource("5_k84fd")
+
+[node name="CSGTorus3D4" type="CSGTorus3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0.518395)
+inner_radius = 0.476
+outer_radius = 0.553
+material = ExtResource("5_k84fd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Glow/CSGCombiner3D/CSGTorus3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.228036)
+operation = 2
+size = Vector3(1.43, 1, 1)
+material = ExtResource("5_k84fd")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.103, 0.26)
+radius = 0.07
+radial_segments = 4
+rings = 3
+smooth_faces = false
+material = ExtResource("5_k84fd")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Glow/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.103, 0.26)
+radius = 0.07
+radial_segments = 4
+rings = 3
+smooth_faces = false
+material = ExtResource("5_k84fd")
+
+[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_k0gv2")
+autoplay = true
+script = ExtResource("6_juwnl")
+Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

@@ -1,14 +1,8 @@
-[gd_resource type="Resource" script_class="Loot" load_steps=5 format=3 uid="uid://dthqvd42qjlfh"]
+[gd_resource type="Resource" script_class="Loot" load_steps=4 format=3 uid="uid://dthqvd42qjlfh"]
 
 [ext_resource type="Texture2D" uid="uid://fanwa8bjffka" path="res://Textures/UI/Items/spellbook.png" id="1_dvten"]
-[ext_resource type="Script" path="res://Scripts/Relics/Magic.cs" id="2_hbdex"]
+[ext_resource type="Resource" uid="uid://c4f1tw3x5ueid" path="res://Resources/Relics/Magic/Distract.tres" id="2_gg7eu"]
 [ext_resource type="Script" path="res://Scripts/Relics/Loot.cs" id="3_dh58k"]
-
-[sub_resource type="Resource" id="Resource_ytst6"]
-script = ExtResource("2_hbdex")
-name = "Unlock"
-type = 1
-Description = ""
 
 [resource]
 script = ExtResource("3_dh58k")
@@ -19,4 +13,4 @@ UI = ExtResource("1_dvten")
 RelicPath = "res://Prefabs/Relics/spellbook.tscn"
 Money = 300
 Category = 1
-magic = SubResource("Resource_ytst6")
+magic = ExtResource("2_gg7eu")

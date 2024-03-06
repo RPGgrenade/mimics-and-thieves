@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://ddx5ikc2wmrsy"]
+[gd_scene load_steps=30 format=3 uid="uid://ddx5ikc2wmrsy"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_2eyl3"]
 [ext_resource type="Resource" uid="uid://caqdcofdlj85k" path="res://Resources/Relics/Crystal Ball.tres" id="2_fv4a8"]
 [ext_resource type="Texture2D" uid="uid://peekdalaucn8" path="res://Textures/Materials/wood.jpg" id="3_0dm3h"]
+[ext_resource type="AudioStream" uid="uid://cbcspuwjjk3hs" path="res://Audio/SFX/Relics/Unique/crystal_ball.wav" id="3_2ajk2"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/ProtectEffect.cs" id="3_jbqg8"]
 [ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="4_4q5nl"]
 [ext_resource type="PackedScene" uid="uid://cjc3j73ciw2fh" path="res://Prefabs/Thief/protective_barrier.tscn" id="4_v8otp"]
@@ -11,6 +12,10 @@
 [ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="7_fr8kr"]
 [ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="8_wmnv8"]
 [ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="9_ljdbr"]
+[ext_resource type="AudioStream" uid="uid://btfualf1mdsik" path="res://Audio/SFX/Relics/use.mp3" id="10_qfv6f"]
+[ext_resource type="AudioStream" uid="uid://b3dibo060gmq7" path="res://Audio/SFX/Relics/grab.wav" id="13_qg64t"]
+[ext_resource type="AudioStream" uid="uid://cn410o5c022b6" path="res://Audio/SFX/Relics/pickup.wav" id="14_bpru4"]
+[ext_resource type="AudioStream" uid="uid://bnafcs7v6og2d" path="res://Audio/SFX/Relics/collide.wav" id="15_fuo23"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h7436"]
 radius = 0.172818
@@ -51,6 +56,7 @@ normal_texture = ExtResource("4_4q5nl")
 [sub_resource type="Resource" id="Resource_76rnk"]
 script = ExtResource("8_wmnv8")
 Weight = 1.0
+Sound = ExtResource("10_qfv6f")
 
 [sub_resource type="Resource" id="Resource_o2k08"]
 resource_name = "Use"
@@ -61,6 +67,7 @@ Sounds = Array[Object]([SubResource("Resource_76rnk")])
 [sub_resource type="Resource" id="Resource_roj5q"]
 script = ExtResource("8_wmnv8")
 Weight = 1.0
+Sound = ExtResource("13_qg64t")
 
 [sub_resource type="Resource" id="Resource_efuyy"]
 resource_name = "Grab"
@@ -71,6 +78,7 @@ Sounds = Array[Object]([SubResource("Resource_roj5q")])
 [sub_resource type="Resource" id="Resource_sfr58"]
 script = ExtResource("8_wmnv8")
 Weight = 1.0
+Sound = ExtResource("14_bpru4")
 
 [sub_resource type="Resource" id="Resource_qqw1t"]
 resource_name = "Break"
@@ -81,6 +89,7 @@ Sounds = Array[Object]([SubResource("Resource_sfr58")])
 [sub_resource type="Resource" id="Resource_d5gy7"]
 script = ExtResource("8_wmnv8")
 Weight = 1.0
+Sound = ExtResource("15_fuo23")
 
 [sub_resource type="Resource" id="Resource_y4gmc"]
 resource_name = "Collide"
@@ -102,6 +111,7 @@ BounceAmount = 0.6
 BounceThreshold = 1.0
 Gravity = 10.0
 Manager = NodePath("Sounds")
+ItemSound = ExtResource("3_2ajk2")
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_jbqg8")
@@ -149,6 +159,9 @@ material = ExtResource("6_bc7mk")
 
 [node name="Sounds" type="AudioStreamPlayer3D" parent="."]
 stream = SubResource("AudioStreamPolyphonic_k0gv2")
+unit_size = 30.0
 autoplay = true
+max_distance = 15.0
+bus = &"SFX"
 script = ExtResource("7_fr8kr")
 Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

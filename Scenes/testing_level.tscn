@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnettdkcw5eks"]
+[gd_scene load_steps=18 format=3 uid="uid://cnettdkcw5eks"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_mdb1k"]
 [ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="2_uwt82"]
@@ -10,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://cl7lrgi537jr4" path="res://Prefabs/Relics/scroll.tscn" id="8_8nd1w"]
 [ext_resource type="PackedScene" uid="uid://p026rx4ef5oh" path="res://Prefabs/Relics/key.tscn" id="9_s0x0x"]
 [ext_resource type="PackedScene" uid="uid://bnqjibltf2k5d" path="res://Prefabs/Relics/jewel_green.tscn" id="10_auj3x"]
+[ext_resource type="PackedScene" uid="uid://obgl3b4yobbx" path="res://Prefabs/Relics/tesseract.tscn" id="11_qvn67"]
+[ext_resource type="PackedScene" uid="uid://cj4p2j6bhf7q3" path="res://Prefabs/Relics/jade_ring.tscn" id="12_1kibq"]
+[ext_resource type="PackedScene" uid="uid://b31itd4t7c5lm" path="res://Prefabs/Relics/scarab.tscn" id="13_opb3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ncx2d"]
 sky_top_color = Color(0.180392, 0.486275, 0.619608, 1)
@@ -82,56 +85,103 @@ transform = Transform3D(1, 0, 0, 0, 0.534943, 0.844888, 0, -0.844888, 0.534943, 
 shadow_enabled = true
 
 [node name="Gold Statue" parent="." instance=ExtResource("2_uwt82")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48139, 1.15941, 0.259087)
+visible = false
 
 [node name="Revelation Eye" parent="." instance=ExtResource("3_tomiv")]
+process_mode = 4
 transform = Transform3D(-0.785349, 0, -0.619053, 0, 1, 0, 0.619053, 0, -0.785349, 5.08758, 1.13913, 0.889775)
+visible = false
 
 [node name="Jewel Blue" parent="." instance=ExtResource("4_u1qby")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22427, 0.172839, 2.86161)
+visible = false
 
 [node name="Jewel Blue2" parent="." instance=ExtResource("4_u1qby")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.276483, 0.129782, 3.30638)
+visible = false
 
 [node name="Jewel Red" parent="." instance=ExtResource("5_7al0w")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.732333, 0.153748, 1.8399)
+visible = false
 
 [node name="Jewel Red2" parent="." instance=ExtResource("5_7al0w")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.681752, 0.112932, 3.59945)
+visible = false
 
 [node name="Jewel Blue3" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("4_u1qby")]
+process_mode = 4
 transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 4.58893, 0.794396, -7.36322)
+visible = false
 Manager = NodePath("../Jewel Blue/Sounds")
 
 [node name="Jewel Blue4" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("4_u1qby")]
+process_mode = 4
 transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 4.59444, 0.129782, -6.45717)
+visible = false
 Manager = NodePath("../Jewel Blue2/Sounds")
 
 [node name="Jewel Red3" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("5_7al0w")]
+process_mode = 4
 transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 3.66749, 0.153748, -7.68156)
+visible = false
 Manager = NodePath("../Jewel Red/Sounds")
 
 [node name="Jewel Red4" parent="." node_paths=PackedStringArray("Manager") instance=ExtResource("5_7al0w")]
+process_mode = 4
 transform = Transform3D(0.58218, 0, 0.81306, 0, 1, 0, -0.81306, 0, 0.58218, 5.06866, 0.112932, -6.61606)
+visible = false
 Manager = NodePath("../Jewel Red2/Sounds")
 
 [node name="Crystal Ball" parent="." instance=ExtResource("6_rljel")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8728, 0.354067, -2.55063)
 
 [node name="Spell Book" parent="." instance=ExtResource("7_3r1dc")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60804, 0.279965, -5.47029)
+visible = false
 
 [node name="Stealth Scroll" parent="." instance=ExtResource("8_8nd1w")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.916194, 0.0202353, -0.874283)
+visible = false
 
 [node name="Stealth Scroll2" parent="." instance=ExtResource("8_8nd1w")]
+process_mode = 4
 transform = Transform3D(0.843841, 0, 0.536593, 0, 1, 0, -0.536593, 0, 0.843841, 2.0728, 0.0202351, 0.685957)
+visible = false
 
 [node name="Key" parent="." instance=ExtResource("9_s0x0x")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.145364, -3)
+visible = false
 
 [node name="Jewel Green" parent="." instance=ExtResource("10_auj3x")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.297645, -3)
+visible = false
 
 [node name="Jewel Green2" parent="." instance=ExtResource("10_auj3x")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96455, 0.128636, -1.75887)
+visible = false
+
+[node name="Tesseract" parent="." instance=ExtResource("11_qvn67")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.09884, 0.228208, 1.95795)
+visible = false
+
+[node name="Jade Rings" parent="." instance=ExtResource("12_1kibq")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.40668, 0.233885, -0.894056)
+visible = false
+
+[node name="Gold Scarab" parent="." instance=ExtResource("13_opb3s")]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79173, 0.076681, -1.13359)
+visible = false

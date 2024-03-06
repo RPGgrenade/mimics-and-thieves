@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Linq;
+using System.Reflection;
 
 [GlobalClass]
 public partial class SoundManager : AudioStreamPlayer3D
@@ -30,6 +31,7 @@ public partial class SoundManager : AudioStreamPlayer3D
             if (!useWeight)
             {
                 int index = GD.RandRange(0, _Sounds[sound].Sounds.Length - 1);
+                GD.Print("Playing "+ _Sounds[sound].Sounds[index].Sound);
                 playback.PlayStream(_Sounds[sound].Sounds[index].Sound, offset, volume, (float)GD.RandRange(minpitch, maxpitch));
             }
         }
@@ -53,7 +55,10 @@ public partial class SoundManager : AudioStreamPlayer3D
         if (playback == null)
             setPlayback();
         if (sound != null)
+        {
+            GD.Print("Playing " + sound);
             playback.PlayStream(sound, offset, volume, (float)GD.RandRange(minpitch, maxpitch));
+        }
     }
 
     private void setPlayback()
