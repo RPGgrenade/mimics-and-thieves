@@ -1,17 +1,15 @@
-[gd_scene load_steps=25 format=3 uid="uid://p026rx4ef5oh"]
+[gd_scene load_steps=14 format=3 uid="uid://p026rx4ef5oh"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_xb8bv"]
 [ext_resource type="Resource" uid="uid://cgel4eix6t7qb" path="res://Resources/Relics/Key.tres" id="2_xan1m"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/UnlockEffect.cs" id="3_fpftf"]
+[ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_xio3w"]
 [ext_resource type="ArrayMesh" uid="uid://db2xuglorg2ge" path="res://Models/Relics/key.res" id="4_lcaeu"]
 [ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="5_npw38"]
 [ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="6_7obk0"]
 [ext_resource type="ArrayMesh" uid="uid://bp7xkwglgarxd" path="res://Models/Relics/key_jewel.res" id="7_te8ut"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_ootes"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="9_3fsaa"]
-[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="10_n0dal"]
-[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="11_kul37"]
-[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="12_dqqqb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gxbyp"]
 size = Vector3(0.5, 0.15, 0.835425)
@@ -38,49 +36,7 @@ emission_energy_multiplier = 0.15
 refraction_enabled = true
 refraction_scale = 0.03
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
-
-[sub_resource type="Resource" id="Resource_76rnk"]
-script = ExtResource("11_kul37")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_o2k08"]
-resource_name = "Use"
-script = ExtResource("12_dqqqb")
-Name = "Use"
-Sounds = Array[Object]([SubResource("Resource_76rnk")])
-
-[sub_resource type="Resource" id="Resource_roj5q"]
-script = ExtResource("11_kul37")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_efuyy"]
-resource_name = "Grab"
-script = ExtResource("12_dqqqb")
-Name = "Grab"
-Sounds = Array[Object]([SubResource("Resource_roj5q")])
-
-[sub_resource type="Resource" id="Resource_sfr58"]
-script = ExtResource("11_kul37")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_qqw1t"]
-resource_name = "Break"
-script = ExtResource("12_dqqqb")
-Name = "Break"
-Sounds = Array[Object]([SubResource("Resource_sfr58")])
-
-[sub_resource type="Resource" id="Resource_d5gy7"]
-script = ExtResource("11_kul37")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_y4gmc"]
-resource_name = "Collide"
-script = ExtResource("12_dqqqb")
-Name = "Collide"
-Sounds = Array[Object]([SubResource("Resource_d5gy7")])
-
-[node name="Key" type="CharacterBody3D" node_paths=PackedStringArray("effect", "Manager") groups=["Relic"]]
+[node name="Key" type="CharacterBody3D" node_paths=PackedStringArray("effect") groups=["Relic"]]
 collision_layer = 8
 collision_mask = 6
 slide_on_ceiling = false
@@ -92,7 +48,7 @@ FrictionLimit = 0.9
 BounceAmount = 0.2
 BounceThreshold = 1.0
 Gravity = 11.0
-Manager = NodePath("Sounds")
+Manager = ExtResource("3_xio3w")
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_fpftf")
@@ -128,9 +84,3 @@ surface_material_override/1 = ExtResource("9_3fsaa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.252)
 mesh = ExtResource("7_te8ut")
 surface_material_override/0 = ExtResource("9_3fsaa")
-
-[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamPolyphonic_k0gv2")
-autoplay = true
-script = ExtResource("10_n0dal")
-Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

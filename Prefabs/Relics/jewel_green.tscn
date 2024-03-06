@@ -1,14 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://bnqjibltf2k5d"]
+[gd_scene load_steps=12 format=3 uid="uid://bnqjibltf2k5d"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_14ef6"]
 [ext_resource type="Resource" uid="uid://c6tfdonktpyun" path="res://Resources/Relics/Jewel Green.tres" id="2_d7gts"]
+[ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_d8bep"]
 [ext_resource type="Script" path="res://Scripts/Relics/MagicEffect.cs" id="3_pdijw"]
+[ext_resource type="AudioStream" uid="uid://c6eqvre1aqw8m" path="res://Audio/SFX/Relics/Unique/jewel.wav" id="4_2qvxm"]
 [ext_resource type="ArrayMesh" uid="uid://bhc0vtnkqmlpx" path="res://Models/Relics/jewel.res" id="4_44sts"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="4_pqaj0"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="5_bni5y"]
-[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="6_1c1dp"]
-[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="7_2j27l"]
-[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="8_qe2xb"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_h7436"]
 radius = 0.1
@@ -37,49 +36,7 @@ backlight = Color(0.54902, 0.321569, 0.239216, 1)
 refraction_enabled = true
 refraction_scale = 0.2
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
-
-[sub_resource type="Resource" id="Resource_76rnk"]
-script = ExtResource("7_2j27l")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_o2k08"]
-resource_name = "Use"
-script = ExtResource("8_qe2xb")
-Name = "Use"
-Sounds = Array[Object]([SubResource("Resource_76rnk")])
-
-[sub_resource type="Resource" id="Resource_roj5q"]
-script = ExtResource("7_2j27l")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_efuyy"]
-resource_name = "Grab"
-script = ExtResource("8_qe2xb")
-Name = "Grab"
-Sounds = Array[Object]([SubResource("Resource_roj5q")])
-
-[sub_resource type="Resource" id="Resource_sfr58"]
-script = ExtResource("7_2j27l")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_qqw1t"]
-resource_name = "Break"
-script = ExtResource("8_qe2xb")
-Name = "Break"
-Sounds = Array[Object]([SubResource("Resource_sfr58")])
-
-[sub_resource type="Resource" id="Resource_d5gy7"]
-script = ExtResource("7_2j27l")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_y4gmc"]
-resource_name = "Collide"
-script = ExtResource("8_qe2xb")
-Name = "Collide"
-Sounds = Array[Object]([SubResource("Resource_d5gy7")])
-
-[node name="Jewel Green" type="CharacterBody3D" node_paths=PackedStringArray("Manager") groups=["Relic"]]
+[node name="Jewel Green" type="CharacterBody3D" groups=["Relic"]]
 collision_layer = 8
 collision_mask = 6
 slide_on_ceiling = false
@@ -90,7 +47,9 @@ FrictionLimit = 1.0
 BounceAmount = 0.3
 BounceThreshold = 0.8
 Gravity = 9.8
-Manager = NodePath("Sounds")
+Manager = ExtResource("3_d8bep")
+ItemSound = ExtResource("4_2qvxm")
+ItemSoundVolume = -8.0
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_pdijw")
@@ -110,9 +69,3 @@ script = ExtResource("4_pqaj0")
 [node name="CSGBox3D3" type="MeshInstance3D" parent="Glow"]
 mesh = ExtResource("4_44sts")
 surface_material_override/0 = ExtResource("5_bni5y")
-
-[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamPolyphonic_k0gv2")
-autoplay = true
-script = ExtResource("6_1c1dp")
-Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

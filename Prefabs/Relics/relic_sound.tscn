@@ -1,0 +1,70 @@
+[gd_scene load_steps=17 format=3 uid="uid://bmy4coxbu2aep"]
+
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="1_uvlm3"]
+[ext_resource type="AudioStream" uid="uid://btfualf1mdsik" path="res://Audio/SFX/Relics/use.mp3" id="2_r864d"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="3_2tr53"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="4_2is0x"]
+[ext_resource type="AudioStream" uid="uid://b3dibo060gmq7" path="res://Audio/SFX/Relics/grab.wav" id="5_u32aj"]
+[ext_resource type="AudioStream" uid="uid://cn410o5c022b6" path="res://Audio/SFX/Relics/pickup.wav" id="6_2t4oy"]
+[ext_resource type="AudioStream" uid="uid://bnafcs7v6og2d" path="res://Audio/SFX/Relics/collide.wav" id="7_dw44g"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_xeq37"]
+
+[sub_resource type="Resource" id="Resource_76rnk"]
+script = ExtResource("3_2tr53")
+Weight = 1.0
+Sound = ExtResource("2_r864d")
+
+[sub_resource type="Resource" id="Resource_o2k08"]
+resource_name = "Use"
+script = ExtResource("4_2is0x")
+Name = "Use"
+Sounds = Array[Object]([SubResource("Resource_76rnk")])
+
+[sub_resource type="Resource" id="Resource_roj5q"]
+script = ExtResource("3_2tr53")
+Weight = 1.0
+Sound = ExtResource("5_u32aj")
+
+[sub_resource type="Resource" id="Resource_efuyy"]
+resource_name = "Grab"
+script = ExtResource("4_2is0x")
+Name = "Grab"
+Sounds = Array[Object]([SubResource("Resource_roj5q")])
+
+[sub_resource type="Resource" id="Resource_sfr58"]
+script = ExtResource("3_2tr53")
+Weight = 1.0
+Sound = ExtResource("6_2t4oy")
+
+[sub_resource type="Resource" id="Resource_qqw1t"]
+resource_name = "Break"
+script = ExtResource("4_2is0x")
+Name = "Break"
+Sounds = Array[Object]([SubResource("Resource_sfr58")])
+
+[sub_resource type="Resource" id="Resource_d5gy7"]
+script = ExtResource("3_2tr53")
+Weight = 1.0
+Sound = ExtResource("7_dw44g")
+
+[sub_resource type="Resource" id="Resource_y4gmc"]
+resource_name = "Collide"
+script = ExtResource("4_2is0x")
+Name = "Collide"
+Sounds = Array[Object]([SubResource("Resource_d5gy7")])
+
+[node name="Relic Sound" type="AudioStreamPlayer3D" groups=["sound"]]
+stream = SubResource("AudioStreamPolyphonic_xeq37")
+unit_size = 30.0
+autoplay = true
+max_distance = 30.0
+bus = &"SFX"
+script = ExtResource("1_uvlm3")
+Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="Kill"]

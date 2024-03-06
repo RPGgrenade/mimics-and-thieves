@@ -1,15 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://cl7lrgi537jr4"]
+[gd_scene load_steps=15 format=3 uid="uid://cl7lrgi537jr4"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_yk4dm"]
 [ext_resource type="Resource" uid="uid://ckl5u1xnb5fgb" path="res://Resources/Relics/Stealth Scroll.tres" id="2_i8va0"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/UndetectEffect.cs" id="3_8q4o6"]
+[ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_da3fd"]
 [ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="5_wfiyc"]
 [ext_resource type="Texture2D" uid="uid://cr31hdlj0fbju" path="res://Textures/Thief/fabric.jpg" id="6_b8mnq"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_8hojo"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="9_8wctp"]
-[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="10_5x85s"]
-[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="11_ymq4t"]
-[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="12_anneq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gxbyp"]
 size = Vector3(0.3, 0.15, 0.875)
@@ -41,49 +39,7 @@ normal_enabled = true
 normal_scale = 0.3
 normal_texture = ExtResource("6_b8mnq")
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
-
-[sub_resource type="Resource" id="Resource_76rnk"]
-script = ExtResource("11_ymq4t")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_o2k08"]
-resource_name = "Use"
-script = ExtResource("12_anneq")
-Name = "Use"
-Sounds = Array[Object]([SubResource("Resource_76rnk")])
-
-[sub_resource type="Resource" id="Resource_roj5q"]
-script = ExtResource("11_ymq4t")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_efuyy"]
-resource_name = "Grab"
-script = ExtResource("12_anneq")
-Name = "Grab"
-Sounds = Array[Object]([SubResource("Resource_roj5q")])
-
-[sub_resource type="Resource" id="Resource_sfr58"]
-script = ExtResource("11_ymq4t")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_qqw1t"]
-resource_name = "Break"
-script = ExtResource("12_anneq")
-Name = "Break"
-Sounds = Array[Object]([SubResource("Resource_sfr58")])
-
-[sub_resource type="Resource" id="Resource_d5gy7"]
-script = ExtResource("11_ymq4t")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_y4gmc"]
-resource_name = "Collide"
-script = ExtResource("12_anneq")
-Name = "Collide"
-Sounds = Array[Object]([SubResource("Resource_d5gy7")])
-
-[node name="Stealth Scroll" type="CharacterBody3D" node_paths=PackedStringArray("effect", "Manager") groups=["Relic"]]
+[node name="Stealth Scroll" type="CharacterBody3D" node_paths=PackedStringArray("effect") groups=["Relic"]]
 collision_layer = 8
 collision_mask = 6
 slide_on_ceiling = false
@@ -96,7 +52,7 @@ RotationSpeed = 4.79
 BounceAmount = 0.33
 BounceThreshold = 0.96
 Gravity = 11.0
-Manager = NodePath("Sounds")
+Manager = ExtResource("3_da3fd")
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_8q4o6")
@@ -214,9 +170,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39, 0)
 radius = 0.04
 radial_segments = 10
 material = ExtResource("9_8wctp")
-
-[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamPolyphonic_k0gv2")
-autoplay = true
-script = ExtResource("10_5x85s")
-Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Relic : CharacterBody3D
 {
@@ -20,8 +21,13 @@ public partial class Relic : CharacterBody3D
     [ExportGroup("Gravity")]
     [Export] public float Gravity = 1.0f;
     [ExportCategory("Sounds")]
-    [Export] public SoundManager Manager;
+    [Export] public PackedScene Manager;
+    [Export] public float GrabSoundVolume = -3f;
+    [Export] public float UseSoundVolume = 5f;
+    [Export] public float BreakSoundVolume = 0f;
+    [Export] public float CollideSoundVolume = 5f;
     [Export] public AudioStream ItemSound;
+    [Export] public float ItemSoundVolume = 0f;
 
     private bool is_colliding_floor = false;
     private bool has_collided_floor = false;
@@ -37,6 +43,16 @@ public partial class Relic : CharacterBody3D
     public override void _Ready()
     {
         originalRotation = GlobalRotationDegrees;
+    }
+
+    private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f)
+    {
+        SoundManager sounds = Manager.Instantiate() as SoundManager;
+        GetTree().Root.AddChild(sounds);
+        sounds.GlobalPosition = GlobalPosition;
+
+        sounds.PlayRandom(soundType, minpitch: minPitch, maxpitch: maxPitch, volume: generic_volume);
+        sounds.PlayOneShot(ItemSound, minpitch: minPitch, maxpitch: maxPitch, volume: volume);
     }
 
     private void setCollisionFrame()
@@ -81,15 +97,13 @@ public partial class Relic : CharacterBody3D
         timer.Autostart = true;
         timer.OneShot = true;
         this.AddChild(timer);
-        Manager.PlayRandom("Use", minpitch: 0.95f, maxpitch: 1.05f);
-        Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
+        PlaySounds("Use", volume: ItemSoundVolume, generic_volume: UseSoundVolume);
     }
 
     private void Despawn()
     {
         // Particles
-        Manager.PlayRandom("Break", minpitch: 0.95f, maxpitch: 1.05f);
-        Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
+        PlaySounds("Break", volume: ItemSoundVolume, generic_volume: BreakSoundVolume);
         QueueFree();
     }
 
@@ -128,8 +142,7 @@ public partial class Relic : CharacterBody3D
                 {
                     velocity = velocity.Bounce(GetWallNormal()) * BounceAmount;
                 }
-                Manager.PlayRandom("Collide", minpitch: 0.95f, maxpitch: 1.05f);
-                Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
+                PlaySounds("Collide", volume: ItemSoundVolume, generic_volume: CollideSoundVolume);
                 //GD.Print("Speed is "+ velocity.Length());
             }
 
@@ -142,8 +155,7 @@ public partial class Relic : CharacterBody3D
             velocity = Vector3.Zero;
             if (!has_been_grabbed)
             {
-                Manager.PlayRandom("Grab", minpitch: 0.95f, maxpitch: 1.05f);
-                Manager.PlayOneShot(ItemSound, minpitch: 0.95f, maxpitch: 1.05f);
+                PlaySounds("Grab", volume: ItemSoundVolume, generic_volume: GrabSoundVolume);
                 has_been_grabbed = true;
             }
         }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bohw01wm1a7ns"]
+[gd_scene load_steps=15 format=3 uid="uid://bohw01wm1a7ns"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_aude1"]
 [ext_resource type="Resource" uid="uid://dthqvd42qjlfh" path="res://Resources/Relics/Spell Book.tres" id="2_lh6co"]
+[ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_bdn4h"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/DistractEffect.cs" id="3_u2mcr"]
 [ext_resource type="PackedScene" uid="uid://cqg6dvy04wnnw" path="res://Prefabs/Thief/thief_balloon.tscn" id="4_gnps0"]
 [ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="5_rqpb3"]
@@ -9,9 +10,6 @@
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="7_0rjpx"]
 [ext_resource type="Texture2D" uid="uid://dw8mbw21o6oyf" path="res://Textures/Materials/magic_03.png" id="7_42yki"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="8_8ad67"]
-[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="9_xj1l3"]
-[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="10_bjdmi"]
-[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="11_1tjd0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gxbyp"]
 size = Vector3(0.5, 0.15, 0.6)
@@ -36,49 +34,7 @@ normal_scale = 0.3
 normal_texture = SubResource("CompressedTexture2D_y8ce1")
 uv1_scale = Vector3(1.745, 1.745, 1.745)
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_k0gv2"]
-
-[sub_resource type="Resource" id="Resource_76rnk"]
-script = ExtResource("10_bjdmi")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_o2k08"]
-resource_name = "Use"
-script = ExtResource("11_1tjd0")
-Name = "Use"
-Sounds = Array[Object]([SubResource("Resource_76rnk")])
-
-[sub_resource type="Resource" id="Resource_roj5q"]
-script = ExtResource("10_bjdmi")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_efuyy"]
-resource_name = "Grab"
-script = ExtResource("11_1tjd0")
-Name = "Grab"
-Sounds = Array[Object]([SubResource("Resource_roj5q")])
-
-[sub_resource type="Resource" id="Resource_sfr58"]
-script = ExtResource("10_bjdmi")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_qqw1t"]
-resource_name = "Break"
-script = ExtResource("11_1tjd0")
-Name = "Break"
-Sounds = Array[Object]([SubResource("Resource_sfr58")])
-
-[sub_resource type="Resource" id="Resource_d5gy7"]
-script = ExtResource("10_bjdmi")
-Weight = 1.0
-
-[sub_resource type="Resource" id="Resource_y4gmc"]
-resource_name = "Collide"
-script = ExtResource("11_1tjd0")
-Name = "Collide"
-Sounds = Array[Object]([SubResource("Resource_d5gy7")])
-
-[node name="Spell Book" type="CharacterBody3D" node_paths=PackedStringArray("effect", "Manager") groups=["Relic"]]
+[node name="Spell Book" type="CharacterBody3D" node_paths=PackedStringArray("effect") groups=["Relic"]]
 collision_layer = 8
 collision_mask = 6
 slide_on_ceiling = false
@@ -90,7 +46,7 @@ FrictionLimit = 0.9
 BounceAmount = 0.2
 BounceThreshold = 1.0
 Gravity = 11.0
-Manager = NodePath("Sounds")
+Manager = ExtResource("3_bdn4h")
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_u2mcr")
@@ -156,9 +112,3 @@ material = ExtResource("8_8ad67")
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.208199, -0.000210784, 0)
 size = Vector3(0.12, 0.03, 0.62)
 material = ExtResource("8_8ad67")
-
-[node name="Sounds" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamPolyphonic_k0gv2")
-autoplay = true
-script = ExtResource("9_xj1l3")
-Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])
