@@ -4,6 +4,8 @@ using System.Linq;
 
 public partial class Mimic : CharacterBody3D
 {
+    [Export] public bool IsMimic = true;
+    [Export] public Node3D Glow;
     [ExportCategory("References")]
     [Export] public MimicDetection Detection;
     [Export] public MimicAnimator Animator;
@@ -25,46 +27,58 @@ public partial class Mimic : CharacterBody3D
     public override void _Ready()
     {
         Navigator = Navigator ?? GetChildren().OfType<NavigationAgent3D>().FirstOrDefault();
+        if (!IsMimic && Glow != null) { 
+            Glow.QueueFree(); 
+            Detection.QueueFree();
+            Navigator.QueueFree();
+            Animator.QueueFree();
+        }
     }
 
     public override void _Process(double delta)
     {
-        Target = Detection.Target;
-        if (Target != null)
+        if (IsMimic)
         {
-            if (!Animator.Active) Animator.Activate();
-            MoveBody(Target.GlobalPosition, MaxSpeed, Acceleration, RotationSpeed, (float)delta);
-        }
-        else
-        {
-            if (Animator.Active)
+            Target = Detection.Target;
+            if (Target != null)
             {
-                Animator.Deactivate(); // For now. Needs a cooldown time
-                MoveBody(GlobalPosition, MaxSpeed, Acceleration, RotationSpeed, (float)delta);
-                Velocity = Vector3.Zero;
+                if (!Animator.Active) Animator.Activate();
+                MoveBody(Target.GlobalPosition, MaxSpeed, Acceleration, RotationSpeed, (float)delta);
+            }
+            else
+            {
+                if (Animator.Active)
+                {
+                    Animator.Deactivate(); // For now. Needs a cooldown time
+                    MoveBody(GlobalPosition, MaxSpeed, Acceleration, RotationSpeed, (float)delta);
+                    Velocity = Vector3.Zero;
+                }
             }
         }
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        Vector3 velocity = Velocity;
-        if (!IsOnFloor())
-            velocity.Y -= Gravity * (float)delta;
-        else
+        if (IsMimic)
         {
-            if (jumpCooldown > 0f) jumpCooldown -= (float)delta;
-            else jumpCooldown = JumpCooldown;
-
-            if (Target != null)
+            Vector3 velocity = Velocity;
+            if (!IsOnFloor())
+                velocity.Y -= Gravity * (float)delta;
+            else
             {
-                if (jumpCooldown <= 0f)
-                    velocity.Y = JumpVelocity;
-                else velocity = Vector3.Zero;
+                if (jumpCooldown > 0f) jumpCooldown -= (float)delta;
+                else jumpCooldown = JumpCooldown;
+
+                if (Target != null)
+                {
+                    if (jumpCooldown <= 0f)
+                        velocity.Y = JumpVelocity;
+                    else velocity = Vector3.Zero;
+                }
             }
+            Velocity = velocity;
+            MoveAndSlide();
         }
-        Velocity = velocity;
-        MoveAndSlide();
     }
 
     public void MoveBody(Vector3 TargetPosition, float MoveSpeed, float Acceleration, float RotationSpeed, float delta)

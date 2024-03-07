@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://h68odrw8nmu"]
+[gd_scene load_steps=20 format=3 uid="uid://h68odrw8nmu"]
 
 [ext_resource type="Script" path="res://Scripts/Mimics/Mimic.cs" id="1_4e0r3"]
 [ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="1_hwdcd"]
@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="3_mpbln"]
 [ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="4_hllw8"]
 [ext_resource type="Texture2D" uid="uid://bt4f7y3m52guh" path="res://Textures/Thief/leather_n.jpg" id="5_p2faw"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="8_ckaho"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_eax0b"]
 [ext_resource type="Script" path="res://Scripts/Mimics/MimicDetection.cs" id="8_lv01f"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0iv85"]
 height = 0.919679
-radius = 0.863077
+radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tnc2"]
 albedo_texture = ExtResource("1_hwdcd")
@@ -77,10 +79,11 @@ points = PackedVector3Array(0, 0, 0, 4, -2, 6, -4, -2, 6, 4, 2, 6, -4, 2, 6)
 [sub_resource type="SphereShape3D" id="SphereShape3D_05308"]
 radius = 3.78261
 
-[node name="Chest" type="CharacterBody3D" node_paths=PackedStringArray("Detection", "Animator", "Navigator")]
+[node name="Chest" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator") groups=["Mimic"]]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_4e0r3")
+Glow = NodePath("Glow")
 Detection = NodePath("Detection")
 Animator = NodePath("Animator")
 Navigator = NodePath("Navigator")
@@ -107,7 +110,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526524, 0)
 shape = SubResource("CylinderShape3D_0iv85")
 
 [node name="Navigator" type="NavigationAgent3D" parent="."]
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.862745, 0.137255, 0.188235, 1)
 
@@ -381,12 +383,75 @@ radial_segments = 10
 rings = 4
 material = SubResource("StandardMaterial3D_3s8qr")
 
-[node name="Detection" type="Area3D" parent="."]
+[node name="Glow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0730177, 0)
+script = ExtResource("8_eax0b")
+
+[node name="Bottom" type="Node3D" parent="Glow"]
+
+[node name="Base" type="CSGBox3D" parent="Glow/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.366109, 0)
+size = Vector3(1, 0.5, 0.8)
+material = ExtResource("8_ckaho")
+
+[node name="Hole" type="CSGBox3D" parent="Glow/Bottom/Base"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.0287563, 0)
+operation = 2
+size = Vector3(1, 0.555, 0.8)
+material = ExtResource("8_ckaho")
+
+[node name="Keyhole" type="CSGBox3D" parent="Glow/Bottom/Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.209616, 0.434571)
+size = Vector3(0.2, 0.2, 0.08)
+material = ExtResource("8_ckaho")
+
+[node name="Keyhole2" type="CSGBox3D" parent="Glow/Bottom/Base/Keyhole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0218002, 0.0295265)
+operation = 2
+size = Vector3(0.035, 0.09, 0.04)
+material = ExtResource("8_ckaho")
+
+[node name="Keyhole3" type="CSGCylinder3D" parent="Glow/Bottom/Base/Keyhole"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.0479732, 0.0295265)
+operation = 2
+radius = 0.042
+height = 0.04
+material = ExtResource("8_ckaho")
+
+[node name="Mouth" type="Node3D" parent="Glow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.615375, -0.386547)
+
+[node name="Top" type="CSGCylinder3D" parent="Glow/Mouth"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.0133596, 0.389906)
+radius = 0.4
+height = 1.0
+sides = 12
+material = ExtResource("8_ckaho")
+
+[node name="Hole" type="CSGBox3D" parent="Glow/Mouth/Top"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, -0.256168, 0.0287563, 0)
+operation = 2
+size = Vector3(0.495, 1.13, 0.995)
+material = ExtResource("8_ckaho")
+
+[node name="Top2" type="CSGCylinder3D" parent="Glow/Mouth/Top"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+operation = 2
+radius = 0.4
+height = 1.0
+sides = 12
+material = ExtResource("8_ckaho")
+
+[node name="Detection" type="Area3D" parent="." node_paths=PackedStringArray("StartPoint")]
 collision_layer = 4
 collision_mask = 17
 monitorable = false
 script = ExtResource("8_lv01f")
 TargetGroups = PackedStringArray("player")
+ForgetTime = 4.0
+StartPoint = NodePath("Marker3D")
+VisionDistance = 18.0
+VisionMask = 3
 
 [node name="Sight" type="CollisionShape3D" parent="Detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738482, 0.16008)
@@ -396,5 +461,7 @@ shape = SubResource("ConvexPolygonShape3D_un5eb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5444, 0)
 shape = SubResource("SphereShape3D_05308")
 
+[node name="Marker3D" type="Marker3D" parent="Detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801032, 0.323939)
+
 [connection signal="body_entered" from="Detection" to="Detection" method="OnBodyEnter"]
-[connection signal="body_exited" from="Detection" to="Detection" method="OnBodyExit"]
