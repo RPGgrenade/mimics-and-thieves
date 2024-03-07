@@ -97,6 +97,15 @@ public partial class MimicDetection : Area3D
             {
                 SeesTarget = true;
                 if (body is Node3D) Target = body as Node3D;
+                if (body is ThiefController)
+                {
+                    ThiefController controller = body as ThiefController;
+                    if (controller.IsUndetectable)
+                    {
+                        Target = null;
+                        SeesTarget = false;
+                    }
+                }
             }
             if(Target != null && body.IsInGroup(PriorityTargetGroup))
                 if (body is Node3D) Target = body as Node3D;

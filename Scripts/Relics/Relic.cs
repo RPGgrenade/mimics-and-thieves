@@ -105,9 +105,13 @@ public partial class Relic : CharacterBody3D
 
     private void Despawn()
     {
-        // Particles
-        PlaySounds("Break", volume: ItemSoundVolume, generic_volume: BreakSoundVolume);
-        QueueFree();
+        GD.Print("Used: "+Used);
+        if (Used)
+        {
+            // Particles
+            PlaySounds("Break", volume: ItemSoundVolume, generic_volume: BreakSoundVolume);
+            QueueFree();
+        }
     }
 
     public void SetVelocity(Vector3 velocity) {

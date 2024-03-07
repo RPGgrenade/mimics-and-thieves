@@ -94,9 +94,9 @@ public partial class Grab : Area3D
             Relic relic = Item as Relic;
             if (!relic.Used && relic.effect != null)
             {
-                relic.effect.Activate();
                 relic.IsUsed();
                 ItemUsed(relic);
+                relic.effect.Activate();
             }
         }
     }
@@ -113,7 +113,12 @@ public partial class Grab : Area3D
 
     private void clearItem()
     {
-        Item = null;
+        if (Item != null)
+        {
+            Relic relic = Item as Relic;
+            if (relic.Used)
+                Item = null;
+        }
     }
 
     public void GetItem()

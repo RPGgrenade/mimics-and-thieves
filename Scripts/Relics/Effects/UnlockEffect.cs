@@ -3,6 +3,7 @@ using System;
 
 public partial class UnlockEffect : MagicEffect
 {
+    [Export] public Relic key;
     [Export] public string EffectGroup = "door";
     [Export] public float Radius = 5f;
 
@@ -10,6 +11,7 @@ public partial class UnlockEffect : MagicEffect
     {
         GD.Print("Unlock activated");
         var targets = GetTree().GetNodesInGroup(EffectGroup);
+        bool foundDoor = false;
         foreach (Node target in targets)
         {
             Node3D target3D = target as Node3D;
@@ -17,8 +19,13 @@ public partial class UnlockEffect : MagicEffect
             {
                 // Convert target to door script
                 // unlock door target
+                Door door = target3D as Door;
+                door.Open();
+                foundDoor = true;
                 break;
             }
         }
+        if (!foundDoor)
+            key.Used = false;
     }
 }

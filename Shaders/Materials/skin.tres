@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://te5jx48j78xw"]
+
+[resource]
+resource_local_to_scene = true
+diffuse_mode = 3
+specular_mode = 1
+disable_ambient_light = true
+albedo_color = Color(0.980392, 0.811765, 0.666667, 1)
+metallic = 0.62
+metallic_specular = 1.0
+roughness = 0.6
+emission_enabled = true
+emission = Color(0.980392, 0.811765, 0.666667, 1)
+emission_operator = 1
+rim_enabled = true
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 0.1
+subsurf_scatter_skin_mode = true
+backlight_enabled = true
+backlight = Color(1, 0.843137, 0.8, 1)
+distance_fade_mode = 2
+distance_fade_max_distance = 0.25

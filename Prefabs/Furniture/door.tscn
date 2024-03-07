@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://wwd1vnycjyx2"]
+
+[ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="1_cjhge"]
+[ext_resource type="Script" path="res://Scripts/House/Door.cs" id="1_y7sht"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p0xbb"]
+size = Vector3(1.8, 3, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vmsk"]
+albedo_color = Color(0.572549, 0.709804, 0.721569, 1)
+albedo_texture = ExtResource("1_cjhge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6mdv"]
+diffuse_mode = 3
+albedo_color = Color(0.741176, 0.529412, 0.176471, 1)
+metallic = 0.31
+metallic_specular = 0.88
+roughness = 0.31
+clearcoat_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjjnw"]
+diffuse_mode = 3
+albedo_color = Color(0.741176, 0.529412, 0.176471, 1)
+metallic = 0.31
+metallic_specular = 0.88
+roughness = 0.31
+clearcoat_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f5jbd"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.698039, 0.235294, 0.796078, 1)
+metallic = 0.31
+metallic_specular = 0.88
+roughness = 0.31
+clearcoat_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tt83e"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.698039, 0.235294, 0.796078, 1)
+metallic = 0.31
+metallic_specular = 0.88
+roughness = 0.31
+clearcoat_enabled = true
+
+[node name="DoorFrame" type="Node3D" node_paths=PackedStringArray("DoorObject") groups=["door"]]
+script = ExtResource("1_y7sht")
+DoorObject = NodePath("Door")
+OpenAngle = 110.0
+
+[node name="Door" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, 0)
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 0)
+shape = SubResource("BoxShape3D_p0xbb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.909759, 0, 0)
+size = Vector3(1.8, 3, 0.1)
+material = SubResource("StandardMaterial3D_3vmsk")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Door/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.433547, 0)
+radius = 0.05
+height = 0.25
+material = SubResource("StandardMaterial3D_m6mdv")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Door/CSGBox3D/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.17, 0)
+radius = 0.166
+radial_segments = 4
+rings = 4
+material = SubResource("StandardMaterial3D_sjjnw")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Door/CSGBox3D"]
+transform = Transform3D(0.75, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.622481, 5.96046e-08)
+radius = 0.619
+height = 0.2
+sides = 6
+material = SubResource("StandardMaterial3D_m6mdv")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Door/CSGBox3D/CSGCylinder3D2"]
+transform = Transform3D(1.25, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.17924, -0.22753)
+operation = 2
+radius = 0.217
+height = 0.25
+sides = 10
+material = SubResource("StandardMaterial3D_f5jbd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Door/CSGBox3D/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.154502, 0.11682)
+operation = 2
+size = Vector3(0.165, 0.2, 0.4)
+material = SubResource("StandardMaterial3D_tt83e")

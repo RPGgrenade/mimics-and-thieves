@@ -43,6 +43,7 @@ slide_on_ceiling = false
 script = ExtResource("1_xb8bv")
 loot = ExtResource("2_xan1m")
 effect = NodePath("Magic")
+UsedTimeout = 0.2
 Friction = 0.1
 FrictionLimit = 0.9
 BounceAmount = 0.2
@@ -50,8 +51,10 @@ BounceThreshold = 1.0
 Gravity = 11.0
 Manager = ExtResource("3_xio3w")
 
-[node name="Magic" type="Node3D" parent="."]
+[node name="Magic" type="Node3D" parent="." node_paths=PackedStringArray("key")]
 script = ExtResource("3_fpftf")
+key = NodePath("..")
+Radius = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0114624)

@@ -1,0 +1,162 @@
+[gd_scene load_steps=11 format=3 uid="uid://c6swx1wgxfx22"]
+
+[ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_5i2il"]
+[ext_resource type="Material" uid="uid://lfqkse3ptsax" path="res://Shaders/Materials/house/wall.tres" id="1_emvfp"]
+[ext_resource type="Texture2D" uid="uid://cr31hdlj0fbju" path="res://Textures/Thief/fabric.jpg" id="2_ra6x6"]
+[ext_resource type="PackedScene" uid="uid://c3fptkfve0361" path="res://Prefabs/Furniture/window.tscn" id="2_yd3ot"]
+[ext_resource type="Texture2D" uid="uid://du0s1qyux3c8i" path="res://Textures/Thief/fabric_c.jpg" id="3_h6uf0"]
+[ext_resource type="PackedScene" uid="uid://wwd1vnycjyx2" path="res://Prefabs/Furniture/door.tscn" id="5_t4kcf"]
+[ext_resource type="PackedScene" uid="uid://p026rx4ef5oh" path="res://Prefabs/Relics/key.tscn" id="7_auxh8"]
+
+[sub_resource type="Environment" id="Environment_ekfaw"]
+ambient_light_source = 2
+ambient_light_color = Color(0.537255, 0.858824, 1, 1)
+ambient_light_energy = 0.1
+ssao_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.203922, 0.478431, 0.470588, 1)
+fog_light_energy = 0.0
+fog_density = 0.02
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+adjustment_enabled = true
+adjustment_brightness = 1.06
+adjustment_contrast = 1.12
+adjustment_saturation = 1.21
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxkvq"]
+albedo_color = Color(0.713726, 0.184314, 0.129412, 1)
+albedo_texture = ExtResource("2_ra6x6")
+metallic_specular = 0.26
+normal_enabled = true
+normal_scale = 0.03
+normal_texture = ExtResource("3_h6uf0")
+heightmap_enabled = true
+heightmap_scale = 2.455
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+uv1_scale = Vector3(0.999, 3, 0.999)
+
+[sub_resource type="FogMaterial" id="FogMaterial_ewdhq"]
+density = 5.0
+albedo = Color(0, 0, 0, 1)
+
+[node name="Manor" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ekfaw")
+
+[node name="Entrance" type="Node3D" parent="."]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Entrance"]
+use_collision = true
+collision_layer = 2
+collision_mask = 29
+
+[node name="Room" type="CSGCylinder3D" parent="Entrance/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+radius = 13.939
+height = 33.675
+sides = 10
+cone = true
+material = ExtResource("1_emvfp")
+
+[node name="Main2" type="CSGCylinder3D" parent="Entrance/CSGCombiner3D/Room"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+operation = 2
+radius = 13.939
+height = 33.675
+sides = 10
+cone = true
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Entrance/CSGCombiner3D/Room/Main2"]
+transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, 1.05263, 0, -1.05263, -4.6012e-08, 0, -0.749803, 8.4045)
+operation = 2
+size = Vector3(30, 12.61, 34)
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Entrance/CSGCombiner3D/Room/Main2"]
+transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, 1.05263, 0, -1.05263, -4.6012e-08, 0, 1.56436, -4.10544)
+operation = 2
+size = Vector3(30, 12.61, 4.78)
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Entrance/CSGCombiner3D/Room"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.3399, -3.90016)
+operation = 2
+size = Vector3(30, 12.61, 26.22)
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Entrance/CSGCombiner3D/Room"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.712313, -6.10725)
+operation = 1
+size = Vector3(30, 16.925, 34)
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Entrance/CSGCombiner3D/Room"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -11.6718, 0.161218)
+operation = 2
+size = Vector3(1.8, 3, 26.22)
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Entrance/CSGCombiner3D/Room"]
+transform = Transform3D(1, 0, 0, 0, -0.948434, 0.316974, 0, -0.316974, -0.948434, 0, -8.41923, -9.81901)
+operation = 2
+size = Vector3(4, 7, 3.46)
+material = ExtResource("1_emvfp")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Entrance/CSGCombiner3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.88094e-08, -1.66665, -8.46556)
+size = Vector3(14.52, 0.02, 5.045)
+material = SubResource("StandardMaterial3D_cxkvq")
+
+[node name="Lighting" type="Node3D" parent="Entrance"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Entrance/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6.65056, -8.60402)
+light_color = Color(1, 0.737255, 0.913725, 1)
+light_energy = 0.1
+light_specular = 7.0
+omni_range = 45.188
+omni_attenuation = 0.0583146
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Entrance/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65817, 6.65056, -8.60402)
+light_color = Color(1, 0.737255, 0.913725, 1)
+light_energy = 0.1
+light_specular = 7.0
+omni_range = 45.188
+omni_attenuation = 0.0583146
+
+[node name="Window" parent="Entrance" instance=ExtResource("2_yd3ot")]
+transform = Transform3D(1, 0, 0, 0, 0.932046, -0.362341, 0, 0.362341, 0.932046, 0, 9.64948, -8.28)
+
+[node name="Door" parent="Entrance" instance=ExtResource("5_t4kcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0195459, -0.15383, -0.823763)
+
+[node name="Door2" parent="Entrance" node_paths=PackedStringArray("DoorObject") instance=ExtResource("5_t4kcf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0195445, -0.15383, -16.3609)
+DoorObject = NodePath("../Door/Door")
+IsOpen = true
+
+[node name="FogVolume" type="FogVolume" parent="Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.193543, -17.2172)
+size = Vector3(1.71751, 3.03808, 2.23712)
+material = SubResource("FogMaterial_ewdhq")
+
+[node name="Hallway" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0178013, 0.999842, 0, -0.999842, 0.0178013, 2.38419e-07, 2.60472, -7.49793)
+light_color = Color(0.235294, 0.631373, 0.847059, 1)
+light_energy = 0.0
+shadow_transmittance_bias = 14.415
+sky_mode = 1
+
+[node name="Thief" parent="." instance=ExtResource("1_5i2il")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.42158, -1.61883, -10)
+
+[node name="Key" parent="." instance=ExtResource("7_auxh8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.331465, -1.65665, -6.4219)
