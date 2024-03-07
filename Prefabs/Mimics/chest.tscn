@@ -112,7 +112,7 @@ debug_use_custom = true
 debug_path_custom_color = Color(0.862745, 0.137255, 0.188235, 1)
 
 [node name="Model" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.101602, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0730177, 0)
 
 [node name="Bottom" type="Node3D" parent="Model"]
 
@@ -383,9 +383,10 @@ material = SubResource("StandardMaterial3D_3s8qr")
 
 [node name="Detection" type="Area3D" parent="."]
 collision_layer = 4
+collision_mask = 17
 monitorable = false
 script = ExtResource("8_lv01f")
-TargetGroups = PackedStringArray("player", "sound")
+TargetGroups = PackedStringArray("player")
 
 [node name="Sight" type="CollisionShape3D" parent="Detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738482, 0.16008)

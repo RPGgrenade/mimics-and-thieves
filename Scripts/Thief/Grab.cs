@@ -24,7 +24,7 @@ public partial class Grab : Area3D
 
     public void OnHit(Node3D body)
     {
-        GD.Print("Grab");
+        //GD.Print("Grab");
         if (body.IsInGroup(RelicGroup) && Item == null)
         {
             grabItem(body);
@@ -33,7 +33,7 @@ public partial class Grab : Area3D
 
     private void grabItem(Node3D item)
     {
-        GD.Print("Grab "+item.Name);
+        //GD.Print("Grab "+item.Name);
         Item = item;
         Item.Reparent(Grip);
 
@@ -66,7 +66,7 @@ public partial class Grab : Area3D
             }
             else relic.SetVelocity(controller.Velocity);
 
-            GD.Print("Item is used: "+ relic.Used);
+            //GD.Print("Item is used: "+ relic.Used);
             if (controller.loot.Open && !relic.Used)
             {
                 controller.loot.AddLoot(relic);
@@ -88,7 +88,7 @@ public partial class Grab : Area3D
 
     public void ActivateItem()
     {
-        GD.Print("Activate");
+        //GD.Print("Activate");
         if (Item != null)
         {
             Relic relic = Item as Relic;
@@ -118,7 +118,7 @@ public partial class Grab : Area3D
 
     public void GetItem()
     {
-        GD.Print("Get Item");
+        //GD.Print("Get Item");
         if (Item == null && controller.loot.Open)
         {
             Node3D item = controller.loot.RemoveLoot();

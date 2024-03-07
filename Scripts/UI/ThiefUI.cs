@@ -103,7 +103,7 @@ public partial class ThiefUI : CanvasLayer
     {
         foreach(InventoryItem item in Inventory)
         {
-            GD.Print(item.Name);
+            //GD.Print(item.Name);
             item.ItemTexture.Texture = DefaultTexture;
             item.ItemCount.Text = ""+DefaultCount;
         }

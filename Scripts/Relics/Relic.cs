@@ -47,12 +47,15 @@ public partial class Relic : CharacterBody3D
 
     private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f)
     {
-        SoundManager sounds = Manager.Instantiate() as SoundManager;
-        GetTree().Root.AddChild(sounds);
-        sounds.GlobalPosition = GlobalPosition;
+        if (Manager != null)
+        {
+            SoundManager sounds = Manager.Instantiate() as SoundManager;
+            GetTree().Root.AddChild(sounds);
+            sounds.GlobalPosition = GlobalPosition;
 
-        sounds.PlayRandom(soundType, minpitch: minPitch, maxpitch: maxPitch, volume: generic_volume);
-        sounds.PlayOneShot(ItemSound, minpitch: minPitch, maxpitch: maxPitch, volume: volume);
+            sounds.PlayRandom(soundType, minpitch: minPitch, maxpitch: maxPitch, volume: generic_volume);
+            sounds.PlayOneShot(ItemSound, minpitch: minPitch, maxpitch: maxPitch, volume: volume);
+        }
     }
 
     private void setCollisionFrame()

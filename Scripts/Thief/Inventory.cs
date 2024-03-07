@@ -69,7 +69,7 @@ public partial class Inventory : Node
             SelectedLoot = _allLoot[key].loot;
             SelectedCount = _allLoot[key].count;
         }
-        GD.Print("Selected Loot is " + SelectedLoot.name);
+        //GD.Print("Selected Loot is " + SelectedLoot.name);
     }
 
     public void CycleLeft()
@@ -82,7 +82,7 @@ public partial class Inventory : Node
             SelectedLoot = _allLoot[key].loot;
             SelectedCount = _allLoot[key].count;
         }
-        GD.Print("Selected Loot is " + SelectedLoot.name);
+        //GD.Print("Selected Loot is " + SelectedLoot.name);
     }
 
     public void AddLoot(Relic relic)
@@ -112,10 +112,10 @@ public partial class Inventory : Node
     {
         Node3D relic = new Node3D();
         Loot loot = selected ?? SelectedLoot;
-        GD.Print("Loot: "+_allLoot);
+        //GD.Print("Loot: "+_allLoot);
         if (_allLoot.ContainsKey(loot.name))
         {
-            GD.Print("Taking " + loot.name + " out");
+            //GD.Print("Taking " + loot.name + " out");
             // Count down loot count
             _allLoot[loot.name].count -= 1;
 
@@ -132,7 +132,7 @@ public partial class Inventory : Node
                 // Randomize key to select for the selected loot
                 var keys = _allLoot.Keys.ToArray();
                 int key_count = keys.Length;
-                GD.Print("Keys: " + keys);
+                //GD.Print("Keys: " + keys);
                 if (key_count > 0)
                 {
                     string rand_key = keys[GD.RandRange(0, key_count - 1)];
