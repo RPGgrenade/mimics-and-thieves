@@ -1,0 +1,102 @@
+[gd_scene load_steps=13 format=3 uid="uid://bsvikwrfwypav"]
+
+[ext_resource type="Texture2D" uid="uid://peekdalaucn8" path="res://Textures/Materials/wood.jpg" id="1_8uhnu"]
+[ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="2_rusge"]
+[ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="3_esuh3"]
+[ext_resource type="Script" path="res://Scripts/CoinDropper.cs" id="4_6vdis"]
+[ext_resource type="PackedScene" uid="uid://bfb6qslfm4ota" path="res://Prefabs/Relics/coins/bronze_coin.tscn" id="4_exkpc"]
+[ext_resource type="PackedScene" uid="uid://c00ldy7tiwlmm" path="res://Prefabs/Relics/coins/gold_coin.tscn" id="5_2ktqa"]
+[ext_resource type="PackedScene" uid="uid://b0jk1rfddle7" path="res://Prefabs/Relics/coins/silver_coin.tscn" id="6_27vhu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x3mjp"]
+sky_top_color = Color(0.258824, 0.654902, 0.984314, 1)
+sky_horizon_color = Color(0.286275, 0.603922, 0.803922, 1)
+
+[sub_resource type="Sky" id="Sky_0dwdt"]
+sky_material = SubResource("ProceduralSkyMaterial_x3mjp")
+
+[sub_resource type="Environment" id="Environment_4o2iw"]
+background_mode = 2
+sky = SubResource("Sky_0dwdt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpoii"]
+albedo_color = Color(0.52549, 0.34902, 0.180392, 1)
+albedo_texture = ExtResource("1_8uhnu")
+roughness = 0.8
+normal_enabled = true
+normal_texture = ExtResource("2_rusge")
+uv1_scale = Vector3(1.7, 1.7, 1.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3olf8"]
+albedo_color = Color(0.34902, 0.223529, 0.105882, 1)
+albedo_texture = ExtResource("3_esuh3")
+roughness = 0.8
+normal_enabled = true
+normal_texture = ExtResource("2_rusge")
+uv1_scale = Vector3(12.3, 12.3, 12.3)
+
+[node name="Winnings" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4o2iw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.968817, 0.247777, 0, -0.247777, 0.968817, 0, 0.904503, 0.953909)
+
+[node name="Counter" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.473353, -0.65222)
+use_collision = true
+collision_layer = 2
+collision_mask = 8
+size = Vector3(5.96, 1, 1.13)
+material = SubResource("StandardMaterial3D_lpoii")
+
+[node name="Counter2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42467, -1.69099)
+layers = 0
+use_collision = true
+collision_layer = 2
+collision_mask = 8
+size = Vector3(5.96, 4, 1.13)
+material = SubResource("StandardMaterial3D_lpoii")
+
+[node name="Counter3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.42467, 0.41311)
+layers = 0
+use_collision = true
+collision_layer = 2
+collision_mask = 8
+size = Vector3(5.96, 4, 1.13)
+material = SubResource("StandardMaterial3D_lpoii")
+
+[node name="Wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.657223, -3.06139)
+collision_layer = 2
+collision_mask = 8
+size = Vector3(19.83, 8.485, 1.13)
+material = SubResource("StandardMaterial3D_3olf8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9442, 0.865467, -0.0255144)
+operation = 2
+size = Vector3(2.365, 2, 3.105)
+material = SubResource("StandardMaterial3D_lpoii")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.60644, 0.865467, -0.0255144)
+operation = 2
+size = Vector3(2.365, 2, 3.105)
+material = SubResource("StandardMaterial3D_lpoii")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.356412, 0.934329, 0, -0.934329, -0.356412, 0.0733527, 2.54054, -1.01272)
+light_color = Color(0.901961, 0.788235, 0.721569, 1)
+
+[node name="Dropper" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00014782, 1.84226, -0.64862)
+script = ExtResource("4_6vdis")
+BronzeCoin = ExtResource("4_exkpc")
+SilverCoin = ExtResource("6_27vhu")
+GoldCoin = ExtResource("5_2ktqa")
+GoldValue = 500
+CoinSpeed = 0.5

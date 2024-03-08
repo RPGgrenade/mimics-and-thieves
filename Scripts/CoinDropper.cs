@@ -1,0 +1,68 @@
+using Godot;
+using MEC;
+using System;
+
+public partial class CoinDropper : Node3D
+{
+	[Export] public int TotalValue = 0;
+	[ExportGroup("Coins")]
+    [Export] public PackedScene BronzeCoin;
+	[Export] public PackedScene SilverCoin;
+	[Export] public PackedScene GoldCoin;
+	[ExportGroup("Values")]
+    [Export] public int BronzeValue = 10;
+    [Export] public int SilverValue = 100;
+    [Export] public int GoldValue = 1000;
+	[ExportGroup("Speeds")]
+	[Export] public float DropSpeed = 0.2f;
+	[Export] public float CoinSpeed = 1.5f;
+
+	private int totalValue = 0;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+	{
+		totalValue = TotalValue;
+		if(TotalValue > 0)
+            Timing.CallDelayed(DropSpeed, DropCoin);
+    }
+
+	private void DropCoin()
+	{
+		Relic coin = SpawnCoin();
+		Vector3 velocity = new Vector3 (
+			(float)GD.RandRange(-CoinSpeed, CoinSpeed), 
+			0f, 
+			(float)GD.RandRange(-CoinSpeed, CoinSpeed)
+		);
+		coin.SetVelocity(velocity);
+		if(totalValue > 0)
+            Timing.CallDelayed(DropSpeed, DropCoin);
+    }
+
+	private Relic SpawnCoin()
+	{
+		PackedScene chosenCoin = null;
+		if (totalValue >= GoldValue)
+		{
+			chosenCoin = GoldCoin;
+			totalValue -= GoldValue;
+		}
+		else if (totalValue >= SilverValue)
+		{
+			chosenCoin = SilverCoin;
+			totalValue -= SilverValue;
+		}
+		else if (totalValue >= BronzeValue)
+		{
+			chosenCoin = BronzeCoin;
+			totalValue -= BronzeValue;
+		}
+
+		Relic coin = chosenCoin.Instantiate() as Relic;
+		GetTree().Root.AddChild(coin);
+		coin.GlobalPosition = GlobalPosition;
+
+		return coin;
+	}
+}

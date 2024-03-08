@@ -17,6 +17,7 @@ public partial class MimicDetection : Area3D
     [Export(PropertyHint.Layers3DPhysics)] public int VisionMask = 0;
 
     public Node3D Target;
+    public Mimic mimic;
 
     private void PeriodicSoundCheck()
     {
@@ -49,20 +50,24 @@ public partial class MimicDetection : Area3D
 
     public override void _Ready()
     {
-        // Max value so that it will never stop until the node with the method is gone
-        Timing.CallPeriodically(double.MaxValue, 0.5f, PeriodicSoundCheck);
+        mimic = Owner as Mimic;
+        if(mimic.IsMimic)
+            Timing.CallPeriodically(double.MaxValue, 0.5f, PeriodicSoundCheck);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        if (IsInstanceValid(Target) && Target != null && SeesTarget)
+        if (mimic.IsMimic)
         {
-            float targetDist = (Target.GlobalPosition - StartPoint.GlobalPosition).Length();
-            if (lookAtPlayer() < targetDist)
+            if (IsInstanceValid(Target) && Target != null && SeesTarget)
             {
-                SeesTarget = false;
-                GD.Print("Target lost");
-                Timing.CallDelayed(ForgetTime, PeriodicTargetLostCheck);
+                float targetDist = (Target.GlobalPosition - StartPoint.GlobalPosition).Length();
+                if (lookAtPlayer() < targetDist)
+                {
+                    SeesTarget = false;
+                    GD.Print("Target lost");
+                    Timing.CallDelayed(ForgetTime, PeriodicTargetLostCheck);
+                }
             }
         }
     }
@@ -90,25 +95,28 @@ public partial class MimicDetection : Area3D
 
     public void OnBodyEnter(Node3D body)
     {
-        GD.Print("Body is: " + body.Name);
-        foreach (string group in TargetGroups)
+        if (mimic.IsMimic)
         {
-            if (body.IsInGroup(group) && Target == null)
+            GD.Print("Body is: " + body.Name);
+            foreach (string group in TargetGroups)
             {
-                SeesTarget = true;
-                if (body is Node3D) Target = body as Node3D;
-                if (body is ThiefController)
+                if (body.IsInGroup(group) && Target == null)
                 {
-                    ThiefController controller = body as ThiefController;
-                    if (controller.IsUndetectable)
+                    SeesTarget = true;
+                    if (body is Node3D) Target = body as Node3D;
+                    if (body is ThiefController)
                     {
-                        Target = null;
-                        SeesTarget = false;
+                        ThiefController controller = body as ThiefController;
+                        if (controller.IsUndetectable)
+                        {
+                            Target = null;
+                            SeesTarget = false;
+                        }
                     }
                 }
+                if (Target != null && body.IsInGroup(PriorityTargetGroup))
+                    if (body is Node3D) Target = body as Node3D;
             }
-            if(Target != null && body.IsInGroup(PriorityTargetGroup))
-                if (body is Node3D) Target = body as Node3D;
         }
     }
 

@@ -1,0 +1,422 @@
+[gd_scene load_steps=16 format=3 uid="uid://da8juw4j5l1vk"]
+
+[ext_resource type="Texture2D" uid="uid://peekdalaucn8" path="res://Textures/Materials/wood.jpg" id="1_on0in"]
+[ext_resource type="Script" path="res://Scripts/Mimics/Mimic.cs" id="1_p8wbb"]
+[ext_resource type="Script" path="res://Scripts/Mimics/MimicAnimator.cs" id="2_vp0kc"]
+[ext_resource type="Texture2D" uid="uid://bt4f7y3m52guh" path="res://Textures/Thief/leather_n.jpg" id="4_huu0x"]
+[ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="5_ycvtg"]
+[ext_resource type="Script" path="res://Scripts/Glow.cs" id="5_ymgkw"]
+[ext_resource type="Script" path="res://Scripts/Mimics/MimicDetection.cs" id="6_b38y8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cp8pm"]
+size = Vector3(2.975, 1.14, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7ts6"]
+albedo_color = Color(0.670588, 0.298039, 0.0392157, 1)
+albedo_texture = ExtResource("1_on0in")
+uv1_scale = Vector3(3, 3, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2l3g"]
+albedo_color = Color(0.905882, 0.909804, 0.815686, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdyn4"]
+albedo_color = Color(0.823529, 0.2, 0.266667, 1)
+roughness = 0.2
+normal_enabled = true
+normal_scale = 0.76
+normal_texture = ExtResource("4_huu0x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fills"]
+albedo_color = Color(0.290196, 0.0823529, 0.301961, 1)
+roughness = 0.32
+emission_enabled = true
+emission = Color(0.113725, 0.0235294, 0.176471, 1)
+clearcoat_enabled = true
+clearcoat_roughness = 0.77
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4gtw"]
+albedo_color = Color(0.52549, 0.360784, 0.0941176, 1)
+roughness = 0.32
+emission_enabled = true
+emission = Color(0.8, 0.462745, 0, 1)
+clearcoat_enabled = true
+clearcoat_roughness = 0.77
+disable_receive_shadows = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jr3hj"]
+points = PackedVector3Array(0, 0, 0, 4, -2, 8, -4, -2, 8, 4, 2, 8, -4, 2, 8)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w3sij"]
+radius = 5.57028
+
+[node name="Drawers" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator") groups=["Mimic"]]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_p8wbb")
+Glow = NodePath("Glow")
+Detection = NodePath("Detection")
+Animator = NodePath("Animator")
+Navigator = NodePath("Navigator")
+MaxSpeed = 5.0
+Acceleration = 2.0
+RotationSpeed = 1.0
+JumpCooldown = 0.4
+
+[node name="Animator" type="Node" parent="." node_paths=PackedStringArray("BodyParts", "Eyes", "Mouth", "Tongue")]
+script = ExtResource("2_vp0kc")
+PartSpeed = 4.0
+BodyParts = [NodePath("../Model/Mouth/Eyes"), NodePath("../Model/Base/Teeth"), NodePath("../Model/Mouth/Teeth2"), NodePath("../Model/Base/Tongue")]
+Eyes = [NodePath("../Model/Mouth/Eyes/Eye"), NodePath("../Model/Mouth/Eyes/Eye2"), NodePath("../Model/Mouth/Eyes/Eye3"), NodePath("../Model/Mouth/Eyes/Eye4"), NodePath("../Model/Mouth/Eyes/Eye5")]
+Mouth = NodePath("../Model/Mouth")
+Tongue = NodePath("../Model/Base/Tongue")
+ChompSpeed = 6.0
+ClosedAngle = -15.0
+OpenAngle = -60.0
+ChompTime = Vector2(0.6, 1.5)
+TongueSpeed = 6.0
+TongueAngle = 50.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cp8pm")
+
+[node name="Navigator" type="NavigationAgent3D" parent="."]
+debug_use_custom = true
+debug_path_custom_color = Color(0.862745, 0.137255, 0.188235, 1)
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Base" type="Node3D" parent="Model"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model/Base"]
+size = Vector3(2.98, 1.14, 1)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer5" type="CSGBox3D" parent="Model/Base/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73, 0.270013, 0.267253)
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer3" type="CSGSphere3D" parent="Model/Base/CSGBox3D/Drawer5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292033)
+radius = 0.065
+radial_segments = 5
+rings = 4
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer2" type="CSGBox3D" parent="Model/Base/CSGBox3D/Drawer5"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.0292293, 0)
+operation = 2
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer6" type="CSGBox3D" parent="Model/Base/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73, 0.270013, 0.267253)
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer3" type="CSGSphere3D" parent="Model/Base/CSGBox3D/Drawer6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292033)
+radius = 0.065
+radial_segments = 5
+rings = 4
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer2" type="CSGBox3D" parent="Model/Base/CSGBox3D/Drawer6"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.0292293, 0)
+operation = 2
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer7" type="CSGBox3D" parent="Model/Base/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73, -0.228091, 0.267253)
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer3" type="CSGSphere3D" parent="Model/Base/CSGBox3D/Drawer7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292033)
+radius = 0.065
+radial_segments = 5
+rings = 4
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer2" type="CSGBox3D" parent="Model/Base/CSGBox3D/Drawer7"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.0292293, 0)
+operation = 2
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer8" type="CSGBox3D" parent="Model/Base/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73, -0.228091, 0.267253)
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer3" type="CSGSphere3D" parent="Model/Base/CSGBox3D/Drawer8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292033)
+radius = 0.065
+radial_segments = 5
+rings = 4
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Drawer2" type="CSGBox3D" parent="Model/Base/CSGBox3D/Drawer8"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.0292293, 0)
+operation = 2
+size = Vector3(1.4, 0.54, 0.5)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Teeth" type="Node3D" parent="Model/Base"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.674146, 0.390452)
+
+[node name="Tooth" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth2" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth3" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth4" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth5" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth6" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth7" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth8" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tongue" type="Node3D" parent="Model/Base"]
+transform = Transform3D(1.36, 0, 0, 0, 1.28194, -0.454112, 0, 0.454112, 1.28194, 0, -0.0376961, -0.145098)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/Base/Tongue"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.146825, 0)
+radius = 0.14
+height = 0.412
+material = SubResource("StandardMaterial3D_cdyn4")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/Base/Tongue/CSGCylinder3D"]
+transform = Transform3D(1, 0, 0, 0, 0.878075, -0.478523, 0, 0.478523, 0.878075, 0, 0.330451, 0.082946)
+radius = 0.1
+height = 0.412
+material = SubResource("StandardMaterial3D_cdyn4")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/Base/Tongue/CSGCylinder3D/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.782097, -0.623157, 0, 0.623157, 0.782097, 0, 0.266008, 0.0731865)
+radius = 0.07
+height = 0.227
+cone = true
+material = SubResource("StandardMaterial3D_cdyn4")
+
+[node name="Mouth" type="Node3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.507631, -0.499496)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Model/Mouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104416, 0.509755)
+size = Vector3(3, 0.1, 1.1)
+material = SubResource("StandardMaterial3D_v7ts6")
+
+[node name="Teeth2" type="Node3D" parent="Model/Mouth"]
+transform = Transform3D(3, 0, 0, 0, -3, 3.57628e-07, 0, -3.57628e-07, -3, 0, -0.0483479, 0.992728)
+
+[node name="Tooth" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth2" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth3" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth4" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth5" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth6" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth7" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Tooth8" type="CSGCylinder3D" parent="Model/Mouth/Teeth2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.038, 0)
+radius = 0.01
+height = 0.2
+cone = true
+material = SubResource("StandardMaterial3D_o2l3g")
+
+[node name="Eyes" type="Node3D" parent="Model/Mouth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0584069, 1.04261)
+
+[node name="Eye" type="CSGSphere3D" parent="Model/Mouth/Eyes"]
+radius = 0.1
+radial_segments = 6
+rings = 4
+material = SubResource("StandardMaterial3D_fills")
+
+[node name="Pupil" type="CSGSphere3D" parent="Model/Mouth/Eyes/Eye"]
+transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
+radius = 0.07
+radial_segments = 10
+rings = 4
+material = SubResource("StandardMaterial3D_u4gtw")
+
+[node name="Eye2" type="CSGSphere3D" parent="Model/Mouth/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0, 0)
+radius = 0.1
+radial_segments = 6
+rings = 4
+material = SubResource("StandardMaterial3D_fills")
+
+[node name="Pupil" type="CSGSphere3D" parent="Model/Mouth/Eyes/Eye2"]
+transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
+radius = 0.07
+radial_segments = 10
+rings = 4
+material = SubResource("StandardMaterial3D_u4gtw")
+
+[node name="Eye3" type="CSGSphere3D" parent="Model/Mouth/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1, 0, 0)
+radius = 0.1
+radial_segments = 6
+rings = 4
+material = SubResource("StandardMaterial3D_fills")
+
+[node name="Pupil" type="CSGSphere3D" parent="Model/Mouth/Eyes/Eye3"]
+transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
+radius = 0.07
+radial_segments = 10
+rings = 4
+material = SubResource("StandardMaterial3D_u4gtw")
+
+[node name="Eye4" type="CSGSphere3D" parent="Model/Mouth/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.143, -0.103)
+radius = 0.1
+radial_segments = 6
+rings = 4
+material = SubResource("StandardMaterial3D_fills")
+
+[node name="Pupil" type="CSGSphere3D" parent="Model/Mouth/Eyes/Eye4"]
+transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
+radius = 0.07
+radial_segments = 10
+rings = 4
+material = SubResource("StandardMaterial3D_u4gtw")
+
+[node name="Eye5" type="CSGSphere3D" parent="Model/Mouth/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.143, -0.103)
+radius = 0.1
+radial_segments = 6
+rings = 4
+material = SubResource("StandardMaterial3D_fills")
+
+[node name="Pupil" type="CSGSphere3D" parent="Model/Mouth/Eyes/Eye5"]
+transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
+radius = 0.07
+radial_segments = 10
+rings = 4
+material = SubResource("StandardMaterial3D_u4gtw")
+
+[node name="Glow" type="Node3D" parent="."]
+script = ExtResource("5_ymgkw")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Glow"]
+size = Vector3(2.98, 1.14, 1)
+material = ExtResource("5_ycvtg")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Glow/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.612047, 0.0102592)
+size = Vector3(3, 0.1, 1.1)
+material = ExtResource("5_ycvtg")
+
+[node name="Detection" type="Area3D" parent="." node_paths=PackedStringArray("StartPoint")]
+collision_layer = 4
+collision_mask = 17
+monitorable = false
+script = ExtResource("6_b38y8")
+TargetGroups = PackedStringArray("player")
+ForgetTime = 4.0
+StartPoint = NodePath("Marker3D")
+VisionDistance = 18.0
+VisionMask = 7
+
+[node name="Sight" type="CollisionShape3D" parent="Detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738482, 0.16008)
+shape = SubResource("ConvexPolygonShape3D_jr3hj")
+
+[node name="Hearing" type="CollisionShape3D" parent="Detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5444, 0)
+shape = SubResource("SphereShape3D_w3sij")
+
+[node name="Marker3D" type="Marker3D" parent="Detection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801032, 0.323939)
+
+[connection signal="body_entered" from="Detection" to="Detection" method="OnBodyEnter"]

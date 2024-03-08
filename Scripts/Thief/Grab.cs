@@ -82,7 +82,7 @@ public partial class Grab : Area3D
                     controller.UI.UpdateSelectedItem("", 0, "", null);
             }
 
-            clearItem();
+            Item = null;
         }
     }
 

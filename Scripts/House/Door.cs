@@ -26,6 +26,7 @@ public partial class Door : Node3D
     public override void _Ready()
     {
 		doorAngle = IsOpen ? OpenAngle : ClosedAngle;
+        DoorObject.RotationDegrees = new Vector3(DoorObject.RotationDegrees.X, doorAngle, DoorObject.RotationDegrees.Z);
     }
 
     public override void _PhysicsProcess(double delta)

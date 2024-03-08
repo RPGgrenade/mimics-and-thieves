@@ -4,6 +4,7 @@ using System.Linq;
 
 public partial class Relic : CharacterBody3D
 {
+    [Export] public bool IsCoin = false;
     [ExportCategory("Item Properties")]
     [Export] public bool IsGrabbed = false;
     [Export] public Loot loot;
@@ -43,6 +44,12 @@ public partial class Relic : CharacterBody3D
     public override void _Ready()
     {
         originalRotation = GlobalRotationDegrees;
+        if (IsCoin)
+            RotationDegrees += new Vector3(
+                (float)GD.RandRange(-180f,180f), 
+                (float)GD.RandRange(-180f, 180f),
+                (float)GD.RandRange(-180f, 180f)
+            );
     }
 
     private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f)

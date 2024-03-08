@@ -451,7 +451,7 @@ TargetGroups = PackedStringArray("player")
 ForgetTime = 4.0
 StartPoint = NodePath("Marker3D")
 VisionDistance = 18.0
-VisionMask = 3
+VisionMask = 7
 
 [node name="Sight" type="CollisionShape3D" parent="Detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738482, 0.16008)

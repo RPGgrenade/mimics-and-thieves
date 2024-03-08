@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c06xcrka08vat"]
+
+[ext_resource type="Texture2D" uid="uid://ewvv2g2s5jk8" path="res://Textures/Thief/leather.jpg" id="1_y5wx0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ie7jf"]
+size = Vector3(2, 0.2, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4d2nc"]
+albedo_color = Color(0.666667, 0.435294, 0.152941, 1)
+albedo_texture = ExtResource("1_y5wx0")
+emission_enabled = true
+emission = Color(0.666667, 0.435294, 0.152941, 1)
+emission_energy_multiplier = 0.1
+uv1_scale = Vector3(0.36, 0.36, 0.36)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tt5w2"]
+load_path = "res://.godot/imported/leather.jpg-e3ed5a6458dc874bb3b8f2efe8463ada.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmbsw"]
+albedo_color = Color(0.356863, 0.223529, 0.0588235, 1)
+albedo_texture = SubResource("CompressedTexture2D_tt5w2")
+emission = Color(0.666667, 0.435294, 0.152941, 1)
+emission_energy_multiplier = 0.1
+uv1_scale = Vector3(0.36, 0.36, 0.36)
+
+[node name="Shelf" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 13
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ie7jf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(2, 0.2, 1.2)
+material = SubResource("StandardMaterial3D_4d2nc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 0.69388, -0.720091, 0, 0.720091, 0.69388, 0.653954, -0.40676, -0.699065)
+size = Vector3(0.2, 1.1, 0.2)
+material = SubResource("StandardMaterial3D_hmbsw")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 0.69388, -0.720091, 0, 0.720091, 0.69388, -0.654, -0.40691, -0.699421)
+size = Vector3(0.2, 1.1, 0.2)
+material = SubResource("StandardMaterial3D_hmbsw")

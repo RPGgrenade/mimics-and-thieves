@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class MimicAnimator : Node
 {
@@ -20,12 +22,15 @@ public partial class MimicAnimator : Node
 	[ExportGroup("Mouth")]
 	[Export] public bool UpDown = true;
 	[Export] public float ChompSpeed = 4f;
+    [Export] public float InactiveAngle = 0f;
     [Export] public float ClosedAngle = 0f;
     [Export] public float OpenAngle = -40f;
 	[Export] public Vector2 ChompTime = new Vector2(3.4f, 5.5f);
 	[ExportGroup("Tongue")]
 	[Export] public float TongueSpeed = 2.3f;
     [Export] public float TongueAngle = 30f;
+
+	private List<Vector3> partOriginalSizes = new List<Vector3>();
 
 	private float blinkTime = 0f;
 	private float chompTime = 0f;
@@ -42,6 +47,7 @@ public partial class MimicAnimator : Node
 	{
 		foreach (Node3D part in BodyParts)
 		{
+			partOriginalSizes.Add(part.Scale);
 			part.Scale = Vector3.Zero;
 		}
 		firstTongueRotation = Tongue.RotationDegrees;
@@ -51,9 +57,11 @@ public partial class MimicAnimator : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		int index = 0;
 		foreach (Node3D part in BodyParts)
 		{
-			part.Scale = part.Scale.Lerp(Active ? Vector3.One : Vector3.Zero, (float)delta * PartSpeed);
+			part.Scale = part.Scale.Lerp(Active ? partOriginalSizes[index] : Vector3.Zero, (float)delta * PartSpeed);
+			index++;
         }
 
 		if (Active)
@@ -65,7 +73,7 @@ public partial class MimicAnimator : Node
 		chompTime -= (float)delta;
         if (chompTime <= 0f || !Active)
         {
-            mouthAngle = Mathf.Lerp(mouthAngle, ClosedAngle, (float)delta * ChompSpeed);
+            mouthAngle = Mathf.Lerp(mouthAngle, Active ? ClosedAngle : InactiveAngle, (float)delta * ChompSpeed);
             Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
             if (Mathf.Abs(mouthAngle - ClosedAngle) <= 1f)
                 chompTime = (float)GD.RandRange(ChompTime.X, ChompTime.Y);

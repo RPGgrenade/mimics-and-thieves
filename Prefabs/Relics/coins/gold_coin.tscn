@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://c00ldy7tiwlmm"]
+
+[ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_0lmh4"]
+[ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="2_8fvrf"]
+[ext_resource type="AudioStream" uid="uid://bal88yavxllge" path="res://Audio/SFX/Relics/Unique/coin.wav" id="3_88psr"]
+[ext_resource type="Material" uid="uid://vlja567v1q0d" path="res://Shaders/Materials/coins/gold_coin.tres" id="3_o2qhl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_olayd"]
+height = 0.0175962
+radius = 0.0914075
+
+[node name="Gold Coin" type="CharacterBody3D" groups=["Relic"]]
+collision_layer = 8
+collision_mask = 2
+slide_on_ceiling = false
+script = ExtResource("1_0lmh4")
+IsCoin = true
+Friction = 0.34
+FrictionLimit = 4.0
+RotationSpeed = 3.0
+BounceAmount = 0.4
+BounceThreshold = 5.0
+Gravity = 9.8
+Manager = ExtResource("2_8fvrf")
+ItemSound = ExtResource("3_88psr")
+ItemSoundVolume = -5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000905767, 0)
+shape = SubResource("CylinderShape3D_olayd")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.4499, 0, 0, 0, 0.4499, 0, 0, 0, 0.4499, 0, 0, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Model"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/CSGCombiner3D"]
+radius = 0.2
+height = 0.05
+sides = 10
+material = ExtResource("3_o2qhl")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/CSGCombiner3D/CSGCylinder3D"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.0336711, 0)
+operation = 2
+radius = 0.2
+height = 0.05
+sides = 10
+material = ExtResource("3_o2qhl")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/CSGCombiner3D/CSGCylinder3D"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.034, 0)
+operation = 2
+radius = 0.2
+height = 0.05
+sides = 10
+material = ExtResource("3_o2qhl")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Model/CSGCombiner3D"]
+transform = Transform3D(0.284097, 0.0963773, 4.21279e-09, 0, -1.31134e-08, 0.3, 0.0963773, -0.284097, -1.24183e-08, -0.00753557, 0.0198629, 0.141123)
+polygon = PackedVector2Array(-0.0862897, 0.0925436, -0.368048, 0.123858, -0.471232, 0.359212, -0.472844, 0.589231, -0.406435, 0.426472, -0.235526, 0.22897, -0.190936, 0.328101, -0.174112, 0.516504, -0.23009, 0.664073, -0.446019, 0.907567, -0.220813, 0.82746, -0.0599424, 0.657137, -0.0103697, 0.468282, -0.0201666, 0.267071, 0.0473459, 0.218156, 0.107412, 0.305996, 0.114918, 0.580994, 0.0909606, 0.716241, 0.22688, 0.452597, 0.205552, 0.258657, 0.163088, 0.13024, 0.0423993, 0.0953268)
+depth = 0.05
+material = ExtResource("3_o2qhl")

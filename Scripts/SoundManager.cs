@@ -71,6 +71,7 @@ public partial class SoundManager : AudioStreamPlayer3D
 
     private void setSounds()
     {
+        if (Sounds == null) return;
         Dictionary<string, RandomSoundGroup> soundGroups = new Dictionary<string, RandomSoundGroup>();
         foreach (var soundGroup in Sounds)
         {

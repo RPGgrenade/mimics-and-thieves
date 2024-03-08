@@ -1,0 +1,783 @@
+[gd_scene load_steps=23 format=3 uid="uid://bh5nxfjipeapm"]
+
+[ext_resource type="Script" path="res://Scripts/UI/ThiefUI.cs" id="1_gfiup"]
+[ext_resource type="Texture2D" uid="uid://dd6s1f1qe2fcm" path="res://Textures/UI/empty.png" id="2_5ogup"]
+[ext_resource type="Texture2D" uid="uid://kjf6mqw5e22p" path="res://Textures/Thief/Eye.png" id="3_s8apq"]
+[ext_resource type="StyleBox" uid="uid://c7isbnsfek1o1" path="res://UI/Styles/pause_bg.tres" id="4_grhg8"]
+[ext_resource type="StyleBox" uid="uid://b83nadw0lymbi" path="res://UI/Styles/inventory_no_highlight.tres" id="5_0qsm1"]
+[ext_resource type="Script" path="res://Scripts/UI/InventoryItem.cs" id="6_eci81"]
+[ext_resource type="StyleBox" uid="uid://km50i6c42aqi" path="res://UI/Styles/inventory_highlight.tres" id="7_xcsnm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jbv68"]
+load_path = "res://.godot/imported/fabric_bg.png-ca9c02923220639d582523693b777b7c.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o8tnp"]
+texture = SubResource("CompressedTexture2D_jbv68")
+expand_margin_left = 45.0
+expand_margin_top = 25.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+modulate_color = Color(0.564706, 0.776471, 0.929412, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_44xk0"]
+load_path = "res://.godot/imported/circle.png-34f048176b409cf940a20ef5e8736c2c.s3tc.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yppr2"]
+texture = SubResource("CompressedTexture2D_44xk0")
+expand_margin_left = 180.0
+expand_margin_top = 150.0
+expand_margin_right = 150.0
+expand_margin_bottom = 150.0
+modulate_color = Color(0.545098, 0.623529, 0.796078, 0.388235)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2dvti"]
+font_size = 24
+font_color = Color(0.984314, 0.639216, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mgung"]
+font_size = 36
+font_color = Color(0.984314, 0.639216, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oadfr"]
+font_size = 24
+font_color = Color(0.568627, 0.835294, 0.886275, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2etu5"]
+font_size = 24
+font_color = Color(0.988235, 0, 0.101961, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uavqv"]
+line_spacing = -12.0
+font_size = 30
+font_color = Color(1, 0.388235, 0.898039, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_igmp2"]
+load_path = "res://.godot/imported/circle.png-34f048176b409cf940a20ef5e8736c2c.s3tc.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xwkny"]
+texture = SubResource("CompressedTexture2D_igmp2")
+expand_margin_left = 180.0
+expand_margin_top = 400.0
+expand_margin_right = 180.0
+expand_margin_bottom = 400.0
+modulate_color = Color(0.145098, 0.113725, 0.176471, 0.792157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_71dga"]
+font_color = Color(1, 0.388235, 0.898039, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jfa30"]
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_716u0"]
+font_size = 30
+font_color = Color(0.721569, 0.576471, 1, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s8pwu"]
+font_color = Color(0.721569, 0.576471, 1, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("SelectedControl", "ItemName", "ItemTexture", "ItemCount", "ItemEffect", "InventoryControl", "Inventory", "InfoTexture", "InfoName", "InfoDescription", "InfoEffect", "InfoEffectDescription")]
+script = ExtResource("1_gfiup")
+DefaultTexture = ExtResource("2_5ogup")
+SelectedControl = NodePath("Play")
+ItemName = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title/Item Name")
+ItemTexture = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item/Item Texture")
+ItemCount = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item/Count")
+ItemEffect = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Magic/Magic")
+InventoryControl = NodePath("Pause")
+Inventory = [NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12")]
+InfoTexture = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Texture")
+InfoName = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Name")
+InfoDescription = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Description")
+InfoEffect = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Magic")
+InfoEffectDescription = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Magic Description")
+
+[node name="Play" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_right = 0.455933
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Play"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -226.001
+offset_right = 214.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_o8tnp")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Play/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Play/PanelContainer/AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+
+[node name="PanelContainer" type="PanelContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_yppr2")
+
+[node name="GridContainer" type="GridContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Item Name" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title"]
+layout_mode = 2
+text = "Name"
+label_settings = SubResource("LabelSettings_2dvti")
+
+[node name="Item" type="HBoxContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Item Texture" type="TextureRect" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_mgung")
+
+[node name="Count" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_mgung")
+
+[node name="Magic" type="HBoxContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Magic" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Magic"]
+layout_mode = 2
+text = "Magic"
+label_settings = SubResource("LabelSettings_oadfr")
+horizontal_alignment = 1
+
+[node name="Pause" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Pause"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="Pause/AspectRatioContainer"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_grhg8")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause/AspectRatioContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = -50
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Top Container" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.0
+
+[node name="LeftMargin" type="MarginContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 40
+
+[node name="Inventory" type="GridContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin"]
+layout_mode = 2
+size_flags_stretch_ratio = 2.0
+theme_override_constants/h_separation = 70
+theme_override_constants/v_separation = 60
+columns = 4
+
+[node name="Item" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item4")
+focus_neighbor_top = NodePath("../../../../Bottom Container/MarginContainer/Continue Button")
+focus_neighbor_right = NodePath("../Item2")
+focus_neighbor_bottom = NodePath("../Item5")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item2" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item")
+focus_neighbor_top = NodePath("../../../../Bottom Container/MarginContainer/Continue Button")
+focus_neighbor_right = NodePath("../Item3")
+focus_neighbor_bottom = NodePath("../Item6")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item3" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item2")
+focus_neighbor_top = NodePath("../../../../Bottom Container/MarginContainer2/Restart Button")
+focus_neighbor_right = NodePath("../Item4")
+focus_neighbor_bottom = NodePath("../Item7")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item4" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item3")
+focus_neighbor_top = NodePath("../../../../Bottom Container/MarginContainer3/Menu Button")
+focus_neighbor_right = NodePath("../Item")
+focus_neighbor_bottom = NodePath("../Item8")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item5" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item8")
+focus_neighbor_top = NodePath("../Item")
+focus_neighbor_right = NodePath("../Item6")
+focus_neighbor_bottom = NodePath("../Item9")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item6" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item5")
+focus_neighbor_top = NodePath("../Item2")
+focus_neighbor_right = NodePath("../Item7")
+focus_neighbor_bottom = NodePath("../Item10")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item7" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item6")
+focus_neighbor_top = NodePath("../Item3")
+focus_neighbor_right = NodePath("../Item8")
+focus_neighbor_bottom = NodePath("../Item11")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item8" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item7")
+focus_neighbor_top = NodePath("../Item4")
+focus_neighbor_right = NodePath("../Item5")
+focus_neighbor_bottom = NodePath("../Item12")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item9" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item12")
+focus_neighbor_top = NodePath("../Item5")
+focus_neighbor_right = NodePath("../Item10")
+focus_neighbor_bottom = NodePath("../../../../Bottom Container/MarginContainer/Continue Button")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item10" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item9")
+focus_neighbor_top = NodePath("../Item6")
+focus_neighbor_right = NodePath("../Item11")
+focus_neighbor_bottom = NodePath("../../../../Bottom Container/MarginContainer/Continue Button")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item11" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item10")
+focus_neighbor_top = NodePath("../Item7")
+focus_neighbor_right = NodePath("../Item12")
+focus_neighbor_bottom = NodePath("../../../../Bottom Container/MarginContainer2/Restart Button")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="Item12" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory" node_paths=PackedStringArray("ItemTexture", "ItemCount")]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Item11")
+focus_neighbor_top = NodePath("../Item8")
+focus_neighbor_right = NodePath("../Item9")
+focus_neighbor_bottom = NodePath("../../../../Bottom Container/MarginContainer3/Menu Button")
+focus_mode = 2
+theme_override_styles/panel = ExtResource("5_0qsm1")
+script = ExtResource("6_eci81")
+NoHighlight = ExtResource("5_0qsm1")
+Highlight = ExtResource("7_xcsnm")
+ItemTexture = NodePath("Item Info/Item Texture")
+ItemCount = NodePath("Item Info/Count")
+
+[node name="Item Info" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Item Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12/Item Info"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="x" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12/Item Info"]
+layout_mode = 2
+text = "x"
+label_settings = SubResource("LabelSettings_2etu5")
+
+[node name="Count" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12/Item Info"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_uavqv")
+
+[node name="RightMargin" type="MarginContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="PanelContainer" type="PanelContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xwkny")
+
+[node name="Item Information" type="VBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="Selected Name" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information"]
+layout_mode = 2
+text = "Name"
+label_settings = SubResource("LabelSettings_uavqv")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Selected Texture" type="TextureRect" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("3_s8apq")
+expand_mode = 4
+
+[node name="Selected Description" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information"]
+layout_mode = 2
+text = "Description"
+label_settings = SubResource("LabelSettings_71dga")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Separator" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information"]
+layout_mode = 2
+text = "-------------------"
+label_settings = SubResource("LabelSettings_jfa30")
+horizontal_alignment = 1
+
+[node name="Selected Magic" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information"]
+layout_mode = 2
+text = "Magic"
+label_settings = SubResource("LabelSettings_716u0")
+horizontal_alignment = 1
+
+[node name="Selected Magic Description" type="Label" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information"]
+layout_mode = 2
+text = "Magic description"
+label_settings = SubResource("LabelSettings_s8pwu")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Bottom Container" type="HBoxContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Continue Button" type="Button" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../MarginContainer3/Menu Button")
+focus_neighbor_top = NodePath("../../../Top Container/LeftMargin/Inventory/Item10")
+focus_neighbor_right = NodePath("../../MarginContainer2/Restart Button")
+focus_neighbor_bottom = NodePath("../../../Top Container/LeftMargin/Inventory/Item2")
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "Continue"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Restart Button" type="Button" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../MarginContainer/Continue Button")
+focus_neighbor_top = NodePath("../../../Top Container/LeftMargin/Inventory/Item11")
+focus_neighbor_right = NodePath("../../MarginContainer3/Menu Button")
+focus_neighbor_bottom = NodePath("../../../Top Container/LeftMargin/Inventory/Item3")
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "Restart Level"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Menu Button" type="Button" parent="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer3"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+focus_neighbor_left = NodePath("../../MarginContainer2/Restart Button")
+focus_neighbor_top = NodePath("../../../Top Container/LeftMargin/Inventory/Item12")
+focus_neighbor_right = NodePath("../../MarginContainer/Continue Button")
+focus_neighbor_bottom = NodePath("../../../Top Container/LeftMargin/Inventory/Item4")
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "Main Menu"
+
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11" method="SetNoHighlight"]
+[connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" method="SetHighlight"]
+[connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" method="SetNoHighlight"]
