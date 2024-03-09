@@ -1,12 +1,27 @@
-[gd_scene load_steps=23 format=3 uid="uid://bh5nxfjipeapm"]
+[gd_scene load_steps=40 format=3 uid="uid://bh5nxfjipeapm"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ThiefUI.cs" id="1_gfiup"]
 [ext_resource type="Texture2D" uid="uid://dd6s1f1qe2fcm" path="res://Textures/UI/empty.png" id="2_5ogup"]
 [ext_resource type="Texture2D" uid="uid://kjf6mqw5e22p" path="res://Textures/Thief/Eye.png" id="3_s8apq"]
+[ext_resource type="Texture2D" uid="uid://c84dhq1br37ut" path="res://Textures/UI/Icons/steam/lb.png" id="4_7oml5"]
 [ext_resource type="StyleBox" uid="uid://c7isbnsfek1o1" path="res://UI/Styles/pause_bg.tres" id="4_grhg8"]
 [ext_resource type="StyleBox" uid="uid://b83nadw0lymbi" path="res://UI/Styles/inventory_no_highlight.tres" id="5_0qsm1"]
+[ext_resource type="Texture2D" uid="uid://d2pq4scgbfu4j" path="res://Textures/UI/Icons/steam/rb.png" id="5_8sjsk"]
+[ext_resource type="Script" path="res://Scripts/UI/ControlsSwap.cs" id="5_clnkx"]
+[ext_resource type="Texture2D" uid="uid://cjqbtuyd5nsrt" path="res://Textures/UI/Icons/key/q.png" id="6_81sqp"]
+[ext_resource type="Texture2D" uid="uid://bwxml0x7rgya" path="res://Textures/circle.png" id="6_6746v"]
 [ext_resource type="Script" path="res://Scripts/UI/InventoryItem.cs" id="6_eci81"]
+[ext_resource type="Texture2D" uid="uid://bs576jo0los7a" path="res://Textures/UI/Icons/steam/right_track.png" id="7_eqwa5"]
 [ext_resource type="StyleBox" uid="uid://km50i6c42aqi" path="res://UI/Styles/inventory_highlight.tres" id="7_xcsnm"]
+[ext_resource type="Texture2D" uid="uid://bbn2a7nkqc5as" path="res://Textures/UI/Icons/key/e.png" id="8_8f7tf"]
+[ext_resource type="Texture2D" uid="uid://c4yrti21yav3f" path="res://Textures/UI/Icons/mouse/middle.png" id="11_rdyhl"]
+[ext_resource type="Texture2D" uid="uid://bijluv2vogdm3" path="res://Textures/UI/Icons/key/shift.png" id="12_0cl01"]
+[ext_resource type="Texture2D" uid="uid://daxnt7nmtcxr0" path="res://Textures/UI/Icons/key/caps_lock.png" id="13_105kc"]
+[ext_resource type="Texture2D" uid="uid://cxabvrsnqel78" path="res://Textures/UI/Icons/key/space.png" id="14_iedss"]
+[ext_resource type="Texture2D" uid="uid://ytelgofw6me5" path="res://Textures/UI/Icons/steam/lt.png" id="15_o2vl8"]
+[ext_resource type="Texture2D" uid="uid://ic33yy20t1vd" path="res://Textures/UI/Icons/mouse/right.png" id="16_cflu3"]
+[ext_resource type="Texture2D" uid="uid://c1eejia5viw3n" path="res://Textures/UI/Icons/steam/rt.png" id="17_gq65x"]
+[ext_resource type="Texture2D" uid="uid://dhuxet66wn7bc" path="res://Textures/UI/Icons/mouse/left.png" id="18_fcg0v"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jbv68"]
 load_path = "res://.godot/imported/fabric_bg.png-ca9c02923220639d582523693b777b7c.ctex"
@@ -49,6 +64,20 @@ font_size = 24
 font_color = Color(0.568627, 0.835294, 0.886275, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qt4pf"]
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0.113725, 0.113725, 0.113725, 0.627451)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vngf4"]
+texture = ExtResource("6_6746v")
+expand_margin_left = 40.0
+expand_margin_top = 40.0
+expand_margin_right = 40.0
+expand_margin_bottom = 40.0
+modulate_color = Color(0.482353, 0.482353, 0.482353, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2etu5"]
 font_size = 24
@@ -94,14 +123,14 @@ font_color = Color(0.721569, 0.576471, 1, 1)
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("SelectedControl", "ItemName", "ItemTexture", "ItemCount", "ItemEffect", "InventoryControl", "Inventory", "InfoTexture", "InfoName", "InfoDescription", "InfoEffect", "InfoEffectDescription")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("SelectedControl", "ItemName", "ItemTexture", "ItemCount", "ItemEffect", "InventoryControl", "Inventory", "InfoTexture", "InfoName", "InfoDescription", "InfoEffect", "InfoEffectDescription", "Icons")]
 script = ExtResource("1_gfiup")
 DefaultTexture = ExtResource("2_5ogup")
 SelectedControl = NodePath("Play")
-ItemName = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title/Item Name")
-ItemTexture = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item/Item Texture")
-ItemCount = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item/Count")
-ItemEffect = NodePath("Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Magic/Magic")
+ItemName = NodePath("Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title/Item Name")
+ItemTexture = NodePath("Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item/Item Texture")
+ItemCount = NodePath("Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item/Count")
+ItemEffect = NodePath("Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Magic/Magic")
 InventoryControl = NodePath("Pause")
 Inventory = [NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item2"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item3"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item4"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item5"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item6"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item7"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item8"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item9"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item10"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11"), NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12")]
 InfoTexture = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Texture")
@@ -109,6 +138,7 @@ InfoName = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/V
 InfoDescription = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Description")
 InfoEffect = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Magic")
 InfoEffectDescription = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Magic Description")
+Icons = [NodePath("Play/Selected/MarginContainer/CycleLeft"), NodePath("Play/Selected/MarginContainer2/CycleRight"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Toss"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Run"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Dodge"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Jump"), NodePath("Play/Controls/MarginContainer/Bag"), NodePath("Play/Controls/MarginContainer2/Grab")]
 
 [node name="Play" type="Control" parent="."]
 layout_mode = 3
@@ -118,69 +148,319 @@ anchor_bottom = 1.0
 offset_right = 0.455933
 grow_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="Play"]
+[node name="Selected" type="Control" parent="Play"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Play/Selected"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -226.001
+offset_top = -266.001
 offset_right = 214.0
+offset_bottom = -40.0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_o8tnp")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Play/PanelContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Play/Selected/PanelContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Play/PanelContainer/AspectRatioContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Play/Selected/PanelContainer/AspectRatioContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 
-[node name="PanelContainer" type="PanelContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yppr2")
 
-[node name="GridContainer" type="GridContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer"]
+[node name="GridContainer" type="GridContainer" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Title" type="HBoxContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
+[node name="Title" type="HBoxContainer" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Item Name" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title"]
+[node name="Item Name" type="Label" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title"]
 layout_mode = 2
 text = "Name"
 label_settings = SubResource("LabelSettings_2dvti")
 
-[node name="Item" type="HBoxContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
+[node name="Item" type="HBoxContainer" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
 layout_mode = 2
 
-[node name="Item Texture" type="TextureRect" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
+[node name="Item Texture" type="TextureRect" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 texture = ExtResource("3_s8apq")
 expand_mode = 4
 
-[node name="x" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
+[node name="x" type="Label" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
 layout_mode = 2
 text = "x"
 label_settings = SubResource("LabelSettings_mgung")
 
-[node name="Count" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
+[node name="Count" type="Label" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Item"]
 layout_mode = 2
 text = "1"
 label_settings = SubResource("LabelSettings_mgung")
 
-[node name="Magic" type="HBoxContainer" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
+[node name="Magic" type="HBoxContainer" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Magic" type="Label" parent="Play/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Magic"]
+[node name="Magic" type="Label" parent="Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Magic"]
 layout_mode = 2
 text = "Magic"
 label_settings = SubResource("LabelSettings_oadfr")
 horizontal_alignment = 1
 
+[node name="MarginContainer" type="MarginContainer" parent="Play/Selected"]
+layout_mode = 2
+offset_left = 15.0
+offset_top = -290.0
+offset_right = 85.0
+offset_bottom = -220.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CycleLeft" type="TextureRect" parent="Play/Selected/MarginContainer" node_paths=PackedStringArray("text")]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("4_7oml5")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("6_81sqp")
+ControllerIcon = ExtResource("4_7oml5")
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Selected/MarginContainer/CycleLeft"]
+layout_mode = 0
+offset_top = -8.0
+offset_right = 75.0
+offset_bottom = 15.0
+text = "Cycle Left"
+label_settings = SubResource("LabelSettings_qt4pf")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Play/Selected"]
+layout_mode = 2
+offset_left = 153.0
+offset_top = -290.0
+offset_right = 223.0
+offset_bottom = -220.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="CycleRight" type="TextureRect" parent="Play/Selected/MarginContainer2" node_paths=PackedStringArray("text")]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("5_8sjsk")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("8_8f7tf")
+ControllerIcon = ExtResource("5_8sjsk")
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Selected/MarginContainer2/CycleRight"]
+layout_mode = 0
+offset_top = -8.0
+offset_right = 75.0
+offset_bottom = 15.0
+text = "Cycle Right"
+label_settings = SubResource("LabelSettings_qt4pf")
+
+[node name="Controls" type="Control" parent="Play"]
+layout_mode = 1
+anchors_preset = 0
+offset_top = 29.0
+offset_right = 40.0
+offset_bottom = 69.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Play/Controls"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1104.0
+offset_top = -368.0
+offset_right = 1144.0
+offset_bottom = -328.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.785398
+scale = Vector2(5.947, 6)
+theme_override_styles/panel = SubResource("StyleBoxTexture_vngf4")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Play/Controls/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Play/Controls/PanelContainer/AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+
+[node name="GridContainer" type="GridContainer" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Toss" type="TextureRect" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("text")]
+modulate = Color(0.619608, 0.894118, 0.65098, 1)
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_eqwa5")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("11_rdyhl")
+ControllerIcon = ExtResource("7_eqwa5")
+Rotates = true
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Toss"]
+offset_left = -0.481745
+offset_top = 9.61354
+offset_right = 80.5183
+offset_bottom = 58.6135
+rotation = -0.785398
+scale = Vector2(0.18, 0.18)
+text = "Toss/Use"
+label_settings = SubResource("LabelSettings_qt4pf")
+horizontal_alignment = 1
+
+[node name="Run" type="TextureRect" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("text")]
+modulate = Color(1, 0.745098, 0.670588, 1)
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_eqwa5")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("12_0cl01")
+ControllerIcon = ExtResource("7_eqwa5")
+Rotates = true
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Run"]
+offset_left = -0.481745
+offset_top = 9.61354
+offset_right = 80.5183
+offset_bottom = 58.6135
+rotation = -0.785398
+scale = Vector2(0.18, 0.18)
+text = "Run"
+label_settings = SubResource("LabelSettings_qt4pf")
+horizontal_alignment = 1
+
+[node name="Dodge" type="TextureRect" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("text")]
+modulate = Color(1, 0.709804, 0.894118, 1)
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_eqwa5")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("13_105kc")
+ControllerIcon = ExtResource("7_eqwa5")
+Rotates = true
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Dodge"]
+offset_left = -0.481745
+offset_top = 9.61354
+offset_right = 80.5183
+offset_bottom = 58.6135
+rotation = -0.785398
+scale = Vector2(0.18, 0.18)
+text = "Dodge"
+label_settings = SubResource("LabelSettings_qt4pf")
+horizontal_alignment = 1
+
+[node name="Jump" type="TextureRect" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer" node_paths=PackedStringArray("text")]
+modulate = Color(0.34902, 0.901961, 0.988235, 1)
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_eqwa5")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("14_iedss")
+ControllerIcon = ExtResource("7_eqwa5")
+Rotates = true
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Jump"]
+offset_left = -0.481745
+offset_top = 9.61354
+offset_right = 80.5183
+offset_bottom = 58.6135
+rotation = -0.785398
+scale = Vector2(0.18, 0.18)
+text = "Jump"
+label_settings = SubResource("LabelSettings_qt4pf")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Play/Controls"]
+offset_left = 1023.0
+offset_top = -281.0
+offset_right = 1093.0
+offset_bottom = -211.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Bag" type="TextureRect" parent="Play/Controls/MarginContainer" node_paths=PackedStringArray("text")]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("15_o2vl8")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("16_cflu3")
+ControllerIcon = ExtResource("15_o2vl8")
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/MarginContainer/Bag"]
+layout_mode = 0
+offset_top = -8.0
+offset_right = 75.0
+offset_bottom = 15.0
+text = "Open Bag
+"
+label_settings = SubResource("LabelSettings_qt4pf")
+
+[node name="MarginContainer2" type="MarginContainer" parent="Play/Controls"]
+offset_left = 1196.0
+offset_top = -281.0
+offset_right = 1266.0
+offset_bottom = -211.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Grab" type="TextureRect" parent="Play/Controls/MarginContainer2" node_paths=PackedStringArray("text")]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+texture = ExtResource("17_gq65x")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("18_fcg0v")
+ControllerIcon = ExtResource("17_gq65x")
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/MarginContainer2/Grab"]
+layout_mode = 0
+offset_top = -8.0
+offset_right = 75.0
+offset_bottom = 15.0
+text = "Grab/Hold"
+label_settings = SubResource("LabelSettings_qt4pf")
+
 [node name="Pause" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -781,3 +1061,5 @@ text = "Main Menu"
 [connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item11" method="SetNoHighlight"]
 [connection signal="focus_entered" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" method="SetHighlight"]
 [connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" method="SetNoHighlight"]
+[connection signal="pressed" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer/Continue Button" to="." method="UnPause"]
+[connection signal="pressed" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer2/Restart Button" to="." method="Restart"]

@@ -57,6 +57,7 @@ FrictionLimit = 0.9
 RotationSpeed = 3.0
 BounceAmount = 0.6
 BounceThreshold = 1.0
+BounceRotationAdd = 100.0
 Gravity = 10.0
 Manager = ExtResource("3_jkoru")
 ItemSound = ExtResource("3_2ajk2")

@@ -51,7 +51,6 @@ loot = ExtResource("2_jaki8")
 effect = NodePath("Magic")
 Friction = 0.1
 FrictionLimit = 0.9
-RotationSpeed = 0.5
 BounceAmount = 0.6
 BounceThreshold = 1.0
 Gravity = 11.0

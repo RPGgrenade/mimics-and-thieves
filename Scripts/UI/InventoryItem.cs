@@ -9,14 +9,6 @@ public partial class InventoryItem : PanelContainer
 	[Export] public TextureRect ItemTexture;
 	[Export] public Label ItemCount;
 
-    //public override void _Process(double delta)
-    //{
-    //    if (HasFocus())
-    //        SetHighlight();
-    //    else
-    //        SetNoHighlight();
-    //}
-
     public void SetNoHighlight()
     {
         AddThemeStyleboxOverride("panel", NoHighlight);

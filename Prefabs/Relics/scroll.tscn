@@ -51,6 +51,7 @@ FrictionLimit = 0.9
 RotationSpeed = 4.79
 BounceAmount = 0.33
 BounceThreshold = 0.96
+BounceRotationAdd = 200.0
 Gravity = 11.0
 Manager = ExtResource("3_da3fd")
 

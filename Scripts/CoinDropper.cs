@@ -4,6 +4,7 @@ using System;
 
 public partial class CoinDropper : Node3D
 {
+	[Export] public bool IsLootAcquired = true;
 	[Export] public int TotalValue = 0;
 	[ExportGroup("Coins")]
     [Export] public PackedScene BronzeCoin;
@@ -21,8 +22,12 @@ public partial class CoinDropper : Node3D
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-	{
-		totalValue = TotalValue;
+    {
+        if (IsLootAcquired)
+            TotalValue = CarryData.Instance.TotalLootValue;
+        else
+            TotalValue = CarryData.Instance.RemainingLootValue;
+        totalValue = TotalValue;
 		if(TotalValue > 0)
             Timing.CallDelayed(DropSpeed, DropCoin);
     }

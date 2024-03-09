@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using static Inventory;
 
@@ -34,6 +35,10 @@ public partial class ThiefUI : CanvasLayer
     [Export] public Label InfoEffect;
     [Export] public Label InfoEffectDescription;
 
+    [ExportCategory("Control Icons")]
+    [Export] public bool UsingController = true;
+    [Export] public ControlsSwap[] Icons;
+
     private Dictionary<string, InventorySlot> _allLoot = new Dictionary<string, InventorySlot>();
 
     // Called when the node enters the scene tree for the first time.
@@ -50,6 +55,7 @@ public partial class ThiefUI : CanvasLayer
         Inventory[0].GrabFocus();
 
         UpdateInventory();
+        updateIcons();
     }
 
 	public override void _Process(double delta)
@@ -61,6 +67,55 @@ public partial class ThiefUI : CanvasLayer
         SelectedControl.ProcessMode = (SelectedControl.Modulate.A < OpacityThreshold) ? ProcessModeEnum.Disabled : ProcessModeEnum.Inherit;
 
         CheckInfo();
+    }
+    public override void _UnhandledInput(InputEvent evt)
+    {
+        // Keyboard/Gamepad Input
+        if ((evt is InputEventJoypadMotion) || (evt is InputEventJoypadButton))
+        {
+            Controller();
+            GetViewport().SetInputAsHandled();
+        }
+
+        // Mouse Input
+        if ((evt is InputEventMouseMotion) || (evt is InputEventMouseButton) || (evt is InputEventKey))
+        {
+            Mouse();
+            GetViewport().SetInputAsHandled();
+        }
+    }
+    private void Mouse()
+    {
+        UsingController = false;
+        Input.MouseMode = Input.MouseModeEnum.ConfinedHidden;
+        updateIcons();
+    }
+    private void Controller()
+    {
+        UsingController = true;
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+        updateIcons();
+    }
+
+    private void updateIcons()
+    {
+        foreach (ControlsSwap icon in Icons)
+        {
+            if (UsingController) icon.SetController();
+            else icon.SetMouse();
+        }
+    }
+
+    public void UnPause()
+    {
+        Paused = false;
+    }
+
+    public void Restart()
+    {
+        GetTree().ReloadCurrentScene();
+        CarryData.Instance.TotalLootValue = 0;
+        CarryData.Instance.RemainingLootValue = 0;
     }
 
     public void CheckInfo()
@@ -103,7 +158,7 @@ public partial class ThiefUI : CanvasLayer
     {
         foreach(InventoryItem item in Inventory)
         {
-            GD.Print(item.Name);
+            //GD.Print(item.Name);
             item.ItemTexture.Texture = DefaultTexture;
             item.ItemCount.Text = ""+DefaultCount;
         }

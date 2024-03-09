@@ -13,6 +13,8 @@ normal_enabled = true
 normal_scale = 0.27
 normal_texture = ExtResource("2_ssrth")
 uv1_scale = Vector3(2, 2, 2)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [node name="Crate" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

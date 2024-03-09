@@ -45,6 +45,7 @@ Friction = 0.25
 FrictionLimit = 0.9
 BounceAmount = 0.2
 BounceThreshold = 1.0
+BounceRotationAdd = 180.0
 Gravity = 11.0
 Manager = ExtResource("3_bdn4h")
 

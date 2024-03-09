@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c6h8hd4bby33l" path="res://Prefabs/Relics/revelation_eye.tscn" id="16_2krj2"]
 [ext_resource type="Script" path="res://Scripts/House/Exit.cs" id="18_bjp5x"]
 [ext_resource type="PackedScene" uid="uid://bsvikwrfwypav" path="res://Scenes/winnings.tscn" id="19_g7s81"]
+[ext_resource type="PackedScene" uid="uid://b31itd4t7c5lm" path="res://Prefabs/Relics/scarab.tscn" id="21_6o6r0"]
 
 [sub_resource type="Environment" id="Environment_ekfaw"]
 ambient_light_source = 2
@@ -58,16 +59,15 @@ heightmap_deep_parallax = true
 heightmap_min_layers = 8
 heightmap_max_layers = 32
 uv1_scale = Vector3(0.999, 3, 0.999)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggxwh"]
 albedo_color = Color(0.376471, 0.317647, 0.188235, 1)
 albedo_texture = ExtResource("4_fugkv")
 uv1_scale = Vector3(8, 8, 8)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lj6kc"]
-albedo_color = Color(0.376471, 0.317647, 0.188235, 1)
-albedo_texture = ExtResource("4_fugkv")
-uv1_scale = Vector3(8, 8, 8)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l036"]
 transparency = 1
@@ -82,6 +82,8 @@ normal_scale = 0.39
 normal_texture = ExtResource("12_dcaoy")
 uv1_scale = Vector3(0.165, 0.165, 0.165)
 uv1_offset = Vector3(0.065, 0, 0)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_61hog"]
 size = Vector3(2.41003, 2.56555, 1.68799)
@@ -105,12 +107,12 @@ material = SubResource("FogMaterial_ewdhq")
 [node name="Navigation" type="NavigationRegion3D" parent="Entrance"]
 navigation_mesh = SubResource("NavigationMesh_on53v")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Entrance/Navigation"]
+[node name="Entrance" type="CSGCombiner3D" parent="Entrance/Navigation"]
 use_collision = true
 collision_layer = 2
 collision_mask = 29
 
-[node name="Room" type="CSGCylinder3D" parent="Entrance/Navigation/CSGCombiner3D"]
+[node name="Room" type="CSGCylinder3D" parent="Entrance/Navigation/Entrance"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 radius = 8.0
 height = 33.675
@@ -118,7 +120,7 @@ sides = 10
 cone = true
 material = ExtResource("1_emvfp")
 
-[node name="Main2" type="CSGCylinder3D" parent="Entrance/Navigation/CSGCombiner3D/Room"]
+[node name="Main2" type="CSGCylinder3D" parent="Entrance/Navigation/Entrance/Room"]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
 operation = 2
 radius = 8.0
@@ -127,56 +129,56 @@ sides = 10
 cone = true
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D/Room/Main2"]
+[node name="Cut" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room/Main2"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, 1.05263, 0, -1.05263, -4.6012e-08, 0, -0.749803, 8.4045)
 operation = 2
 size = Vector3(30, 12.61, 34)
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D/Room/Main2"]
+[node name="Cut2" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room/Main2"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, 1.05263, 0, -1.05263, -4.6012e-08, 0, 1.56436, -4.10544)
 operation = 2
 size = Vector3(30, 12.61, 4.78)
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D/Room"]
+[node name="Cut Entrance" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.3399, -3.90016)
 operation = 2
 size = Vector3(30, 12.61, 26.22)
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D/Room"]
+[node name="Main Room" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.712313, -6.10725)
 operation = 1
 size = Vector3(30, 16.925, 34)
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D/Room"]
+[node name="Door Holes" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -11.6718, 0.161218)
 operation = 2
 size = Vector3(1.8, 3, 26.22)
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D/Room"]
+[node name="Window Cut" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -0.974929, 0.222518, 0, -0.222518, -0.974929, 0, -4.18847, -4.57797)
 operation = 2
 size = Vector3(2, 4.62, 3.16)
 material = ExtResource("1_emvfp")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D"]
+[node name="Carpet" type="CSGBox3D" parent="Entrance/Navigation/Entrance"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.88094e-08, -1.66665, -8.46556)
 size = Vector3(14.52, 0.02, 5.045)
 material = SubResource("StandardMaterial3D_cxkvq")
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D"]
+[node name="Pillar R" type="CSGBox3D" parent="Entrance/Navigation/Entrance"]
 transform = Transform3D(0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0, 1, -5.68401, 2.78181, -14.594)
 size = Vector3(4, 11, 4)
 material = SubResource("StandardMaterial3D_ggxwh")
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="Entrance/Navigation/CSGCombiner3D"]
+[node name="Pillar L" type="CSGBox3D" parent="Entrance/Navigation/Entrance"]
 transform = Transform3D(0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0, 0, 1, 5.684, 2.782, -14.594)
 size = Vector3(4, 11, 4)
-material = SubResource("StandardMaterial3D_lj6kc")
+material = SubResource("StandardMaterial3D_ggxwh")
 
 [node name="Lighting" type="Node3D" parent="Entrance"]
 
@@ -275,7 +277,7 @@ outline_size = 5
 [node name="Loot" type="Node3D" parent="Entrance"]
 
 [node name="Key" parent="Entrance/Loot" instance=ExtResource("7_auxh8")]
-transform = Transform3D(0.695461, 0, -0.718563, 0, 1, 0, 0.718563, 0, 0.695461, -0.00843869, 4.86097, -12.5587)
+transform = Transform3D(0.695461, 0, -0.718563, 0, 1, 0, 0.718563, 0, 0.695461, -0.00843869, 2.7985, -8.66222)
 
 [node name="Jewel Blue" parent="Entrance/Loot" instance=ExtResource("12_3sfmf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31504, -1.55386, -2.9042)
@@ -295,7 +297,7 @@ script = ExtResource("18_bjp5x")
 WinningsScene = ExtResource("19_g7s81")
 PlayerGroup = "player"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Entrance/Exit"]
+[node name="Exit Collision" type="CollisionShape3D" parent="Entrance/Exit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0438595, -0.147359, -0.328896)
 shape = SubResource("BoxShape3D_61hog")
 
@@ -305,13 +307,13 @@ collision_layer = 2
 size = Vector3(2.65, 3.12, 1.905)
 material = SubResource("StandardMaterial3D_bhimb")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Entrance/Exit/Box"]
+[node name="Box Cut" type="CSGBox3D" parent="Entrance/Exit/Box"]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0.454891)
 operation = 2
 size = Vector3(2.65, 3.12, 1.905)
 material = SubResource("StandardMaterial3D_bhimb")
 
-[node name="Box2" type="CSGBox3D" parent="Entrance/Exit"]
+[node name="Mimic Stopper" type="CSGBox3D" parent="Entrance/Exit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09302)
 use_collision = true
 collision_layer = 0
@@ -330,6 +332,9 @@ sky_mode = 1
 
 [node name="Thief" parent="." instance=ExtResource("1_5i2il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -14.8955)
+
+[node name="Gold Scarab" parent="." instance=ExtResource("21_6o6r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035561, 4.28578, -12.3001)
 
 [connection signal="body_entered" from="Entrance/Exit" to="Entrance/Exit" method="OnExiting"]
 

@@ -21,10 +21,14 @@ emission_energy_multiplier = 0.2
 normal_enabled = true
 normal_texture = ExtResource("1_bxrei")
 uv1_scale = Vector3(2, 2, 2)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vkfpe"]
 albedo_color = Color(0.94902, 0.839216, 0.898039, 1)
 roughness = 0.19
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dlonn"]
 spread = 180.0

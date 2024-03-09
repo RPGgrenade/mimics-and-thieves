@@ -7,6 +7,8 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4onc"]
 albedo_color = Color(0.588235, 0.305882, 0.152941, 1)
 albedo_texture = ExtResource("2_vy1x2")
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arsp7"]
 transparency = 1
@@ -17,6 +19,8 @@ albedo_texture = ExtResource("3_1krh5")
 uv1_scale = Vector3(0.4, 0.4, 0.4)
 uv1_offset = Vector3(0, 0.01, 0)
 disable_receive_shadows = true
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3rurt"]
 load_path = "res://.godot/imported/gradient_linear_up.png-de6116695e33d114ebb5968d2c6d15d9.s3tc.ctex"
@@ -45,6 +49,9 @@ disable_receive_shadows = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Window" type="CSGBox3D" parent="."]
+use_collision = true
+collision_layer = 2
+collision_mask = 15
 size = Vector3(4, 0.05, 7)
 material = ExtResource("1_4byrk")
 

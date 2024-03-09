@@ -22,3 +22,5 @@ heightmap_min_layers = 8
 heightmap_max_layers = 32
 heightmap_texture = ExtResource("1_wmb6d")
 uv1_scale = Vector3(4, 3, 3)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

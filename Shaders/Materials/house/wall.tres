@@ -6,3 +6,5 @@
 albedo_color = Color(0.780392, 0.694118, 0.498039, 1)
 albedo_texture = ExtResource("1_3trgk")
 uv1_scale = Vector3(8, 8, 8)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

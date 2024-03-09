@@ -16,9 +16,11 @@ public partial class Relic : CharacterBody3D
     [Export] public float Friction = 0.12f;
     [Export] public float FrictionLimit = 0.05f;
     [Export] public float RotationSpeed = 5f;
+    [Export] public float DerotateSpeed = 3f;
     [ExportGroup("Bounce")]
     [Export] public float BounceAmount = 0.95f;
     [Export] public float BounceThreshold = 0.03f;
+    [Export] public float BounceRotationAdd = 900f;
     [ExportGroup("Gravity")]
     [Export] public float Gravity = 1.0f;
     [ExportCategory("Sounds")]
@@ -38,6 +40,7 @@ public partial class Relic : CharacterBody3D
     private bool has_been_grabbed = false;
 
     private Vector3 originalRotation = Vector3.Zero;
+    private Vector3 extraRotation = Vector3.Zero;
 
     private Vector3 velocity = Vector3.Zero;
 
@@ -46,9 +49,9 @@ public partial class Relic : CharacterBody3D
         originalRotation = GlobalRotationDegrees;
         if (IsCoin)
             RotationDegrees += new Vector3(
-                (float)GD.RandRange(-180f,180f), 
-                (float)GD.RandRange(-180f, 180f),
-                (float)GD.RandRange(-180f, 180f)
+                (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd), 
+                (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd),
+                (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd)
             );
     }
 
@@ -142,7 +145,8 @@ public partial class Relic : CharacterBody3D
                 if (velocity.Length() <= FrictionLimit) velocity = Vector3.Zero;
             }
 
-            GlobalRotationDegrees = GlobalRotationDegrees.Lerp(originalRotation, RotationSpeed * (float)delta);
+            GlobalRotationDegrees = GlobalRotationDegrees.Lerp(originalRotation + extraRotation, RotationSpeed * (float)delta);
+            extraRotation = extraRotation.Lerp(Vector3.Zero, (float)delta * DerotateSpeed);
 
             if (is_colliding_floor || is_colliding_wall)
             {
@@ -150,10 +154,20 @@ public partial class Relic : CharacterBody3D
 
                 if (IsOnFloor() && Math.Abs(velocity.Y) >= BounceThreshold)
                 {
+                    extraRotation += new Vector3(
+                        (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd),
+                        (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd),
+                        (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd)
+                    );
                     velocity.Y = velocity.Bounce(GetFloorNormal()).Y * BounceAmount;
                 }
                 if (IsOnWall() && new Vector2(velocity.X, velocity.Z).Length() >= BounceThreshold)
                 {
+                    extraRotation += new Vector3(
+                        (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd),
+                        (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd),
+                        (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd)
+                    );
                     velocity = velocity.Bounce(GetWallNormal()) * BounceAmount;
                 }
                 PlaySounds("Collide", volume: ItemSoundVolume, generic_volume: CollideSoundVolume);

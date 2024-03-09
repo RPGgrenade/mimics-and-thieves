@@ -46,8 +46,11 @@ effect = NodePath("Magic")
 UsedTimeout = 0.2
 Friction = 0.1
 FrictionLimit = 0.9
+RotationSpeed = 8.0
+DerotateSpeed = 5.0
 BounceAmount = 0.2
 BounceThreshold = 1.0
+BounceRotationAdd = 100.0
 Gravity = 11.0
 Manager = ExtResource("3_xio3w")
 

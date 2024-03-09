@@ -81,7 +81,7 @@ public partial class ThiefController : CharacterBody3D
         {
             if (Camera is Node3D)
             {
-                Camera.Position = Position;
+                Camera.Position = Position + (Vector3.Up * 1.6f);
             }
 
             if (variables != null)

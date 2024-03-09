@@ -14,10 +14,13 @@ public partial class Exit : Area3D
             ThiefController player = body as ThiefController;
             int totalvalue = player.loot.TotalValue;
 
+            GD.Print("Total Value: "+ totalvalue);
+
             GetTree().ChangeSceneToPacked(WinningsScene);
-            CoinDropper dropper = GetTree().Root.GetChildren().OfType<CoinDropper>().First();
-            
-            dropper.TotalValue = totalvalue;
+            CarryData.Instance.TotalLootValue = totalvalue;
+
+            //CoinDropper dropper = GetTree().Root.GetChildren().OfType<CoinDropper>().First();
+            //dropper.TotalValue = totalvalue;
         }
     }
 }

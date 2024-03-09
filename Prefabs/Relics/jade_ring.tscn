@@ -43,6 +43,7 @@ FrictionLimit = 1.0
 RotationSpeed = 2.0
 BounceAmount = 0.6
 BounceThreshold = 1.5
+BounceRotationAdd = 240.0
 Gravity = 9.8
 Manager = ExtResource("3_tb41q")
 

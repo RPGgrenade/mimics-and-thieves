@@ -41,6 +41,7 @@ FrictionLimit = 1.0
 RotationSpeed = 3.0
 BounceAmount = 0.4
 BounceThreshold = 1.0
+BounceRotationAdd = 160.0
 Gravity = 9.8
 Manager = ExtResource("3_heveu")
 ItemSound = ExtResource("4_md8pf")
