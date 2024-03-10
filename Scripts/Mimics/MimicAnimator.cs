@@ -6,6 +6,7 @@ using System.Linq;
 public partial class MimicAnimator : Node
 {
 	[Export] public bool Active = false;
+	[Export] public string FightMusic = "Caught Music";
 
 	[ExportCategory("Part References")]
 	[Export] public float PartSpeed = 2.5f;
@@ -89,11 +90,15 @@ public partial class MimicAnimator : Node
     {
         Active = true;
         RandomizeEyes();
+        if (FightMusic != "")
+            MusicHandler.Instance.SetPriorityGroupActive(FightMusic, true);
     }
 
     public void Deactivate()
     {
         Active = false;
+        if (FightMusic != "")
+            MusicHandler.Instance.SetPriorityGroupActive(FightMusic, false);
     }
     private void RandomizeEyes()
 	{

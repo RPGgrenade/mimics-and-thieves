@@ -62,7 +62,7 @@ distance_fade_max_distance = 2.0
 points = PackedVector3Array(0, 0, 0, 4, -2, 8, -4, -2, 8, 4, 2, 8, -4, 2, 8)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_w3sij"]
-radius = 5.57028
+radius = 3.6097
 
 [node name="Chair" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator") groups=["Mimic"]]
 collision_layer = 4
