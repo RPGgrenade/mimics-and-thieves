@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c6swx1wgxfx22"]
+[gd_scene load_steps=29 format=3 uid="uid://c6swx1wgxfx22"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_5i2il"]
 [ext_resource type="Material" uid="uid://lfqkse3ptsax" path="res://Shaders/Materials/house/wall.tres" id="1_emvfp"]
@@ -42,9 +42,6 @@ adjustment_saturation = 1.21
 [sub_resource type="FogMaterial" id="FogMaterial_ewdhq"]
 density = 5.0
 albedo = Color(0, 0, 0, 1)
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_on53v"]
-agent_radius = 1.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxkvq"]
 albedo_color = Color(0.713726, 0.184314, 0.129412, 1)
@@ -104,15 +101,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.193543, -17.2172)
 size = Vector3(1.71751, 3.03808, 2.23712)
 material = SubResource("FogMaterial_ewdhq")
 
-[node name="Navigation" type="NavigationRegion3D" parent="Entrance"]
-navigation_mesh = SubResource("NavigationMesh_on53v")
+[node name="Level" type="Node3D" parent="Entrance"]
 
-[node name="Entrance" type="CSGCombiner3D" parent="Entrance/Navigation"]
+[node name="Entrance" type="CSGCombiner3D" parent="Entrance/Level"]
 use_collision = true
 collision_layer = 2
 collision_mask = 29
 
-[node name="Room" type="CSGCylinder3D" parent="Entrance/Navigation/Entrance"]
+[node name="Room" type="CSGCylinder3D" parent="Entrance/Level/Entrance"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 radius = 8.0
 height = 33.675
@@ -120,7 +116,7 @@ sides = 10
 cone = true
 material = ExtResource("1_emvfp")
 
-[node name="Main2" type="CSGCylinder3D" parent="Entrance/Navigation/Entrance/Room"]
+[node name="Main2" type="CSGCylinder3D" parent="Entrance/Level/Entrance/Room"]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
 operation = 2
 radius = 8.0
@@ -129,53 +125,53 @@ sides = 10
 cone = true
 material = ExtResource("1_emvfp")
 
-[node name="Cut" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room/Main2"]
+[node name="Cut" type="CSGBox3D" parent="Entrance/Level/Entrance/Room/Main2"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, 1.05263, 0, -1.05263, -4.6012e-08, 0, -0.749803, 8.4045)
 operation = 2
 size = Vector3(30, 12.61, 34)
 material = ExtResource("1_emvfp")
 
-[node name="Cut2" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room/Main2"]
+[node name="Cut2" type="CSGBox3D" parent="Entrance/Level/Entrance/Room/Main2"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, 1.05263, 0, -1.05263, -4.6012e-08, 0, 1.56436, -4.10544)
 operation = 2
 size = Vector3(30, 12.61, 4.78)
 material = ExtResource("1_emvfp")
 
-[node name="Cut Entrance" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
+[node name="Cut Entrance" type="CSGBox3D" parent="Entrance/Level/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.3399, -3.90016)
 operation = 2
 size = Vector3(30, 12.61, 26.22)
 material = ExtResource("1_emvfp")
 
-[node name="Main Room" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
+[node name="Main Room" type="CSGBox3D" parent="Entrance/Level/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.712313, -6.10725)
 operation = 1
 size = Vector3(30, 16.925, 34)
 material = ExtResource("1_emvfp")
 
-[node name="Door Holes" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
+[node name="Door Holes" type="CSGBox3D" parent="Entrance/Level/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -11.6718, 0.161218)
 operation = 2
 size = Vector3(1.8, 3, 26.22)
 material = ExtResource("1_emvfp")
 
-[node name="Window Cut" type="CSGBox3D" parent="Entrance/Navigation/Entrance/Room"]
+[node name="Window Cut" type="CSGBox3D" parent="Entrance/Level/Entrance/Room"]
 transform = Transform3D(1, 0, 0, 0, -0.974929, 0.222518, 0, -0.222518, -0.974929, 0, -4.18847, -4.57797)
 operation = 2
 size = Vector3(2, 4.62, 3.16)
 material = ExtResource("1_emvfp")
 
-[node name="Carpet" type="CSGBox3D" parent="Entrance/Navigation/Entrance"]
+[node name="Carpet" type="CSGBox3D" parent="Entrance/Level/Entrance"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.88094e-08, -1.66665, -8.46556)
 size = Vector3(14.52, 0.02, 5.045)
 material = SubResource("StandardMaterial3D_cxkvq")
 
-[node name="Pillar R" type="CSGBox3D" parent="Entrance/Navigation/Entrance"]
+[node name="Pillar R" type="CSGBox3D" parent="Entrance/Level/Entrance"]
 transform = Transform3D(0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0, 1, -5.68401, 2.78181, -14.594)
 size = Vector3(4, 11, 4)
 material = SubResource("StandardMaterial3D_ggxwh")
 
-[node name="Pillar L" type="CSGBox3D" parent="Entrance/Navigation/Entrance"]
+[node name="Pillar L" type="CSGBox3D" parent="Entrance/Level/Entrance"]
 transform = Transform3D(0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 0, 0, 1, 5.684, 2.782, -14.594)
 size = Vector3(4, 11, 4)
 material = SubResource("StandardMaterial3D_ggxwh")
@@ -198,25 +194,18 @@ light_specular = 7.0
 omni_range = 45.188
 omni_attenuation = 0.0583146
 
-[node name="Window" parent="Entrance" instance=ExtResource("2_yd3ot")]
+[node name="Window" parent="Entrance/Lighting" instance=ExtResource("2_yd3ot")]
 transform = Transform3D(1, 0, 0, 0, 0.972313, -0.233683, 0, 0.233683, 0.972313, 0, 4.67678, -4.09545)
 
-[node name="SpotLight3D" parent="Entrance/Window" index="2"]
+[node name="SpotLight3D" parent="Entrance/Lighting/Window" index="2"]
 transform = Transform3D(1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, 0, 3.25976, 0)
 
-[node name="Light" parent="Entrance/Window/SpotLight3D" index="0"]
+[node name="Light" parent="Entrance/Lighting/Window/SpotLight3D" index="0"]
 transform = Transform3D(0.335, 0, 0, 0, 0.725, 0, 0, 0, 1, 0, 0, 0.012938)
 
-[node name="CSGBox3D" parent="Entrance/Window/SpotLight3D/Light/CSGCylinder3D" index="1"]
+[node name="CSGBox3D" parent="Entrance/Lighting/Window/SpotLight3D/Light/CSGCylinder3D" index="1"]
 transform = Transform3D(0.707107, -2.98023e-08, -0.707107, 1.27907e-08, 1, -1.49012e-08, 0.707107, 0, 0.707107, 4.76837e-07, 2.89624, 0)
 size = Vector3(8, 9, 8)
-
-[node name="DoorFrame" parent="Entrance" instance=ExtResource("5_t4kcf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00487614, -0.157166, -0.805041)
-
-[node name="DoorFrame2" parent="Entrance" instance=ExtResource("5_t4kcf")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00487479, -0.157166, -16.4219)
-IsOpen = true
 
 [node name="Furniture" type="Node3D" parent="Entrance"]
 
@@ -291,29 +280,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30237, -1.55386, -6.96917)
 [node name="Revelation Eye" parent="Entrance/Loot" instance=ExtResource("16_2krj2")]
 transform = Transform3D(-0.406577, 0, 0.913616, 0, 1, 0, -0.913616, 0, -0.406577, -4.90859, -1.50027, -11.206)
 
-[node name="Exit" type="Area3D" parent="Entrance"]
+[node name="Doors" type="Node3D" parent="Entrance"]
+
+[node name="DoorFrame" parent="Entrance/Doors" instance=ExtResource("5_t4kcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00487614, -0.157166, -0.805041)
+
+[node name="DoorFrame2" parent="Entrance/Doors" instance=ExtResource("5_t4kcf")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00487479, -0.157166, -16.4219)
+IsOpen = true
+
+[node name="Exit" type="Area3D" parent="Entrance/Doors"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.202027, -17.7298)
 script = ExtResource("18_bjp5x")
 WinningsScene = ExtResource("19_g7s81")
 PlayerGroup = "player"
 
-[node name="Exit Collision" type="CollisionShape3D" parent="Entrance/Exit"]
+[node name="Exit Collision" type="CollisionShape3D" parent="Entrance/Doors/Exit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0438595, -0.147359, -0.328896)
 shape = SubResource("BoxShape3D_61hog")
 
-[node name="Box" type="CSGBox3D" parent="Entrance/Exit"]
+[node name="Box" type="CSGBox3D" parent="Entrance/Doors/Exit"]
 use_collision = true
 collision_layer = 2
 size = Vector3(2.65, 3.12, 1.905)
 material = SubResource("StandardMaterial3D_bhimb")
 
-[node name="Box Cut" type="CSGBox3D" parent="Entrance/Exit/Box"]
+[node name="Box Cut" type="CSGBox3D" parent="Entrance/Doors/Exit/Box"]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0.454891)
 operation = 2
 size = Vector3(2.65, 3.12, 1.905)
 material = SubResource("StandardMaterial3D_bhimb")
 
-[node name="Mimic Stopper" type="CSGBox3D" parent="Entrance/Exit"]
+[node name="Mimic Stopper" type="CSGBox3D" parent="Entrance/Doors/Exit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09302)
 use_collision = true
 collision_layer = 0
@@ -322,6 +320,105 @@ size = Vector3(2.65, 3.12, 0.785)
 material = SubResource("StandardMaterial3D_bhimb")
 
 [node name="Hallway" type="Node3D" parent="."]
+
+[node name="Level" type="Node3D" parent="Hallway"]
+
+[node name="Main Hall" type="CSGCombiner3D" parent="Hallway/Level"]
+use_collision = true
+collision_layer = 2
+collision_mask = 29
+
+[node name="Main Body" type="CSGCylinder3D" parent="Hallway/Level/Main Hall"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 3.9051)
+radius = 15.0
+height = 30.0
+sides = 14
+cone = true
+
+[node name="Main Body2" type="CSGSphere3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.0809, -6.59205e-07)
+radius = 15.0
+
+[node name="Cutout" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
+operation = 2
+radius = 15.0
+height = 30.0
+sides = 14
+cone = true
+
+[node name="Cutout" type="CSGSphere3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.0809, -6.59205e-07)
+radius = 15.0
+
+[node name="Tip Hole Fill" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
+transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, 12.5585, 5.48947e-07)
+operation = 2
+size = Vector3(15, 15, 15)
+
+[node name="Floor Cut" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
+transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, -13.6483, -15.6975)
+operation = 2
+size = Vector3(30, 25, 35)
+
+[node name="Second Floor" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
+transform = Transform3D(1.05263, 0, 0, 0, 1.05263, 2.84217e-14, 0, -2.84217e-14, 1.05263, 0, -13.0351, 5.92832)
+operation = 2
+size = Vector3(25, 33, 1)
+
+[node name="Ceiling Cut" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Second Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+operation = 2
+radius = 12.0
+height = 45.572
+cone = true
+
+[node name="Central Pillar" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
+transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, -13.0351, 5.92832)
+operation = 2
+radius = 1.516
+height = 20.0
+
+[node name="Railing" type="CSGTorus3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Central Pillar"]
+transform = Transform3D(1, 0, 0, 0, 6, 0, 0, 0, 1, 0, 1.07779, 0)
+inner_radius = 6.0
+outer_radius = 6.3
+
+[node name="Opening" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Central Pillar/Railing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.35674)
+operation = 2
+size = Vector3(5.93, 0.31, 2.535)
+
+[node name="Step" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Central Pillar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6.302, 0)
+radius = 2.812
+height = 0.4
+sides = 6
+
+[node name="Tip Cut" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 12.192, 5.32929e-07)
+operation = 2
+size = Vector3(15, 15, 15)
+
+[node name="Door Hole" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.77943, -0.161217)
+operation = 2
+size = Vector3(1.8, 3, 2.815)
+material = ExtResource("1_emvfp")
+
+[node name="Full Room" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -12.0196, 7.44097)
+operation = 1
+size = Vector3(30, 21.83, 41.015)
+material = ExtResource("1_emvfp")
+
+[node name="Lighting" type="Node3D" parent="Hallway"]
+
+[node name="Furniture" type="Node3D" parent="Hallway"]
+
+[node name="Loot" type="Node3D" parent="Hallway"]
+
+[node name="Doors" type="Node3D" parent="Hallway"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0178013, 0.999842, 0, -0.999842, 0.0178013, 2.38419e-07, 2.60472, -7.49793)
@@ -336,6 +433,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -14.8955)
 [node name="Gold Scarab" parent="." instance=ExtResource("21_6o6r0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035561, 4.28578, -12.3001)
 
-[connection signal="body_entered" from="Entrance/Exit" to="Entrance/Exit" method="OnExiting"]
+[connection signal="body_entered" from="Entrance/Doors/Exit" to="Entrance/Doors/Exit" method="OnExiting"]
 
-[editable path="Entrance/Window"]
+[editable path="Entrance/Lighting/Window"]
