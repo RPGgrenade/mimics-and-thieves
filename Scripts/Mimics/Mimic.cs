@@ -78,6 +78,31 @@ public partial class Mimic : CharacterBody3D
             }
             Velocity = velocity;
             MoveAndSlide();
+
+            if(GetSlideCollisionCount() > 0 && !IsOnFloor())
+            {
+                //GD.Print("Hit Something");
+                Node3D collision = GetLastSlideCollision().GetCollider() as Node3D;
+                if (collision.IsInGroup("player"))
+                {
+                    //GD.Print("Hit player");
+                    ThiefController thief = collision as ThiefController;
+                    if (thief.GetIFrames() <= 0f)
+                    {
+                        //GD.Print("Hurt player");
+                        thief.SetIFrames();
+                        thief.loot.LoseLoot();
+                        Loot selected = thief.loot.SelectedLoot;
+                        if (selected != null)
+                            thief.UI.UpdateSelectedItem(
+                                selected?.name ?? "",
+                                thief.loot.SelectedCount,
+                                selected.magic?.name ?? "",
+                                selected.UI ?? null
+                            );
+                    }
+                }
+            }
         }
     }
 

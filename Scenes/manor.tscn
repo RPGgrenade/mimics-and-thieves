@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c6swx1wgxfx22"]
+[gd_scene load_steps=53 format=3 uid="uid://c6swx1wgxfx22"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_5i2il"]
 [ext_resource type="Material" uid="uid://lfqkse3ptsax" path="res://Shaders/Materials/house/wall.tres" id="1_emvfp"]
@@ -20,7 +20,15 @@
 [ext_resource type="PackedScene" uid="uid://c6h8hd4bby33l" path="res://Prefabs/Relics/revelation_eye.tscn" id="16_2krj2"]
 [ext_resource type="Script" path="res://Scripts/House/Exit.cs" id="18_bjp5x"]
 [ext_resource type="PackedScene" uid="uid://bsvikwrfwypav" path="res://Scenes/winnings.tscn" id="19_g7s81"]
+[ext_resource type="Script" path="res://Scripts/AreaSound.cs" id="20_dcqk4"]
+[ext_resource type="Texture2D" uid="uid://c4oawut1xxunf" path="res://Textures/Materials/drywall.jpg" id="20_u0fq5"]
 [ext_resource type="PackedScene" uid="uid://b31itd4t7c5lm" path="res://Prefabs/Relics/scarab.tscn" id="21_6o6r0"]
+[ext_resource type="Texture2D" uid="uid://b8iobv2hkf0d4" path="res://Textures/Materials/drywall_n.jpg" id="21_e1nxr"]
+[ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="22_j6o1d"]
+[ext_resource type="Texture2D" uid="uid://i7msav3r1wdv" path="res://Textures/Materials/wood_plank_n.jpg" id="23_a2bw0"]
+[ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="24_y7wxh"]
+[ext_resource type="Texture2D" uid="uid://bv3wj601xks1u" path="res://Textures/Materials/glass_frosted_n.png" id="25_0ax0i"]
+[ext_resource type="PackedScene" uid="uid://dk3asfx6cyj7k" path="res://Scenes/Rooms/room.tscn" id="28_uhqbe"]
 
 [sub_resource type="Environment" id="Environment_ekfaw"]
 ambient_light_source = 2
@@ -88,6 +96,111 @@ size = Vector3(2.41003, 2.56555, 1.68799)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhimb"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i8fcm"]
+size = Vector3(13.5468, 10.404, 18.1279)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00b6v"]
+albedo_color = Color(0.466667, 0.4, 0.694118, 1)
+albedo_texture = ExtResource("20_u0fq5")
+normal_enabled = true
+normal_scale = 0.4
+normal_texture = ExtResource("21_e1nxr")
+uv1_scale = Vector3(30, 30, 30)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0g4n7"]
+albedo_texture = ExtResource("22_j6o1d")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("23_a2bw0")
+uv1_scale = Vector3(13, 13, 13)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_va11w"]
+load_path = "res://.godot/imported/wood_plank.jpg-3ca9efc9b52d2d8060949297b43b9fee.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3y1li"]
+load_path = "res://.godot/imported/wood_plank_n.jpg-092af59801c5dce705c7597cc3df10dc.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l761y"]
+albedo_texture = SubResource("CompressedTexture2D_va11w")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = SubResource("CompressedTexture2D_3y1li")
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4anf7"]
+albedo_texture = ExtResource("22_j6o1d")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = ExtResource("23_a2bw0")
+uv1_scale = Vector3(13, 13, 13)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03s0x"]
+albedo_color = Color(1, 0.8, 0.894118, 1)
+albedo_texture = ExtResource("4_fugkv")
+normal_enabled = true
+normal_scale = 0.25
+normal_texture = ExtResource("24_y7wxh")
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnj7i"]
+transparency = 1
+albedo_color = Color(0.270588, 0.643137, 0.407843, 0.792157)
+metallic_specular = 1.0
+roughness = 0.19
+normal_enabled = true
+normal_texture = ExtResource("25_0ax0i")
+uv1_scale = Vector3(4, 1, 1)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8eni"]
+transparency = 1
+albedo_color = Color(0.270588, 0.643137, 0.407843, 0.792157)
+metallic_specular = 1.0
+roughness = 0.19
+normal_enabled = true
+normal_texture = ExtResource("25_0ax0i")
+uv1_scale = Vector3(4, 1, 1)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dnmxx"]
+load_path = "res://.godot/imported/wood_plank.jpg-3ca9efc9b52d2d8060949297b43b9fee.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ycd6q"]
+load_path = "res://.godot/imported/wood_plank_n.jpg-092af59801c5dce705c7597cc3df10dc.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bss33"]
+albedo_color = Color(0, 0.796078, 0.305882, 1)
+albedo_texture = SubResource("CompressedTexture2D_dnmxx")
+normal_enabled = true
+normal_scale = 0.75
+normal_texture = SubResource("CompressedTexture2D_ycd6q")
+uv1_scale = Vector3(3, 3, 3)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_cg7gw"]
+density = 3.0
+albedo = Color(0.698039, 0.235294, 0.796078, 1)
+emission = Color(0.698039, 0.235294, 0.796078, 1)
+edge_fade = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_shk7i"]
+radius = 15.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i7tj2"]
+height = 7.51651
+radius = 7.5066
 
 [node name="Manor" type="Node3D"]
 
@@ -179,18 +292,22 @@ material = SubResource("StandardMaterial3D_ggxwh")
 [node name="Lighting" type="Node3D" parent="Entrance"]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Entrance/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 6.65056, -8.60402)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104993, 3.95307, -13.1634)
 light_color = Color(1, 0.737255, 0.913725, 1)
 light_energy = 0.1
 light_specular = 7.0
+shadow_enabled = true
+shadow_blur = 4.0
 omni_range = 45.188
 omni_attenuation = 0.0583146
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Entrance/Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65817, 6.65056, -8.60402)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0450335, 2.4399, -7.87273)
 light_color = Color(1, 0.737255, 0.913725, 1)
 light_energy = 0.1
 light_specular = 7.0
+shadow_enabled = true
+shadow_blur = 4.0
 omni_range = 45.188
 omni_attenuation = 0.0583146
 
@@ -280,6 +397,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30237, -1.55386, -6.96917)
 [node name="Revelation Eye" parent="Entrance/Loot" instance=ExtResource("16_2krj2")]
 transform = Transform3D(-0.406577, 0, 0.913616, 0, 1, 0, -0.913616, 0, -0.406577, -4.90859, -1.50027, -11.206)
 
+[node name="Gold Scarab" parent="Entrance/Loot" instance=ExtResource("21_6o6r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035561, 4.28578, -12.3001)
+
 [node name="Doors" type="Node3D" parent="Entrance"]
 
 [node name="DoorFrame" parent="Entrance/Doors" instance=ExtResource("5_t4kcf")]
@@ -319,6 +439,17 @@ collision_mask = 12
 size = Vector3(2.65, 3.12, 0.785)
 material = SubResource("StandardMaterial3D_bhimb")
 
+[node name="Sounds" type="Area3D" parent="Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.01851)
+monitorable = false
+script = ExtResource("20_dcqk4")
+AmbienceName = "Windy"
+MusicName = "Start Music"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entrance/Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.096581, 2.87598, -2.81305)
+shape = SubResource("BoxShape3D_i8fcm")
+
 [node name="Hallway" type="Node3D" parent="."]
 
 [node name="Level" type="Node3D" parent="Hallway"]
@@ -334,10 +465,12 @@ radius = 15.0
 height = 30.0
 sides = 14
 cone = true
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Main Body2" type="CSGSphere3D" parent="Hallway/Level/Main Hall/Main Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.0809, -6.59205e-07)
 radius = 15.0
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Cutout" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body"]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, 0)
@@ -346,25 +479,36 @@ radius = 15.0
 height = 30.0
 sides = 14
 cone = true
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Cutout" type="CSGSphere3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.0809, -6.59205e-07)
 radius = 15.0
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Tip Hole Fill" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, 12.5585, 5.48947e-07)
 operation = 2
 size = Vector3(15, 15, 15)
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Floor Cut" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, -13.6483, -15.6975)
 operation = 2
 size = Vector3(30, 25, 35)
+material = SubResource("StandardMaterial3D_0g4n7")
+
+[node name="Floor Cut2" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
+transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, 3.81156, -3.3184)
+operation = 2
+size = Vector3(3, 3, 3)
+material = SubResource("StandardMaterial3D_l761y")
 
 [node name="Second Floor" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
 transform = Transform3D(1.05263, 0, 0, 0, 1.05263, 2.84217e-14, 0, -2.84217e-14, 1.05263, 0, -13.0351, 5.92832)
 operation = 2
 size = Vector3(25, 33, 1)
+material = SubResource("StandardMaterial3D_4anf7")
 
 [node name="Ceiling Cut" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Second Floor"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -372,53 +516,253 @@ operation = 2
 radius = 12.0
 height = 45.572
 cone = true
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Central Pillar" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body/Cutout"]
 transform = Transform3D(1.05263, 0, 0, 0, -4.6012e-08, -1.05263, 0, 1.05263, -4.6012e-08, 0, -13.0351, 5.92832)
 operation = 2
 radius = 1.516
 height = 20.0
+material = SubResource("StandardMaterial3D_03s0x")
 
 [node name="Railing" type="CSGTorus3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Central Pillar"]
 transform = Transform3D(1, 0, 0, 0, 6, 0, 0, 0, 1, 0, 1.07779, 0)
 inner_radius = 6.0
 outer_radius = 6.3
+material = SubResource("StandardMaterial3D_pnj7i")
 
 [node name="Opening" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Central Pillar/Railing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.35674)
 operation = 2
 size = Vector3(5.93, 0.31, 2.535)
-
-[node name="Step" type="CSGCylinder3D" parent="Hallway/Level/Main Hall/Main Body/Cutout/Central Pillar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -6.302, 0)
-radius = 2.812
-height = 0.4
-sides = 6
+material = SubResource("StandardMaterial3D_q8eni")
 
 [node name="Tip Cut" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 12.192, 5.32929e-07)
 operation = 2
 size = Vector3(15, 15, 15)
-
-[node name="Door Hole" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.77943, -0.161217)
-operation = 2
-size = Vector3(1.8, 3, 2.815)
-material = ExtResource("1_emvfp")
+material = SubResource("StandardMaterial3D_00b6v")
 
 [node name="Full Room" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -12.0196, 7.44097)
 operation = 1
 size = Vector3(30, 21.83, 41.015)
-material = ExtResource("1_emvfp")
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window Cut" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, 0.742151, -0.670232, 0, 0.670232, 0.742151, 0, -5.20852, 10.511)
+operation = 2
+size = Vector3(3.6, 2.1, 2)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Door Hole" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 3.77943, -0.161217)
+operation = 2
+size = Vector3(1.8, 3, 2.815)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Door Hole2" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -29.1772, -0.908397)
+operation = 2
+size = Vector3(1.8, 3, 3)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Door Hole3" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -13.4252, -12.822, -0.908396)
+operation = 2
+size = Vector3(1.8, 3, 3)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Door Hole4" type="CSGBox3D" parent="Hallway/Level/Main Hall/Main Body"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 13.425, -12.822, -0.908)
+operation = 2
+size = Vector3(1.8, 3, 3)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Steps" type="Node3D" parent="Hallway/Level"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -2.49057, 16.2434)
+
+[node name="Step" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, -0.0666107, 0.215242, -2.58224)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step2" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, -2.82664, 1, 0.0444164)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step3" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, 0.0285223, 2, 2.37681)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step4" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, 2.64641, 3, 0.0818043)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step5" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, 0.115753, 4, -2.31615)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step6" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, -2.59296, 5, 0.0823174)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step7" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, 0.114336, 6, 2.34643)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step8" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, 2.62139, 7, 0.0359097)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
+
+[node name="Step9" type="CSGCylinder3D" parent="Hallway/Level/Steps"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, -6.75015e-14, 0, 6.75015e-14, 0.999998, 0.00556076, 8, -2.26092)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+radius = 2.0
+height = 0.311
+sides = 6
+material = SubResource("StandardMaterial3D_bss33")
 
 [node name="Lighting" type="Node3D" parent="Hallway"]
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Hallway/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.817353, 6.14651)
+light_color = Color(0.258824, 0.545098, 1, 1)
+light_energy = 3.336
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 425.39
+omni_attenuation = 1.1
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Hallway/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481138, 23.6668)
+light_color = Color(0.258824, 0.545098, 1, 1)
+light_energy = 3.336
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 425.39
+omni_attenuation = 1.1
+
+[node name="OmniLight3D3" type="SpotLight3D" parent="Hallway/Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4.76837e-07, 13.9369, 18.262)
+light_color = Color(0.258824, 0.545098, 1, 1)
+light_energy = 3.336
+shadow_enabled = true
+shadow_blur = 4.0
+spot_range = 16.085
+spot_attenuation = 0.183011
+spot_angle = 60.0
+spot_angle_attenuation = 0.683019
+
 [node name="Furniture" type="Node3D" parent="Hallway"]
+
+[node name="Window" parent="Hallway/Furniture" instance=ExtResource("2_yd3ot")]
+transform = Transform3D(1, 0, 0, 0, 0.681156, 0.226963, 0, -0.732139, 0.211158, -0.0172801, 10.362, 9.30573)
+
+[node name="Light" parent="Hallway/Furniture/Window/SpotLight3D" index="0"]
+transform = Transform3D(0.91, 0, 0, 0, 0.51, 0, 0, 0, 1, 0, 0, 0.012938)
 
 [node name="Loot" type="Node3D" parent="Hallway"]
 
 [node name="Doors" type="Node3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.2733)
+
+[node name="DoorFrame3" parent="Hallway/Doors" instance=ExtResource("5_t4kcf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00487681, -0.912262, 16.3605)
+IsOpen = true
+OpenAngle = 95.0
+
+[node name="FogVolume2" type="FogVolume" parent="Hallway/Doors/DoorFrame3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+size = Vector3(2, 3.04, 1)
+material = SubResource("FogMaterial_cg7gw")
+
+[node name="DoorFrame4" parent="Hallway/Doors" instance=ExtResource("5_t4kcf")]
+transform = Transform3D(-0.241922, 0, -0.970296, 0, 1, 0, 0.970296, 0, -0.241922, -14.011, -0.912262, 0.442854)
+IsOpen = true
+OpenAngle = 95.0
+
+[node name="FogVolume2" type="FogVolume" parent="Hallway/Doors/DoorFrame4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+size = Vector3(2, 3.04, 1)
+material = SubResource("FogMaterial_cg7gw")
+
+[node name="DoorFrame5" parent="Hallway/Doors" instance=ExtResource("5_t4kcf")]
+transform = Transform3D(-0.241922, 0, 0.970296, 0, 1, 0, -0.970296, 0, -0.241922, 14.011, -0.912, 0.443)
+IsOpen = true
+OpenAngle = 95.0
+
+[node name="FogVolume2" type="FogVolume" parent="Hallway/Doors/DoorFrame5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+size = Vector3(2, 3.04, 1)
+material = SubResource("FogMaterial_cg7gw")
+
+[node name="Sounds" type="Area3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.5949)
+monitorable = false
+script = ExtResource("20_dcqk4")
+AmbienceName = "Room"
+MusicName = "Hall Music"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hallway/Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.096581, 1.67898, 2.97639)
+shape = SubResource("SphereShape3D_shk7i")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hallway/Sounds"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.166311, 1.26852, -12.5111)
+shape = SubResource("CylinderShape3D_i7tj2")
+
+[node name="Room 1" parent="." instance=ExtResource("28_uhqbe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.25756, 33.1715)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0178013, 0.999842, 0, -0.999842, 0.0178013, 2.38419e-07, 2.60472, -7.49793)
@@ -430,9 +774,11 @@ sky_mode = 1
 [node name="Thief" parent="." instance=ExtResource("1_5i2il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -14.8955)
 
-[node name="Gold Scarab" parent="." instance=ExtResource("21_6o6r0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035561, 4.28578, -12.3001)
-
 [connection signal="body_entered" from="Entrance/Doors/Exit" to="Entrance/Doors/Exit" method="OnExiting"]
+[connection signal="body_entered" from="Entrance/Sounds" to="Entrance/Sounds" method="StartSounds"]
+[connection signal="body_exited" from="Entrance/Sounds" to="Entrance/Sounds" method="StopSounds"]
+[connection signal="body_entered" from="Hallway/Sounds" to="Hallway/Sounds" method="StartSounds"]
+[connection signal="body_exited" from="Hallway/Sounds" to="Hallway/Sounds" method="StopSounds"]
 
 [editable path="Entrance/Lighting/Window"]
+[editable path="Hallway/Furniture/Window"]

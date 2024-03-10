@@ -1,33 +1,194 @@
-[gd_scene load_steps=8 format=3 uid="uid://pv06s0i32l30"]
+[gd_scene load_steps=30 format=3 uid="uid://pv06s0i32l30"]
 
+[ext_resource type="Script" path="res://addons/music_handler/MusicHandler.cs" id="1_vmydw"]
 [ext_resource type="Script" path="res://addons/music_handler/MusicGroup.cs" id="1_x72mo"]
 [ext_resource type="Script" path="res://addons/music_handler/MusicTrack.cs" id="2_1i84a"]
 [ext_resource type="Script" path="res://addons/music_handler/MusicChannel.cs" id="2_yml2r"]
+[ext_resource type="AudioStream" uid="uid://dflg3rtcpkg2r" path="res://Audio/SFX/Ambience/room_tone.wav" id="3_3t6hj"]
+[ext_resource type="AudioStream" uid="uid://ccyo2xm7youuy" path="res://Audio/Music/Magic Hall.wav" id="3_el5e1"]
+[ext_resource type="AudioStream" uid="uid://ddrrydtxgub3b" path="res://Audio/Music/Magic Start Room.wav" id="3_x71b7"]
+[ext_resource type="AudioStream" uid="uid://dbvb0am1a54fi" path="res://Audio/SFX/Ambience/windy_room.wav" id="6_osdam"]
+[ext_resource type="AudioStream" uid="uid://kqc5yahs331l" path="res://Audio/Music/Magic Room.wav" id="7_q53xb"]
+[ext_resource type="AudioStream" uid="uid://g15ghu1xd7ak" path="res://Audio/Music/Magic Caught.wav" id="8_gv8vm"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_wisq0"]
 resource_local_to_scene = true
 
-[sub_resource type="Curve" id="Curve_1cwpi"]
+[sub_resource type="Curve" id="Curve_as7qj"]
 min_value = -80.0
-max_value = 24.0
-_data = [Vector2(0, -80), 0.0, 115.738, 1, 1, Vector2(1, 24), 92.352, 0.0, 1, 0]
+max_value = -15.0
+_data = [Vector2(0, -80), 0.0, 80.0, 0, 1, Vector2(1, 0), 80.0, 0.0, 1, 0]
+point_count = 2
+metadata/_snap_count = 16
+
+[sub_resource type="Resource" id="Resource_bsvo3"]
+resource_name = "Start"
+script = ExtResource("2_yml2r")
+Name = "Start"
+Active = false
+Music = ExtResource("3_x71b7")
+VolumeDB = -80.0
+VolumeCurve = SubResource("Curve_as7qj")
+VolumeRange = Vector2(-80, -15)
+
+[sub_resource type="Resource" id="Resource_b6l5q"]
+resource_name = "Start"
+script = ExtResource("2_1i84a")
+Name = "Start"
+Channels = [SubResource("Resource_bsvo3")]
+
+[sub_resource type="Curve" id="Curve_t1451"]
+min_value = -80.0
+max_value = -15.0
+_data = [Vector2(0, -80), 0.0, 104.0, 1, 0, Vector2(1, 24), 104.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_psbyt"]
+resource_name = "Hall"
+script = ExtResource("2_yml2r")
+Name = "Hall"
+Active = false
+Music = ExtResource("3_el5e1")
+VolumeDB = -80.0
+VolumeCurve = SubResource("Curve_t1451")
+VolumeRange = Vector2(-80, -15)
+
+[sub_resource type="Resource" id="Resource_v185s"]
+resource_name = "Hall"
+script = ExtResource("2_1i84a")
+Name = "Hall"
+Channels = [SubResource("Resource_psbyt")]
+
+[sub_resource type="Curve" id="Curve_n4w07"]
+min_value = -80.0
+max_value = -15.0
+_data = [Vector2(0, -80), 0.0, 104.0, 1, 0, Vector2(1, 24), 104.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_yuu1t"]
+resource_name = "Room"
+script = ExtResource("2_yml2r")
+Name = "Room"
+Active = false
+Music = ExtResource("7_q53xb")
+VolumeDB = -80.0
+VolumeCurve = SubResource("Curve_n4w07")
+VolumeRange = Vector2(-80, -15)
+
+[sub_resource type="Resource" id="Resource_rug66"]
+resource_name = "Room"
+script = ExtResource("2_1i84a")
+Name = "Room"
+Channels = [SubResource("Resource_yuu1t")]
+
+[sub_resource type="Curve" id="Curve_0vy3h"]
+min_value = -80.0
+max_value = -15.0
+_data = [Vector2(0, -80), 0.0, 104.0, 1, 0, Vector2(1, 24), 104.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ucull"]
+resource_name = "Caught"
+script = ExtResource("2_yml2r")
+Name = "Caught"
+Active = false
+Music = ExtResource("8_gv8vm")
+VolumeDB = -80.0
+VolumeCurve = SubResource("Curve_0vy3h")
+VolumeRange = Vector2(-80, -15)
+
+[sub_resource type="Resource" id="Resource_61ckf"]
+resource_name = "Caught"
+script = ExtResource("2_1i84a")
+Name = "Caught"
+Channels = [SubResource("Resource_ucull")]
+
+[sub_resource type="Curve" id="Curve_81fq5"]
+min_value = -80.0
+max_value = -40.0
+_data = [Vector2(0, -80), 0.0, 104.0, 1, 0, Vector2(1, 24), 104.0, 0.0, 1, 0]
 point_count = 2
 
 [sub_resource type="Resource" id="Resource_56mep"]
+resource_name = "Room"
 script = ExtResource("2_yml2r")
-Name = ""
-VolumeDB = -72.0
-VolumeCurve = SubResource("Curve_1cwpi")
-VolumeRange = Vector2(-71.825, 24)
+Name = "Room"
+Active = true
+Music = ExtResource("3_3t6hj")
+VolumeDB = -80.0
+VolumeCurve = SubResource("Curve_81fq5")
+VolumeRange = Vector2(-80, -40)
 
 [sub_resource type="Resource" id="Resource_w43v1"]
+resource_name = "Room"
 script = ExtResource("2_1i84a")
-Channels = [SubResource("Resource_56mep"), null]
+Name = "Room"
+Channels = [SubResource("Resource_56mep")]
 
-[node name="Music" type="Node"]
+[sub_resource type="Curve" id="Curve_rhmj4"]
+min_value = -80.0
+max_value = -15.0
+_data = [Vector2(0, -80), 0.0, 104.0, 1, 0, Vector2(1, 24), 104.0, 0.0, 1, 0]
+point_count = 2
 
-[node name="MusicGroup" type="AudioStreamPlayer" parent="."]
+[sub_resource type="Resource" id="Resource_1s3se"]
+resource_name = "Windy"
+script = ExtResource("2_yml2r")
+Name = "Windy"
+Active = true
+Music = ExtResource("6_osdam")
+VolumeDB = -80.0
+VolumeCurve = SubResource("Curve_rhmj4")
+VolumeRange = Vector2(-80, -15)
+
+[sub_resource type="Resource" id="Resource_k1dp6"]
+resource_name = "Windy"
+script = ExtResource("2_1i84a")
+Name = "Windy"
+Channels = [SubResource("Resource_1s3se")]
+
+[node name="Music" type="Node" node_paths=PackedStringArray("MusicGroups")]
+script = ExtResource("1_vmydw")
+MusicGroups = [NodePath("Room"), NodePath("Windy"), NodePath("Start Music"), NodePath("Hall Music"), NodePath("Room Music"), NodePath("Caught Music")]
+
+[node name="Start Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamPolyphonic_wisq0")
 autoplay = true
+bus = &"Music"
+script = ExtResource("1_x72mo")
+Tracks = [SubResource("Resource_b6l5q")]
+
+[node name="Hall Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_wisq0")
+autoplay = true
+bus = &"Music"
+script = ExtResource("1_x72mo")
+Tracks = [SubResource("Resource_v185s")]
+
+[node name="Room Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_wisq0")
+autoplay = true
+bus = &"Music"
+script = ExtResource("1_x72mo")
+Tracks = [SubResource("Resource_rug66")]
+
+[node name="Caught Music" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_wisq0")
+autoplay = true
+bus = &"Music"
+script = ExtResource("1_x72mo")
+Tracks = [SubResource("Resource_61ckf")]
+
+[node name="Room" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_wisq0")
+autoplay = true
+bus = &"Music"
 script = ExtResource("1_x72mo")
 Tracks = [SubResource("Resource_w43v1")]
+
+[node name="Windy" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPolyphonic_wisq0")
+autoplay = true
+bus = &"Music"
+script = ExtResource("1_x72mo")
+Tracks = [SubResource("Resource_k1dp6")]

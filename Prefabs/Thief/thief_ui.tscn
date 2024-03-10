@@ -321,6 +321,7 @@ Rotates = true
 text = NodePath("Label")
 
 [node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Toss"]
+layout_mode = 0
 offset_left = -0.481745
 offset_top = 9.61354
 offset_right = 80.5183
@@ -346,6 +347,7 @@ Rotates = true
 text = NodePath("Label")
 
 [node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Run"]
+layout_mode = 0
 offset_left = -0.481745
 offset_top = 9.61354
 offset_right = 80.5183
@@ -371,6 +373,7 @@ Rotates = true
 text = NodePath("Label")
 
 [node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Dodge"]
+layout_mode = 0
 offset_left = -0.481745
 offset_top = 9.61354
 offset_right = 80.5183
@@ -396,6 +399,7 @@ Rotates = true
 text = NodePath("Label")
 
 [node name="Label" type="Label" parent="Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Jump"]
+layout_mode = 0
 offset_left = -0.481745
 offset_top = 9.61354
 offset_right = 80.5183
@@ -407,6 +411,7 @@ label_settings = SubResource("LabelSettings_qt4pf")
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Play/Controls"]
+layout_mode = 0
 offset_left = 1023.0
 offset_top = -281.0
 offset_right = 1093.0
@@ -434,6 +439,7 @@ text = "Open Bag
 label_settings = SubResource("LabelSettings_qt4pf")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Play/Controls"]
+layout_mode = 0
 offset_left = 1196.0
 offset_top = -281.0
 offset_right = 1266.0
@@ -460,7 +466,6 @@ text = "Grab/Hold"
 label_settings = SubResource("LabelSettings_qt4pf")
 
 [node name="Pause" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

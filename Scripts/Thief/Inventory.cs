@@ -162,10 +162,11 @@ public partial class Inventory : Node
         {
             var keys = _allLoot.Keys.ToList();
             int index = GD.RandRange(0, keys.Count-1);
+            GD.Print(keys[index]);
             Relic item = RemoveLoot(_allLoot[keys[index]].loot) as Relic;
             if (item != null)
             {
-                item.Position = new Vector3(0f, 1f, 0f);
+                item.Position = Opening.GlobalPosition + new Vector3(0f, 0f, 0f);
                 item.Rotation = new Vector3(0f, 0f, 0f);
                 Vector3 forward = ((Owner as Node3D).Basis * Vector3.Back).Normalized();
                 Vector3 right = ((Owner as Node3D).Basis * Vector3.Right).Normalized();

@@ -11,6 +11,9 @@ public partial class ThiefController : CharacterBody3D
     [Export] public Grab grab;
     [Export] public ThiefUI UI;
 
+    [ExportCategory("Other")]
+    [Export] public float IFrames = 2f;
+
     [ExportCategory("Movement")]
     [ExportGroup("Ground")]
     [Export] public bool IsRunning = false;
@@ -62,6 +65,8 @@ public partial class ThiefController : CharacterBody3D
 
     private Vector3 undetectSize = Vector3.Zero;
 
+    private float iframes = 0.0f;
+
     public override void _Ready()
     {
         undetectSize = Undetect.Scale;
@@ -70,7 +75,7 @@ public partial class ThiefController : CharacterBody3D
 
     public override void _Process(double delta)
     {
-
+        if (iframes >= 0f) iframes -= (float)delta;
         if (inputs.Pause)
         {
             UI.Paused = !UI.Paused;
@@ -128,6 +133,16 @@ public partial class ThiefController : CharacterBody3D
 
             Undetect.Scale = Undetect.Scale.Lerp(IsUndetectable ? undetectSize : Vector3.Zero, (float)delta * UndetectSpeed);
         }
+    }
+
+    public void SetIFrames()
+    {
+        iframes = IFrames;
+    }
+
+    public float GetIFrames()
+    {
+        return iframes;
     }
 
     public void SlowDodge() {

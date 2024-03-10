@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://g15ghu1xd7ak"
+path="res://.godot/imported/Magic Caught.wav-b2e937e5bfce2a2e87c4dff0bcabd392.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Magic Caught.wav"
+dest_files=["res://.godot/imported/Magic Caught.wav-b2e937e5bfce2a2e87c4dff0bcabd392.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

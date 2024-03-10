@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://dk3asfx6cyj7k"]
+
+[ext_resource type="Texture2D" uid="uid://c4oawut1xxunf" path="res://Textures/Materials/drywall.jpg" id="1_tr8o3"]
+[ext_resource type="Texture2D" uid="uid://b8iobv2hkf0d4" path="res://Textures/Materials/drywall_n.jpg" id="2_2eclv"]
+[ext_resource type="Script" path="res://Scripts/House/Rooms/RandomRotater.cs" id="3_ntoje"]
+[ext_resource type="Script" path="res://Scripts/House/Rooms/RandomLighter.cs" id="4_wn5s6"]
+[ext_resource type="Gradient" uid="uid://d0qsvnpkxmq51" path="res://Resources/Rooms/Light_Gradient.tres" id="5_0fj21"]
+[ext_resource type="Script" path="res://Scripts/AreaSound.cs" id="6_o2uq0"]
+[ext_resource type="PackedScene" uid="uid://b0ue4obat8qsy" path="res://Prefabs/Mimics/chair.tscn" id="7_p6e7d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3qss"]
+albedo_color = Color(0.466667, 0.4, 0.694118, 1)
+albedo_texture = ExtResource("1_tr8o3")
+normal_enabled = true
+normal_scale = 0.4
+normal_texture = ExtResource("2_2eclv")
+uv1_scale = Vector3(2, 2, 2)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6gc5n"]
+albedo_color = Color(0.917647, 0.960784, 0.929412, 1)
+albedo_texture = ExtResource("1_tr8o3")
+normal_enabled = true
+normal_scale = 0.4
+normal_texture = ExtResource("2_2eclv")
+uv1_scale = Vector3(36, 12, 36)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00b6v"]
+albedo_color = Color(0.466667, 0.4, 0.694118, 1)
+albedo_texture = ExtResource("1_tr8o3")
+normal_enabled = true
+normal_scale = 0.4
+normal_texture = ExtResource("2_2eclv")
+uv1_scale = Vector3(30, 30, 30)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i7tj2"]
+height = 7.51651
+radius = 10.0526
+
+[node name="Room" type="Node3D"]
+
+[node name="Level" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+
+[node name="Room Base" type="CSGCylinder3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.44983, 9.79103)
+radius = 10.0
+height = 8.0
+sides = 10
+material = SubResource("StandardMaterial3D_s3qss")
+
+[node name="Room Cut" type="CSGCylinder3D" parent="Level/Room Base"]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.12879, 0)
+operation = 2
+radius = 10.0
+height = 8.0
+sides = 10
+material = SubResource("StandardMaterial3D_6gc5n")
+
+[node name="Door Hole" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34916, 0.632336)
+operation = 2
+size = Vector3(1.8, 3, 3)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Furniture" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
+
+[node name="Loot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
+
+[node name="Lighting" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 8.828)
+script = ExtResource("3_ntoje")
+
+[node name="Room Light 1" type="Node3D" parent="Lighting" node_paths=PackedStringArray("Lights")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.908932, 4)
+script = ExtResource("4_wn5s6")
+Lights = [null, null, null, null]
+LightEnergyMin = 0.1
+LightEnergyMax = 0.4
+Colors = ExtResource("5_0fj21")
+
+[node name="Light 1" type="OmniLight3D" parent="Lighting/Room Light 1"]
+light_energy = 0.087
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 30.0
+omni_attenuation = 0.3
+
+[node name="Light 2" type="OmniLight3D" parent="Lighting/Room Light 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.81877e-05, -8)
+light_energy = 0.087
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 30.0
+omni_attenuation = 0.3
+
+[node name="Lighting2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 8.828)
+script = ExtResource("3_ntoje")
+
+[node name="Light 3" type="OmniLight3D" parent="Lighting2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.908932, 4)
+light_energy = 0.087
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 30.0
+omni_attenuation = 0.3
+
+[node name="Light 4" type="OmniLight3D" parent="Lighting2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.909, -4)
+light_energy = 0.087
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 30.0
+omni_attenuation = 0.3
+
+[node name="Sounds" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1481, 6.39502)
+monitorable = false
+script = ExtResource("6_o2uq0")
+AmbienceName = "Room"
+MusicName = "Room Music"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.77486, 2.50353)
+shape = SubResource("CylinderShape3D_i7tj2")
+
+[node name="Chair" parent="." instance=ExtResource("7_p6e7d")]
+transform = Transform3D(-0.637774, 0, -0.770224, 0, 1, 0, 0.770224, 0, -0.637774, 3.46661, 0.426527, 12.1359)
+
+[connection signal="body_entered" from="Sounds" to="Sounds" method="StartSounds"]
+[connection signal="body_exited" from="Sounds" to="Sounds" method="StopSounds"]

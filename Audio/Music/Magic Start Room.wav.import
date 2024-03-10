@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ddrrydtxgub3b"
+path="res://.godot/imported/Magic Start Room.wav-cd4b0d6e4be8109f39e357860a3487cf.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Magic Start Room.wav"
+dest_files=["res://.godot/imported/Magic Start Room.wav-cd4b0d6e4be8109f39e357860a3487cf.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

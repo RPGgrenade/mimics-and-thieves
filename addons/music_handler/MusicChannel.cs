@@ -11,12 +11,14 @@ public partial class MusicChannel : Resource
 		get { return name; }
 		set { name = value; ResourceName = value; }
 	}
+	[Export] public bool Active;
 	[Export] public AudioStream Music;
+	//[Export] public MusicVenue Venue;
 	[ExportGroup("Volume")]
     [Export] public float VolumeDB
     {
         get { return vol_db; }
-        set { vol_db = Mathf.Clamp(value, -80f, 24f); }
+        set { vol_db = Mathf.Clamp(value, vol_range.X, vol_range.Y); }
     }
 	[Export] public Curve VolumeCurve { 
 		get
@@ -36,9 +38,9 @@ public partial class MusicChannel : Resource
 		get { return vol_range; } 
 		set
         {
-            vol_curve.MinValue = vol_range.X;
-            vol_curve.MaxValue = vol_range.Y;
-            VolumeDB = Mathf.Clamp(VolumeDB, vol_range.X, vol_range.Y);
+            vol_curve.MinValue = value.X;
+            vol_curve.MaxValue = value.Y;
+            VolumeDB = Mathf.Clamp(VolumeDB, value.X, value.Y);
 			vol_range = value; 
 		}
 	}
@@ -47,4 +49,17 @@ public partial class MusicChannel : Resource
 	private float vol_db = -80f;
 	private Vector2 vol_range = new Vector2(-80f, 24f);
 	private Curve vol_curve = new Curve();
+
+	public long StreamID { get { return id; } set { id = value; } }
+	private long id;
+
+	public float SetVolume(float volume, bool use_curve = true)
+	{
+		if(use_curve)
+			VolumeDB = VolumeCurve.Sample(volume);
+		else
+			// Incorrect, needs to calculate linearly between min and max using 0 to 1 as a range
+			VolumeDB = volume;
+		return VolumeDB;
+	}
 }
