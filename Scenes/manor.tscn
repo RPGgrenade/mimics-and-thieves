@@ -772,7 +772,7 @@ shadow_transmittance_bias = 14.415
 sky_mode = 1
 
 [node name="Thief" parent="." instance=ExtResource("1_5i2il")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -14.8955)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -13.766)
 
 [connection signal="body_entered" from="Entrance/Doors/Exit" to="Entrance/Doors/Exit" method="OnExiting"]
 [connection signal="body_entered" from="Entrance/Sounds" to="Entrance/Sounds" method="StartSounds"]
