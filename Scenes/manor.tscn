@@ -345,11 +345,11 @@ transform = Transform3D(0.877398, 0, -0.479764, 0, 1, 0, 0.479764, 0, 0.877398, 
 transform = Transform3D(0.155228, 0, -0.987879, 0, 1, 0, 0.987879, 0, 0.155228, -4.17175, -1.17589, -6.0346)
 
 [node name="Drawers" parent="Entrance/Furniture" instance=ExtResource("7_0i7wg")]
-transform = Transform3D(-0.221225, 0, -0.975223, 0, 1, 0, 0.975223, 0, -0.221225, 4.86148, -1.08697, -9.22737)
+transform = Transform3D(-0.221225, 0, -0.975223, 0, 1, 0, 0.975223, 0, -0.221225, 4.86148, -1.65884, -9.22737)
 IsMimic = false
 
 [node name="Drawers2" parent="Entrance/Furniture" instance=ExtResource("7_0i7wg")]
-transform = Transform3D(-0.215162, 0, 0.976579, 0, 1, 0, -0.976579, 0, -0.215162, -3.45578, -1.08697, -3.69622)
+transform = Transform3D(-0.215162, 0, 0.976579, 0, 1, 0, -0.976579, 0, -0.215162, -3.45578, -1.65884, -3.69622)
 IsMimic = false
 
 [node name="Shelf" parent="Entrance/Furniture" instance=ExtResource("9_dmhu6")]

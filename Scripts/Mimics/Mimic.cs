@@ -11,6 +11,7 @@ public partial class Mimic : CharacterBody3D
     [Export] public MimicAnimator Animator;
     [ExportCategory("Navigation")]
     [Export] public NavigationAgent3D Navigator;
+    [Export] public NavigationObstacle3D Obstacle;
     [Export] public Node3D Target;
     [ExportCategory("Movement")]
     [Export] public float MaxSpeed = 6f;
@@ -27,12 +28,16 @@ public partial class Mimic : CharacterBody3D
     public override void _Ready()
     {
         Navigator = Navigator ?? GetChildren().OfType<NavigationAgent3D>().FirstOrDefault();
-        if (!IsMimic && Glow != null) { 
-            Glow.QueueFree(); 
+        Obstacle = Obstacle ?? GetChildren().OfType<NavigationObstacle3D>().FirstOrDefault();
+        if (!IsMimic && Glow != null)
+        {
+            Glow.QueueFree();
             Detection.QueueFree();
             Navigator.QueueFree();
             Animator.QueueFree();
         }
+        else
+            Obstacle.QueueFree();
     }
 
     public override void _Process(double delta)

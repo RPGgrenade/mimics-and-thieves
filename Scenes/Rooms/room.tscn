@@ -1,12 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dk3asfx6cyj7k"]
+[gd_scene load_steps=19 format=3 uid="uid://dk3asfx6cyj7k"]
 
 [ext_resource type="Texture2D" uid="uid://c4oawut1xxunf" path="res://Textures/Materials/drywall.jpg" id="1_tr8o3"]
 [ext_resource type="Texture2D" uid="uid://b8iobv2hkf0d4" path="res://Textures/Materials/drywall_n.jpg" id="2_2eclv"]
+[ext_resource type="PackedScene" uid="uid://c3fptkfve0361" path="res://Prefabs/Furniture/window.tscn" id="3_ewr1u"]
 [ext_resource type="Script" path="res://Scripts/House/Rooms/RandomRotater.cs" id="3_ntoje"]
+[ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="3_sjlvx"]
 [ext_resource type="Script" path="res://Scripts/House/Rooms/RandomLighter.cs" id="4_wn5s6"]
 [ext_resource type="Gradient" uid="uid://d0qsvnpkxmq51" path="res://Resources/Rooms/Light_Gradient.tres" id="5_0fj21"]
+[ext_resource type="PackedScene" uid="uid://dwt1d0avw10r3" path="res://Prefabs/Furniture/chandelier.tscn" id="6_ifl08"]
 [ext_resource type="Script" path="res://Scripts/AreaSound.cs" id="6_o2uq0"]
-[ext_resource type="PackedScene" uid="uid://b0ue4obat8qsy" path="res://Prefabs/Mimics/chair.tscn" id="7_p6e7d"]
+[ext_resource type="PackedScene" uid="uid://6vtvvfkqri1k" path="res://Prefabs/Furniture/crate.tscn" id="7_wqssn"]
+[ext_resource type="PackedScene" uid="uid://c06xcrka08vat" path="res://Prefabs/Furniture/shelf.tscn" id="8_d7fu6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3qss"]
 albedo_color = Color(0.466667, 0.4, 0.694118, 1)
@@ -38,48 +42,275 @@ uv1_scale = Vector3(30, 30, 30)
 distance_fade_mode = 2
 distance_fade_max_distance = 2.0
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_cpx0h"]
+vertices = PackedVector3Array(8.75, 0.75, 6.08732, 10.5, 0.75, 0.587322, 10.5, 0.75, -0.662678, 4, 0.75, 9.83732, 10.5, 0.75, -0.662678, 8.5, 0.75, -6.41268, 3.75, 0.75, -9.91268, -3.75, 0.75, -9.91268, -8.5, 0.75, -6.41268, -10.5, 0.75, -0.662678, -10.5, 0.75, -0.662678, -8.75, 0.75, 6.08732, -4, 0.75, 9.83732, 10.5, 0.75, -0.662678, 3.75, 0.75, -9.91268, -3.75, 0.75, -9.91268, -10.5, 0.75, -0.662678, -4, 0.75, 9.83732, 4, 0.75, 9.83732)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(4, 6, 5), PackedInt32Array(9, 8, 7), PackedInt32Array(10, 12, 11), PackedInt32Array(14, 13, 15), PackedInt32Array(15, 13, 16), PackedInt32Array(16, 13, 18), PackedInt32Array(16, 18, 17)]
+agent_height = 3.0
+agent_radius = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fm8ao"]
+albedo_color = Color(0.835294, 0.729412, 0.858824, 1)
+albedo_texture = ExtResource("3_sjlvx")
+uv1_scale = Vector3(12.5, 12.5, 12.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06gmr"]
+albedo_color = Color(0.784314, 0.847059, 0.909804, 1)
+albedo_texture = ExtResource("3_sjlvx")
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i7tj2"]
-height = 7.51651
-radius = 10.0526
+height = 12.0
+radius = 12.0
 
 [node name="Room" type="Node3D"]
 
-[node name="Level" type="CSGCombiner3D" parent="."]
+[node name="Base Level" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
 use_collision = true
 collision_layer = 2
 collision_mask = 13
 
-[node name="Room Base" type="CSGCylinder3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.44983, 9.79103)
-radius = 10.0
-height = 8.0
+[node name="Room Base" type="CSGCylinder3D" parent="Base Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 11.791)
+radius = 12.0
+height = 12.0
 sides = 10
 material = SubResource("StandardMaterial3D_s3qss")
 
-[node name="Room Cut" type="CSGCylinder3D" parent="Level/Room Base"]
+[node name="Room Cut" type="CSGCylinder3D" parent="Base Level/Room Base"]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0.12879, 0)
 operation = 2
-radius = 10.0
-height = 8.0
+radius = 12.0
+height = 12.0
 sides = 10
 material = SubResource("StandardMaterial3D_6gc5n")
 
-[node name="Door Hole" type="CSGBox3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34916, 0.632336)
+[node name="Door Hole" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.349, 0.33704)
 operation = 2
 size = Vector3(1.8, 3, 3)
 material = SubResource("StandardMaterial3D_00b6v")
 
-[node name="Furniture" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
+[node name="Window Hole" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9387, 22.8954)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window" parent="Base Level/Window Hole" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(0.455, 0, 0, 0, -4.37114e-08, -0.365, 0, 1, -1.59547e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole/Window" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole/Window/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="Window Hole2" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.5219, 1.9387, 11.8071)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window2" parent="Base Level/Window Hole2" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(0.455, 0, 0, 0, -4.37114e-08, -0.365, 0, 1, -1.59547e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole2/Window2" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole2/Window2/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="Window Hole3" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11.522, 1.939, 11.807)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window3" parent="Base Level/Window Hole3" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(-0.455, -8.74228e-08, 1.3948e-15, 0, -4.37114e-08, -0.365, 3.97774e-08, -1, 1.59547e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole3/Window3" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole3/Window3/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="Window Hole4" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(0.752495, 0, 0.658598, 0, 1, 0, -0.658598, 0, 0.752495, 7.30691, 7.054, 20.1494)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window4" parent="Base Level/Window Hole4" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(0.455, 0, 0, 0, -4.37114e-08, -0.365, 0, 1, -1.59547e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole4/Window4" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole4/Window4/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="Window Hole5" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(-0.658598, 0, 0.752495, 0, 1, 0, -0.752495, 0, -0.658598, 8.6743, 7.054, 4.21725)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window5" parent="Base Level/Window Hole5" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(0.448087, 0.173648, -2.7705e-09, 0, -4.37114e-08, -0.365, -0.0790099, 0.984808, -1.57123e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole5/Window5" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole5/Window5/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="Window Hole6" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(-0.658598, 0, 0.752495, 0, 1, 0, -0.752495, 0, -0.658598, -8.66616, 7.0543, 19.3938)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window6" parent="Base Level/Window Hole6" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(-0.446273, -0.194919, 1.77636e-15, 3.87668e-09, -4.2873e-08, -0.365, 0.0886883, -0.980819, 1.59547e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole6/Window6" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole6/Window6/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="Window Hole7" type="CSGBox3D" parent="Base Level"]
+transform = Transform3D(0.752495, 0, 0.658598, 0, 1, 0, -0.658598, 0, 0.752495, -7.31518, 7.054, 3.44264)
+operation = 2
+size = Vector3(1.8, 2.51, 1)
+material = SubResource("StandardMaterial3D_00b6v")
+
+[node name="Window7" parent="Base Level/Window Hole7" instance=ExtResource("3_ewr1u")]
+transform = Transform3D(-0.455, -8.74227e-08, 1.3948e-15, 0, -4.37114e-08, -0.365, 3.97774e-08, -1, 1.59547e-08, 0, 0, 0)
+
+[node name="SpotLight3D" parent="Base Level/Window Hole7/Window7" index="2"]
+transform = Transform3D(2.1978, 0, 0, 0, -0.777334, 0.629088, 0, -1.72353, -2.12968, 0, 0.0400009, 0)
+
+[node name="Light" parent="Base Level/Window Hole7/Window7/SpotLight3D" index="0"]
+transform = Transform3D(0.43, 0, 0, 0, 0.61, 0, 0, 0, 0.465, 0, -0.171655, 0.827974)
+
+[node name="First Floor Nav" type="NavigationRegion3D" parent="." node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.315, 10.83)
+navigation_mesh = SubResource("NavigationMesh_cpx0h")
+script = ExtResource("3_ntoje")
+Randomizer = NodePath(".")
+
+[node name="First Floor" type="CSGCombiner3D" parent="First Floor Nav"]
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+
+[node name="Floor" type="CSGCylinder3D" parent="First Floor Nav/First Floor"]
+radius = 12.0
+height = 0.5
+sides = 10
+material = SubResource("StandardMaterial3D_fm8ao")
+
+[node name="Second Floor Nav" type="NavigationRegion3D" parent="." node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1, 10.83)
+navigation_mesh = SubResource("NavigationMesh_cpx0h")
+script = ExtResource("3_ntoje")
+RotationRange = 140.0
+Randomizer = NodePath(".")
+
+[node name="First Floor" type="CSGCombiner3D" parent="Second Floor Nav"]
+use_collision = true
+collision_layer = 2
+collision_mask = 13
+
+[node name="Floor" type="CSGCylinder3D" parent="Second Floor Nav/First Floor"]
+radius = 12.0
+height = 0.5
+sides = 10
+material = SubResource("StandardMaterial3D_fm8ao")
+
+[node name="Hole" type="CSGCylinder3D" parent="Second Floor Nav/First Floor/Floor"]
+operation = 2
+radius = 2.587
+material = SubResource("StandardMaterial3D_6gc5n")
+
+[node name="Stair Hole" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.87145)
+operation = 2
+size = Vector3(4, 1, 2)
+material = SubResource("StandardMaterial3D_fm8ao")
+
+[node name="Stairs" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07877, -0.024034, 8.87168)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs2" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs3" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs4" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs2" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2/Stairs3/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs2" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2/Stairs3/Stairs4/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs3" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2/Stairs3/Stairs4/Stairs2/Stairs2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs4" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2/Stairs3/Stairs4/Stairs2/Stairs2/Stairs3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stairs5" type="CSGBox3D" parent="Second Floor Nav/First Floor/Floor/Stairs/Stairs2/Stairs3/Stairs4/Stairs2/Stairs2/Stairs3/Stairs4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.5, 0)
+size = Vector3(0.5, 0.55, 2)
+material = SubResource("StandardMaterial3D_06gmr")
+
+[node name="Stair Obstacle" type="NavigationObstacle3D" parent="Second Floor Nav/First Floor/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264726, -3.26458, 8.87273)
+radius = 1.5
+
+[node name="Furniture" type="Node3D" parent="." node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.083, 10.828)
+script = ExtResource("3_ntoje")
+Randomizer = NodePath(".")
+
+[node name="Chandelier" parent="Furniture" instance=ExtResource("6_ifl08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.18316, 0)
+
+[node name="Crate" parent="Furniture" instance=ExtResource("7_wqssn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54931, 0.361075, 0)
+
+[node name="Shelf" parent="Furniture" instance=ExtResource("8_d7fu6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.8019, 1.62376, 0)
 
 [node name="Loot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.083, 10.828)
 
-[node name="Lighting" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 8.828)
+[node name="Lighting" type="Node3D" parent="." node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.88446, 10.828)
 script = ExtResource("3_ntoje")
+Randomizer = NodePath(".")
 
 [node name="Room Light 1" type="Node3D" parent="Lighting" node_paths=PackedStringArray("Lights")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.908932, 4)
@@ -90,6 +321,7 @@ LightEnergyMax = 0.4
 Colors = ExtResource("5_0fj21")
 
 [node name="Light 1" type="OmniLight3D" parent="Lighting/Room Light 1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 light_energy = 0.087
 shadow_enabled = true
 shadow_blur = 4.0
@@ -97,19 +329,20 @@ omni_range = 30.0
 omni_attenuation = 0.3
 
 [node name="Light 2" type="OmniLight3D" parent="Lighting/Room Light 1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.81877e-05, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
 light_energy = 0.087
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 30.0
 omni_attenuation = 0.3
 
-[node name="Lighting2" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 8.828)
+[node name="Lighting2" type="Node3D" parent="." node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8483, 10.828)
 script = ExtResource("3_ntoje")
+Randomizer = NodePath(".")
 
 [node name="Light 3" type="OmniLight3D" parent="Lighting2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.908932, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.909, 5)
 light_energy = 0.087
 shadow_enabled = true
 shadow_blur = 4.0
@@ -117,7 +350,7 @@ omni_range = 30.0
 omni_attenuation = 0.3
 
 [node name="Light 4" type="OmniLight3D" parent="Lighting2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.909, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.909, -5)
 light_energy = 0.087
 shadow_enabled = true
 shadow_blur = 4.0
@@ -125,7 +358,7 @@ omni_range = 30.0
 omni_attenuation = 0.3
 
 [node name="Sounds" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1481, 6.39502)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.148, 8.395)
 monitorable = false
 script = ExtResource("6_o2uq0")
 AmbienceName = "Room"
@@ -135,8 +368,13 @@ MusicName = "Room Music"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.77486, 2.50353)
 shape = SubResource("CylinderShape3D_i7tj2")
 
-[node name="Chair" parent="." instance=ExtResource("7_p6e7d")]
-transform = Transform3D(-0.637774, 0, -0.770224, 0, 1, 0, 0.770224, 0, -0.637774, 3.46661, 0.426527, 12.1359)
-
 [connection signal="body_entered" from="Sounds" to="Sounds" method="StartSounds"]
 [connection signal="body_exited" from="Sounds" to="Sounds" method="StopSounds"]
+
+[editable path="Base Level/Window Hole/Window"]
+[editable path="Base Level/Window Hole2/Window2"]
+[editable path="Base Level/Window Hole3/Window3"]
+[editable path="Base Level/Window Hole4/Window4"]
+[editable path="Base Level/Window Hole5/Window5"]
+[editable path="Base Level/Window Hole6/Window6"]
+[editable path="Base Level/Window Hole7/Window7"]

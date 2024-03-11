@@ -53,7 +53,7 @@ points = PackedVector3Array(0, 0, 0, 4, -2, 8, -4, -2, 8, 4, 2, 8, -4, 2, 8)
 [sub_resource type="SphereShape3D" id="SphereShape3D_w3sij"]
 radius = 5.57028
 
-[node name="Drawers" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator") groups=["Mimic"]]
+[node name="Drawers" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator", "Obstacle") groups=["Mimic"]]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_p8wbb")
@@ -61,6 +61,7 @@ Glow = NodePath("Glow")
 Detection = NodePath("Detection")
 Animator = NodePath("Animator")
 Navigator = NodePath("Navigator")
+Obstacle = NodePath("Obstacle")
 MaxSpeed = 5.0
 Acceleration = 2.0
 RotationSpeed = 1.0
@@ -81,13 +82,19 @@ TongueSpeed = 6.0
 TongueAngle = 50.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58426, 0)
 shape = SubResource("BoxShape3D_cp8pm")
 
 [node name="Navigator" type="NavigationAgent3D" parent="."]
 debug_use_custom = true
 debug_path_custom_color = Color(0.862745, 0.137255, 0.188235, 1)
 
+[node name="Obstacle" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58426, 0)
+radius = 2.5
+
 [node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58426, 0)
 
 [node name="Base" type="Node3D" parent="Model"]
 
@@ -388,6 +395,7 @@ rings = 4
 material = SubResource("StandardMaterial3D_u4gtw")
 
 [node name="Glow" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58426, 0)
 script = ExtResource("5_ymgkw")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Glow"]
@@ -400,6 +408,7 @@ size = Vector3(3, 0.1, 1.1)
 material = ExtResource("5_ycvtg")
 
 [node name="Detection" type="Area3D" parent="." node_paths=PackedStringArray("StartPoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58426, 0)
 collision_layer = 4
 collision_mask = 17
 monitorable = false
