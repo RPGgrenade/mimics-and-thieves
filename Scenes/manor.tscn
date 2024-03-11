@@ -328,21 +328,27 @@ size = Vector3(8, 9, 8)
 
 [node name="Crate" parent="Entrance/Furniture" instance=ExtResource("7_2itc8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.14486, -1.17589, -7.13133)
+DespawnChance = 0.0
 
 [node name="Crate3" parent="Entrance/Furniture" instance=ExtResource("7_2itc8")]
 transform = Transform3D(0.649037, 0, -0.760757, 0, 1, 0, 0.760757, 0, 0.649037, 4.14486, -0.193329, -6.42561)
+DespawnChance = 0.0
 
 [node name="Crate2" parent="Entrance/Furniture" instance=ExtResource("7_2itc8")]
 transform = Transform3D(-0.206734, 0, -0.978397, 0, 1, 0, 0.978397, 0, -0.206734, 3.91407, -1.17589, -6.0579)
+DespawnChance = 0.0
 
 [node name="Crate4" parent="Entrance/Furniture" instance=ExtResource("7_2itc8")]
 transform = Transform3D(0.934447, 0, 0.356102, 0, 1, 0, -0.356102, 0, 0.934447, -4.33834, -1.17589, -7.11985)
+DespawnChance = 0.0
 
 [node name="Crate5" parent="Entrance/Furniture" instance=ExtResource("7_2itc8")]
 transform = Transform3D(0.877398, 0, -0.479764, 0, 1, 0, 0.479764, 0, 0.877398, -4.50194, -0.193329, -6.46039)
+DespawnChance = 0.0
 
 [node name="Crate6" parent="Entrance/Furniture" instance=ExtResource("7_2itc8")]
 transform = Transform3D(0.155228, 0, -0.987879, 0, 1, 0, 0.987879, 0, 0.155228, -4.17175, -1.17589, -6.0346)
+DespawnChance = 0.0
 
 [node name="Drawers" parent="Entrance/Furniture" instance=ExtResource("7_0i7wg")]
 transform = Transform3D(-0.221225, 0, -0.975223, 0, 1, 0, 0.975223, 0, -0.221225, 4.86148, -1.65884, -9.22737)
@@ -354,15 +360,19 @@ IsMimic = false
 
 [node name="Shelf" parent="Entrance/Furniture" instance=ExtResource("9_dmhu6")]
 transform = Transform3D(-0.211871, 0, 0.977298, 0, 1, 0, -0.977298, 0, -0.211871, -4.65167, 0.945867, -9.10501)
+DespawnChance = 0.0
 
 [node name="Shelf2" parent="Entrance/Furniture" instance=ExtResource("9_dmhu6")]
 transform = Transform3D(-0.272247, 0, -0.962228, 0, 1, 0, 0.962228, 0, -0.272247, 3.47, 0.946, -4.822)
+DespawnChance = 0.0
 
 [node name="Chandelier" parent="Entrance/Furniture" instance=ExtResource("6_o4tkm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.963, -13.0913)
+DespawnChance = 0.0
 
 [node name="Chandelier2" parent="Entrance/Furniture" instance=ExtResource("6_o4tkm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42198, -7.88503)
+DespawnChance = 0.0
 
 [node name="Chest" parent="Entrance/Furniture" instance=ExtResource("10_217ad")]
 transform = Transform3D(0.425337, 0, 0.905035, 0, 1, 0, -0.905035, 0, 0.425337, -5.7534, -1.67928, -12.0071)

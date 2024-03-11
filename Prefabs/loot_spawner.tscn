@@ -1,0 +1,22 @@
+[gd_scene load_steps=14 format=3 uid="uid://c4uixwhbd2gu6"]
+
+[ext_resource type="Script" path="res://Scripts/House/Rooms/RandomLoot.cs" id="1_fgfrl"]
+[ext_resource type="PackedScene" uid="uid://p026rx4ef5oh" path="res://Prefabs/Relics/key.tscn" id="2_ggbys"]
+[ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="3_2scwa"]
+[ext_resource type="PackedScene" uid="uid://ddx5ikc2wmrsy" path="res://Prefabs/Relics/crystal_ball.tscn" id="4_u0bq0"]
+[ext_resource type="PackedScene" uid="uid://cj4p2j6bhf7q3" path="res://Prefabs/Relics/jade_ring.tscn" id="5_x5bt2"]
+[ext_resource type="PackedScene" uid="uid://b3l7sejy6ceif" path="res://Prefabs/Relics/jewel_blue.tscn" id="6_8fr0u"]
+[ext_resource type="PackedScene" uid="uid://bnqjibltf2k5d" path="res://Prefabs/Relics/jewel_green.tscn" id="7_pvhid"]
+[ext_resource type="PackedScene" uid="uid://cr8qg0160hn07" path="res://Prefabs/Relics/jewel_red.tscn" id="8_0p0yb"]
+[ext_resource type="PackedScene" uid="uid://c6h8hd4bby33l" path="res://Prefabs/Relics/revelation_eye.tscn" id="9_2d1yn"]
+[ext_resource type="PackedScene" uid="uid://b31itd4t7c5lm" path="res://Prefabs/Relics/scarab.tscn" id="10_ajbpj"]
+[ext_resource type="PackedScene" uid="uid://cl7lrgi537jr4" path="res://Prefabs/Relics/scroll.tscn" id="11_lg6i1"]
+[ext_resource type="PackedScene" uid="uid://bohw01wm1a7ns" path="res://Prefabs/Relics/spellbook.tscn" id="12_sxyf3"]
+[ext_resource type="PackedScene" uid="uid://obgl3b4yobbx" path="res://Prefabs/Relics/tesseract.tscn" id="13_0hpoe"]
+
+[node name="Loot Spawner" type="Marker3D" node_paths=PackedStringArray("Randomizer")]
+gizmo_extents = 1.0
+script = ExtResource("1_fgfrl")
+Key = ExtResource("2_ggbys")
+LootTable = Array[PackedScene]([ExtResource("3_2scwa"), ExtResource("4_u0bq0"), ExtResource("5_x5bt2"), ExtResource("6_8fr0u"), ExtResource("7_pvhid"), ExtResource("8_0p0yb"), ExtResource("9_2d1yn"), ExtResource("10_ajbpj"), ExtResource("11_lg6i1"), ExtResource("12_sxyf3"), ExtResource("13_0hpoe")])
+Randomizer = NodePath(".")

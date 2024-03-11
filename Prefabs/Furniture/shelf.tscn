@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c06xcrka08vat"]
+[gd_scene load_steps=7 format=3 uid="uid://c06xcrka08vat"]
 
+[ext_resource type="Script" path="res://Scripts/House/Rooms/RandomDespawn.cs" id="1_byv6e"]
 [ext_resource type="Texture2D" uid="uid://ewvv2g2s5jk8" path="res://Textures/Thief/leather.jpg" id="1_y5wx0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ie7jf"]
@@ -27,9 +28,11 @@ uv1_scale = Vector3(0.36, 0.36, 0.36)
 distance_fade_mode = 2
 distance_fade_max_distance = 2.0
 
-[node name="Shelf" type="StaticBody3D"]
+[node name="Shelf" type="StaticBody3D" node_paths=PackedStringArray("Randomizer")]
 collision_layer = 2
 collision_mask = 13
+script = ExtResource("1_byv6e")
+Randomizer = NodePath(".")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ie7jf")

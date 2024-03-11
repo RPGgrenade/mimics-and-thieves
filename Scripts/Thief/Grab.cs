@@ -71,6 +71,7 @@ public partial class Grab : Area3D
             {
                 controller.loot.AddLoot(relic);
                 Loot selected = controller.loot.SelectedLoot;
+                CarryData.Instance.RemainingLootValue -= selected.GetValue();
                 if (selected != null)
                     controller.UI.UpdateSelectedItem(
                         selected?.name ?? "",
@@ -132,7 +133,8 @@ public partial class Grab : Area3D
                 Item = item;
                 grabItem(item);
                 Loot selected = controller.loot.SelectedLoot;
-                if(selected != null)
+                CarryData.Instance.RemainingLootValue += selected.GetValue();
+                if (selected != null)
                     controller.UI.UpdateSelectedItem(
                         selected?.name ?? "",
                         controller.loot.SelectedCount,

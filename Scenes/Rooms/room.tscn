@@ -1,5 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://dk3asfx6cyj7k"]
+[gd_scene load_steps=21 format=3 uid="uid://dk3asfx6cyj7k"]
 
+[ext_resource type="Script" path="res://Scripts/House/Rooms/RandomRoom.cs" id="1_gro3k"]
 [ext_resource type="Texture2D" uid="uid://c4oawut1xxunf" path="res://Textures/Materials/drywall.jpg" id="1_tr8o3"]
 [ext_resource type="Texture2D" uid="uid://b8iobv2hkf0d4" path="res://Textures/Materials/drywall_n.jpg" id="2_2eclv"]
 [ext_resource type="PackedScene" uid="uid://c3fptkfve0361" path="res://Prefabs/Furniture/window.tscn" id="3_ewr1u"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/AreaSound.cs" id="6_o2uq0"]
 [ext_resource type="PackedScene" uid="uid://6vtvvfkqri1k" path="res://Prefabs/Furniture/crate.tscn" id="7_wqssn"]
 [ext_resource type="PackedScene" uid="uid://c06xcrka08vat" path="res://Prefabs/Furniture/shelf.tscn" id="8_d7fu6"]
+[ext_resource type="PackedScene" uid="uid://c4uixwhbd2gu6" path="res://Prefabs/loot_spawner.tscn" id="9_tmvit"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3qss"]
 albedo_color = Color(0.466667, 0.4, 0.694118, 1)
@@ -61,7 +63,11 @@ albedo_texture = ExtResource("3_sjlvx")
 height = 12.0
 radius = 12.0
 
-[node name="Room" type="Node3D"]
+[node name="Room" type="Node3D" node_paths=PackedStringArray("Randomizers", "Randomizer")]
+script = ExtResource("1_gro3k")
+TimeBetweenSetup = 0.2
+Randomizers = [NodePath("First Floor Nav"), NodePath("Second Floor Nav"), NodePath("Furniture/Furniture First Floor"), NodePath("Loot/First Floor Loot"), NodePath("Loot/Second Floor Loot"), NodePath("Lighting"), NodePath("Lighting2"), NodePath("Lighting/Room Light 1"), NodePath("Furniture/Furniture First Floor/Chandelier"), NodePath("Furniture/Furniture First Floor/Crate"), NodePath("Furniture/Furniture First Floor/Shelf"), NodePath("Loot/First Floor Loot/Loot Spawner"), NodePath("Loot/First Floor Loot/Loot Spawner2"), NodePath("Loot/First Floor Loot/Loot Spawner3"), NodePath("Loot/First Floor Loot/Loot Spawner4"), NodePath("Loot/First Floor Loot/Loot Spawner5"), NodePath("Loot/First Floor Loot/Loot Spawner6"), NodePath("Loot/First Floor Loot/Loot Spawner7"), NodePath("Loot/First Floor Loot/Loot Spawner8"), NodePath("Loot/First Floor Loot/Loot Spawner9"), NodePath("Loot/First Floor Loot/Loot Spawner10"), NodePath("Loot/First Floor Loot/Loot Spawner11"), NodePath("Loot/First Floor Loot/Loot Spawner12"), NodePath("Loot/First Floor Loot/Loot Spawner13"), NodePath("Loot/First Floor Loot/Loot Spawner14"), NodePath("Loot/First Floor Loot/Loot Spawner15"), NodePath("Loot/First Floor Loot/Loot Spawner16"), NodePath("Loot/First Floor Loot/Loot Spawner17"), NodePath("Loot/First Floor Loot/Loot Spawner18"), NodePath("Loot/Second Floor Loot/Loot Spawner"), NodePath("Loot/Second Floor Loot/Loot Spawner2"), NodePath("Loot/Second Floor Loot/Loot Spawner3"), NodePath("Loot/Second Floor Loot/Loot Spawner4"), NodePath("Loot/Second Floor Loot/Loot Spawner5"), NodePath("Loot/Second Floor Loot/Loot Spawner6"), NodePath("Loot/Second Floor Loot/Loot Spawner7"), NodePath("Loot/Second Floor Loot/Loot Spawner8"), NodePath("Loot/Second Floor Loot/Loot Spawner9"), NodePath("Loot/Second Floor Loot/Loot Spawner10"), NodePath("Loot/Second Floor Loot/Loot Spawner11"), NodePath("Loot/Second Floor Loot/Loot Spawner12"), NodePath("Loot/Second Floor Loot/Loot Spawner13"), NodePath("Loot/Second Floor Loot/Loot Spawner14"), NodePath("Loot/Second Floor Loot/Loot Spawner15"), NodePath("Loot/Second Floor Loot/Loot Spawner16"), NodePath("Loot/Second Floor Loot/Loot Spawner17"), NodePath("Loot/Second Floor Loot/Loot Spawner18")]
+Randomizer = NodePath(".")
 
 [node name="Base Level" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0829618, -0.962624)
@@ -290,35 +296,190 @@ material = SubResource("StandardMaterial3D_06gmr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.264726, -3.26458, 8.87273)
 radius = 1.5
 
-[node name="Furniture" type="Node3D" parent="." node_paths=PackedStringArray("Randomizer")]
+[node name="Furniture" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.083, 10.828)
+
+[node name="Furniture First Floor" type="Node3D" parent="Furniture" node_paths=PackedStringArray("Randomizer")]
 script = ExtResource("3_ntoje")
 Randomizer = NodePath(".")
 
-[node name="Chandelier" parent="Furniture" instance=ExtResource("6_ifl08")]
+[node name="Chandelier" parent="Furniture/Furniture First Floor" instance=ExtResource("6_ifl08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.18316, 0)
 
-[node name="Crate" parent="Furniture" instance=ExtResource("7_wqssn")]
+[node name="Crate" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54931, 0.361075, 0)
 
-[node name="Shelf" parent="Furniture" instance=ExtResource("8_d7fu6")]
+[node name="Shelf" parent="Furniture/Furniture First Floor" instance=ExtResource("8_d7fu6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.8019, 1.62376, 0)
+
+[node name="Mimics" type="Node3D" parent="."]
 
 [node name="Loot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.083, 10.828)
+
+[node name="First Floor Loot" type="Node3D" parent="Loot" node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.08027, 0)
+script = ExtResource("3_ntoje")
+Randomizer = NodePath(".")
+
+[node name="Loot Spawner" parent="Loot/First Floor Loot" instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22559, 0, 0)
+
+[node name="Loot Spawner2" parent="Loot/First Floor Loot" instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1874, 0, 4.45909)
+
+[node name="Loot Spawner3" parent="Loot/First Floor Loot" instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50345, 0, -0.0172606)
+
+[node name="Loot Spawner4" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.61095, 0, 2.06248)
+Randomizer = NodePath("../Loot Spawner")
+
+[node name="Loot Spawner5" parent="Loot/First Floor Loot" instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27491, 0, 2.90866)
+
+[node name="Loot Spawner6" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, 2.75732, 0, 4.45078)
+Randomizer = NodePath("../Loot Spawner")
+
+[node name="Loot Spawner7" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, 2.28174, 0, -0.102798)
+Randomizer = NodePath("../Loot Spawner2")
+
+[node name="Loot Spawner8" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, -0.545454, 0, 4.05422)
+Randomizer = NodePath("../Loot Spawner3")
+
+[node name="Loot Spawner10" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, -2.78543, 0, 0.824654)
+Randomizer = NodePath("../Loot Spawner5")
+
+[node name="Loot Spawner9" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22559, 0, -7.67756)
+Randomizer = NodePath("../Loot Spawner")
+
+[node name="Loot Spawner11" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1874, 0, -3.21848)
+Randomizer = NodePath("../Loot Spawner2")
+
+[node name="Loot Spawner12" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.89914, 0, -7.69482)
+Randomizer = NodePath("../Loot Spawner3")
+
+[node name="Loot Spawner13" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(0.85587, 0, 0.517191, 0, 1, 0, -0.517191, 0, 0.85587, 7.59762, 0, -5.73157)
+Randomizer = NodePath("../Loot Spawner")
+
+[node name="Loot Spawner14" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(0.85587, 0, 0.517191, 0, 1, 0, -0.517191, 0, 0.85587, -1.49396, 0, -2.41869)
+Randomizer = NodePath("../Loot Spawner5")
+
+[node name="Loot Spawner15" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.913545, 0, -0.406737, 0, 1, 0, 0.406737, 0, -0.913545, 3.61055, 0, -3.70146)
+Randomizer = NodePath("../Loot Spawner")
+
+[node name="Loot Spawner16" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.913545, 0, -0.406737, 0, 1, 0, 0.406737, 0, -0.913545, 0.848437, 0, -7.35277)
+Randomizer = NodePath("../Loot Spawner2")
+
+[node name="Loot Spawner17" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.913545, 0, -0.406737, 0, 1, 0, 0.406737, 0, -0.913545, 0.578701, 0, -2.3327)
+Randomizer = NodePath("../Loot Spawner3")
+
+[node name="Loot Spawner18" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, -2.78543, 0, -6.85291)
+Randomizer = NodePath("../Loot Spawner5")
+
+[node name="Second Floor Loot" type="Node3D" parent="Loot" node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.6759, 0)
+script = ExtResource("3_ntoje")
+Randomizer = NodePath(".")
+
+[node name="Loot Spawner" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22559, 0, 0)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner")
+
+[node name="Loot Spawner2" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1874, 0, 4.45909)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner2")
+
+[node name="Loot Spawner3" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50345, 0, -0.0172606)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner3")
+
+[node name="Loot Spawner4" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.61095, 0, 2.06248)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner")
+
+[node name="Loot Spawner5" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.581432, 0, 0.535431)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner5")
+
+[node name="Loot Spawner6" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, 2.75732, 0, 4.45078)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner")
+
+[node name="Loot Spawner7" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, 2.28174, 0, -0.102798)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner2")
+
+[node name="Loot Spawner8" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, -0.545454, 0, 4.05422)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner3")
+
+[node name="Loot Spawner10" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, -2.78543, 0, 0.824654)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner5")
+
+[node name="Loot Spawner9" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.22559, 0, -7.67756)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner")
+
+[node name="Loot Spawner11" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1874, 0, -3.21848)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner2")
+
+[node name="Loot Spawner12" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.89914, 0, -7.69482)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner3")
+
+[node name="Loot Spawner13" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(0.85587, 0, 0.517191, 0, 1, 0, -0.517191, 0, 0.85587, 7.59762, 0, -5.73157)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner")
+
+[node name="Loot Spawner14" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(0.85587, 0, 0.517191, 0, 1, 0, -0.517191, 0, 0.85587, -1.49396, 0, -2.41869)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner5")
+
+[node name="Loot Spawner15" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.913545, 0, -0.406737, 0, 1, 0, 0.406737, 0, -0.913545, 3.61055, 0, -3.70146)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner")
+
+[node name="Loot Spawner16" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.913545, 0, -0.406737, 0, 1, 0, 0.406737, 0, -0.913545, 0.848437, 0, -7.35277)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner2")
+
+[node name="Loot Spawner17" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.913545, 0, -0.406737, 0, 1, 0, 0.406737, 0, -0.913545, -0.241667, 0, -0.741524)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner3")
+
+[node name="Loot Spawner18" parent="Loot/Second Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, -2.78543, 0, -6.85291)
+Randomizer = NodePath("../../First Floor Loot/Loot Spawner5")
 
 [node name="Lighting" type="Node3D" parent="." node_paths=PackedStringArray("Randomizer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.88446, 10.828)
 script = ExtResource("3_ntoje")
 Randomizer = NodePath(".")
 
-[node name="Room Light 1" type="Node3D" parent="Lighting" node_paths=PackedStringArray("Lights")]
+[node name="Room Light 1" type="Node3D" parent="Lighting" node_paths=PackedStringArray("Lights", "Randomizer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.908932, 4)
 script = ExtResource("4_wn5s6")
-Lights = [null, null, null, null]
+Lights = [NodePath("Light 1"), NodePath("Light 2"), NodePath("../../Lighting2/Light 3"), NodePath("../../Lighting2/Light 4")]
 LightEnergyMin = 0.1
 LightEnergyMax = 0.4
 Colors = ExtResource("5_0fj21")
+Randomizer = NodePath(".")
 
 [node name="Light 1" type="OmniLight3D" parent="Lighting/Room Light 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)

@@ -8,6 +8,8 @@ public partial class CarryData : Node
 	[ExportCategory("Loot")]
     [Export] public int TotalLootValue = 0;
     [Export] public int RemainingLootValue = 0;
+    [Export] public int KeyCount = 0;
+    [Export] public int MaxKeyCount = 3;
 
 
     public override void _Ready()

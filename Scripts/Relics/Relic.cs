@@ -120,6 +120,7 @@ public partial class Relic : CharacterBody3D
         {
             // Particles
             PlaySounds("Break", volume: ItemSoundVolume, generic_volume: BreakSoundVolume);
+            CarryData.Instance.RemainingLootValue -= loot.GetValue();
             QueueFree();
         }
     }
