@@ -12,4 +12,9 @@ public partial class CameraTransition : Camera3D
 		if(Transition)
 			GlobalPosition = GlobalPosition.Lerp(FinalPosition.GlobalPosition, (float)delta * TransitionSpeed);
 	}
+
+	public void SetTransition()
+	{
+		Transition = true;
+	}
 }

@@ -5,8 +5,8 @@ public partial class WinningsUI : CanvasLayer
 {
 	[Export] public Control Focus;
 
-    [Export] public PackedScene RetryScene;
-    [Export] public PackedScene MainMenuScene;
+    [Export(PropertyHint.Dir)] public string RetryScene;
+    [Export(PropertyHint.Dir)] public string MainMenuScene;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -16,9 +16,11 @@ public partial class WinningsUI : CanvasLayer
 
     public void Retry()
     {
+        GD.Print("Retrying level: " + (RetryScene != null));
         if (RetryScene != null)
         {
-            GetTree().ChangeSceneToPacked(RetryScene);
+            CarryData.Instance.PlayIntro = false;
+            GetTree().ChangeSceneToFile(RetryScene);
             CarryData.Instance.TotalLootValue = 0;
             CarryData.Instance.RemainingLootValue = 0;
         }
@@ -26,11 +28,20 @@ public partial class WinningsUI : CanvasLayer
 
     public void MainMenu()
     {
+        GD.Print("Main Menu level: " + (MainMenuScene != null));
         if (MainMenuScene != null)
         {
-            GetTree().ChangeSceneToPacked(MainMenuScene);
+            GetTree().ChangeSceneToFile(MainMenuScene);
             CarryData.Instance.TotalLootValue = 0;
             CarryData.Instance.RemainingLootValue = 0;
+        }
+    }
+
+    private void clearLevel()
+    {
+        foreach(var child in GetTree().Root.GetChildren())
+        {
+            child.QueueFree();
         }
     }
 }

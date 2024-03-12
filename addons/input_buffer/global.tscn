@@ -10,3 +10,4 @@ script = ExtResource("1_ngkok")
 
 [node name="Data" type="Node" parent="."]
 script = ExtResource("2_1v3c1")
+PlayIntro = false

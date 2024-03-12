@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c6swx1wgxfx22"]
+[gd_scene load_steps=56 format=3 uid="uid://c6swx1wgxfx22"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_5i2il"]
 [ext_resource type="Material" uid="uid://lfqkse3ptsax" path="res://Shaders/Materials/house/wall.tres" id="1_emvfp"]
@@ -29,6 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="24_y7wxh"]
 [ext_resource type="Texture2D" uid="uid://bv3wj601xks1u" path="res://Textures/Materials/glass_frosted_n.png" id="25_0ax0i"]
 [ext_resource type="PackedScene" uid="uid://dk3asfx6cyj7k" path="res://Scenes/Rooms/room.tscn" id="28_uhqbe"]
+[ext_resource type="Script" path="res://Scripts/RoomProcessing.cs" id="28_wcfle"]
+[ext_resource type="PackedScene" uid="uid://cvftc0c35vbo" path="res://Prefabs/intro_ui.tscn" id="31_v5agl"]
 
 [sub_resource type="Environment" id="Environment_ekfaw"]
 ambient_light_source = 2
@@ -780,9 +782,22 @@ shape = SubResource("CylinderShape3D_i7tj2")
 [node name="OccluderInstance3D2" type="OccluderInstance3D" parent="Hallway"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334527, -0.0247421, 14.816)
 
-[node name="Room 1" parent="." node_paths=PackedStringArray("ExitDoor") instance=ExtResource("28_uhqbe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.25756, 33.1715)
-ExitDoor = NodePath("../Hallway/Doors/DoorFrame3")
+[node name="Rooms" type="Node3D" parent="." node_paths=PackedStringArray("rooms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.4148)
+script = ExtResource("28_wcfle")
+rooms = [NodePath("Room 1"), NodePath("Room 2"), NodePath("Room 3")]
+
+[node name="Room 1" parent="Rooms" node_paths=PackedStringArray("ExitDoor") instance=ExtResource("28_uhqbe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.33935, 16.7567)
+ExitDoor = NodePath("../../Hallway/Doors/DoorFrame3")
+
+[node name="Room 2" parent="Rooms" node_paths=PackedStringArray("ExitDoor") instance=ExtResource("28_uhqbe")]
+transform = Transform3D(-0.252812, 0, -0.967515, 0, 1, 0, 0.967515, 0, -0.252812, -14.6088, -2.35463, 0.14591)
+ExitDoor = NodePath("../../Hallway/Doors/DoorFrame4")
+
+[node name="Room 3" parent="Rooms" node_paths=PackedStringArray("ExitDoor") instance=ExtResource("28_uhqbe")]
+transform = Transform3D(-0.252069, 0, 0.967709, 0, 1, 0, -0.967709, 0, -0.252069, 14.5066, -2.35463, 0.14591)
+ExitDoor = NodePath("../../Hallway/Doors/DoorFrame5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0178013, 0.999842, 0, -0.999842, 0.0178013, 2.38419e-07, 2.60472, -7.49793)
@@ -793,6 +808,8 @@ sky_mode = 1
 
 [node name="Thief" parent="." instance=ExtResource("1_5i2il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -13.766)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("31_v5agl")]
 
 [connection signal="body_entered" from="Entrance/Doors/Exit" to="Entrance/Doors/Exit" method="OnExiting"]
 [connection signal="body_entered" from="Entrance/Sounds" to="Entrance/Sounds" method="StartSounds"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c6h8hd4bby33l"]
+[gd_scene load_steps=13 format=3 uid="uid://c6h8hd4bby33l"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_22ovn"]
 [ext_resource type="Resource" uid="uid://ccwytyxbbu3i" path="res://Resources/Relics/Revelation Eye.tres" id="2_jaki8"]
 [ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_hcpny"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/RevealEffect.cs" id="3_ufdgf"]
 [ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="4_0my6e"]
+[ext_resource type="AudioStream" uid="uid://dm2b3fre10hw0" path="res://Audio/SFX/Relics/Unique/eye.wav" id="4_bvj4b"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="6_accdp"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="7_kvxlr"]
 
@@ -55,6 +56,8 @@ BounceAmount = 0.6
 BounceThreshold = 1.0
 Gravity = 11.0
 Manager = ExtResource("3_hcpny")
+ItemSound = ExtResource("4_bvj4b")
+ItemSoundVolume = -10.0
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_ufdgf")

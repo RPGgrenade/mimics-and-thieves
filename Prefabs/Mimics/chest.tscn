@@ -97,7 +97,6 @@ JumpCooldown = 0.2
 
 [node name="Animator" type="Node" parent="." node_paths=PackedStringArray("BodyParts", "Eyes", "Mouth", "Tongue")]
 script = ExtResource("2_tf87v")
-Active = true
 BodyParts = [NodePath("../Model/Bottom/Teeth"), NodePath("../Model/Mouth/Teeth2"), NodePath("../Model/Mouth/Eyes"), NodePath("../Model/Bottom/Tongue")]
 Eyes = [NodePath("../Model/Mouth/Eyes/Eye"), NodePath("../Model/Mouth/Eyes/Eye2"), NodePath("../Model/Mouth/Eyes/Eye3"), NodePath("../Model/Mouth/Eyes/Eye4"), NodePath("../Model/Mouth/Eyes/Eye5")]
 Mouth = NodePath("../Model/Mouth")

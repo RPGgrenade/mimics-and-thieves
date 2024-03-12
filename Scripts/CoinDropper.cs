@@ -38,9 +38,9 @@ public partial class CoinDropper : Node3D
 	private void MakeNextDrop()
     {
         if (NextDropper != null)
-            NextDropper.SetDrop();
+            Timing.CallDelayed(1.5f, NextDropper.SetDrop);
         if (camera != null)
-            camera.Transition = true;
+            Timing.CallDelayed(0.7f, camera.SetTransition);
     }
 
 	public void SetDrop()
@@ -84,7 +84,7 @@ public partial class CoinDropper : Node3D
 		}
 
 		Relic coin = chosenCoin.Instantiate() as Relic;
-		GetTree().Root.AddChild(coin);
+		this.AddChild(coin);
 		coin.GlobalPosition = GlobalPosition;
 
 		return coin;

@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bohw01wm1a7ns"]
+[gd_scene load_steps=16 format=3 uid="uid://bohw01wm1a7ns"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_aude1"]
 [ext_resource type="Resource" uid="uid://dthqvd42qjlfh" path="res://Resources/Relics/Spell Book.tres" id="2_lh6co"]
 [ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_bdn4h"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/DistractEffect.cs" id="3_u2mcr"]
 [ext_resource type="PackedScene" uid="uid://cqg6dvy04wnnw" path="res://Prefabs/Thief/thief_balloon.tscn" id="4_gnps0"]
+[ext_resource type="AudioStream" uid="uid://oecasfmyfudv" path="res://Audio/SFX/Relics/Unique/book.wav" id="4_s6ldb"]
 [ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="5_rqpb3"]
 [ext_resource type="Texture2D" uid="uid://c83l21pddpuki" path="res://Textures/Materials/magic_01.png" id="6_pjaav"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="7_0rjpx"]
@@ -48,6 +49,8 @@ BounceThreshold = 1.0
 BounceRotationAdd = 180.0
 Gravity = 11.0
 Manager = ExtResource("3_bdn4h")
+ItemSound = ExtResource("4_s6ldb")
+ItemSoundVolume = -10.0
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_u2mcr")

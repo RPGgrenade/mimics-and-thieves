@@ -38,7 +38,7 @@ public partial class RandomLoot : RoomRandom
         if (loot == null) return;
 
         Node3D lootNode = loot.Instantiate() as Node3D;
-        GetTree().Root.AddChild(lootNode);
+        GetParent().AddChild(lootNode);
 
         lootNode.GlobalPosition = GlobalPosition;
         lootNode.RotationDegrees = Vector3.Up * (float)GD.RandRange(-180f, 180f);

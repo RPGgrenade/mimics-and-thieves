@@ -5,7 +5,9 @@ public partial class CarryData : Node
 {
 	public static CarryData Instance;
 
-	[ExportCategory("Loot")]
+    [ExportCategory("Other")]
+    [Export] public bool PlayIntro = true;
+    [ExportCategory("Loot")]
     [Export] public int TotalLootValue = 0;
     [Export] public int RemainingLootValue = 0;
     [Export] public int KeyCount = 0;

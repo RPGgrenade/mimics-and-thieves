@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://obgl3b4yobbx"]
+[gd_scene load_steps=13 format=3 uid="uid://obgl3b4yobbx"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_j6n5e"]
 [ext_resource type="Resource" uid="uid://qe21eiy0xlfg" path="res://Resources/Relics/Tesseract.tres" id="2_7lscd"]
 [ext_resource type="Script" path="res://Scripts/Relics/MagicEffect.cs" id="3_qjv7r"]
 [ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_v3eyj"]
 [ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="4_abnif"]
+[ext_resource type="AudioStream" uid="uid://bvg13pspdxtkd" path="res://Audio/SFX/Relics/Unique/tesseract.wav" id="4_ohnfr"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="4_w0gc4"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="5_4mx5e"]
 
@@ -66,6 +67,8 @@ BounceThreshold = 1.0
 BounceRotationAdd = 360.0
 Gravity = 9.8
 Manager = ExtResource("3_v3eyj")
+ItemSound = ExtResource("4_ohnfr")
+ItemSoundVolume = -10.0
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_qjv7r")

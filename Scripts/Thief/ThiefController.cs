@@ -52,6 +52,11 @@ public partial class ThiefController : CharacterBody3D
     [ExportCategory("Camera")]
     [Export] private Node3D Camera;
 
+    [ExportCategory("Sound")]
+    [Export] public SoundManager Manager;
+    [ExportGroup("Sounds")]
+    [Export] public AudioStream PauseSound;
+
     private Vector3 _velocity = Vector3.Zero;
     private Vector3 _snap_vector = Vector3.Down;
     private float _current_speed = 0.0f;
@@ -78,6 +83,7 @@ public partial class ThiefController : CharacterBody3D
         if (iframes >= 0f) iframes -= (float)delta;
         if (inputs.Pause)
         {
+            Manager.PlayOneShot(PauseSound, -10f, 1.05f, 1.2f);
             UI.Paused = !UI.Paused;
             UI.UpdateInventory(loot._allLoot);
         }

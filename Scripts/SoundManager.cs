@@ -19,7 +19,7 @@ public partial class SoundManager : AudioStreamPlayer3D
         setSounds();
     }
 
-    public void PlayRandom(string sound, bool useWeight = false, float volume = 0f, float minpitch = 1f, float maxpitch = 1f, float size = 10f, float offset = 0f)
+    public void PlayRandom(string sound, bool useWeight = false, float volume = 0f, float minpitch = 0.95f, float maxpitch = 1.05f, float size = 10f, float offset = 0f)
     {
         UnitSize = size;
         if (playback == null)

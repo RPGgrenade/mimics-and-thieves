@@ -1,0 +1,152 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvftc0c35vbo"]
+
+[ext_resource type="Script" path="res://Scripts/IntrouUI.cs" id="1_t1w71"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfqbl"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ykb7h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ler7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2r06"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lb0x"]
+
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("Focus", "Main", "Texts")]
+script = ExtResource("1_t1w71")
+Focus = NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Button")
+Main = NodePath("Intro")
+Texts = [NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text1"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text2"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text3"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text4"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text5")]
+
+[node name="Intro" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Intro"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kfqbl")
+
+[node name="MarginContainer" type="MarginContainer" parent="Intro/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Intro/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="Control" type="Control" parent="Intro/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Text1" type="Label" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.615686, 0.768627, 0.94902, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 50
+text = "Your mission today is to take as much loot as possible from a wealthy wizard"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Text2" type="Label" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.615686, 0.768627, 0.94902, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 50
+text = "You are quite nimble, but your fine motor skills might need... 
+some work"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Text3" type="Label" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.615686, 0.768627, 0.94902, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 50
+text = "The only way to keep loot is to place it in your bag. You can take out loot to use it if you need to"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Text4" type="Label" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.615686, 0.768627, 0.94902, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 50
+text = "Just try not to drop anything on accident, ok?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Text5" type="Label" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.615686, 0.768627, 0.94902, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_spacing = 12
+theme_override_font_sizes/font_size = 50
+text = "Oh, and look out for any Lurkens. I hear they protect the wizard's house"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="Intro/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_outline_color = Color(0.8, 0.227451, 0.396078, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 31
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ykb7h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7ler7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_a2r06")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2lb0x")
+text = " O "
+
+[connection signal="pressed" from="Intro/PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="AdvanceText"]

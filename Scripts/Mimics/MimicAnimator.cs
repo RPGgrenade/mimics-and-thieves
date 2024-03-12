@@ -6,7 +6,9 @@ using System.Linq;
 public partial class MimicAnimator : Node
 {
 	[Export] public bool Active = false;
-	[Export] public string FightMusic = "Caught Music";
+    [Export] public string FightMusic = "Caught Music";
+    [Export] public string RoomMusic = "Room Music";
+    [Export] public float ActivityDistanceFromCamera = 22f;
 
 	[ExportCategory("Part References")]
 	[Export] public float PartSpeed = 2.5f;
@@ -43,6 +45,9 @@ public partial class MimicAnimator : Node
 
 	private Vector3 firstTongueRotation = Vector3.Zero;
 
+	private Node3D camera;
+	private float distanceFromCamera = float.MaxValue;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -51,6 +56,7 @@ public partial class MimicAnimator : Node
 			partOriginalSizes.Add(part.Scale);
 			part.Scale = Vector3.Zero;
 		}
+		camera = GetViewport().GetCamera3D();
 		firstTongueRotation = Tongue.RotationDegrees;
 		mouthAngle = ClosedAngle;
 	}
@@ -59,47 +65,59 @@ public partial class MimicAnimator : Node
 	public override void _Process(double delta)
 	{
 		int index = 0;
+        if (camera != null && IsInstanceValid(camera))
+            distanceFromCamera = Mouth.GlobalPosition.DistanceTo(camera.GlobalPosition);
 		foreach (Node3D part in BodyParts)
 		{
 			part.Scale = part.Scale.Lerp(Active ? partOriginalSizes[index] : Vector3.Zero, (float)delta * PartSpeed);
 			index++;
         }
 
-		if (Active)
+		if (distanceFromCamera <= ActivityDistanceFromCamera)
 		{
-			tongueTime += (float)delta;
-			Tongue.RotateX(Mathf.DegToRad(Mathf.Cos(tongueTime * TongueSpeed) * TongueAngle * (float)delta));
-        }
+			if (Active)
+			{
+				tongueTime += (float)delta;
+				Tongue.RotateX(Mathf.DegToRad(Mathf.Cos(tongueTime * TongueSpeed) * TongueAngle * (float)delta));
+			}
 
-		chompTime -= (float)delta;
-        if (chompTime <= 0f || !Active)
-        {
-            mouthAngle = Mathf.Lerp(mouthAngle, Active ? ClosedAngle : InactiveAngle, (float)delta * ChompSpeed);
-            Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
-            if (Mathf.Abs(mouthAngle - ClosedAngle) <= 1f)
-                chompTime = (float)GD.RandRange(ChompTime.X, ChompTime.Y);
-        }
-        if (chompTime > 0f && Active)
-        {
-            mouthAngle = Mathf.Lerp(mouthAngle, OpenAngle, (float)delta * ChompSpeed);
-            Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
-        }
+			chompTime -= (float)delta;
+			if (chompTime <= 0f || !Active)
+			{
+				mouthAngle = Mathf.Lerp(mouthAngle, Active ? ClosedAngle : InactiveAngle, (float)delta * ChompSpeed);
+				Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
+				if (Mathf.Abs(mouthAngle - ClosedAngle) <= 1f)
+					chompTime = (float)GD.RandRange(ChompTime.X, ChompTime.Y);
+			}
+			if (chompTime > 0f && Active)
+			{
+				mouthAngle = Mathf.Lerp(mouthAngle, OpenAngle, (float)delta * ChompSpeed);
+				Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
+			}
+		}
     }
 
     public void Activate()
     {
-        Active = true;
-        RandomizeEyes();
-        if (FightMusic != "")
-            MusicHandler.Instance.SetPriorityGroupActive(FightMusic, true);
+		if (distanceFromCamera <= ActivityDistanceFromCamera)
+		{
+			Active = true;
+			RandomizeEyes();
+			if (FightMusic != "")
+				MusicHandler.Instance.SetOnlyGroupActive(FightMusic, volSpeed : 1f);
+		}
     }
 
     public void Deactivate()
     {
-        Active = false;
-        if (FightMusic != "")
-            MusicHandler.Instance.SetPriorityGroupActive(FightMusic, false);
+		if (distanceFromCamera <= ActivityDistanceFromCamera)
+		{
+			Active = false;
+			if (FightMusic != "")
+				MusicHandler.Instance.SetOnlyGroupActive(RoomMusic, volSpeed: 0.5f);
+		}
     }
+
     private void RandomizeEyes()
 	{
 		foreach (Node3D eye in Eyes)

@@ -16,7 +16,7 @@ public partial class DistractEffect : MagicEffect
         {
             Node3D owner = GetTree().GetFirstNodeInGroup("player") as Node3D;
             balloon.UsedTimeout = Duration;
-            balloon.IsUsed();
+            //balloon.IsUsed();
 
             GetTree().Root.AddChild(balloon);
             balloon.GlobalRotation = owner.GlobalRotation;

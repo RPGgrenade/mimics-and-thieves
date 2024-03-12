@@ -33,38 +33,41 @@ public partial class ThiefInputs : Node
 
     public override void _Process(double delta)
     {
-        // Stick input grabbing
-        LeftStick.X = Input.GetAxis("Left", "Right");
-        LeftStick.Y = Input.GetAxis("Up", "Down");
-        MouseInput = MouseInput.Lerp(Input.GetLastMouseVelocity(), (float)delta * MouseSmoothness);
-        RightStick = RightStick.Lerp(
-            new Vector2(
-                Input.GetAxis("Left2", "Right2"),
-                Input.GetAxis("Up2", "Down2")
-            ),
-        (float)delta * StickSmoothness);
+        if (!CarryData.Instance.PlayIntro)
+        {
+            // Stick input grabbing
+            LeftStick.X = Input.GetAxis("Left", "Right");
+            LeftStick.Y = Input.GetAxis("Up", "Down");
+            MouseInput = MouseInput.Lerp(Input.GetLastMouseVelocity(), (float)delta * MouseSmoothness);
+            RightStick = RightStick.Lerp(
+                new Vector2(
+                    Input.GetAxis("Left2", "Right2"),
+                    Input.GetAxis("Up2", "Down2")
+                ),
+            (float)delta * StickSmoothness);
 
-        // Action input grabbing
-        // Consume action check is for things that stop after being processed
-        // Is buffered is for held things
-        Jump = InputActionBuffer.Instance.ConsumeAction("Jump");
-        Run = Input.IsActionPressed("Run");
-        Dodge = InputActionBuffer.Instance.ConsumeAction("Dodge");
-        Grab = Input.IsActionPressed("Grab");
-        JustGrabbed = Input.IsActionJustPressed("Grab");
-        JustDropped = Input.IsActionJustReleased("Grab");
-        Bag = Input.IsActionPressed("Bag");
-        Swing = InputActionBuffer.Instance.ConsumeAction("Swing");
+            // Action input grabbing
+            // Consume action check is for things that stop after being processed
+            // Is buffered is for held things
+            Jump = InputActionBuffer.Instance.ConsumeAction("Jump");
+            Run = Input.IsActionPressed("Run");
+            Dodge = InputActionBuffer.Instance.ConsumeAction("Dodge");
+            Grab = Input.IsActionPressed("Grab");
+            JustGrabbed = Input.IsActionJustPressed("Grab");
+            JustDropped = Input.IsActionJustReleased("Grab");
+            Bag = Input.IsActionPressed("Bag");
+            Swing = InputActionBuffer.Instance.ConsumeAction("Swing");
 
-        // UI input grabbing
-        Pause = Input.IsActionJustPressed("Pause");
+            // UI input grabbing
+            Pause = Input.IsActionJustPressed("Pause");
 
-        if (cycleCooldown > 0f) cycleCooldown -= (float)delta;
-        if(Input.IsActionJustReleased("CycleLeft") || Input.IsActionJustReleased("CycleRight")) cycleCooldown = 0f;
+            if (cycleCooldown > 0f) cycleCooldown -= (float)delta;
+            if (Input.IsActionJustReleased("CycleLeft") || Input.IsActionJustReleased("CycleRight")) cycleCooldown = 0f;
 
-        CycleLeft = Input.IsActionPressed("CycleLeft") && cycleCooldown <= 0f;
-        CycleRight = Input.IsActionPressed("CycleRight") && cycleCooldown <= 0f;
+            CycleLeft = Input.IsActionPressed("CycleLeft") && cycleCooldown <= 0f;
+            CycleRight = Input.IsActionPressed("CycleRight") && cycleCooldown <= 0f;
 
-        if ((CycleLeft || CycleRight)) cycleCooldown = CycleCooldown;
+            if ((CycleLeft || CycleRight)) cycleCooldown = CycleCooldown;
+        }
     }
 }

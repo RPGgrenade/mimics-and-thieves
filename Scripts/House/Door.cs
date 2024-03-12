@@ -9,19 +9,24 @@ public partial class Door : Node3D
 	[Export] public float OpenAngle = 0f;
 	[Export] public float DoorSpeed = 3f;
 
+	[Export] public SoundManager Manager;
+	[Export] public AudioStream Sound;
+
 	private float doorAngle = 0f;
 
 	public void Open()
 	{
 		IsOpen = true;
+		Manager.PlayOneShot(Sound, -5f, 1.0f, 1.1f);
 		// Play sound
 	}
 
 	public void Close()
 	{
 		IsOpen = false;
-		// Play sound
-	}
+        Manager.PlayOneShot(Sound, -5f, 0.8f, 0.9f);
+        // Play sound
+    }
 
     public override void _Ready()
     {

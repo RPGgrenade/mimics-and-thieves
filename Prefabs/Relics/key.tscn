@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://p026rx4ef5oh"]
+[gd_scene load_steps=15 format=3 uid="uid://p026rx4ef5oh"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_xb8bv"]
 [ext_resource type="Resource" uid="uid://cgel4eix6t7qb" path="res://Resources/Relics/Key.tres" id="2_xan1m"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/UnlockEffect.cs" id="3_fpftf"]
 [ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_xio3w"]
+[ext_resource type="AudioStream" uid="uid://cld68nrerpfms" path="res://Audio/SFX/Relics/Unique/key.wav" id="4_dj61n"]
 [ext_resource type="ArrayMesh" uid="uid://db2xuglorg2ge" path="res://Models/Relics/key.res" id="4_lcaeu"]
 [ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="5_npw38"]
 [ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="6_7obk0"]
@@ -53,6 +54,8 @@ BounceThreshold = 1.0
 BounceRotationAdd = 100.0
 Gravity = 11.0
 Manager = ExtResource("3_xio3w")
+ItemSound = ExtResource("4_dj61n")
+ItemSoundVolume = -14.0
 
 [node name="Magic" type="Node3D" parent="." node_paths=PackedStringArray("key")]
 script = ExtResource("3_fpftf")

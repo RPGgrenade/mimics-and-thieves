@@ -5,6 +5,7 @@ using System.Linq;
 public partial class Mimic : CharacterBody3D
 {
     [Export] public bool IsMimic = true;
+    [Export] public float ActivityDistanceFromCamera = 25f;
     [Export] public Node3D Glow;
     [ExportCategory("References")]
     [Export] public MimicDetection Detection;
@@ -25,6 +26,9 @@ public partial class Mimic : CharacterBody3D
 
     private float jumpCooldown = 0f;
 
+    private Node3D camera;
+    private float distanceFromCamera = float.MaxValue;
+
     public override void _Ready()
     {
         Navigator = Navigator ?? GetChildren().OfType<NavigationAgent3D>().FirstOrDefault();
@@ -38,20 +42,29 @@ public partial class Mimic : CharacterBody3D
         }
         else
             Obstacle.QueueFree();
+        if(IsMimic)
+            camera = GetViewport().GetCamera3D();
     }
 
     public override void _Process(double delta)
     {
         if (IsMimic)
         {
+            if (camera != null && IsInstanceValid(camera))
+                distanceFromCamera = GlobalPosition.DistanceTo(camera.GlobalPosition);
+            //GD.Print("Distance from camera: " + distanceFromCamera);
+        }
+        if (IsMimic && distanceFromCamera <= ActivityDistanceFromCamera)
+        {
             Target = Detection.Target;
-            if (Target != null)
+            if (Target != null && IsInstanceValid(Target))
             {
                 if (!Animator.Active) Animator.Activate();
                 MoveBody(Target.GlobalPosition, MaxSpeed, Acceleration, RotationSpeed, (float)delta);
             }
             else
             {
+                if (!IsInstanceValid(Target)) Target = null;
                 if (Animator.Active)
                 {
                     Animator.Deactivate(); // For now. Needs a cooldown time
@@ -64,7 +77,7 @@ public partial class Mimic : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (IsMimic)
+        if (IsMimic && distanceFromCamera <= ActivityDistanceFromCamera)
         {
             Vector3 velocity = Velocity;
             if (!IsOnFloor())
@@ -88,7 +101,7 @@ public partial class Mimic : CharacterBody3D
             {
                 //GD.Print("Hit Something");
                 Node3D collision = GetLastSlideCollision().GetCollider() as Node3D;
-                if (collision.IsInGroup("player"))
+                if (collision.IsInGroup("player") && collision is ThiefController)
                 {
                     //GD.Print("Hit player");
                     ThiefController thief = collision as ThiefController;

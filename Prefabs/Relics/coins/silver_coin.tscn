@@ -11,7 +11,7 @@ radius = 0.0914075
 
 [node name="Silver Coin" type="CharacterBody3D" groups=["Relic"]]
 collision_layer = 8
-collision_mask = 10
+collision_mask = 2
 slide_on_ceiling = false
 script = ExtResource("1_cru7r")
 IsCoin = true

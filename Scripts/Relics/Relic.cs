@@ -61,13 +61,16 @@ public partial class Relic : CharacterBody3D
             );
     }
 
-    private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f)
+    private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f, bool hearable = false)
     {
         if (Manager != null && distanceFromCamera <= SoundDistanceFromCamera)
         {
             SoundManager sounds = Manager.Instantiate() as SoundManager;
+            if(!hearable)
+                sounds.RemoveFromGroup("sound");
             GetTree().Root.AddChild(sounds);
             sounds.GlobalPosition = GlobalPosition;
+
 
             sounds.PlayRandom(soundType, minpitch: minPitch, maxpitch: maxPitch, volume: generic_volume);
             sounds.PlayOneShot(ItemSound, minpitch: minPitch, maxpitch: maxPitch, volume: volume);
@@ -126,7 +129,8 @@ public partial class Relic : CharacterBody3D
         {
             // Particles
             PlaySounds("Break", volume: ItemSoundVolume, generic_volume: BreakSoundVolume);
-            CarryData.Instance.RemainingLootValue -= loot.GetValue();
+            if(loot != null)
+                CarryData.Instance.RemainingLootValue -= loot.GetValue();
             QueueFree();
         }
     }
@@ -182,7 +186,7 @@ public partial class Relic : CharacterBody3D
                     );
                     velocity = velocity.Bounce(GetWallNormal()) * BounceAmount;
                 }
-                PlaySounds("Collide", volume: ItemSoundVolume, generic_volume: CollideSoundVolume);
+                PlaySounds("Collide", volume: ItemSoundVolume, generic_volume: CollideSoundVolume, hearable : true);
                 //GD.Print("Speed is "+ velocity.Length());
             }
 

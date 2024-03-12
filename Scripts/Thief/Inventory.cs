@@ -39,6 +39,12 @@ public partial class Inventory : Node
     [Export] public float OpeningSizeSpeed = 6f;
     [Export] public float BagSizeSpeed = 4f;
 
+    [ExportCategory("Sound")]
+    [Export] public SoundManager Manager;
+    [ExportGroup("Sounds")]
+    [Export] public AudioStream BagSound;
+    [Export] public AudioStream CycleSound;
+
     private Vector3 holeScale;
     private Vector3 openScale;
     private Vector3 bagScale;
@@ -68,6 +74,7 @@ public partial class Inventory : Node
             string key = _allLoot.Keys.ToList()[index];
             SelectedLoot = _allLoot[key].loot;
             SelectedCount = _allLoot[key].count;
+            Manager.PlayOneShot(CycleSound, -10f, 0.95f, 1.05f);
         }
         //GD.Print("Selected Loot is " + SelectedLoot.name);
     }
@@ -81,6 +88,7 @@ public partial class Inventory : Node
             string key = _allLoot.Keys.ToList()[index];
             SelectedLoot = _allLoot[key].loot;
             SelectedCount = _allLoot[key].count;
+            Manager.PlayOneShot(CycleSound, -10f, 0.95f, 1.05f);
         }
         //GD.Print("Selected Loot is " + SelectedLoot.name);
     }
@@ -103,6 +111,7 @@ public partial class Inventory : Node
             _allLoot[loot.name].count += 1;
             if (loot.name == SelectedLoot.name) SelectedCount = _allLoot[loot.name].count;
         }
+        Manager.PlayOneShot(BagSound, -10f, 0.95f, 1.05f);
         Bag.Scale *= BagLargeSize;
         relic.QueueFree();
         countTotals();
@@ -143,6 +152,7 @@ public partial class Inventory : Node
             }
             else
                 SelectedCount = _allLoot[loot.name].count;
+            Manager.PlayOneShot(BagSound ,-10f, 0.95f, 1.05f);
 
         }
         else {

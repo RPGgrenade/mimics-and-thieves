@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cj4p2j6bhf7q3"]
+[gd_scene load_steps=11 format=3 uid="uid://cj4p2j6bhf7q3"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_47ill"]
 [ext_resource type="Resource" uid="uid://tgw0xegxlone" path="res://Resources/Relics/Jade Rings.tres" id="2_dkqdh"]
 [ext_resource type="Script" path="res://Scripts/Relics/MagicEffect.cs" id="3_1tptm"]
 [ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_tb41q"]
+[ext_resource type="AudioStream" uid="uid://x7ecyc8ogi5x" path="res://Audio/SFX/Relics/Unique/jade.wav" id="4_ke0xc"]
 [ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="4_xaysj"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="5_rxkmb"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="6_gbhnl"]
@@ -46,6 +47,8 @@ BounceThreshold = 1.5
 BounceRotationAdd = 240.0
 Gravity = 9.8
 Manager = ExtResource("3_tb41q")
+ItemSound = ExtResource("4_ke0xc")
+ItemSoundVolume = -5.0
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_1tptm")

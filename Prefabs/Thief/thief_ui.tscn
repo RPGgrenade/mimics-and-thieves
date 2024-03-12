@@ -125,6 +125,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("SelectedControl", "ItemName", "ItemTexture", "ItemCount", "ItemEffect", "InventoryControl", "Inventory", "InfoTexture", "InfoName", "InfoDescription", "InfoEffect", "InfoEffectDescription", "Icons")]
 script = ExtResource("1_gfiup")
+MainMenu = "res://Scenes/main_menu.tscn"
 DefaultTexture = ExtResource("2_5ogup")
 SelectedControl = NodePath("Play")
 ItemName = NodePath("Play/Selected/PanelContainer/AspectRatioContainer/MarginContainer/PanelContainer/GridContainer/Title/Item Name")
@@ -1068,3 +1069,4 @@ text = "Main Menu"
 [connection signal="focus_exited" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" to="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/LeftMargin/Inventory/Item12" method="SetNoHighlight"]
 [connection signal="pressed" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer/Continue Button" to="." method="UnPause"]
 [connection signal="pressed" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer2/Restart Button" to="." method="Restart"]
+[connection signal="pressed" from="Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Bottom Container/MarginContainer3/Menu Button" to="." method="LoadMainMenu"]

@@ -8,6 +8,7 @@ using static Inventory;
 
 public partial class ThiefUI : CanvasLayer
 {
+    [Export(PropertyHint.Dir)] public string MainMenu;
     [Export] public bool Paused = false;
     [Export] public float PauseSpeed = 10f;
     [Export] public float OpacityThreshold = 0.1f;
@@ -60,6 +61,7 @@ public partial class ThiefUI : CanvasLayer
 
 	public override void _Process(double delta)
     {
+        Visible = !CarryData.Instance.PlayIntro;
         SelectedControl.Modulate = SelectedControl.Modulate.Lerp(new Color(1f, 1f, 1f, Paused ? 0f : 1f), (float)delta * PauseSpeed);
         InventoryControl.Modulate = InventoryControl.Modulate.Lerp(new Color(1f, 1f, 1f, Paused ? 1f : 0f), (float)delta * PauseSpeed);
 
@@ -113,7 +115,16 @@ public partial class ThiefUI : CanvasLayer
 
     public void Restart()
     {
+        CarryData.Instance.PlayIntro = false;
         GetTree().ReloadCurrentScene();
+        CarryData.Instance.TotalLootValue = 0;
+        CarryData.Instance.RemainingLootValue = 0;
+    }
+
+    public void LoadMainMenu()
+    {
+        GD.Print("loading main menu");
+        GetTree().ChangeSceneToFile(MainMenu);
         CarryData.Instance.TotalLootValue = 0;
         CarryData.Instance.RemainingLootValue = 0;
     }
@@ -156,7 +167,9 @@ public partial class ThiefUI : CanvasLayer
 
     public void UpdateInventory(Dictionary<string, Inventory.InventorySlot> inventory = null)
     {
-        foreach(InventoryItem item in Inventory)
+
+        Inventory[0].GrabFocus();
+        foreach (InventoryItem item in Inventory)
         {
             //GD.Print(item.Name);
             item.ItemTexture.Texture = DefaultTexture;

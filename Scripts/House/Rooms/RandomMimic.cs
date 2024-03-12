@@ -27,15 +27,16 @@ public partial class RandomMimic : RoomRandom
 
         Node3D mimicNode = mimic.Instantiate() as Node3D;
         GetTree().Root.AddChild(mimicNode);
-
         mimicNode.GlobalPosition = GlobalPosition;
         mimicNode.RotationDegrees = Vector3.Up * (float)GD.RandRange(-180f, 180f);
+
 
         if (mimicNode is Mimic)
         {
             Mimic mimick = mimicNode as Mimic;
             float furnitureChance = (float)GD.RandRange(0f,1f);
             mimick.IsMimic = furnitureChance > FurnitureChance;
+            mimick._Ready();
         }
     }
 }

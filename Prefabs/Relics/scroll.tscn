@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cl7lrgi537jr4"]
+[gd_scene load_steps=16 format=3 uid="uid://cl7lrgi537jr4"]
 
 [ext_resource type="Script" path="res://Scripts/Relics/Relic.cs" id="1_yk4dm"]
 [ext_resource type="Resource" uid="uid://ckl5u1xnb5fgb" path="res://Resources/Relics/Stealth Scroll.tres" id="2_i8va0"]
 [ext_resource type="Script" path="res://Scripts/Relics/Effects/UndetectEffect.cs" id="3_8q4o6"]
 [ext_resource type="PackedScene" uid="uid://bmy4coxbu2aep" path="res://Prefabs/Relics/relic_sound.tscn" id="3_da3fd"]
+[ext_resource type="AudioStream" uid="uid://y8876aqlmkjm" path="res://Audio/SFX/Relics/Unique/scroll.wav" id="4_t1xrp"]
 [ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="5_wfiyc"]
 [ext_resource type="Texture2D" uid="uid://cr31hdlj0fbju" path="res://Textures/Thief/fabric.jpg" id="6_b8mnq"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_8hojo"]
@@ -54,6 +55,8 @@ BounceThreshold = 0.96
 BounceRotationAdd = 200.0
 Gravity = 11.0
 Manager = ExtResource("3_da3fd")
+ItemSound = ExtResource("4_t1xrp")
+ItemSoundVolume = -10.0
 
 [node name="Magic" type="Node3D" parent="."]
 script = ExtResource("3_8q4o6")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bfqpgmqtscikh"]
+[gd_scene load_steps=31 format=3 uid="uid://bfqpgmqtscikh"]
 
 [ext_resource type="Texture2D" uid="uid://c4oawut1xxunf" path="res://Textures/Materials/drywall.jpg" id="1_nisvt"]
 [ext_resource type="Texture2D" uid="uid://b8iobv2hkf0d4" path="res://Textures/Materials/drywall_n.jpg" id="2_kw7ao"]
@@ -8,6 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="6_xmr5b"]
 [ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="7_7embg"]
 [ext_resource type="Script" path="res://Scripts/Mimics/MenuMimic.cs" id="8_gnolg"]
+[ext_resource type="ArrayMesh" uid="uid://bhc0vtnkqmlpx" path="res://Models/Relics/jewel.res" id="9_eq5rk"]
+[ext_resource type="Script" path="res://Scripts/MainMenu.cs" id="10_glaj0"]
+[ext_resource type="PackedScene" uid="uid://c6swx1wgxfx22" path="res://Scenes/manor.tscn" id="11_0l8bv"]
+[ext_resource type="Texture2D" uid="uid://nfmc4w8f1iud" path="res://Textures/UI/ui_bg.png" id="12_81j2i"]
+
+[sub_resource type="Environment" id="Environment_1b1cc"]
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3
+volumetric_fog_albedo = Color(0.607843, 0.8, 0.968627, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27sp5"]
 albedo_color = Color(0.466667, 0.4, 0.694118, 1)
@@ -79,7 +88,98 @@ clearcoat_enabled = true
 clearcoat_roughness = 0.77
 disable_receive_shadows = true
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_h7436"]
+radius = 0.1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6sbgp"]
+load_path = "res://.godot/imported/hair_n.jpg-e853b287ffd36a7c6b1d6c548c2f1b53.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf2xc"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.0509804, 0.356863, 1, 0.521569)
+metallic = 0.07
+metallic_specular = 0.79
+roughness = 0.11
+normal_enabled = true
+normal_scale = 3.26
+normal_texture = SubResource("CompressedTexture2D_6sbgp")
+rim_enabled = true
+clearcoat_enabled = true
+clearcoat = 0.63
+clearcoat_roughness = 0.44
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+backlight = Color(0.54902, 0.321569, 0.239216, 1)
+refraction_enabled = true
+refraction_scale = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kxm83"]
+radius = 0.1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dxqur"]
+load_path = "res://.godot/imported/hair_n.jpg-e853b287ffd36a7c6b1d6c548c2f1b53.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ofxpq"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.933333, 0, 0.0470588, 0.521569)
+metallic = 0.07
+metallic_specular = 0.79
+roughness = 0.11
+normal_enabled = true
+normal_scale = 3.26
+normal_texture = SubResource("CompressedTexture2D_dxqur")
+rim_enabled = true
+clearcoat_enabled = true
+clearcoat = 0.63
+clearcoat_roughness = 0.44
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+backlight = Color(0.54902, 0.321569, 0.239216, 1)
+refraction_enabled = true
+refraction_scale = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jsk47"]
+radius = 0.1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_na7xf"]
+load_path = "res://.godot/imported/hair_n.jpg-e853b287ffd36a7c6b1d6c548c2f1b53.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hcvu"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0.533333, 0.184314, 0.521569)
+metallic = 0.07
+metallic_specular = 0.79
+roughness = 0.11
+normal_enabled = true
+normal_scale = 3.26
+normal_texture = SubResource("CompressedTexture2D_na7xf")
+rim_enabled = true
+clearcoat_enabled = true
+clearcoat = 0.63
+clearcoat_roughness = 0.44
+subsurf_scatter_enabled = true
+subsurf_scatter_strength = 1.0
+backlight = Color(0.54902, 0.321569, 0.239216, 1)
+refraction_enabled = true
+refraction_scale = 0.2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2vv0j"]
+texture = ExtResource("12_81j2i")
+expand_margin_left = 190.0
+expand_margin_top = 20.0
+expand_margin_right = 150.0
+expand_margin_bottom = 30.0
+
 [node name="Main Menu" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1b1cc")
 
 [node name="Area" type="Node3D" parent="."]
 
@@ -268,9 +368,442 @@ rings = 4
 material = SubResource("StandardMaterial3D_3s8qr")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.990268, -0.0425446, 0.132511, 0, 0.952129, 0.305695, -0.139173, -0.30272, 0.942863, 1.59351, 1.472, 1.19081)
+transform = Transform3D(0.990268, -0.0246454, 0.136974, 0, 0.984196, 0.177085, -0.139173, -0.175361, 0.974617, 1.59351, 1.472, 1.19081)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.994412, -5.20434e-12, -0.10557, 0.104434, 0.146325, 0.983709, 0.0154475, -0.989237, 0.145507, -0.0217168, 4.32412, 0.0322804)
 light_color = Color(0.462745, 0.819608, 0.964706, 1)
 spot_range = 9.41739
+
+[node name="Jewel Blue" type="CharacterBody3D" parent="." groups=["Relic"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.347624, 0.511733, 0.204497)
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jewel Blue"]
+shape = SubResource("SphereShape3D_h7436")
+
+[node name="Model" type="Node3D" parent="Jewel Blue"]
+
+[node name="CSGBox3D" type="CSGSphere3D" parent="Jewel Blue/Model"]
+radius = 0.1
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_xf2xc")
+
+[node name="Jewel Red" type="CharacterBody3D" parent="." groups=["Relic"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48881, 0.527466, -0.320505)
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jewel Red"]
+shape = SubResource("SphereShape3D_kxm83")
+
+[node name="Model" type="Node3D" parent="Jewel Red"]
+
+[node name="CSGBox3D" type="CSGSphere3D" parent="Jewel Red/Model"]
+radius = 0.1
+radial_segments = 4
+rings = 3
+material = SubResource("StandardMaterial3D_ofxpq")
+
+[node name="Jewel Green" type="CharacterBody3D" parent="." groups=["Relic"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24821, 0.529206, 0.0405002)
+collision_layer = 8
+collision_mask = 6
+slide_on_ceiling = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Jewel Green"]
+shape = SubResource("SphereShape3D_jsk47")
+
+[node name="Model" type="Node3D" parent="Jewel Green"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Jewel Green/Model"]
+mesh = ExtResource("9_eq5rk")
+surface_material_override/0 = SubResource("StandardMaterial3D_3hcvu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("Focus", "CreditsFocus", "Credits")]
+script = ExtResource("10_glaj0")
+Focus = NodePath("Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Start Button")
+CreditsFocus = NodePath("Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/Close Credits Button")
+Credits = NodePath("Credits")
+Game = ExtResource("11_0l8bv")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 400
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.776471, 0.415686, 0.964706, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.431373, 0, 0.207843, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 11
+theme_override_constants/shadow_outline_size = 24
+theme_override_font_sizes/font_size = 80
+text = "    Loot-n-Lurk"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 0
+
+[node name="Start Button" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../MarginContainer3/Quit Button")
+focus_neighbor_bottom = NodePath("../../MarginContainer2/Credits Button")
+theme_override_font_sizes/font_size = 50
+text = "Start Game"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 0
+
+[node name="Credits Button" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../MarginContainer/Start Button")
+focus_neighbor_bottom = NodePath("../../MarginContainer3/Quit Button")
+theme_override_font_sizes/font_size = 50
+text = "Credits"
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 0
+
+[node name="Quit Button" type="Button" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../MarginContainer2/Credits Button")
+focus_neighbor_bottom = NodePath("../../MarginContainer/Start Button")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_right = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 11
+theme_override_font_sizes/font_size = 20
+text = "By: Jaime (RPGgrenade) Echeverría"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Credits" type="Control" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Credits/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2vv0j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Credits/MarginContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Magic Escape Room\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"F_ST_Room_Tone_05.wav\" Tim_Verberne
+Licensed under Creative Commons: 0 License
+https://freesound.org/people/Tim_Verberne/sounds/546579/"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"room-tone windy house SHORT 140212_0078.wav\" 
+klankbeeld
+Licensed under Creative Commons: By Attribution 4.0 License
+https://freesound.org/people/klankbeeld/sounds/218751/"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"sculpted base mesh but with a manga shader Free 3D model\"
+oj889
+Licensed under Royalty Free No Ai License
+https://www.cgtrader.com/free-3d-models/character/
+anatomy/sculpted-base-mesh-but-with-a-manga-shader"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Controller Icons v2.0.1\" [Copyright (c) 2023 rsubtil]
+Licensed under MIT License
+https://godotengine.org/asset-library/asset/1429"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Fire Ball Release\" by  CTCollab
+Licensed under Creative Commons: By Attribution 3.0 License
+https://freesound.org/people/CTCollab/sounds/223611/"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Pick up Item 1.wav\" by  SilverIllusionist
+Licensed under Creative Commons: By Attribution 4.0 License
+https://freesound.org/people/SilverIllusionist/sounds/411177/"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"grab-item\" by  1bob
+Licensed under Creative Commons 0 License
+https://freesound.org/people/1bob/sounds/651515/"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Item Equip\" by  mrickey13
+Licensed under Creative Commons 0 License
+https://freesound.org/people/mrickey13/sounds/518850/"
+horizontal_alignment = 1
+
+[node name="Label10" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Hit 2.wav\" by  goldenpotatobull
+Licensed under Creative Commons 0 License
+https://freesound.org/people/goldenpotatobull/
+sounds/468948/"
+horizontal_alignment = 1
+
+[node name="Label11" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Shuffling Backpack.wav\" by  Flem0527
+Licensed under Creative Commons 0 License
+https://freesound.org/people/Flem0527/sounds/630021/"
+horizontal_alignment = 1
+
+[node name="Label12" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"snd_small_object_hit.wav\" by  gristi
+Licensed under Creative Commons 0 License
+https://freesound.org/people/gristi/sounds/562199/"
+horizontal_alignment = 1
+
+[node name="Label13" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"iceSpell.wav\" by  Relenzo2
+Licensed under Creative Commons 0 License
+https://freesound.org/people/Relenzo2/sounds/160420/"
+horizontal_alignment = 1
+
+[node name="Label14" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Metal Clank\" by f4ngy
+Licensed under Creative Commons: By Attribution 4.0 License
+https://freesound.org/people/f4ngy/sounds/240787/"
+horizontal_alignment = 1
+
+[node name="Label15" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Metal Clank 2\" by  JustInvoke
+Licensed under Creative Commons: By Attribution 4.0 License
+https://freesound.org/people/JustInvoke/sounds/446107/"
+horizontal_alignment = 1
+
+[node name="Label16" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"Real Coin Drop\" by  Rocotilos
+Licensed under Creative Commons 0 License
+https://freesound.org/people/Rocotilos/sounds/343462/"
+horizontal_alignment = 1
+
+[node name="Label18" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"footsteps socks parquet\" by  Yuval
+Licensed under Creative Commons 0 License
+https://freesound.org/people/Yuval/sounds/205819/"
+horizontal_alignment = 1
+
+[node name="Label17" type="Label" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 12
+text = "\"RPG Sound Pack\" by  artisticdude
+Licensed under Creative Commons 0 License
+https://opengameart.org/content/rpg-sound-pack"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 550
+theme_override_constants/margin_right = 550
+
+[node name="Close Credits Button" type="Button" parent="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Close Credits"
+
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer/Start Button" to="CanvasLayer" method="StartGame"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer2/Credits Button" to="CanvasLayer" method="CreditsOpen"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/MarginContainer3/Quit Button" to="CanvasLayer" method="QuitGame"]
+[connection signal="pressed" from="CanvasLayer/Credits/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/Close Credits Button" to="CanvasLayer" method="CreditsClose"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bsvikwrfwypav"]
+[gd_scene load_steps=15 format=3 uid="uid://bsvikwrfwypav"]
 
 [ext_resource type="Texture2D" uid="uid://peekdalaucn8" path="res://Textures/Materials/wood.jpg" id="1_8uhnu"]
 [ext_resource type="Script" path="res://Scripts/CameraTransition.cs" id="1_kju8u"]
@@ -9,8 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://c00ldy7tiwlmm" path="res://Prefabs/Relics/coins/gold_coin.tscn" id="5_2ktqa"]
 [ext_resource type="PackedScene" uid="uid://b0jk1rfddle7" path="res://Prefabs/Relics/coins/silver_coin.tscn" id="6_27vhu"]
 [ext_resource type="Script" path="res://Scripts/WinningsUI.cs" id="9_aw1oe"]
-[ext_resource type="PackedScene" uid="uid://c6swx1wgxfx22" path="res://Scenes/manor.tscn" id="10_hcn0j"]
-[ext_resource type="PackedScene" uid="uid://bfqpgmqtscikh" path="res://Scenes/main_menu.tscn" id="11_fsgpc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x3mjp"]
 sky_top_color = Color(0.258824, 0.654902, 0.984314, 1)
@@ -48,6 +46,7 @@ environment = SubResource("Environment_4o2iw")
 transform = Transform3D(1, 0, 0, 0, 0.968817, 0.247777, 0, -0.247777, 0.968817, -1.382, 0.811056, 0.608849)
 script = ExtResource("1_kju8u")
 FinalPosition = NodePath("../Marker3D")
+TransitionSpeed = 1.4
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.968817, 0.247777, 0, -0.247777, 0.968817, 1.48344, 0.811056, 0.608849)
@@ -178,8 +177,8 @@ outline_size = 7
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("Focus")]
 script = ExtResource("9_aw1oe")
 Focus = NodePath("Control/MarginContainer/HBoxContainer/Button")
-RetryScene = ExtResource("10_hcn0j")
-MainMenuScene = ExtResource("11_fsgpc")
+RetryScene = "res://Scenes/manor.tscn"
+MainMenuScene = "res://Scenes/main_menu.tscn"
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
