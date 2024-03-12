@@ -416,7 +416,7 @@ script = ExtResource("6_b38y8")
 TargetGroups = PackedStringArray("player")
 ForgetTime = 4.0
 StartPoint = NodePath("Marker3D")
-VisionDistance = 18.0
+VisionDistance = 20.0
 VisionMask = 7
 
 [node name="Sight" type="CollisionShape3D" parent="Detection"]

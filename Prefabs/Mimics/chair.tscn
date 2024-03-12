@@ -73,7 +73,6 @@ Detection = NodePath("Detection")
 Animator = NodePath("Animator")
 Navigator = NodePath("Navigator")
 Obstacle = NodePath("Obstacle")
-MaxSpeed = 3.0
 JumpVelocity = 4.0
 Acceleration = 3.0
 RotationSpeed = 2.0
@@ -433,7 +432,7 @@ script = ExtResource("7_2w5tt")
 TargetGroups = PackedStringArray("player")
 ForgetTime = 4.0
 StartPoint = NodePath("Marker3D")
-VisionDistance = 18.0
+VisionDistance = 25.0
 VisionMask = 7
 
 [node name="Sight" type="CollisionShape3D" parent="Detection"]

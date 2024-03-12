@@ -4,6 +4,9 @@ using System;
 
 public partial class CoinDropper : Node3D
 {
+    [Export] public CameraTransition camera;
+    [Export] public CoinDropper NextDropper;
+    [Export] public bool AutoDrops = true;
 	[Export] public bool IsLootAcquired = true;
 	[Export] public int TotalValue = 0;
 	[ExportGroup("Coins")]
@@ -28,7 +31,21 @@ public partial class CoinDropper : Node3D
         else
             TotalValue = CarryData.Instance.RemainingLootValue;
         totalValue = TotalValue;
-		if(TotalValue > 0)
+		if(TotalValue > 0 && AutoDrops)
+            Timing.CallDelayed(DropSpeed, DropCoin);
+    }
+
+	private void MakeNextDrop()
+    {
+        if (NextDropper != null)
+            NextDropper.SetDrop();
+        if (camera != null)
+            camera.Transition = true;
+    }
+
+	public void SetDrop()
+    {
+        if (TotalValue > 0)
             Timing.CallDelayed(DropSpeed, DropCoin);
     }
 
@@ -41,8 +58,10 @@ public partial class CoinDropper : Node3D
 			(float)GD.RandRange(-CoinSpeed, CoinSpeed)
 		);
 		coin.SetVelocity(velocity);
-		if(totalValue > 0)
-            Timing.CallDelayed(DropSpeed, DropCoin);
+		if (totalValue > 0)
+			Timing.CallDelayed(DropSpeed, DropCoin);
+		else
+			MakeNextDrop();
     }
 
 	private Relic SpawnCoin()

@@ -92,7 +92,7 @@ public partial class Mimic : CharacterBody3D
                 {
                     //GD.Print("Hit player");
                     ThiefController thief = collision as ThiefController;
-                    if (thief.GetIFrames() <= 0f)
+                    if (thief.GetIFrames() <= 0f && !thief.IsProtected && !thief.IsDodging)
                     {
                         //GD.Print("Hurt player");
                         thief.SetIFrames();

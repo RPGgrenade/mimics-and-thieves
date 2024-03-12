@@ -12,6 +12,7 @@ public partial class Relic : CharacterBody3D
     [Export] public bool Used = false;
     [Export] public float UsedTimeout = 1.0f;
     [ExportCategory("Physics")]
+    [Export] public float PhysicsDistanceFromCamera = 30f; // Distance at which most physics applies
     [ExportGroup("Grounding")]
     [Export] public float Friction = 0.12f;
     [Export] public float FrictionLimit = 0.05f;
@@ -24,6 +25,7 @@ public partial class Relic : CharacterBody3D
     [ExportGroup("Gravity")]
     [Export] public float Gravity = 1.0f;
     [ExportCategory("Sounds")]
+    [Export] public float SoundDistanceFromCamera = 35f; // Distance at which sounds will play
     [Export] public PackedScene Manager;
     [Export] public float GrabSoundVolume = -3f;
     [Export] public float UseSoundVolume = 5f;
@@ -44,9 +46,13 @@ public partial class Relic : CharacterBody3D
 
     private Vector3 velocity = Vector3.Zero;
 
+    private Node3D camera;
+    private float distanceFromCamera = 0f;
+
     public override void _Ready()
     {
         originalRotation = GlobalRotationDegrees;
+        camera = GetViewport().GetCamera3D();
         if (IsCoin)
             RotationDegrees += new Vector3(
                 (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd), 
@@ -57,7 +63,7 @@ public partial class Relic : CharacterBody3D
 
     private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f)
     {
-        if (Manager != null)
+        if (Manager != null && distanceFromCamera <= SoundDistanceFromCamera)
         {
             SoundManager sounds = Manager.Instantiate() as SoundManager;
             GetTree().Root.AddChild(sounds);
@@ -131,6 +137,8 @@ public partial class Relic : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (camera != null && IsInstanceValid(camera))
+            distanceFromCamera = GlobalPosition.DistanceTo(camera.GlobalPosition);
         if (!IsGrabbed)
         {
             has_been_grabbed = false;
@@ -141,15 +149,18 @@ public partial class Relic : CharacterBody3D
                 velocity.Y -= Gravity * (float)delta;
             else
             {
-                float friction_reduction = 1f - Friction;
-                velocity = new Vector3(velocity.X * friction_reduction, velocity.Y, velocity.Z * friction_reduction);
-                if (velocity.Length() <= FrictionLimit) velocity = Vector3.Zero;
+                if (distanceFromCamera <= PhysicsDistanceFromCamera)
+                {
+                    float friction_reduction = 1f - Friction;
+                    velocity = new Vector3(velocity.X * friction_reduction, velocity.Y, velocity.Z * friction_reduction);
+                    if (velocity.Length() <= FrictionLimit) velocity = Vector3.Zero;
+                }
             }
 
             GlobalRotationDegrees = GlobalRotationDegrees.Lerp(originalRotation + extraRotation, RotationSpeed * (float)delta);
             extraRotation = extraRotation.Lerp(Vector3.Zero, (float)delta * DerotateSpeed);
 
-            if (is_colliding_floor || is_colliding_wall)
+            if (distanceFromCamera <= PhysicsDistanceFromCamera && (is_colliding_floor || is_colliding_wall))
             {
                 Vector3 bounce = Vector3.Zero;
 

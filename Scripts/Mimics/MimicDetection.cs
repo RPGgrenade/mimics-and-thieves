@@ -10,6 +10,7 @@ public partial class MimicDetection : Area3D
     [Export] public string SoundGroup = "sound";
     [Export] public float HearingDistance = 8.0f;
     [Export] public float ForgetTime = 3.5f;
+    [Export] public float DistanceFromCameraToDetect = 35f;
 
     [ExportGroup("Raycast")]
     [Export] public Marker3D StartPoint;
@@ -18,11 +19,12 @@ public partial class MimicDetection : Area3D
 
     public Node3D Target;
     public Mimic mimic;
+    public Node3D camera;
 
     private void PeriodicSoundCheck()
     {
         if(!IsInstanceValid(Target)) Target = null;
-        if (Target == null)
+        if (Target == null && GlobalPosition.DistanceTo(camera.GlobalPosition) <= DistanceFromCameraToDetect)
         {
             var sounds = GetTree().GetNodesInGroup(SoundGroup);
             foreach (var item in sounds)
@@ -51,6 +53,7 @@ public partial class MimicDetection : Area3D
     public override void _Ready()
     {
         mimic = Owner as Mimic;
+        camera = GetViewport().GetCamera3D();
         if(mimic.IsMimic)
             Timing.CallPeriodically(double.MaxValue, 0.5f, PeriodicSoundCheck);
     }

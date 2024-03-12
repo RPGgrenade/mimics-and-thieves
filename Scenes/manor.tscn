@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://c6swx1wgxfx22"]
+[gd_scene load_steps=54 format=3 uid="uid://c6swx1wgxfx22"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_5i2il"]
 [ext_resource type="Material" uid="uid://lfqkse3ptsax" path="res://Shaders/Materials/house/wall.tres" id="1_emvfp"]
@@ -99,6 +99,8 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i8fcm"]
 size = Vector3(13.5468, 10.404, 18.1279)
+
+[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_dnstc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00b6v"]
 albedo_color = Color(0.466667, 0.4, 0.694118, 1)
@@ -460,6 +462,10 @@ MusicName = "Start Music"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.096581, 2.87598, -2.81305)
 shape = SubResource("BoxShape3D_i8fcm")
 
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.34952, -9.12729)
+occluder = SubResource("BoxOccluder3D_dnstc")
+
 [node name="Hallway" type="Node3D" parent="."]
 
 [node name="Level" type="Node3D" parent="Hallway"]
@@ -771,8 +777,12 @@ shape = SubResource("SphereShape3D_shk7i")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.166311, 1.26852, -12.5111)
 shape = SubResource("CylinderShape3D_i7tj2")
 
-[node name="Room 1" parent="." instance=ExtResource("28_uhqbe")]
+[node name="OccluderInstance3D2" type="OccluderInstance3D" parent="Hallway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334527, -0.0247421, 14.816)
+
+[node name="Room 1" parent="." node_paths=PackedStringArray("ExitDoor") instance=ExtResource("28_uhqbe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.25756, 33.1715)
+ExitDoor = NodePath("../Hallway/Doors/DoorFrame3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0178013, 0.999842, 0, -0.999842, 0.0178013, 2.38419e-07, 2.60472, -7.49793)
