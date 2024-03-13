@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dk3asfx6cyj7k"]
+[gd_scene load_steps=27 format=3 uid="uid://dk3asfx6cyj7k"]
 
 [ext_resource type="Script" path="res://Scripts/House/Rooms/RandomRoom.cs" id="1_gro3k"]
 [ext_resource type="Texture2D" uid="uid://c4oawut1xxunf" path="res://Textures/Materials/drywall.jpg" id="1_tr8o3"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://c06xcrka08vat" path="res://Prefabs/Furniture/shelf.tscn" id="8_d7fu6"]
 [ext_resource type="PackedScene" uid="uid://c4uixwhbd2gu6" path="res://Prefabs/loot_spawner.tscn" id="9_tmvit"]
 [ext_resource type="PackedScene" uid="uid://cffle8ee4bb6f" path="res://Prefabs/mimic_spawner.tscn" id="10_f2n38"]
+[ext_resource type="PackedScene" uid="uid://dwbyafvrp8scs" path="res://Prefabs/Furniture/fireplace.tscn" id="10_ntavr"]
+[ext_resource type="PackedScene" uid="uid://dhh8eiujyjeql" path="res://Prefabs/Furniture/table.tscn" id="11_jtdv6"]
+[ext_resource type="PackedScene" uid="uid://ctek8xm7i7kmp" path="res://Prefabs/Furniture/plant.tscn" id="12_g8qdg"]
 [ext_resource type="Script" path="res://Scripts/AreaExit.cs" id="15_jwa4m"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s3qss"]
@@ -57,6 +60,10 @@ albedo_color = Color(0.835294, 0.729412, 0.858824, 1)
 albedo_texture = ExtResource("3_sjlvx")
 uv1_scale = Vector3(12.5, 12.5, 12.5)
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_lya7n"]
+vertices = PackedVector3Array(-1.75, 0.700966, -2.41268, 0, 0.700966, -2.91268, 0, 0.700966, -10.9127, -1.75, 0.700966, -2.41268, 0, 0.700966, -10.9127, -4, 0.700966, -10.9127, -9.5, 0.700966, -6.91268, -11.5, 0.700966, -0.162678, -3, 0.700966, -0.162678, 0, 0.700966, -10.9127, 0, 0.700966, -2.91268, 1.75, 0.700966, -2.41268, 4, 0.700966, -10.9127, 0, 0.700966, -10.9127, 1.75, 0.700966, -2.41268, 3, 0.700966, -0.162678, 11.5, 0.700966, -0.162678, 9.5, 0.700966, -6.91268, 0.25, 0.700966, 10.8373, 0.25, 0.700966, 10.3373, -2.25, 0.700966, 10.0873, -4, 0.700966, 10.8373, -9.25, 0.700966, 7.08732, -4, 0.700966, 10.8373, -2.25, 0.700966, 7.83732, -2.25, 0.700966, 2.08732, -3, 0.700966, -0.162678, -11.5, 0.700966, -0.162678, -4, 0.700966, 10.8373, -2.25, 0.700966, 10.0873, -2.25, 0.700966, 7.83732, -2.25, 0.700966, 7.83732, 0, 0.700966, 7.58732, 0, 0.700966, 2.83732, -2.25, 0.700966, 2.08732, 2.5, 0.700966, 10.0873, 0.25, 0.700966, 10.3373, 0.25, 0.700966, 10.8373, 4, 0.700966, 10.8373, 2.5, 0.700966, 7.83732, 4, 0.700966, 10.8373, 9.25, 0.700966, 7.08732, 11.5, 0.700966, -0.162678, 3, 0.700966, -0.162678, 2, 0.700966, 2.33732, 2.5, 0.700966, 7.83732, 2.5, 0.700966, 10.0873, 4, 0.700966, 10.8373, 0, 0.700966, 2.83732, 0, 0.700966, 7.58732, 2.5, 0.700966, 7.83732, 2, 0.700966, 2.33732)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(8, 7, 3), PackedInt32Array(3, 7, 6), PackedInt32Array(3, 6, 5), PackedInt32Array(3, 5, 4), PackedInt32Array(11, 10, 9), PackedInt32Array(15, 14, 16), PackedInt32Array(16, 14, 17), PackedInt32Array(17, 14, 12), PackedInt32Array(12, 14, 13), PackedInt32Array(19, 18, 20), PackedInt32Array(20, 18, 21), PackedInt32Array(25, 24, 26), PackedInt32Array(26, 24, 23), PackedInt32Array(26, 23, 22), PackedInt32Array(26, 22, 27), PackedInt32Array(30, 29, 28), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 34), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 38), PackedInt32Array(44, 43, 39), PackedInt32Array(39, 43, 40), PackedInt32Array(40, 43, 41), PackedInt32Array(41, 43, 42), PackedInt32Array(47, 46, 45), PackedInt32Array(48, 51, 49), PackedInt32Array(49, 51, 50)]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06gmr"]
 albedo_color = Color(0.784314, 0.847059, 0.909804, 1)
 albedo_texture = ExtResource("3_sjlvx")
@@ -70,11 +77,11 @@ script = ExtResource("1_gro3k")
 TimeForVisibility = 0.2
 VisibilityDistance = 30.0
 Exit = NodePath("Exiting")
-TimeBetweenSetup = 0.08
-Rotaters = [NodePath("First Floor Nav"), NodePath("Second Floor Nav"), NodePath("Furniture/Furniture First Floor"), NodePath("Mimics/First Floor Mimics"), NodePath("Mimics/Second Floor Mimics"), NodePath("Loot/First Floor Loot"), NodePath("Loot/Second Floor Loot"), NodePath("Lighting"), NodePath("Lighting2")]
+TimeBetweenSpawning = 0.25
+Rotaters = [NodePath("First Floor Nav"), NodePath("Second Floor Nav"), NodePath("Furniture/Furniture First Floor"), NodePath("Furniture/Furniture Second Floor"), NodePath("Mimics/First Floor Mimics"), NodePath("Mimics/Second Floor Mimics"), NodePath("Loot/First Floor Loot"), NodePath("Loot/Second Floor Loot"), NodePath("Lighting"), NodePath("Lighting2")]
 Lighters = [NodePath("Lighting/Room Light 1")]
-Furniture = [NodePath("Furniture/Furniture First Floor/Chandelier"), NodePath("Furniture/Furniture First Floor/Crate"), NodePath("Furniture/Furniture First Floor/Shelf")]
-Mimics = [NodePath("Mimics/First Floor Mimics/Mimic Spawner"), NodePath("Mimics/First Floor Mimics/Mimic Spawner2"), NodePath("Mimics/First Floor Mimics/Mimic Spawner3"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner2"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner3")]
+Furniture = [NodePath("Furniture/Furniture First Floor/Chandelier"), NodePath("Furniture/Furniture First Floor/Crate"), NodePath("Furniture/Furniture First Floor/Crate2"), NodePath("Furniture/Furniture First Floor/Crate3"), NodePath("Furniture/Furniture First Floor/Crate4"), NodePath("Furniture/Furniture First Floor/Crate5"), NodePath("Furniture/Furniture First Floor/Crate6"), NodePath("Furniture/Furniture First Floor/Shelf"), NodePath("Furniture/Furniture First Floor/Shelf2"), NodePath("Furniture/Furniture First Floor/Shelf3"), NodePath("Furniture/Furniture First Floor/Fireplace"), NodePath("Furniture/Furniture First Floor/Fireplace2"), NodePath("Furniture/Furniture First Floor/Table"), NodePath("Furniture/Furniture First Floor/Plant"), NodePath("Furniture/Furniture First Floor/Plant2"), NodePath("Furniture/Furniture First Floor/Plant3"), NodePath("Furniture/Furniture First Floor/Plant4"), NodePath("Furniture/Furniture Second Floor/Crate"), NodePath("Furniture/Furniture Second Floor/Crate2"), NodePath("Furniture/Furniture Second Floor/Crate3"), NodePath("Furniture/Furniture Second Floor/Crate4"), NodePath("Furniture/Furniture Second Floor/Crate5"), NodePath("Furniture/Furniture Second Floor/Crate6"), NodePath("Furniture/Furniture Second Floor/Shelf"), NodePath("Furniture/Furniture Second Floor/Shelf2"), NodePath("Furniture/Furniture Second Floor/Shelf3"), NodePath("Furniture/Furniture Second Floor/Plant"), NodePath("Furniture/Furniture Second Floor/Plant2"), NodePath("Furniture/Furniture Second Floor/Plant3"), NodePath("Furniture/Furniture Second Floor/Plant4"), NodePath("Furniture/Furniture Second Floor/Table2")]
+Mimics = [NodePath("Mimics/First Floor Mimics/Mimic Spawner"), NodePath("Mimics/First Floor Mimics/Mimic Spawner2"), NodePath("Mimics/First Floor Mimics/Mimic Spawner3"), NodePath("Mimics/First Floor Mimics/Mimic Spawner4"), NodePath("Mimics/First Floor Mimics/Mimic Spawner5"), NodePath("Mimics/First Floor Mimics/Mimic Spawner6"), NodePath("Mimics/First Floor Mimics/Mimic Spawner7"), NodePath("Mimics/First Floor Mimics/Mimic Spawner8"), NodePath("Mimics/First Floor Mimics/Mimic Spawner9"), NodePath("Mimics/First Floor Mimics/Mimic Spawner10"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner2"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner3"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner4"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner5"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner6"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner7"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner8"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner9"), NodePath("Mimics/Second Floor Mimics/Mimic Spawner10")]
 Loot = [NodePath("Loot/First Floor Loot/Loot Spawner"), NodePath("Loot/First Floor Loot/Loot Spawner3"), NodePath("Loot/First Floor Loot/Loot Spawner4"), NodePath("Loot/First Floor Loot/Loot Spawner6"), NodePath("Loot/First Floor Loot/Loot Spawner7"), NodePath("Loot/First Floor Loot/Loot Spawner9"), NodePath("Loot/First Floor Loot/Loot Spawner11"), NodePath("Loot/First Floor Loot/Loot Spawner12"), NodePath("Loot/First Floor Loot/Loot Spawner14"), NodePath("Loot/First Floor Loot/Loot Spawner16"), NodePath("Loot/First Floor Loot/Loot Spawner18"), NodePath("Loot/Second Floor Loot/Loot Spawner"), NodePath("Loot/Second Floor Loot/Loot Spawner3"), NodePath("Loot/Second Floor Loot/Loot Spawner5"), NodePath("Loot/Second Floor Loot/Loot Spawner7"), NodePath("Loot/Second Floor Loot/Loot Spawner8"), NodePath("Loot/Second Floor Loot/Loot Spawner10"), NodePath("Loot/Second Floor Loot/Loot Spawner11"), NodePath("Loot/Second Floor Loot/Loot Spawner13"), NodePath("Loot/Second Floor Loot/Loot Spawner14"), NodePath("Loot/Second Floor Loot/Loot Spawner17"), NodePath("Loot/Second Floor Loot/Loot Spawner18")]
 Randomizer = NodePath(".")
 
@@ -229,7 +236,7 @@ material = SubResource("StandardMaterial3D_fm8ao")
 
 [node name="Second Floor Nav" type="NavigationRegion3D" parent="." node_paths=PackedStringArray("Randomizer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1, 10.83)
-navigation_mesh = SubResource("NavigationMesh_cpx0h")
+navigation_mesh = SubResource("NavigationMesh_lya7n")
 script = ExtResource("3_ntoje")
 RotationRange = 140.0
 Randomizer = NodePath(".")
@@ -316,10 +323,116 @@ Randomizer = NodePath(".")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.18316, 0)
 
 [node name="Crate" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54931, 0.361075, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.54931, 0.352, 0)
+
+[node name="Crate2" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.653724, 0, 0.756733, 0, 1, 0, -0.756733, 0, 0.653724, -5.41608, 0.352, 1.51501)
+
+[node name="Crate3" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.653724, 0, 0.756733, 0, 1, 0, -0.756733, 0, 0.653724, -9.77655, 0.352, 1.83782)
+
+[node name="Crate4" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.9035, 0, -0.428588, 0, 1, 0, 0.428588, 0, 0.9035, 4.86379, 0.352, -8.06308)
+
+[node name="Crate5" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.914967, 0, 0.403529, 0, 1, 0, -0.403529, 0, 0.914967, 7.34464, 0.352, -6.07126)
+
+[node name="Crate6" parent="Furniture/Furniture First Floor" instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.914967, 0, 0.403529, 0, 1, 0, -0.403529, 0, 0.914967, 3.54007, 0.352, -3.91647)
 
 [node name="Shelf" parent="Furniture/Furniture First Floor" instance=ExtResource("8_d7fu6")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.8019, 1.62376, 0)
+
+[node name="Shelf2" parent="Furniture/Furniture First Floor" instance=ExtResource("8_d7fu6")]
+transform = Transform3D(-0.819472, 0, 0.573119, 0, 1, 0, -0.573119, 0, -0.819472, -5.03935, 1.62376, 8.58263)
+
+[node name="Shelf3" parent="Furniture/Furniture First Floor" instance=ExtResource("8_d7fu6")]
+transform = Transform3D(0.801995, 0, 0.597331, 0, 1, 0, -0.597331, 0, 0.801995, -4.19938, 1.62376, -9.14507)
+
+[node name="Fireplace" parent="Furniture/Furniture First Floor" instance=ExtResource("10_ntavr")]
+transform = Transform3D(0.322117, 0, 0.9467, 0, 1, 0, -0.9467, 0, 0.322117, -9.02674, 0.61019, -4.98275)
+
+[node name="Fireplace2" parent="Furniture/Furniture First Floor" instance=ExtResource("10_ntavr")]
+transform = Transform3D(-0.291604, 0, -0.956539, 0, 1, 0, 0.956539, 0, -0.291604, 9.44032, 0.61019, 4.05807)
+
+[node name="Table" parent="Furniture/Furniture First Floor" instance=ExtResource("11_jtdv6")]
+transform = Transform3D(0.864976, 0, -0.501813, 0, 1, 0, 0.501813, 0, 0.864976, 0.0292596, 0.351931, -0.0133018)
+
+[node name="Plant" parent="Furniture/Furniture First Floor" instance=ExtResource("12_g8qdg")]
+transform = Transform3D(0.636374, 0, -0.77138, 0, 1, 0, 0.77138, 0, 0.636374, -10.1461, 0.377007, 0.59912)
+
+[node name="Plant2" parent="Furniture/Furniture First Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(-0.888024, 0, -0.459797, 0, 1, 0, 0.459797, 0, -0.888024, -6.6943, 0.377007, 7.26572)
+Randomizer = NodePath("../Plant")
+
+[node name="Plant3" parent="Furniture/Furniture First Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(-0.224067, 0, -0.974574, 0, 1, 0, 0.974574, 0, -0.224067, 8.51242, 0.377007, -4.11432)
+Randomizer = NodePath("../Plant")
+
+[node name="Plant4" parent="Furniture/Furniture First Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(-0.224067, 0, -0.974574, 0, 1, 0, 0.974574, 0, -0.224067, 8.71309, 0.377007, 5.75962)
+Randomizer = NodePath("../Plant")
+
+[node name="Furniture Second Floor" type="Node3D" parent="Furniture" node_paths=PackedStringArray("Randomizer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.43845, 0)
+script = ExtResource("3_ntoje")
+Randomizer = NodePath("../Furniture First Floor")
+
+[node name="Crate" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("7_wqssn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86929, 0.256734, 0)
+Randomizer = NodePath("../../Furniture First Floor/Crate")
+
+[node name="Crate2" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.653724, 0, 0.756733, 0, 1, 0, -0.756733, 0, 0.653724, -6.37499, 0.352, 2.94261)
+Randomizer = NodePath("../../Furniture First Floor/Crate2")
+
+[node name="Crate3" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.653724, 0, 0.756733, 0, 1, 0, -0.756733, 0, 0.653724, -9.77655, 0.352, 1.83782)
+Randomizer = NodePath("../../Furniture First Floor/Crate3")
+
+[node name="Crate4" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.9035, 0, -0.428588, 0, 1, 0, 0.428588, 0, 0.9035, 2.91852, 0.352, -7.60414)
+Randomizer = NodePath("../../Furniture First Floor/Crate4")
+
+[node name="Crate5" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.914967, 0, 0.403529, 0, 1, 0, -0.403529, 0, 0.914967, 5.78741, 0.352, -6.16689)
+Randomizer = NodePath("../../Furniture First Floor/Crate5")
+
+[node name="Crate6" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("7_wqssn")]
+transform = Transform3D(0.914967, 0, 0.403529, 0, 1, 0, -0.403529, 0, 0.914967, 2.28062, 0.352, -2.22547)
+Randomizer = NodePath("../../Furniture First Floor/Crate6")
+
+[node name="Shelf" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("8_d7fu6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10.8019, 1.62376, 0)
+Randomizer = NodePath("../../Furniture First Floor/Shelf")
+
+[node name="Shelf2" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("8_d7fu6")]
+transform = Transform3D(-0.819472, 0, 0.573119, 0, 1, 0, -0.573119, 0, -0.819472, -5.03935, 1.62376, 8.58263)
+Randomizer = NodePath("../../Furniture First Floor/Shelf2")
+
+[node name="Shelf3" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("8_d7fu6")]
+transform = Transform3D(0.801995, 0, 0.597331, 0, 1, 0, -0.597331, 0, 0.801995, -4.19938, 1.62376, -9.14507)
+Randomizer = NodePath("../../Furniture First Floor/Shelf3")
+
+[node name="Plant" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(0.636374, 0, -0.77138, 0, 1, 0, 0.77138, 0, 0.636374, -10.1461, 0.377007, 0.59912)
+Randomizer = NodePath("../../Furniture First Floor/Plant")
+
+[node name="Plant2" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(-0.888024, 0, -0.459797, 0, 1, 0, 0.459797, 0, -0.888024, 0.0419908, 0.377007, 6.46192)
+Randomizer = NodePath("../../Furniture First Floor/Plant")
+
+[node name="Plant3" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(-0.224067, 0, -0.974574, 0, 1, 0, 0.974574, 0, -0.224067, 8.26349, 0.377007, -2.32382)
+Randomizer = NodePath("../../Furniture First Floor/Plant")
+
+[node name="Plant4" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("12_g8qdg")]
+transform = Transform3D(-0.224067, 0, -0.974574, 0, 1, 0, 0.974574, 0, -0.224067, 3.2154, 0.377007, 0.788842)
+Randomizer = NodePath("../../Furniture First Floor/Plant")
+
+[node name="Table2" parent="Furniture/Furniture Second Floor" node_paths=PackedStringArray("Randomizer") instance=ExtResource("11_jtdv6")]
+transform = Transform3D(0.269525, 0, -0.962993, 0, 1, 0, 0.962993, 0, 0.269525, -1.33082, 0.328484, -3.37044)
+Randomizer = NodePath("../../Furniture First Floor/Table")
 
 [node name="Mimics" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.083, 10.828)
@@ -338,6 +451,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78989, -0.0450062, 6.3468)
 [node name="Mimic Spawner3" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.92989, -0.0450062, 5.8549)
 
+[node name="Mimic Spawner4" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4491, -0.0450064, 2.53371)
+
+[node name="Mimic Spawner5" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.45556, -0.0450067, -1.85564)
+
+[node name="Mimic Spawner6" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.01801, -0.0450067, -5.85454)
+
+[node name="Mimic Spawner7" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7815, -0.0450067, -6.93816)
+
+[node name="Mimic Spawner8" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92784, -0.0450067, -2.86897)
+
+[node name="Mimic Spawner9" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.1707, -0.0450067, -1.89596)
+
+[node name="Mimic Spawner10" parent="Mimics/First Floor Mimics" instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74343, -0.0450069, -8.86066)
+
 [node name="Second Floor Mimics" type="Node3D" parent="Mimics" node_paths=PackedStringArray("Randomizer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.32209, 0)
 script = ExtResource("3_ntoje")
@@ -352,7 +486,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78989, -0.0450062, 6.3468)
 Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner2")
 
 [node name="Mimic Spawner3" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.92989, -0.0450062, 5.8549)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.22914, -0.0450063, 5.36912)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner4" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.54306, -0.0450063, 2.23201)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner5" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89913, -0.0560803, -4.5098)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner6" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67238, -0.0560803, -5.99164)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner7" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.979537, -0.0560803, -8.66956)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner8" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.45389, -0.0560803, -6.27757)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner9" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25309, -0.0560803, -5.21419)
+Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
+
+[node name="Mimic Spawner10" parent="Mimics/Second Floor Mimics" node_paths=PackedStringArray("Randomizer") instance=ExtResource("10_f2n38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.02827, -0.0560803, -1.25913)
 Randomizer = NodePath("../../First Floor Mimics/Mimic Spawner3")
 
 [node name="Loot" type="Node3D" parent="."]
@@ -378,7 +540,7 @@ transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237
 Randomizer = NodePath("../Loot Spawner")
 
 [node name="Loot Spawner7" parent="Loot/First Floor Loot" instance=ExtResource("9_tmvit")]
-transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, 2.28174, 0, -0.102798)
+transform = Transform3D(-0.992237, 0, 0.124364, 0, 1, 0, -0.124364, 0, -0.992237, 0.23188, 0, -0.102798)
 
 [node name="Loot Spawner9" parent="Loot/First Floor Loot" node_paths=PackedStringArray("Randomizer") instance=ExtResource("9_tmvit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.43275, 0, -6.71794)

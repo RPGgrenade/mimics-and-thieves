@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c6swx1wgxfx22"]
+[gd_scene load_steps=69 format=3 uid="uid://c6swx1wgxfx22"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_5i2il"]
 [ext_resource type="Material" uid="uid://lfqkse3ptsax" path="res://Shaders/Materials/house/wall.tres" id="1_emvfp"]
@@ -28,9 +28,22 @@
 [ext_resource type="Texture2D" uid="uid://i7msav3r1wdv" path="res://Textures/Materials/wood_plank_n.jpg" id="23_a2bw0"]
 [ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="24_y7wxh"]
 [ext_resource type="Texture2D" uid="uid://bv3wj601xks1u" path="res://Textures/Materials/glass_frosted_n.png" id="25_0ax0i"]
+[ext_resource type="PackedScene" uid="uid://dwbyafvrp8scs" path="res://Prefabs/Furniture/fireplace.tscn" id="28_owelh"]
 [ext_resource type="PackedScene" uid="uid://dk3asfx6cyj7k" path="res://Scenes/Rooms/room.tscn" id="28_uhqbe"]
 [ext_resource type="Script" path="res://Scripts/RoomProcessing.cs" id="28_wcfle"]
+[ext_resource type="PackedScene" uid="uid://dhh8eiujyjeql" path="res://Prefabs/Furniture/table.tscn" id="29_hsboa"]
+[ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="31_pr76k"]
 [ext_resource type="PackedScene" uid="uid://cvftc0c35vbo" path="res://Prefabs/intro_ui.tscn" id="31_v5agl"]
+[ext_resource type="PackedScene" uid="uid://cj4p2j6bhf7q3" path="res://Prefabs/Relics/jade_ring.tscn" id="32_yips5"]
+[ext_resource type="PackedScene" uid="uid://bxuwdwwramswt" path="res://Prefabs/Mimics/cupboard.tscn" id="33_8syto"]
+[ext_resource type="PackedScene" uid="uid://ddx5ikc2wmrsy" path="res://Prefabs/Relics/crystal_ball.tscn" id="33_gkt2o"]
+[ext_resource type="PackedScene" uid="uid://b0ue4obat8qsy" path="res://Prefabs/Mimics/chair.tscn" id="34_ok2gk"]
+[ext_resource type="PackedScene" uid="uid://ctek8xm7i7kmp" path="res://Prefabs/Furniture/plant.tscn" id="34_sipls"]
+[ext_resource type="PackedScene" uid="uid://bohw01wm1a7ns" path="res://Prefabs/Relics/spellbook.tscn" id="34_u3es0"]
+[ext_resource type="PackedScene" uid="uid://cl7lrgi537jr4" path="res://Prefabs/Relics/scroll.tscn" id="35_vndbl"]
+[ext_resource type="PackedScene" uid="uid://obgl3b4yobbx" path="res://Prefabs/Relics/tesseract.tscn" id="36_hpqrc"]
+[ext_resource type="PackedScene" uid="uid://cbk11och67deo" path="res://Prefabs/Mimics/clock.tscn" id="41_s41k3"]
+[ext_resource type="PackedScene" uid="uid://bqmifs83qd5sb" path="res://Prefabs/Mimics/sofa.tscn" id="42_s1amf"]
 
 [sub_resource type="Environment" id="Environment_ekfaw"]
 ambient_light_source = 2
@@ -729,7 +742,142 @@ transform = Transform3D(1, 0, 0, 0, 0.681156, 0.226963, 0, -0.732139, 0.211158, 
 [node name="Light" parent="Hallway/Furniture/Window/SpotLight3D" index="0"]
 transform = Transform3D(0.91, 0, 0, 0, 0.51, 0, 0, 0, 1, 0, 0, 0.012938)
 
+[node name="Fireplace" parent="Hallway/Furniture" instance=ExtResource("28_owelh")]
+transform = Transform3D(0.502492, 0, 0.864582, 0, 1, 0, -0.864582, 0, 0.502492, -6.95411, -1.65445, 5.73663)
+DespawnChance = 0.0
+
+[node name="Table" parent="Hallway/Furniture" instance=ExtResource("29_hsboa")]
+transform = Transform3D(0.89481, 0, 0.446448, 0, 1, 0, -0.446448, 0, 0.89481, 6.69832, -2.41265, 3.62981)
+DespawnChance = 0.0
+
+[node name="Shelf" parent="Hallway/Furniture" instance=ExtResource("9_dmhu6")]
+transform = Transform3D(0.711082, 0, -0.703109, 0, 1, 0, 0.703109, 0, 0.711082, 7.90027, -0.379582, 7.78657)
+DespawnChance = 0.0
+
+[node name="Plant" parent="Hallway/Furniture" instance=ExtResource("34_sipls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.83, -1.94314, 3.21761)
+DespawnChance = 0.0
+
+[node name="Plant2" parent="Hallway/Furniture" instance=ExtResource("34_sipls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.88907, -1.88764, 25.3502)
+DespawnChance = 0.0
+
+[node name="Crate" parent="Hallway/Furniture" instance=ExtResource("7_2itc8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.51066, -1.91264, 27.5567)
+DespawnChance = 0.0
+
+[node name="Crate2" parent="Hallway/Furniture" instance=ExtResource("7_2itc8")]
+transform = Transform3D(0.999217, 0, 0.0395562, 0, 1, 0, -0.0395562, 0, 0.999217, 9.50821, -1.91264, 26.1041)
+DespawnChance = 0.0
+
+[node name="Table2" parent="Hallway/Furniture" instance=ExtResource("29_hsboa")]
+transform = Transform3D(0.0751875, 0, -0.997169, 0, 1, 0, 0.997169, 0, 0.0751875, 0.905271, 6.1319, 26.2964)
+DespawnChance = 0.0
+
+[node name="Plant3" parent="Hallway/Furniture" instance=ExtResource("34_sipls")]
+transform = Transform3D(0.686174, 0, 0.727438, 0, 1, 0, -0.727438, 0, 0.686174, -9.72843, 6.65691, 21.3696)
+DespawnChance = 0.0
+
+[node name="Fireplace2" parent="Hallway/Furniture" instance=ExtResource("28_owelh")]
+transform = Transform3D(0.0407945, 0, -0.999168, 0, 1, 0, 0.999168, 0, 0.0407945, 11.42, 6.73306, 17.1315)
+DespawnChance = 0.0
+
+[node name="Clock" parent="Hallway/Furniture" instance=ExtResource("41_s41k3")]
+transform = Transform3D(0.6378, 0, -0.770202, 0, 1, 0, 0.770202, 0, 0.6378, 11.137, -2.32157, 11.6225)
+IsMimic = false
+
+[node name="Sofa" parent="Hallway/Furniture" instance=ExtResource("42_s1amf")]
+transform = Transform3D(0.611499, 0, -0.791245, 0, 1, 0, 0.791245, 0, 0.611499, 9.16444, -2.37972, 10.1872)
+IsMimic = false
+
+[node name="Cupboard" parent="Hallway/Furniture" instance=ExtResource("33_8syto")]
+transform = Transform3D(0.605572, 0, 0.795791, 0, 1, 0, -0.795791, 0, 0.605572, -9.60445, -2.41264, 9.54618)
+IsMimic = false
+
+[node name="Chair" parent="Hallway/Furniture" instance=ExtResource("34_ok2gk")]
+transform = Transform3D(0.0308351, 0, 0.999524, 0, 1, 0, -0.999524, 0, 0.0308351, -2.50456, 6.1631, 26.2704)
+IsMimic = false
+
+[node name="Chair2" parent="Hallway/Furniture" instance=ExtResource("34_ok2gk")]
+transform = Transform3D(-0.0203666, 0, -0.999793, 0, 1, 0, 0.999793, 0, -0.0203666, 4.27478, 6.17441, 26.1508)
+IsMimic = false
+
+[node name="Drawers" parent="Hallway/Furniture" instance=ExtResource("7_0i7wg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.233117, 6.15023, 5.99667)
+IsMimic = false
+
+[node name="Chest" parent="Hallway/Furniture" instance=ExtResource("10_217ad")]
+transform = Transform3D(0.875026, 0, -0.484077, 0, 1, 0, 0.484077, 0, 0.875026, 2.9644, 6.07503, 7.39573)
+IsMimic = false
+
+[node name="Chest2" parent="Hallway/Furniture" instance=ExtResource("10_217ad")]
+transform = Transform3D(0.851187, 0, 0.524863, 0, 1, 0, -0.524863, 0, 0.851187, -3.13461, 6.07503, 7.5598)
+IsMimic = false
+
 [node name="Loot" type="Node3D" parent="Hallway"]
+
+[node name="Gold Statue" parent="Hallway/Loot" instance=ExtResource("31_pr76k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.910376, 7.48979, 26.289)
+
+[node name="Gold Scarab" parent="Hallway/Loot" instance=ExtResource("21_6o6r0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0283496, 7.29797, 26.2585)
+
+[node name="Jade Rings" parent="Hallway/Loot" instance=ExtResource("32_yips5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72338, 7.43184, 26.1489)
+
+[node name="Jewel Blue" parent="Hallway/Loot" instance=ExtResource("12_3sfmf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.397688, 7.37821, 25.7395)
+
+[node name="Jewel Green" parent="Hallway/Loot" instance=ExtResource("13_g3rr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82281, 7.36704, 26.4254)
+
+[node name="Jewel Red" parent="Hallway/Loot" instance=ExtResource("14_pavo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02383, 7.37451, 26.6908)
+
+[node name="Crystal Ball" parent="Hallway/Loot" instance=ExtResource("33_gkt2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.95473, -0.0647559, 7.82154)
+
+[node name="Spell Book" parent="Hallway/Loot" instance=ExtResource("34_u3es0")]
+transform = Transform3D(0.60389, 0, 0.797068, 0, 1, 0, -0.797068, 0, 0.60389, -7.42495, -2.33764, 7.58329)
+
+[node name="Stealth Scroll" parent="Hallway/Loot" instance=ExtResource("35_vndbl")]
+transform = Transform3D(0.817115, 0, 0.576475, 0, 1, 0, -0.576475, 0, 0.817115, -10.5248, -2.40786, 25.8073)
+
+[node name="Tesseract" parent="Hallway/Loot" instance=ExtResource("36_hpqrc")]
+transform = Transform3D(0.960745, 0, 0.277432, 0, 1, 0, -0.277432, 0, 0.960745, 9.71185, -2.18764, 26.8775)
+
+[node name="Gold Statue2" parent="Hallway/Loot" instance=ExtResource("31_pr76k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1005, 1.75193, 11.702)
+
+[node name="Jade Rings2" parent="Hallway/Loot" instance=ExtResource("32_yips5")]
+transform = Transform3D(-0.160312, 0, 0.987066, 0, 1, 0, -0.987066, 0, -0.160312, -9.49302, 1.51499, 9.60798)
+
+[node name="Gold Statue3" parent="Hallway/Loot" instance=ExtResource("31_pr76k")]
+transform = Transform3D(0.881831, 0, -0.471566, 0, 1, 0, 0.471566, 0, 0.881831, -0.262364, 7.57151, 6.34891)
+
+[node name="Jewel Blue2" parent="Hallway/Loot" instance=ExtResource("12_3sfmf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.62381, 6.20772, 7.55703)
+
+[node name="Jewel Green2" parent="Hallway/Loot" instance=ExtResource("13_g3rr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.933951, 6.20772, 7.3225)
+
+[node name="Jewel Red2" parent="Hallway/Loot" instance=ExtResource("14_pavo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.81908, 6.20772, 8.10176)
+
+[node name="Jewel Green3" parent="Hallway/Loot" instance=ExtResource("13_g3rr2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3787, 6.20772, 7.26414)
+
+[node name="Jewel Blue3" parent="Hallway/Loot" instance=ExtResource("12_3sfmf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.512875, 6.20772, 6.89951)
+
+[node name="Jewel Red3" parent="Hallway/Loot" instance=ExtResource("14_pavo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.299017, 6.20772, 7.68525)
+
+[node name="Jewel Blue4" parent="Hallway/Loot" instance=ExtResource("12_3sfmf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.04979, 6.20772, 8.0675)
+
+[node name="Jewel Red4" parent="Hallway/Loot" instance=ExtResource("14_pavo1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.495784, 6.20772, 6.79513)
 
 [node name="Doors" type="Node3D" parent="Hallway"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.2733)

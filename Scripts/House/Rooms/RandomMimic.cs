@@ -5,6 +5,7 @@ public partial class RandomMimic : RoomRandom
 {
     [Export(PropertyHint.Range, "0,1")] public float NoSpawnChance = 0.08f;
     [Export(PropertyHint.Range, "0,1")] public float FurnitureChance = 0.6f;
+    [Export] public float MinDistanceFromDoor = 12f;
     [Export] public PackedScene[] MimicTable;
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -16,8 +17,23 @@ public partial class RandomMimic : RoomRandom
             QueueFree();
         else
         {
-            int table_size = MimicTable.Length - 1;
-            summonMimic(MimicTable[GD.RandRange(0, table_size)]);
+            bool neardoor = false;
+            var doors = GetTree().GetNodesInGroup("door");
+            foreach (var door in doors)
+            {
+                Node3D door3D = door as Node3D;
+                if (door3D.GlobalPosition.DistanceTo(GlobalPosition) < MinDistanceFromDoor)
+                {
+                    QueueFree();
+                    neardoor |= true;
+                    break;
+                }
+            }
+            if (!neardoor)
+            {
+                int table_size = MimicTable.Length - 1;
+                summonMimic(MimicTable[GD.RandRange(0, table_size)]);
+            }
         }
     }
 

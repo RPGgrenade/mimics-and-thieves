@@ -24,7 +24,7 @@ public partial class RoomProcessing : Node3D
 		{
 			foreach (var room in rooms)
 			{
-				if (room.listcount >= 5)
+				if (room.listcount > 5)
 				{
 					distanceFromCamera = room.GlobalPosition.DistanceTo(camera.GlobalPosition);
 					if (distanceFromCamera > CameraDistanceToProcess || !room.ExitDoor.IsOpen)

@@ -59,6 +59,8 @@ public partial class Relic : CharacterBody3D
                 (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd),
                 (float)GD.RandRange(-BounceRotationAdd, BounceRotationAdd)
             );
+        if(loot != null)
+            CarryData.Instance.RemainingLootValue += loot.GetValue();
     }
 
     private void PlaySounds(string soundType, float minPitch = 0.95f, float maxPitch = 1.05f, float volume = 0f, float generic_volume = 0f, bool hearable = false)

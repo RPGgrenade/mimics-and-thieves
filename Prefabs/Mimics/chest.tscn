@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://h68odrw8nmu"]
+[gd_scene load_steps=40 format=3 uid="uid://h68odrw8nmu"]
 
 [ext_resource type="Script" path="res://Scripts/Mimics/Mimic.cs" id="1_4e0r3"]
 [ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="1_hwdcd"]
+[ext_resource type="AudioStream" uid="uid://cx5mf24vsmahu" path="res://Audio/SFX/RPG Sound Pack/inventory/armor-light.wav" id="2_pofea"]
 [ext_resource type="Texture2D" uid="uid://i7msav3r1wdv" path="res://Textures/Materials/wood_plank_n.jpg" id="2_s26b3"]
 [ext_resource type="Script" path="res://Scripts/Mimics/MimicAnimator.cs" id="2_tf87v"]
 [ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="3_mpbln"]
@@ -10,6 +11,16 @@
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="8_ckaho"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="8_eax0b"]
 [ext_resource type="Script" path="res://Scripts/Mimics/MimicDetection.cs" id="8_lv01f"]
+[ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="11_gla3q"]
+[ext_resource type="AudioStream" uid="uid://die30jerkvdb8" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr1.wav" id="12_6ql4l"]
+[ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="13_wmu64"]
+[ext_resource type="AudioStream" uid="uid://cr3ggv57k8a4b" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr2.wav" id="14_dpqo3"]
+[ext_resource type="AudioStream" uid="uid://v5uat5gg78nw" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr3.wav" id="15_m6g0f"]
+[ext_resource type="AudioStream" uid="uid://bsjvanwffwkm2" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr4.wav" id="16_llqil"]
+[ext_resource type="AudioStream" uid="uid://dtefjv313f8uj" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr5.wav" id="17_0kkx4"]
+[ext_resource type="AudioStream" uid="uid://dww3abrnc1k4n" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr6.wav" id="18_nrdk5"]
+[ext_resource type="AudioStream" uid="uid://f8woda3ek5fa" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr7.wav" id="19_iur2a"]
+[ext_resource type="Script" path="res://Scripts/RandomSoundGroup.cs" id="20_yaqjn"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0iv85"]
 height = 0.919679
@@ -78,10 +89,53 @@ disable_receive_shadows = true
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_un5eb"]
 points = PackedVector3Array(0, 0, 0, 4, -2, 6, -4, -2, 6, 4, 2, 6, -4, 2, 6)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_05308"]
-radius = 3.78261
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dimri"]
+height = 3.0
+radius = 2.52431
 
-[node name="Chest" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator", "Obstacle") groups=["Mimic"]]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_ladlu"]
+
+[sub_resource type="Resource" id="Resource_mjwbg"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("12_6ql4l")
+
+[sub_resource type="Resource" id="Resource_4swud"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("14_dpqo3")
+
+[sub_resource type="Resource" id="Resource_we17w"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("15_m6g0f")
+
+[sub_resource type="Resource" id="Resource_blmid"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("16_llqil")
+
+[sub_resource type="Resource" id="Resource_5ilne"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("17_0kkx4")
+
+[sub_resource type="Resource" id="Resource_rktsc"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("18_nrdk5")
+
+[sub_resource type="Resource" id="Resource_sfhts"]
+script = ExtResource("13_wmu64")
+Weight = 1.0
+Sound = ExtResource("19_iur2a")
+
+[sub_resource type="Resource" id="Resource_u51v8"]
+script = ExtResource("20_yaqjn")
+Name = "Growl"
+Sounds = Array[Object]([SubResource("Resource_mjwbg"), SubResource("Resource_4swud"), SubResource("Resource_we17w"), SubResource("Resource_blmid"), SubResource("Resource_5ilne"), SubResource("Resource_rktsc"), SubResource("Resource_sfhts")])
+
+[node name="Chest" type="CharacterBody3D" node_paths=PackedStringArray("Glow", "Detection", "Animator", "Navigator", "Obstacle", "Manager") groups=["Mimic"]]
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_4e0r3")
@@ -94,8 +148,10 @@ MaxSpeed = 4.0
 Acceleration = 5.0
 RotationSpeed = 3.0
 JumpCooldown = 0.2
+Manager = NodePath("SoundManager")
+LandSound = ExtResource("2_pofea")
 
-[node name="Animator" type="Node" parent="." node_paths=PackedStringArray("BodyParts", "Eyes", "Mouth", "Tongue")]
+[node name="Animator" type="Node" parent="." node_paths=PackedStringArray("BodyParts", "Eyes", "Mouth", "Tongue", "Manager")]
 script = ExtResource("2_tf87v")
 BodyParts = [NodePath("../Model/Bottom/Teeth"), NodePath("../Model/Mouth/Teeth2"), NodePath("../Model/Mouth/Eyes"), NodePath("../Model/Bottom/Tongue")]
 Eyes = [NodePath("../Model/Mouth/Eyes/Eye"), NodePath("../Model/Mouth/Eyes/Eye2"), NodePath("../Model/Mouth/Eyes/Eye3"), NodePath("../Model/Mouth/Eyes/Eye4"), NodePath("../Model/Mouth/Eyes/Eye5")]
@@ -106,6 +162,7 @@ OpenAngle = -45.0
 ChompTime = Vector2(0.5, 1.3)
 TongueSpeed = 6.0
 TongueAngle = 50.0
+Manager = NodePath("../SoundManager")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526524, 0)
@@ -463,10 +520,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.738482, 0.16008)
 shape = SubResource("ConvexPolygonShape3D_un5eb")
 
 [node name="Hearing" type="CollisionShape3D" parent="Detection"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5444, 0)
-shape = SubResource("SphereShape3D_05308")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51838, 0)
+shape = SubResource("CylinderShape3D_dimri")
 
 [node name="Marker3D" type="Marker3D" parent="Detection"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.801032, 0.323939)
+
+[node name="SoundManager" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamPolyphonic_ladlu")
+autoplay = true
+script = ExtResource("11_gla3q")
+Sounds = Array[Object]([SubResource("Resource_u51v8")])
 
 [connection signal="body_entered" from="Detection" to="Detection" method="OnBodyEnter"]

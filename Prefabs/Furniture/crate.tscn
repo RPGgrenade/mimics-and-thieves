@@ -34,3 +34,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.480285, 0)
 size = Vector3(1, 0.125, 1)
 texture_albedo = ExtResource("3_qfeaf")
 modulate = Color(0, 0.670588, 0.235294, 1)
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 1.6

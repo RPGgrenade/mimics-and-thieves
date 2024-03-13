@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cffle8ee4bb6f"]
+[gd_scene load_steps=8 format=3 uid="uid://cffle8ee4bb6f"]
 
 [ext_resource type="Script" path="res://Scripts/House/Rooms/RandomMimic.cs" id="1_e6wya"]
 [ext_resource type="PackedScene" uid="uid://h68odrw8nmu" path="res://Prefabs/Mimics/chest.tscn" id="2_u0x03"]
 [ext_resource type="PackedScene" uid="uid://da8juw4j5l1vk" path="res://Prefabs/Mimics/drawers.tscn" id="3_uoes4"]
 [ext_resource type="PackedScene" uid="uid://b0ue4obat8qsy" path="res://Prefabs/Mimics/chair.tscn" id="4_3ha21"]
+[ext_resource type="PackedScene" uid="uid://bqmifs83qd5sb" path="res://Prefabs/Mimics/sofa.tscn" id="5_ppqwn"]
+[ext_resource type="PackedScene" uid="uid://bxuwdwwramswt" path="res://Prefabs/Mimics/cupboard.tscn" id="6_83oxs"]
+[ext_resource type="PackedScene" uid="uid://cbk11och67deo" path="res://Prefabs/Mimics/clock.tscn" id="7_ksdtj"]
 
 [node name="Mimic Spawner" type="Marker3D" node_paths=PackedStringArray("Randomizer")]
 gizmo_extents = 1.0
 script = ExtResource("1_e6wya")
-MimicTable = Array[PackedScene]([ExtResource("2_u0x03"), ExtResource("3_uoes4"), ExtResource("4_3ha21")])
+FurnitureChance = 0.75
+MimicTable = Array[PackedScene]([ExtResource("2_u0x03"), ExtResource("3_uoes4"), ExtResource("4_3ha21"), ExtResource("5_ppqwn"), ExtResource("6_83oxs"), ExtResource("7_ksdtj")])
 Randomizer = NodePath(".")

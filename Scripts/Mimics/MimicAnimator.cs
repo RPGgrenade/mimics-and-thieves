@@ -32,8 +32,10 @@ public partial class MimicAnimator : Node
 	[ExportGroup("Tongue")]
 	[Export] public float TongueSpeed = 2.3f;
     [Export] public float TongueAngle = 30f;
+    [ExportCategory("Sounds")]
+    [Export] public SoundManager Manager;
 
-	private List<Vector3> partOriginalSizes = new List<Vector3>();
+    private List<Vector3> partOriginalSizes = new List<Vector3>();
 
 	private float blinkTime = 0f;
 	private float chompTime = 0f;
@@ -85,15 +87,27 @@ public partial class MimicAnimator : Node
 			if (chompTime <= 0f || !Active)
 			{
 				mouthAngle = Mathf.Lerp(mouthAngle, Active ? ClosedAngle : InactiveAngle, (float)delta * ChompSpeed);
-				Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
+				if (UpDown)
+					Mouth.RotationDegrees = new Vector3(mouthAngle, Mouth.RotationDegrees.Y, Mouth.RotationDegrees.Z);
+				else
+					Mouth.RotationDegrees = new Vector3(Mouth.RotationDegrees.X, mouthAngle, Mouth.RotationDegrees.Z);
+				GD.Print("Mouth rot: " + Mouth.RotationDegrees);
 				if (Mathf.Abs(mouthAngle - ClosedAngle) <= 1f)
+				{
 					chompTime = (float)GD.RandRange(ChompTime.X, ChompTime.Y);
+					if(Active)
+						Manager.PlayRandom("Growl", volume: -10f);
+				}
 			}
 			if (chompTime > 0f && Active)
 			{
 				mouthAngle = Mathf.Lerp(mouthAngle, OpenAngle, (float)delta * ChompSpeed);
-				Mouth.RotationDegrees = new Vector3(mouthAngle, 0f, 0f);
-			}
+                if (UpDown)
+                    Mouth.RotationDegrees = new Vector3(mouthAngle, Mouth.RotationDegrees.Y, Mouth.RotationDegrees.Z);
+                else
+                    Mouth.RotationDegrees = new Vector3(Mouth.RotationDegrees.X, mouthAngle, Mouth.RotationDegrees.Z);
+                GD.Print("Mouth rot: " + Mouth.RotationDegrees);
+            }
 		}
     }
 

@@ -31,8 +31,11 @@ public partial class MusicHandler : Node
         if (active)
         {
             //GD.Print("Music Handler: "+ groupName + " Group is beng set to active" );
-            if (force) group.ForceStart();
-            else group.SlowStart(volSpeed);
+            if (!group.Active)
+            {
+                if (force) group.ForceStart();
+                else group.SlowStart(volSpeed);
+            }
         }
         else
         {
@@ -46,13 +49,19 @@ public partial class MusicHandler : Node
     {
         foreach (var groupkvp in musicGroups)
         {
-            if (force) groupkvp.Value.ForceStop();
-            else groupkvp.Value.SlowStop(volSpeed);
+            if (groupkvp.Key != groupName)
+            {
+                if (force) groupkvp.Value.ForceStop();
+                else groupkvp.Value.SlowStop(volSpeed);
+            }
         }
         MusicGroup group = musicGroups[groupName];
         //GD.Print("Music Handler: "+ groupName + " Group is beng set to active" );
-        if (force) group.ForceStart();
-        else group.SlowStart(volSpeed);
+        if (!group.Active)
+        {
+            if (force) group.ForceStart();
+            else group.SlowStart(volSpeed);
+        }
     }
 
     public void SetPriorityGroupActive(string groupName, bool active, float volSpeed = 1f, bool force = false)

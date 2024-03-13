@@ -21,6 +21,9 @@ public partial class Mimic : CharacterBody3D
     [Export] public float RotationSpeed = 8f;
     [Export] public float Gravity = 9.8f;
     [Export] public float JumpCooldown = 0.1f;
+    [ExportCategory("Sounds")]
+    [Export] public SoundManager Manager;
+    [Export] public AudioStream LandSound;
 
     private float _current_rotation_difference = 1.0f;
 
@@ -85,7 +88,11 @@ public partial class Mimic : CharacterBody3D
             else
             {
                 if (jumpCooldown > 0f) jumpCooldown -= (float)delta;
-                else jumpCooldown = JumpCooldown;
+                else { 
+                    jumpCooldown = JumpCooldown;
+                    if(Animator.Active)
+                        Manager.PlayOneShot(LandSound, volume: -10f);
+                }
 
                 if (Target != null)
                 {

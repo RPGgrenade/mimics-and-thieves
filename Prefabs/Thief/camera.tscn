@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Thief/CameraController.cs" id="1_spm7o"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hg68s"]
-size = Vector3(3, 1.5, 0.13)
+size = Vector3(3, 1.5, 0.8)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5i03c"]
 radius = 0.55
@@ -40,7 +40,7 @@ OffsetSpeed = 0.2
 
 [node name="Interception" type="ShapeCast3D" parent="Camera3D"]
 shape = SubResource("BoxShape3D_hg68s")
-target_position = Vector3(0, 0, -2.5)
+target_position = Vector3(0, 0, -2.3)
 collision_mask = 6
 debug_shape_custom_color = Color(0.568627, 0.321569, 0.694118, 1)
 

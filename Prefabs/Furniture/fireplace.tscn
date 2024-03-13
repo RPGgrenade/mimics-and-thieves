@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwbyafvrp8scs"]
+
+[ext_resource type="Script" path="res://Scripts/House/Rooms/RandomDespawn.cs" id="1_a3xvr"]
+[ext_resource type="Texture2D" uid="uid://buaw7ao7smsnf" path="res://Textures/Materials/brick.jpg" id="2_ccmee"]
+[ext_resource type="Texture2D" uid="uid://q48gk7w1dy1h" path="res://Textures/Materials/brick_n.jpg" id="3_edx5k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cr442"]
+size = Vector3(2, 10, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ap7mm"]
+albedo_color = Color(0.301961, 0.388235, 0.576471, 1)
+albedo_texture = ExtResource("2_ccmee")
+normal_enabled = true
+normal_scale = 1.16
+normal_texture = ExtResource("3_edx5k")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("3_edx5k")
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwfc5"]
+albedo_color = Color(0.823529, 0.815686, 0.815686, 1)
+albedo_texture = ExtResource("2_ccmee")
+normal_enabled = true
+normal_scale = 1.16
+normal_texture = ExtResource("3_edx5k")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("3_edx5k")
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0
+
+[node name="Fireplace" type="StaticBody3D" node_paths=PackedStringArray("Randomizer")]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_a3xvr")
+DespawnChance = 0.25
+Randomizer = NodePath(".")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.24181, 0)
+shape = SubResource("BoxShape3D_cr442")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(2, 1.5, 1.5)
+material = SubResource("StandardMaterial3D_ap7mm")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0.722272, 0)
+size = Vector3(1.4, 1.4, 1.48)
+material = SubResource("StandardMaterial3D_ap7mm")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.49212, -0.225474)
+size = Vector3(1, 3, 1)
+material = SubResource("StandardMaterial3D_wwfc5")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.45327, -0.225474)
+size = Vector3(1, 3, 1)
+material = SubResource("StandardMaterial3D_wwfc5")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.45211, -0.225474)
+size = Vector3(1, 3, 1)
+material = SubResource("StandardMaterial3D_wwfc5")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0.375173)
+operation = 2
+size = Vector3(2, 1.5, 1.5)
+material = SubResource("StandardMaterial3D_ap7mm")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D/CSGBox3D3"]
+transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, 0.722272, 0)
+size = Vector3(1.4, 1.4, 0.96)
+material = SubResource("StandardMaterial3D_ap7mm")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 2.0

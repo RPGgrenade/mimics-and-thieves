@@ -1,14 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://cnettdkcw5eks"]
+[gd_scene load_steps=17 format=3 uid="uid://cnettdkcw5eks"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_mdb1k"]
 [ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="2_uwt82"]
 [ext_resource type="PackedScene" uid="uid://b3l7sejy6ceif" path="res://Prefabs/Relics/jewel_blue.tscn" id="4_u1qby"]
 [ext_resource type="PackedScene" uid="uid://cr8qg0160hn07" path="res://Prefabs/Relics/jewel_red.tscn" id="5_7al0w"]
 [ext_resource type="PackedScene" uid="uid://ddx5ikc2wmrsy" path="res://Prefabs/Relics/crystal_ball.tscn" id="6_rljel"]
-[ext_resource type="PackedScene" uid="uid://h68odrw8nmu" path="res://Prefabs/Mimics/chest.tscn" id="8_u3smo"]
 [ext_resource type="PackedScene" uid="uid://bohw01wm1a7ns" path="res://Prefabs/Relics/spellbook.tscn" id="9_a30jj"]
 [ext_resource type="PackedScene" uid="uid://c6h8hd4bby33l" path="res://Prefabs/Relics/revelation_eye.tscn" id="10_8bxyf"]
 [ext_resource type="PackedScene" uid="uid://bnqjibltf2k5d" path="res://Prefabs/Relics/jewel_green.tscn" id="10_auj3x"]
+[ext_resource type="PackedScene" uid="uid://cbk11och67deo" path="res://Prefabs/Mimics/clock.tscn" id="10_p3y0c"]
+[ext_resource type="PackedScene" uid="uid://bxuwdwwramswt" path="res://Prefabs/Mimics/cupboard.tscn" id="11_0tbsg"]
 [ext_resource type="PackedScene" uid="uid://b31itd4t7c5lm" path="res://Prefabs/Relics/scarab.tscn" id="13_opb3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ncx2d"]
@@ -113,15 +114,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.87944, 0.186064, -6.26174)
 [node name="Gold Scarab" parent="." instance=ExtResource("13_opb3s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -9)
 
-[node name="Chest" parent="." instance=ExtResource("8_u3smo")]
-transform = Transform3D(-0.529579, 0, 0.84826, 0, 1, 0, -0.84826, 0, -0.529579, -4.54632, -0.0940429, 1.7443)
-
 [node name="Spell Book" parent="." instance=ExtResource("9_a30jj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72956, 0.15511, -2.16758)
 
 [node name="Revelation Eye" parent="." instance=ExtResource("10_8bxyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.23882, 1)
 
-[node name="Chest2" parent="." instance=ExtResource("8_u3smo")]
-transform = Transform3D(0.550626, 0, 0.834752, 0, 1, 0, -0.834752, 0, 0.550626, -4.54751, 0.0202351, -3.45483)
-IsMimic = false
+[node name="Cupboard" parent="." instance=ExtResource("10_p3y0c")]
+transform = Transform3D(-0.565802, 0, 0.824541, 0, 1, 0, -0.824541, 0, -0.565802, -6.84365, 0.0202351, 4.1176)
+
+[node name="Cupboard2" parent="." instance=ExtResource("11_0tbsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0226326, 0.0202353, -9.82747)

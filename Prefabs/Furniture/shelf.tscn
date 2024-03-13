@@ -50,3 +50,6 @@ material = SubResource("StandardMaterial3D_hmbsw")
 transform = Transform3D(1, 0, 0, 0, 0.69388, -0.720091, 0, 0.720091, 0.69388, -0.654, -0.40691, -0.699421)
 size = Vector3(0.2, 1.1, 0.2)
 material = SubResource("StandardMaterial3D_hmbsw")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 1.4

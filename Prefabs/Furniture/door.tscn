@@ -102,3 +102,6 @@ stream = SubResource("AudioStreamPolyphonic_klicn")
 autoplay = true
 bus = &"SFX"
 script = ExtResource("3_m8n7h")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 2.5

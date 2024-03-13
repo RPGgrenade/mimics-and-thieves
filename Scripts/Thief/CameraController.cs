@@ -84,14 +84,13 @@ public partial class CameraController : SpringArm3D
         bool is_evading = (EvasionRay.IsColliding() || InterceptionRay.IsColliding());
         bool is_accelerating = (camera_input || is_returning || is_evading);
 
-        evadeSurroundings(camera_input, (float)delta);
-
         cameraSpeed = Mathf.Lerp(cameraSpeed, is_accelerating ? cameraTargetSpeed : 0f, deltaTime);
         rotation_degrees = processRotationInput(mouse_input, stick_input, rotation_degrees, deltaTime);
         updateOffset(rot_difference, (float)deltaTime);
 
         if (!camera_input)
         {
+            evadeSurroundings(camera_input, (float)delta);
             cameraTargetSpeed = ReturnSpeed;
             returnTime -= deltaTime;
             if (returnTime <= 0f)
@@ -118,7 +117,7 @@ public partial class CameraController : SpringArm3D
         }
         //else
             //GD.Print("No Hit");
-        targetDistance = obstacleDistance;
+        //targetDistance = obstacleDistance;
 
         var blendWeight = (float)Mathf.Clamp((targetDistance < currentDistance ? ZoomingInSpeed : ZoomingOutSpeed) * delta, 0, 1);
         if (obstacleDistance < ZoomDistance)

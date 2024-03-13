@@ -43,10 +43,9 @@ public partial class RandomLoot : RoomRandom
         lootNode.GlobalPosition = GlobalPosition;
         lootNode.RotationDegrees = Vector3.Up * (float)GD.RandRange(-180f, 180f);
 
-        if (lootNode is Relic)
-        {
-            Relic relic = lootNode as Relic;
-            CarryData.Instance.RemainingLootValue += relic.loot.GetValue();
-        }
+        //if (lootNode is Relic)
+        //{
+        //    Relic relic = lootNode as Relic;
+        //}
     }
 }

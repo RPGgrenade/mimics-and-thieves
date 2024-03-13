@@ -12,6 +12,7 @@ public partial class RandomRoom : RoomRandom
     [ExportCategory("Randomizing")]
     [Export] public float TimeBetweenSetup = 0.05f;
     [Export] public float TimeBetweenSpawning = 0.5f;
+    [Export] public float TimeBeforeStopping = 2.5f;
     //[Export] public RoomRandom[] Randomizers;
     [Export] public RandomRotater[] Rotaters;
     [Export] public RandomLighter[] Lighters;
@@ -53,6 +54,11 @@ public partial class RandomRoom : RoomRandom
                 yield return Timing.WaitForSeconds(randomizationTime);
                 Timing.RunCoroutine(RunRandomization().CancelWith(this), Segment.Process, "Random");
             }
+        }
+        if (listcount == 5)
+        {
+            yield return Timing.WaitForSeconds(TimeBeforeStopping); // To give objects time to reach the floor and not activate mimics
+            listcount++;
         }
     }
 
