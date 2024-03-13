@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bsdxg5kjhhj4x"]
+
+[ext_resource type="Texture2D" uid="uid://peekdalaucn8" path="res://Textures/Materials/wood.jpg" id="1_4obbs"]
+
+[resource]
+albedo_color = Color(0.588235, 0.305882, 0.152941, 1)
+albedo_texture = ExtResource("1_4obbs")
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

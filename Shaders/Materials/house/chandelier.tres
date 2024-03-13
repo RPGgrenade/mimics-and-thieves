@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dviv7mnbnhohj"]
+
+[ext_resource type="Texture2D" uid="uid://bjhv2j0pvn78d" path="res://Textures/Materials/glass_n.jpg" id="1_pbrya"]
+
+[resource]
+transparency = 1
+albedo_color = Color(1, 0.839216, 0.643137, 0.74902)
+roughness_texture = ExtResource("1_pbrya")
+emission_enabled = true
+emission = Color(0.74902, 0.490196, 0, 1)
+emission_energy_multiplier = 0.2
+normal_enabled = true
+normal_texture = ExtResource("1_pbrya")
+uv1_scale = Vector3(2, 2, 2)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

@@ -5,7 +5,7 @@ public partial class RandomMimic : RoomRandom
 {
     [Export(PropertyHint.Range, "0,1")] public float NoSpawnChance = 0.08f;
     [Export(PropertyHint.Range, "0,1")] public float FurnitureChance = 0.6f;
-    [Export] public float MinDistanceFromDoor = 12f;
+    [Export] public float MinDistanceFromDoor = 7f;
     [Export] public PackedScene[] MimicTable;
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

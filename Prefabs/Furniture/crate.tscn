@@ -1,21 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://6vtvvfkqri1k"]
+[gd_scene load_steps=6 format=3 uid="uid://6vtvvfkqri1k"]
 
 [ext_resource type="Script" path="res://Scripts/House/Rooms/RandomDespawn.cs" id="1_dksc4"]
-[ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="1_qmbe6"]
-[ext_resource type="Texture2D" uid="uid://i7msav3r1wdv" path="res://Textures/Materials/wood_plank_n.jpg" id="2_ssrth"]
+[ext_resource type="ArrayMesh" uid="uid://bvk3v5kkakt6m" path="res://Models/Furniture/crate.res" id="2_mjhhf"]
+[ext_resource type="Material" uid="uid://neqwpi7sure3" path="res://Shaders/Materials/house/crate.tres" id="3_h7v0k"]
 [ext_resource type="Texture2D" uid="uid://dw8mbw21o6oyf" path="res://Textures/Materials/magic_03.png" id="3_qfeaf"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cr442"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_861uk"]
-albedo_texture = ExtResource("1_qmbe6")
-roughness = 0.21
-normal_enabled = true
-normal_scale = 0.27
-normal_texture = ExtResource("2_ssrth")
-uv1_scale = Vector3(2, 2, 2)
-distance_fade_mode = 2
-distance_fade_max_distance = 2.0
 
 [node name="Crate" type="StaticBody3D" node_paths=PackedStringArray("Randomizer")]
 collision_layer = 2
@@ -26,10 +16,12 @@ Randomizer = NodePath(".")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_cr442")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-material = SubResource("StandardMaterial3D_861uk")
+[node name="Crate" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = ExtResource("2_mjhhf")
+surface_material_override/0 = ExtResource("3_h7v0k")
 
-[node name="Decal" type="Decal" parent="CSGBox3D"]
+[node name="Decal" type="Decal" parent="Crate"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.480285, 0)
 size = Vector3(1, 0.125, 1)
 texture_albedo = ExtResource("3_qfeaf")

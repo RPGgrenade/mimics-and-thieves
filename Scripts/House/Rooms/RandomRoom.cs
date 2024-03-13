@@ -59,6 +59,7 @@ public partial class RandomRoom : RoomRandom
         {
             yield return Timing.WaitForSeconds(TimeBeforeStopping); // To give objects time to reach the floor and not activate mimics
             listcount++;
+            CarryData.Instance.Loaded = true;
         }
     }
 

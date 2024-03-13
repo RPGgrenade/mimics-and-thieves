@@ -1,19 +1,25 @@
-[gd_scene load_steps=42 format=3 uid="uid://bxuwdwwramswt"]
+[gd_scene load_steps=40 format=3 uid="uid://bxuwdwwramswt"]
 
 [ext_resource type="Script" path="res://Scripts/Mimics/Mimic.cs" id="1_6ah5a"]
 [ext_resource type="AudioStream" uid="uid://cv2g1mq4eta6j" path="res://Audio/SFX/RPG Sound Pack/inventory/chainmail2.wav" id="2_26owd"]
 [ext_resource type="Script" path="res://Scripts/Mimics/MimicAnimator.cs" id="2_abcwx"]
-[ext_resource type="Texture2D" uid="uid://coibe3m3rj6i0" path="res://Textures/Materials/wood_plank.jpg" id="3_ta3r7"]
-[ext_resource type="Texture2D" uid="uid://i7msav3r1wdv" path="res://Textures/Materials/wood_plank_n.jpg" id="4_4vpgx"]
-[ext_resource type="Texture2D" uid="uid://bt4f7y3m52guh" path="res://Textures/Thief/leather_n.jpg" id="5_1qq6x"]
-[ext_resource type="Texture2D" uid="uid://5fuinqvo2713" path="res://Textures/Thief/metal.jpg" id="5_3l2un"]
-[ext_resource type="Texture2D" uid="uid://blw5trpfrewfo" path="res://Textures/Thief/metal_n.jpg" id="6_ajyjh"]
+[ext_resource type="ArrayMesh" uid="uid://flhoedfbp6mm" path="res://Models/Mimic/cupboard.res" id="4_lslx4"]
+[ext_resource type="Material" uid="uid://gfbh0wuyr0s5" path="res://Shaders/Materials/mimics/cupboard.tres" id="5_svanw"]
+[ext_resource type="Material" uid="uid://b857ecmd5gkh5" path="res://Shaders/Materials/mimics/cupboard_handle.tres" id="6_byxaq"]
 [ext_resource type="Script" path="res://Scripts/Glow.cs" id="6_cbrvi"]
 [ext_resource type="Material" uid="uid://2l53ugu5c5tw" path="res://Shaders/Materials/Glow.tres" id="7_nlwj5"]
+[ext_resource type="ArrayMesh" uid="uid://bymwgeslb2rpw" path="res://Models/Mimic/tooth.res" id="7_u0kbn"]
+[ext_resource type="Material" uid="uid://ocq1y1i65pju" path="res://Shaders/Materials/mimics/tooth.tres" id="8_t78bp"]
 [ext_resource type="Script" path="res://Scripts/Mimics/MimicDetection.cs" id="8_uodip"]
+[ext_resource type="ArrayMesh" uid="uid://cjom3iqdl4ale" path="res://Models/Mimic/tongue.res" id="9_mhgjp"]
+[ext_resource type="Material" uid="uid://cs3b3ouid3vmb" path="res://Shaders/Materials/mimics/tongue.tres" id="10_4p41h"]
+[ext_resource type="ArrayMesh" uid="uid://ns6f0k8uudpk" path="res://Models/Mimic/eye.res" id="11_fcm0y"]
 [ext_resource type="Script" path="res://Scripts/SoundManager.cs" id="11_tvhbh"]
 [ext_resource type="AudioStream" uid="uid://die30jerkvdb8" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr1.wav" id="12_8h5nd"]
+[ext_resource type="Material" uid="uid://gxf8u02es8kf" path="res://Shaders/Materials/mimics/mimic_sclera.tres" id="12_osdgq"]
+[ext_resource type="Material" uid="uid://dpquf5ja4hv42" path="res://Shaders/Materials/mimics/mimic_iris.tres" id="13_l5nt8"]
 [ext_resource type="Script" path="res://Scripts/RandomSound.cs" id="13_tqyd0"]
+[ext_resource type="ArrayMesh" uid="uid://dt5hu4syp52ue" path="res://Models/Mimic/cupboard_door.res" id="14_u28uf"]
 [ext_resource type="AudioStream" uid="uid://cr3ggv57k8a4b" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr2.wav" id="14_uwm07"]
 [ext_resource type="AudioStream" uid="uid://v5uat5gg78nw" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr3.wav" id="15_ceb1w"]
 [ext_resource type="AudioStream" uid="uid://bsjvanwffwkm2" path="res://Audio/SFX/RPG Sound Pack/NPC/gutteral beast/mnstr4.wav" id="16_uk8ho"]
@@ -24,85 +30,6 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cp8pm"]
 size = Vector3(1.75, 3.67, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pecwq"]
-albedo_color = Color(0.862745, 0.635294, 0.156863, 1)
-albedo_texture = ExtResource("3_ta3r7")
-metallic = 0.06
-metallic_specular = 0.37
-roughness = 0.83
-normal_enabled = true
-normal_texture = ExtResource("4_4vpgx")
-heightmap_enabled = true
-heightmap_scale = 2.0
-heightmap_deep_parallax = true
-heightmap_min_layers = 8
-heightmap_max_layers = 32
-uv1_scale = Vector3(3, 3, 3)
-distance_fade_mode = 2
-distance_fade_max_distance = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_negm6"]
-albedo_color = Color(0.494118, 0.368627, 0.27451, 1)
-albedo_texture = ExtResource("5_3l2un")
-metallic = 0.57
-metallic_specular = 0.83
-roughness = 0.24
-normal_enabled = true
-normal_texture = ExtResource("6_ajyjh")
-distance_fade_mode = 2
-distance_fade_max_distance = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ied8t"]
-albedo_color = Color(0.494118, 0.368627, 0.27451, 1)
-albedo_texture = ExtResource("5_3l2un")
-metallic = 0.57
-metallic_specular = 0.83
-roughness = 0.24
-normal_enabled = true
-normal_texture = ExtResource("6_ajyjh")
-distance_fade_mode = 2
-distance_fade_max_distance = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2l3g"]
-albedo_color = Color(0.905882, 0.909804, 0.815686, 1)
-roughness = 0.7
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdyn4"]
-albedo_color = Color(0.823529, 0.2, 0.266667, 1)
-roughness = 0.2
-normal_enabled = true
-normal_scale = 0.76
-normal_texture = ExtResource("5_1qq6x")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fills"]
-albedo_color = Color(0.290196, 0.0823529, 0.301961, 1)
-roughness = 0.32
-emission_enabled = true
-emission = Color(0.113725, 0.0235294, 0.176471, 1)
-clearcoat_enabled = true
-clearcoat_roughness = 0.77
-disable_receive_shadows = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4gtw"]
-albedo_color = Color(0.52549, 0.360784, 0.0941176, 1)
-roughness = 0.32
-emission_enabled = true
-emission = Color(0.8, 0.462745, 0, 1)
-clearcoat_enabled = true
-clearcoat_roughness = 0.77
-disable_receive_shadows = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8pg7"]
-albedo_color = Color(0.494118, 0.368627, 0.27451, 1)
-albedo_texture = ExtResource("5_3l2un")
-metallic = 0.57
-metallic_specular = 0.83
-roughness = 0.24
-normal_enabled = true
-normal_texture = ExtResource("6_ajyjh")
-distance_fade_mode = 2
-distance_fade_max_distance = 2.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jr3hj"]
 points = PackedVector3Array(0, 0, 0, 4, -2, 8, -4, -2, 8, 4, 2, 8, -4, 2, 8)
@@ -162,7 +89,7 @@ Detection = NodePath("Detection")
 Animator = NodePath("Animator")
 Navigator = NodePath("Navigator")
 Obstacle = NodePath("Obstacle")
-MaxSpeed = 8.0
+MaxSpeed = 11.0
 JumpVelocity = 1.5
 Acceleration = 2.0
 RotationSpeed = 1.0
@@ -203,375 +130,183 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.556551, 0)
 
 [node name="Base" type="Node3D" parent="Model"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Model/Base"]
+[node name="CSGBox3D" type="MeshInstance3D" parent="Model/Base"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886927, 0)
-size = Vector3(1.5, 3, 0.8)
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.38884, -1.47826e-08)
-radius = 0.9
-height = 0.8
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.759152, 1.48196, -1.47826e-08)
-radius = 0.276
-height = 0.752
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.759, 1.482, 0)
-radius = 0.276
-height = 0.752
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4092, 0)
-size = Vector3(1.815, 0.05, 0.85)
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.175145, 0.117016)
-operation = 2
-size = Vector3(1.5, 3, 0.8)
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, 0, -1.36471, 0.424205)
-radius = 0.16
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_negm6")
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="Model/Base/CSGBox3D/CSGSphere3D"]
-transform = Transform3D(1, 5.04871e-29, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.182175, 0.0329776)
-inner_radius = 0.1
-outer_radius = 0.13
-sides = 6
-ring_sides = 4
-material = SubResource("StandardMaterial3D_ied8t")
-
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, 0.389281, -1.36471, 0.424205)
-radius = 0.16
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_ied8t")
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="Model/Base/CSGBox3D/CSGSphere3D2"]
-transform = Transform3D(1, 5.04871e-29, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.182175, 0.0329776)
-inner_radius = 0.1
-outer_radius = 0.13
-sides = 6
-ring_sides = 4
-material = SubResource("StandardMaterial3D_ied8t")
-
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="Model/Base/CSGBox3D"]
-transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, -0.389, -1.365, 0.424)
-radius = 0.16
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_ied8t")
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="Model/Base/CSGBox3D/CSGSphere3D3"]
-transform = Transform3D(1, 5.04871e-29, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.182175, 0.0329776)
-inner_radius = 0.1
-outer_radius = 0.13
-sides = 6
-ring_sides = 4
-material = SubResource("StandardMaterial3D_ied8t")
+gi_mode = 2
+mesh = ExtResource("4_lslx4")
+surface_material_override/0 = ExtResource("5_svanw")
+surface_material_override/1 = ExtResource("6_byxaq")
+surface_material_override/2 = ExtResource("6_byxaq")
 
 [node name="Teeth" type="Node3D" parent="Model/Base"]
 transform = Transform3D(1.3, 0, 0, 0, 3, 0, 0, 0, 1.3, -1.19209e-07, 0.0180922, 0.316968)
 
-[node name="Tooth" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth2" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth2" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth3" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth3" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth4" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth4" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth5" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth5" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth6" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth6" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth7" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth7" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth8" type="CSGCylinder3D" parent="Model/Base/Teeth"]
+[node name="Tooth8" type="MeshInstance3D" parent="Model/Base/Teeth"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
 [node name="Teeth2" type="Node3D" parent="Model/Base"]
 transform = Transform3D(1.3, 0, 0, 0, -3, 1.96295e-07, 0, -4.52987e-07, -1.3, 0.0319672, 2.08824, 0.350173)
 
-[node name="Tooth" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth2" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth2" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth3" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth3" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth4" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth4" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth5" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth5" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth6" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth6" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth7" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth7" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
-[node name="Tooth8" type="CSGCylinder3D" parent="Model/Base/Teeth2"]
+[node name="Tooth8" type="MeshInstance3D" parent="Model/Base/Teeth2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0.038, 0)
-radius = 0.01
-height = 0.2
-cone = true
-material = SubResource("StandardMaterial3D_o2l3g")
+gi_mode = 2
+mesh = ExtResource("7_u0kbn")
+surface_material_override/0 = ExtResource("8_t78bp")
 
 [node name="Tongue" type="Node3D" parent="Model/Base"]
 transform = Transform3D(1.7, 0, 0, 0, 1.64174, -0.441224, 0, 0.441224, 1.64174, 0, -0.124157, -0.0552454)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/Base/Tongue"]
+[node name="CSGCylinder3D" type="MeshInstance3D" parent="Model/Base/Tongue"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.146825, 0)
-radius = 0.14
-height = 0.412
-material = SubResource("StandardMaterial3D_cdyn4")
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/Base/Tongue/CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, 0.878075, -0.478523, 0, 0.478523, 0.878075, 0, 0.330451, 0.082946)
-radius = 0.1
-height = 0.412
-material = SubResource("StandardMaterial3D_cdyn4")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/Base/Tongue/CSGCylinder3D/CSGCylinder3D2"]
-transform = Transform3D(1, 0, 0, 0, 0.782097, -0.623157, 0, 0.623157, 0.782097, 0, 0.266008, 0.0731865)
-radius = 0.07
-height = 0.227
-cone = true
-material = SubResource("StandardMaterial3D_cdyn4")
+gi_mode = 2
+mesh = ExtResource("9_mhgjp")
+surface_material_override/0 = ExtResource("10_4p41h")
 
 [node name="Eyes" type="Node3D" parent="Model/Base"]
 transform = Transform3D(1.3, 0, 0, 0, 1.18125, -0.542815, 0, 0.542815, 1.18125, 0, 2.69191, 0.432734)
 
-[node name="Eye" type="CSGSphere3D" parent="Model/Base/Eyes"]
-radius = 0.1
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_fills")
+[node name="Eye" type="MeshInstance3D" parent="Model/Base/Eyes"]
+gi_mode = 2
+mesh = ExtResource("11_fcm0y")
+surface_material_override/0 = ExtResource("12_osdgq")
+surface_material_override/1 = ExtResource("13_l5nt8")
 
-[node name="Pupil" type="CSGSphere3D" parent="Model/Base/Eyes/Eye"]
-transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
-radius = 0.07
-radial_segments = 10
-rings = 4
-material = SubResource("StandardMaterial3D_u4gtw")
-
-[node name="Eye2" type="CSGSphere3D" parent="Model/Base/Eyes"]
+[node name="Eye2" type="MeshInstance3D" parent="Model/Base/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
-radius = 0.1
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_fills")
+gi_mode = 2
+mesh = ExtResource("11_fcm0y")
+surface_material_override/0 = ExtResource("12_osdgq")
+surface_material_override/1 = ExtResource("13_l5nt8")
 
-[node name="Pupil" type="CSGSphere3D" parent="Model/Base/Eyes/Eye2"]
-transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
-radius = 0.07
-radial_segments = 10
-rings = 4
-material = SubResource("StandardMaterial3D_u4gtw")
-
-[node name="Eye3" type="CSGSphere3D" parent="Model/Base/Eyes"]
+[node name="Eye3" type="MeshInstance3D" parent="Model/Base/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
-radius = 0.1
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_fills")
+gi_mode = 2
+mesh = ExtResource("11_fcm0y")
+surface_material_override/0 = ExtResource("12_osdgq")
+surface_material_override/1 = ExtResource("13_l5nt8")
 
-[node name="Pupil" type="CSGSphere3D" parent="Model/Base/Eyes/Eye3"]
-transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
-radius = 0.07
-radial_segments = 10
-rings = 4
-material = SubResource("StandardMaterial3D_u4gtw")
-
-[node name="Eye4" type="CSGSphere3D" parent="Model/Base/Eyes"]
+[node name="Eye4" type="MeshInstance3D" parent="Model/Base/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0.143, -0.103)
-radius = 0.1
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_fills")
+gi_mode = 2
+mesh = ExtResource("11_fcm0y")
+surface_material_override/0 = ExtResource("12_osdgq")
+surface_material_override/1 = ExtResource("13_l5nt8")
 
-[node name="Pupil" type="CSGSphere3D" parent="Model/Base/Eyes/Eye4"]
-transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
-radius = 0.07
-radial_segments = 10
-rings = 4
-material = SubResource("StandardMaterial3D_u4gtw")
-
-[node name="Eye5" type="CSGSphere3D" parent="Model/Base/Eyes"]
+[node name="Eye5" type="MeshInstance3D" parent="Model/Base/Eyes"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0.143, -0.103)
-radius = 0.1
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_fills")
-
-[node name="Pupil" type="CSGSphere3D" parent="Model/Base/Eyes/Eye5"]
-transform = Transform3D(0.94, 0, 0, 0, 1.115, 0, 0, 0, 0.55, 0, -1.19209e-07, 0.054172)
-radius = 0.07
-radial_segments = 10
-rings = 4
-material = SubResource("StandardMaterial3D_u4gtw")
+gi_mode = 2
+mesh = ExtResource("11_fcm0y")
+surface_material_override/0 = ExtResource("12_osdgq")
+surface_material_override/1 = ExtResource("13_l5nt8")
 
 [node name="Mouth" type="Node3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.687542, 0.950861, 0.371804)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Model/Mouth"]
+[node name="CSGBox3D2" type="MeshInstance3D" parent="Model/Mouth"]
 transform = Transform3D(0.9, 7.10543e-15, 0, 0, 0.899999, 0, 0, 0, 0.899999, -0.712221, -0.00712597, 0.064189)
-size = Vector3(1.5, 3, 0.12)
-material = SubResource("StandardMaterial3D_pecwq")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Model/Mouth/CSGBox3D2"]
-transform = Transform3D(1, 3.38813e-21, 0, 0, 1, 0, 0, 0, 1, 0.740534, 1.07004, -0.0642297)
-radius = 0.077
-height = 0.309
-material = SubResource("StandardMaterial3D_e8pg7")
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Model/Mouth/CSGBox3D2"]
-transform = Transform3D(1, 3.38813e-21, 0, 0, 1, 0, 0, 0, 1, 0.740534, -0.0469713, -0.0642297)
-radius = 0.077
-height = 0.309
-material = SubResource("StandardMaterial3D_e8pg7")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Model/Mouth/CSGBox3D2"]
-transform = Transform3D(1, 3.38813e-21, 0, 0, 1, 0, 0, 0, 1, 0.740534, -1.10918, -0.0642297)
-radius = 0.077
-height = 0.309
-material = SubResource("StandardMaterial3D_e8pg7")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Model/Mouth/CSGBox3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.395, 0, 0.379585, 0.0812013)
-radius = 0.16
-radial_segments = 6
-rings = 4
-material = SubResource("StandardMaterial3D_e8pg7")
-
-[node name="CSGTorus3D" type="CSGTorus3D" parent="Model/Mouth/CSGBox3D2/CSGSphere3D"]
-transform = Transform3D(1, 5.04871e-29, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.182175, 0.0329776)
-inner_radius = 0.1
-outer_radius = 0.13
-sides = 6
-ring_sides = 4
-material = SubResource("StandardMaterial3D_e8pg7")
+gi_mode = 2
+mesh = ExtResource("14_u28uf")
+surface_material_override/0 = ExtResource("5_svanw")
+surface_material_override/1 = ExtResource("6_byxaq")
 
 [node name="Glow" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.556551, 0)
 script = ExtResource("6_cbrvi")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Glow"]
+[node name="CSGBox3D2" type="MeshInstance3D" parent="Glow"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.886927, 0)
-size = Vector3(1.5, 3, 0.8)
-material = ExtResource("7_nlwj5")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Glow/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.38884, -1.47826e-08)
-radius = 0.9
-height = 0.8
-material = ExtResource("7_nlwj5")
-
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Glow/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.759152, 1.48196, -1.47826e-08)
-radius = 0.276
-height = 0.752
-material = ExtResource("7_nlwj5")
-
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Glow/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.759, 1.482, 0)
-radius = 0.276
-height = 0.752
-material = ExtResource("7_nlwj5")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Glow/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4092, 0)
-size = Vector3(1.815, 0.05, 0.85)
-material = ExtResource("7_nlwj5")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Glow/CSGBox3D"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.175145, 0.117016)
-operation = 2
-size = Vector3(1.5, 3, 0.8)
-material = ExtResource("7_nlwj5")
+gi_mode = 0
+mesh = ExtResource("4_lslx4")
+surface_material_override/0 = ExtResource("7_nlwj5")
+surface_material_override/1 = ExtResource("7_nlwj5")
+surface_material_override/2 = ExtResource("7_nlwj5")
 
 [node name="Detection" type="Area3D" parent="." node_paths=PackedStringArray("StartPoint")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.556551, 0)

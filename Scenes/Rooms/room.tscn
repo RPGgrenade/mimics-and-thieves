@@ -77,7 +77,8 @@ script = ExtResource("1_gro3k")
 TimeForVisibility = 0.2
 VisibilityDistance = 30.0
 Exit = NodePath("Exiting")
-TimeBetweenSpawning = 0.25
+TimeBetweenSetup = 0.03
+TimeBetweenSpawning = 0.1
 Rotaters = [NodePath("First Floor Nav"), NodePath("Second Floor Nav"), NodePath("Furniture/Furniture First Floor"), NodePath("Furniture/Furniture Second Floor"), NodePath("Mimics/First Floor Mimics"), NodePath("Mimics/Second Floor Mimics"), NodePath("Loot/First Floor Loot"), NodePath("Loot/Second Floor Loot"), NodePath("Lighting"), NodePath("Lighting2")]
 Lighters = [NodePath("Lighting/Room Light 1")]
 Furniture = [NodePath("Furniture/Furniture First Floor/Chandelier"), NodePath("Furniture/Furniture First Floor/Crate"), NodePath("Furniture/Furniture First Floor/Crate2"), NodePath("Furniture/Furniture First Floor/Crate3"), NodePath("Furniture/Furniture First Floor/Crate4"), NodePath("Furniture/Furniture First Floor/Crate5"), NodePath("Furniture/Furniture First Floor/Crate6"), NodePath("Furniture/Furniture First Floor/Shelf"), NodePath("Furniture/Furniture First Floor/Shelf2"), NodePath("Furniture/Furniture First Floor/Shelf3"), NodePath("Furniture/Furniture First Floor/Fireplace"), NodePath("Furniture/Furniture First Floor/Fireplace2"), NodePath("Furniture/Furniture First Floor/Table"), NodePath("Furniture/Furniture First Floor/Plant"), NodePath("Furniture/Furniture First Floor/Plant2"), NodePath("Furniture/Furniture First Floor/Plant3"), NodePath("Furniture/Furniture First Floor/Plant4"), NodePath("Furniture/Furniture Second Floor/Crate"), NodePath("Furniture/Furniture Second Floor/Crate2"), NodePath("Furniture/Furniture Second Floor/Crate3"), NodePath("Furniture/Furniture Second Floor/Crate4"), NodePath("Furniture/Furniture Second Floor/Crate5"), NodePath("Furniture/Furniture Second Floor/Crate6"), NodePath("Furniture/Furniture Second Floor/Shelf"), NodePath("Furniture/Furniture Second Floor/Shelf2"), NodePath("Furniture/Furniture Second Floor/Shelf3"), NodePath("Furniture/Furniture Second Floor/Plant"), NodePath("Furniture/Furniture Second Floor/Plant2"), NodePath("Furniture/Furniture Second Floor/Plant3"), NodePath("Furniture/Furniture Second Floor/Plant4"), NodePath("Furniture/Furniture Second Floor/Table2")]
@@ -622,6 +623,7 @@ Randomizer = NodePath(".")
 [node name="Light 1" type="OmniLight3D" parent="Lighting/Room Light 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 light_energy = 0.087
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 30.0
@@ -630,6 +632,7 @@ omni_attenuation = 0.3
 [node name="Light 2" type="OmniLight3D" parent="Lighting/Room Light 1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
 light_energy = 0.087
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 30.0
@@ -643,6 +646,7 @@ Randomizer = NodePath(".")
 [node name="Light 3" type="OmniLight3D" parent="Lighting2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.909, 5)
 light_energy = 0.087
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 30.0
@@ -651,6 +655,7 @@ omni_attenuation = 0.3
 [node name="Light 4" type="OmniLight3D" parent="Lighting2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.909, -5)
 light_energy = 0.087
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 30.0

@@ -4,7 +4,7 @@ using System;
 public partial class RandomDespawn : RoomRandom
 {
     [Export(PropertyHint.Range, "0,1")] public float DespawnChance = 0.1f;
-    [Export] public float MinDistanceFromDoor = 12f;
+    [Export] public float MinDistanceFromDoor = 5f;
 
     public override void Randomize()
     {

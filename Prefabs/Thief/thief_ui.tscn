@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bh5nxfjipeapm"]
+[gd_scene load_steps=43 format=3 uid="uid://bh5nxfjipeapm"]
 
 [ext_resource type="Script" path="res://Scripts/UI/ThiefUI.cs" id="1_gfiup"]
 [ext_resource type="Texture2D" uid="uid://dd6s1f1qe2fcm" path="res://Textures/UI/empty.png" id="2_5ogup"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://ic33yy20t1vd" path="res://Textures/UI/Icons/mouse/right.png" id="16_cflu3"]
 [ext_resource type="Texture2D" uid="uid://c1eejia5viw3n" path="res://Textures/UI/Icons/steam/rt.png" id="17_gq65x"]
 [ext_resource type="Texture2D" uid="uid://dhuxet66wn7bc" path="res://Textures/UI/Icons/mouse/left.png" id="18_fcg0v"]
+[ext_resource type="Texture2D" uid="uid://d3hispv0xrrdw" path="res://Textures/UI/Icons/steam/start.png" id="19_fsmny"]
+[ext_resource type="Texture2D" uid="uid://531nn52kbggg" path="res://Textures/UI/Icons/key/esc.png" id="20_miopd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jbv68"]
 load_path = "res://.godot/imported/fabric_bg.png-ca9c02923220639d582523693b777b7c.ctex"
@@ -78,6 +80,12 @@ expand_margin_top = 40.0
 expand_margin_right = 40.0
 expand_margin_bottom = 40.0
 modulate_color = Color(0.482353, 0.482353, 0.482353, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5mb5n"]
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0.113725, 0.113725, 0.113725, 0.627451)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2etu5"]
 font_size = 24
@@ -139,7 +147,7 @@ InfoName = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/V
 InfoDescription = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Description")
 InfoEffect = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Magic")
 InfoEffectDescription = NodePath("Pause/AspectRatioContainer/PanelContainer/MarginContainer/VBoxContainer/Top Container/RightMargin/PanelContainer/Item Information/Selected Magic Description")
-Icons = [NodePath("Play/Selected/MarginContainer/CycleLeft"), NodePath("Play/Selected/MarginContainer2/CycleRight"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Toss"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Run"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Dodge"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Jump"), NodePath("Play/Controls/MarginContainer/Bag"), NodePath("Play/Controls/MarginContainer2/Grab")]
+Icons = [NodePath("Play/Selected/MarginContainer/CycleLeft"), NodePath("Play/Selected/MarginContainer2/CycleRight"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Toss"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Run"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Dodge"), NodePath("Play/Controls/PanelContainer/AspectRatioContainer/MarginContainer/GridContainer/Jump"), NodePath("Play/Controls/MarginContainer/Bag"), NodePath("Play/Controls/MarginContainer2/Grab"), NodePath("Play/Controls/MarginContainer3/Pause")]
 
 [node name="Play" type="Control" parent="."]
 layout_mode = 3
@@ -465,6 +473,35 @@ offset_right = 75.0
 offset_bottom = 15.0
 text = "Grab/Hold"
 label_settings = SubResource("LabelSettings_qt4pf")
+
+[node name="MarginContainer3" type="MarginContainer" parent="Play/Controls"]
+layout_mode = 0
+offset_left = 1116.0
+offset_top = -180.0
+offset_right = 1186.0
+offset_bottom = -110.0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Pause" type="TextureRect" parent="Play/Controls/MarginContainer3" node_paths=PackedStringArray("text")]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("19_fsmny")
+expand_mode = 2
+script = ExtResource("5_clnkx")
+MouseIcon = ExtResource("20_miopd")
+ControllerIcon = ExtResource("19_fsmny")
+text = NodePath("Label")
+
+[node name="Label" type="Label" parent="Play/Controls/MarginContainer3/Pause"]
+layout_mode = 0
+offset_top = -8.0
+offset_right = 75.0
+offset_bottom = 15.0
+text = "Inventory"
+label_settings = SubResource("LabelSettings_5mb5n")
+horizontal_alignment = 1
 
 [node name="Pause" type="Control" parent="."]
 layout_mode = 3

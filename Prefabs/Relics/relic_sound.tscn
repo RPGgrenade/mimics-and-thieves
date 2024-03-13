@@ -64,6 +64,7 @@ script = ExtResource("1_uvlm3")
 Sounds = Array[Object]([SubResource("Resource_o2k08"), SubResource("Resource_efuyy"), SubResource("Resource_qqw1t"), SubResource("Resource_y4gmc")])
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 one_shot = true
 autostart = true
 

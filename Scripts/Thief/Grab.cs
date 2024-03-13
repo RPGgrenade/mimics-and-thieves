@@ -50,37 +50,40 @@ public partial class Grab : Area3D
     {
         if (Item != null)
         {
-            Relic relic = Item as Relic;
-            relic.IsGrabbed = false;
-            relic.SetVelocity(Vector3.Zero);
-            relic.Reparent(GetTree().Root);
-
-            if (ThrowStrength > 0f)
+            if (IsInstanceValid(Item))
             {
-                Vector3 forward = (controller.Basis * Vector3.Back).Normalized();
-                Vector3 right = (controller.Basis * Vector3.Right).Normalized();
-                float angle = Mathf.DegToRad(ThrowAngle);
+                Relic relic = Item as Relic;
+                relic.IsGrabbed = false;
+                relic.SetVelocity(Vector3.Zero);
+                relic.Reparent(GetTree().Root);
 
-                Vector3 throwVector = forward.Rotated(right, angle).Normalized() * ThrowStrength;
-                relic.SetVelocity(throwVector + controller.Velocity);
-            }
-            else relic.SetVelocity(controller.Velocity);
+                if (ThrowStrength > 0f)
+                {
+                    Vector3 forward = (controller.Basis * Vector3.Back).Normalized();
+                    Vector3 right = (controller.Basis * Vector3.Right).Normalized();
+                    float angle = Mathf.DegToRad(ThrowAngle);
 
-            //GD.Print("Item is used: "+ relic.Used);
-            if (controller.loot.Open && !relic.Used)
-            {
-                controller.loot.AddLoot(relic);
-                Loot selected = controller.loot.SelectedLoot;
-                CarryData.Instance.RemainingLootValue -= selected.GetValue();
-                if (selected != null)
-                    controller.UI.UpdateSelectedItem(
-                        selected?.name ?? "",
-                        controller.loot.SelectedCount,
-                        selected.magic?.name ?? "",
-                        selected.UI ?? null
-                    );
-                else
-                    controller.UI.UpdateSelectedItem("", 0, "", null);
+                    Vector3 throwVector = forward.Rotated(right, angle).Normalized() * ThrowStrength;
+                    relic.SetVelocity(throwVector + controller.Velocity);
+                }
+                else relic.SetVelocity(controller.Velocity);
+
+                //GD.Print("Item is used: "+ relic.Used);
+                if (controller.loot.Open && !relic.Used)
+                {
+                    controller.loot.AddLoot(relic);
+                    Loot selected = controller.loot.SelectedLoot;
+                    CarryData.Instance.RemainingLootValue -= selected.GetValue();
+                    if (selected != null)
+                        controller.UI.UpdateSelectedItem(
+                            selected?.name ?? "",
+                            controller.loot.SelectedCount,
+                            selected.magic?.name ?? "",
+                            selected.UI ?? null
+                        );
+                    else
+                        controller.UI.UpdateSelectedItem("", 0, "", null);
+                }
             }
 
             Item = null;

@@ -125,6 +125,8 @@ public partial class CameraController : SpringArm3D
             targetDistance = obstacleDistance;
             //blendWeight = 1;
         }
+        else
+            targetDistance = startDistance;
         currentDistance = Mathf.Lerp(currentDistance, targetDistance, blendWeight);
         currentDistance = Mathf.Clamp(currentDistance, 0f, startDistance);
 

@@ -75,6 +75,15 @@ public partial class MimicDetection : Area3D
                     GD.Print("Target lost");
                     Timing.CallDelayed(ForgetTime, PeriodicTargetLostCheck);
                 }
+                if(Target is ThiefController)
+                {
+                    ThiefController thief = (ThiefController)Target;
+                    if (thief.IsUndetectable)
+                    {
+                        SeesTarget = false;
+                        Target = null;
+                    }
+                }
             }
         }
     }

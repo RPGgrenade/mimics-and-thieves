@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://obgl3b4yobbx" path="res://Prefabs/Relics/tesseract.tscn" id="36_hpqrc"]
 [ext_resource type="PackedScene" uid="uid://cbk11och67deo" path="res://Prefabs/Mimics/clock.tscn" id="41_s41k3"]
 [ext_resource type="PackedScene" uid="uid://bqmifs83qd5sb" path="res://Prefabs/Mimics/sofa.tscn" id="42_s1amf"]
+[ext_resource type="LightmapGIData" uid="uid://co0coksaw37wn" path="res://Scenes/lightmaps/manor.lmbake" id="45_6ijct"]
 
 [sub_resource type="Environment" id="Environment_ekfaw"]
 ambient_light_source = 2
@@ -114,8 +115,6 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i8fcm"]
 size = Vector3(13.5468, 10.404, 18.1279)
-
-[sub_resource type="BoxOccluder3D" id="BoxOccluder3D_dnstc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00b6v"]
 albedo_color = Color(0.466667, 0.4, 0.694118, 1)
@@ -313,6 +312,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.104993, 3.95307, -13.1634)
 light_color = Color(1, 0.737255, 0.913725, 1)
 light_energy = 0.1
 light_specular = 7.0
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 45.188
@@ -323,6 +323,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0450335, 2.4399, -7.87273)
 light_color = Color(1, 0.737255, 0.913725, 1)
 light_energy = 0.1
 light_specular = 7.0
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 45.188
@@ -336,10 +337,6 @@ transform = Transform3D(1, 0, 0, 0, -4.47035e-08, 1, 0, -1, -4.47035e-08, 0, 3.2
 
 [node name="Light" parent="Entrance/Lighting/Window/SpotLight3D" index="0"]
 transform = Transform3D(0.335, 0, 0, 0, 0.725, 0, 0, 0, 1, 0, 0, 0.012938)
-
-[node name="CSGBox3D" parent="Entrance/Lighting/Window/SpotLight3D/Light/CSGCylinder3D" index="1"]
-transform = Transform3D(0.707107, -2.98023e-08, -0.707107, 1.27907e-08, 1, -1.49012e-08, 0.707107, 0, 0.707107, 4.76837e-07, 2.89624, 0)
-size = Vector3(8, 9, 8)
 
 [node name="Furniture" type="Node3D" parent="Entrance"]
 
@@ -476,10 +473,6 @@ MusicName = "Start Music"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entrance/Sounds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.096581, 2.87598, -2.81305)
 shape = SubResource("BoxShape3D_i8fcm")
-
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="Entrance"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.34952, -9.12729)
-occluder = SubResource("BoxOccluder3D_dnstc")
 
 [node name="Hallway" type="Node3D" parent="."]
 
@@ -709,6 +702,7 @@ material = SubResource("StandardMaterial3D_bss33")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.817353, 6.14651)
 light_color = Color(0.258824, 0.545098, 1, 1)
 light_energy = 3.336
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 425.39
@@ -718,6 +712,7 @@ omni_attenuation = 1.1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481138, 23.6668)
 light_color = Color(0.258824, 0.545098, 1, 1)
 light_energy = 3.336
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 omni_range = 425.39
@@ -727,6 +722,7 @@ omni_attenuation = 1.1
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4.76837e-07, 13.9369, 18.262)
 light_color = Color(0.258824, 0.545098, 1, 1)
 light_energy = 3.336
+light_bake_mode = 1
 shadow_enabled = true
 shadow_blur = 4.0
 spot_range = 16.085
@@ -927,9 +923,6 @@ shape = SubResource("SphereShape3D_shk7i")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.166311, 1.26852, -12.5111)
 shape = SubResource("CylinderShape3D_i7tj2")
 
-[node name="OccluderInstance3D2" type="OccluderInstance3D" parent="Hallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.334527, -0.0247421, 14.816)
-
 [node name="Rooms" type="Node3D" parent="." node_paths=PackedStringArray("rooms")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16.4148)
 script = ExtResource("28_wcfle")
@@ -955,9 +948,12 @@ shadow_transmittance_bias = 14.415
 sky_mode = 1
 
 [node name="Thief" parent="." instance=ExtResource("1_5i2il")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -13.766)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, -12.5282)
 
 [node name="CanvasLayer" parent="." instance=ExtResource("31_v5agl")]
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+light_data = ExtResource("45_6ijct")
 
 [connection signal="body_entered" from="Entrance/Doors/Exit" to="Entrance/Doors/Exit" method="OnExiting"]
 [connection signal="body_entered" from="Entrance/Sounds" to="Entrance/Sounds" method="StartSounds"]

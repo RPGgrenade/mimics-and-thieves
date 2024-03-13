@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cs3b3ouid3vmb"]
+
+[ext_resource type="Texture2D" uid="uid://bt4f7y3m52guh" path="res://Textures/Thief/leather_n.jpg" id="1_1eoju"]
+
+[resource]
+albedo_color = Color(0.823529, 0.2, 0.266667, 1)
+roughness = 0.2
+normal_enabled = true
+normal_scale = 0.76
+normal_texture = ExtResource("1_1eoju")

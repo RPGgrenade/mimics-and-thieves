@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnettdkcw5eks"]
+[gd_scene load_steps=18 format=3 uid="uid://cnettdkcw5eks"]
 
 [ext_resource type="PackedScene" uid="uid://cenhlqtwliw4u" path="res://Prefabs/Thief/thief.tscn" id="1_mdb1k"]
 [ext_resource type="PackedScene" uid="uid://babd5kcktxaej" path="res://Prefabs/Relics/gold_statue.tscn" id="2_uwt82"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bnqjibltf2k5d" path="res://Prefabs/Relics/jewel_green.tscn" id="10_auj3x"]
 [ext_resource type="PackedScene" uid="uid://cbk11och67deo" path="res://Prefabs/Mimics/clock.tscn" id="10_p3y0c"]
 [ext_resource type="PackedScene" uid="uid://bxuwdwwramswt" path="res://Prefabs/Mimics/cupboard.tscn" id="11_0tbsg"]
+[ext_resource type="PackedScene" uid="uid://cl7lrgi537jr4" path="res://Prefabs/Relics/scroll.tscn" id="12_ijg5f"]
 [ext_resource type="PackedScene" uid="uid://b31itd4t7c5lm" path="res://Prefabs/Relics/scarab.tscn" id="13_opb3s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ncx2d"]
@@ -125,3 +126,6 @@ transform = Transform3D(-0.565802, 0, 0.824541, 0, 1, 0, -0.824541, 0, -0.565802
 
 [node name="Cupboard2" parent="." instance=ExtResource("11_0tbsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0226326, 0.0202353, -9.82747)
+
+[node name="Stealth Scroll" parent="." instance=ExtResource("12_ijg5f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.61906, 0.564149, 1.33449)

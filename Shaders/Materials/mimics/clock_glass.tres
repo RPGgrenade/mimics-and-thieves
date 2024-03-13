@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bx6dom3fji8ax"]
+
+[ext_resource type="Texture2D" uid="uid://i7msav3r1wdv" path="res://Textures/Materials/wood_plank_n.jpg" id="1_5dh7q"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.721569, 0.870588, 0.972549, 0.172549)
+metallic = 0.06
+metallic_specular = 0.37
+roughness = 0.83
+normal_texture = ExtResource("1_5dh7q")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+uv1_scale = Vector3(3, 3, 3)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

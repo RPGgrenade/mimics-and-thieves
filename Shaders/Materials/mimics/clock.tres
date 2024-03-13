@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://8utaugqqb03d"]
+
+[ext_resource type="Texture2D" uid="uid://peekdalaucn8" path="res://Textures/Materials/wood.jpg" id="1_hf6a7"]
+[ext_resource type="Texture2D" uid="uid://dq6ixv2s0gfw3" path="res://Textures/Materials/wood_n.jpg" id="2_2tr7q"]
+
+[resource]
+albedo_color = Color(0.431373, 0.215686, 0, 1)
+albedo_texture = ExtResource("1_hf6a7")
+metallic = 0.06
+metallic_specular = 0.37
+roughness = 0.83
+normal_enabled = true
+normal_scale = 0.84
+normal_texture = ExtResource("2_2tr7q")
+heightmap_enabled = true
+heightmap_scale = 2.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+uv1_scale = Vector3(3, 3, 3)
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

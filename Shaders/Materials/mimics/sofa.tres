@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bn1lb8leqq77s"]
+
+[ext_resource type="Texture2D" uid="uid://cc467nbwhy1in" path="res://Textures/Thief/hair.jpg" id="1_omsd8"]
+[ext_resource type="Texture2D" uid="uid://drmsb1tm0dfh5" path="res://Textures/Thief/hair_n.jpg" id="2_ehe14"]
+
+[resource]
+albedo_color = Color(0.643137, 0.27451, 0.447059, 1)
+albedo_texture = ExtResource("1_omsd8")
+normal_enabled = true
+normal_scale = -0.64
+normal_texture = ExtResource("2_ehe14")
+distance_fade_mode = 2
+distance_fade_max_distance = 2.0

@@ -7,6 +7,7 @@ public partial class CarryData : Node
 
     [ExportCategory("Other")]
     [Export] public bool PlayIntro = true;
+    [Export] public bool Loaded = false;
     [ExportCategory("Loot")]
     [Export] public int TotalLootValue = 0;
     [Export] public int RemainingLootValue = 0;

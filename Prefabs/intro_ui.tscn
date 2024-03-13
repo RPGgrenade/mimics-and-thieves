@@ -13,11 +13,13 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lb0x"]
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("Focus", "Main", "Texts")]
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("Focus", "Loading", "Main", "Texts")]
 script = ExtResource("1_t1w71")
-Focus = NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Button")
+Focus = NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button")
+Loading = NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Loading")
 Main = NodePath("Intro")
 Texts = [NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text1"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text2"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text3"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text4"), NodePath("Intro/PanelContainer/MarginContainer/VBoxContainer/Control/Text5")]
+LoadingPivot = Vector2(12, 25)
 
 [node name="Intro" type="Control" parent="."]
 layout_mode = 3
@@ -131,7 +133,12 @@ text = "Oh, and look out for any Lurkens. I hear they protect the wizard's house
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="Intro/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Intro/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 120
+alignment = 2
+
+[node name="Button" type="Button" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -149,4 +156,14 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_a2r06")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2lb0x")
 text = " O "
 
-[connection signal="pressed" from="Intro/PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="AdvanceText"]
+[node name="Loading" type="Label" parent="Intro/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.380392, 0.694118, 0.733333, 1)
+theme_override_colors/font_shadow_color = Color(0.509804, 0.847059, 0.843137, 1)
+theme_override_colors/font_outline_color = Color(0.509804, 0.847059, 0.843137, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 31
+text = "C "
+
+[connection signal="pressed" from="Intro/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="AdvanceText"]

@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://Scripts/Thief/CameraController.cs" id="1_spm7o"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hg68s"]
-size = Vector3(3, 1.5, 0.8)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wt7we"]
+radius = 0.8
+height = 3.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5i03c"]
 radius = 0.55
@@ -17,15 +18,16 @@ spring_length = 3.0
 margin = 0.5
 script = ExtResource("1_spm7o")
 camera = NodePath("Camera3D")
-mouse_sensitivity = 0.5
+mouse_sensitivity = 0.25
+stick_sensitivity = 1.5
 VerticalAngleLimit = Vector2(-70, 30)
-CameraAcceleration = 25.0
+CameraAcceleration = 90.0
 CameraSpeed = 60.0
 EvasionRay = NodePath("Camera3D/Evasion")
 ControlMultiplier = 0.2
 SurroundingSpeed = 6.0
 InterceptionRay = NodePath("Camera3D/Interception")
-ZoomDistance = 4.0
+ZoomDistance = 5.0
 ZoomingInSpeed = 4.0
 ZoomingOutSpeed = 2.0
 ReturnTime = 6.0
@@ -39,8 +41,9 @@ OffsetSpeed = 0.2
 [node name="Camera3D" type="Camera3D" parent="."]
 
 [node name="Interception" type="ShapeCast3D" parent="Camera3D"]
-shape = SubResource("BoxShape3D_hg68s")
-target_position = Vector3(0, 0, -2.3)
+transform = Transform3D(4.37114e-08, 1, -8.74228e-08, 1, -4.37114e-08, 0, -3.82137e-15, -8.74228e-08, -1, 0, 0, -3)
+shape = SubResource("CapsuleShape3D_wt7we")
+target_position = Vector3(0, 0, -4)
 collision_mask = 6
 debug_shape_custom_color = Color(0.568627, 0.321569, 0.694118, 1)
 
