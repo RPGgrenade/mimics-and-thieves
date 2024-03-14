@@ -16,6 +16,7 @@ public partial class CameraController : SpringArm3D
     [Export] public Vector2 VerticalAngleLimit = new Vector2(-90f, 30f);
 
     [ExportGroup("Speeds")]
+    [Export] public float LerpSmoothing = 0.5f;
     [Export] public float CameraAcceleration = 2f;
     [Export] public float CameraSpeed = 1f;
 
@@ -54,13 +55,13 @@ public partial class CameraController : SpringArm3D
     private float startDistance = 0f;
     private float currentDistance = 0f;
     private float targetDistance = 0f;
-    private Node3D target;
+    private ThiefController target;
 
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        target = Owner as Node3D;
+        target = Owner as ThiefController;
         TopLevel = true;
         cameraTargetSpeed = CameraSpeed;
         returnTime = ReturnTime;
@@ -69,42 +70,59 @@ public partial class CameraController : SpringArm3D
         targetDistance = SpringLength;
     }
 
+    public override void _Process(double delta)
+    {
+        if (!target.UI.Paused)
+        {
+            Vector2 mouse_input = inputs.MouseInput;
+            Vector2 stick_input = inputs.RightStick;
+            float deltaTime = (float)delta;
+            rotation_degrees = RotationDegrees;
+
+
+            // Booleans for determing acceleration times
+            bool camera_input = (mouse_input.Length() > 0.1f || stick_input.Length() > 0.1f);
+            float rot_difference = (180.0f - Mathf.RadToDeg((rotation_degrees.Y - target.GlobalRotationDegrees.Y - ReturnYAngle))) / 180.0f;
+            bool is_returning = (returnTime <= 0f && Mathf.Abs(rot_difference) >= ReturnThreshold);
+            bool is_evading = (EvasionRay.IsColliding() || InterceptionRay.IsColliding());
+            bool is_accelerating = (camera_input || is_returning || is_evading);
+
+            cameraSpeed = Mathf.Lerp(cameraSpeed, is_accelerating ? cameraTargetSpeed : 0f, 1 - Mathf.Pow(LerpSmoothing, deltaTime));
+            rotation_degrees = processRotationInput(mouse_input, stick_input, rotation_degrees, deltaTime);
+            updateOffset(rot_difference, (float)deltaTime);
+
+            if (!camera_input)
+            {
+                //evadeSurroundings(camera_input, (float)delta);
+                cameraTargetSpeed = ReturnSpeed;
+                returnTime -= deltaTime;
+                if (returnTime <= 0f)
+                    rotation_degrees = returnRotation(rotation_degrees, deltaTime);
+            }
+            else
+            {
+                cameraTargetSpeed = CameraSpeed;
+                returnTime = ReturnTime;
+            }
+
+            //updateDistance((float)delta);
+
+            RotationDegrees = rotation_degrees;
+        }
+    }
+
     public override void _PhysicsProcess(double delta)
     {
-        Vector2 mouse_input = inputs.MouseInput;
-        Vector2 stick_input = inputs.RightStick;
-        float deltaTime = (float)delta;
-        rotation_degrees = RotationDegrees;
-
-
-        // Booleans for determing acceleration times
-        bool camera_input = (mouse_input.Length() > 0.1f || stick_input.Length() > 0.1f);
-        float rot_difference = (180.0f - Mathf.RadToDeg((rotation_degrees.Y - target.GlobalRotationDegrees.Y - ReturnYAngle))) / 180.0f;
-        bool is_returning = (returnTime <= 0f && Mathf.Abs(rot_difference) >= ReturnThreshold);
-        bool is_evading = (EvasionRay.IsColliding() || InterceptionRay.IsColliding());
-        bool is_accelerating = (camera_input || is_returning || is_evading);
-
-        cameraSpeed = Mathf.Lerp(cameraSpeed, is_accelerating ? cameraTargetSpeed : 0f, deltaTime);
-        rotation_degrees = processRotationInput(mouse_input, stick_input, rotation_degrees, deltaTime);
-        updateOffset(rot_difference, (float)deltaTime);
-
-        if (!camera_input)
+        if (!target.UI.Paused)
         {
-            evadeSurroundings(camera_input, (float)delta);
-            cameraTargetSpeed = ReturnSpeed;
-            returnTime -= deltaTime;
-            if (returnTime <= 0f)
-                rotation_degrees = returnRotation(rotation_degrees, deltaTime);
+            Vector2 mouse_input = inputs.MouseInput;
+            Vector2 stick_input = inputs.RightStick;
+            float deltaTime = (float)delta;
+            bool camera_input = (mouse_input.Length() > 0.1f || stick_input.Length() > 0.1f);
+            if (!camera_input)
+                evadeSurroundings(camera_input, deltaTime);
+            updateDistance(deltaTime);
         }
-        else
-        {
-            cameraTargetSpeed = CameraSpeed;
-            returnTime = ReturnTime;
-        }
-
-        updateDistance((float)delta);
-        
-        RotationDegrees = rotation_degrees;
     }
 
     private void updateDistance(float delta)
@@ -127,7 +145,7 @@ public partial class CameraController : SpringArm3D
         }
         else
             targetDistance = startDistance;
-        currentDistance = Mathf.Lerp(currentDistance, targetDistance, blendWeight);
+        currentDistance = Mathf.Lerp(currentDistance, targetDistance, 1 - Mathf.Pow(LerpSmoothing, blendWeight));
         currentDistance = Mathf.Clamp(currentDistance, 0f, startDistance);
 
         //GD.Print("Current Distance: "+ currentDistance);
@@ -163,25 +181,25 @@ public partial class CameraController : SpringArm3D
     {
         float dir = rot_difference > 0f ? -1f : 1f;
         if(Mathf.Abs(rot_difference) >= OffsetAmount)
-            camera.HOffset = Mathf.Lerp(camera.HOffset, OffsetAmount * dir, deltaTime * OffsetSpeed);
+            camera.HOffset = Mathf.Lerp(camera.HOffset, OffsetAmount * dir, 1 - Mathf.Pow(LerpSmoothing, deltaTime * OffsetSpeed));
         else
-            camera.HOffset = Mathf.Lerp(camera.HOffset, 0f, deltaTime * OffsetSpeed);
+            camera.HOffset = Mathf.Lerp(camera.HOffset, 0f, 1 - Mathf.Pow(LerpSmoothing,deltaTime * OffsetSpeed));
     }
 
     private Vector3 returnRotation(Vector3 rotation_degrees, float deltaTime)
     {
-        rotation_degrees.X = Mathf.Lerp(rotation_degrees.X, ReturnXAngle, deltaTime * cameraSpeed);
+        rotation_degrees.X = Mathf.Lerp(rotation_degrees.X, ReturnXAngle, 1 - Mathf.Pow(LerpSmoothing, deltaTime * cameraSpeed));
         rotation_degrees.X = Mathf.Clamp(rotation_degrees.X, VerticalAngleLimit.X, VerticalAngleLimit.Y);
-        rotation_degrees.Y = Mathf.Lerp(rotation_degrees.Y, target.RotationDegrees.Y + ReturnYAngle, deltaTime * cameraSpeed);
+        rotation_degrees.Y = Mathf.Lerp(rotation_degrees.Y, target.RotationDegrees.Y + ReturnYAngle, 1 - Mathf.Pow(LerpSmoothing, deltaTime * cameraSpeed));
         rotation_degrees.Y = Mathf.Wrap(rotation_degrees.Y, 0f, 360f);
         return rotation_degrees;
     }
 
     private Vector3 processRotationInput(Vector2 cam_input, Vector2 stick_input, Vector3 rotation_degrees, float deltaTime)
     {
-        rotation_degrees.X = Mathf.Lerp(rotation_degrees.X, rotation_degrees.X - (deltaTime * cam_input.Y * mouse_sensitivity + stick_input.Y * stick_sensitivity), deltaTime * cameraSpeed);
+        rotation_degrees.X = Mathf.Lerp(rotation_degrees.X, rotation_degrees.X - (deltaTime * cam_input.Y * mouse_sensitivity + stick_input.Y * stick_sensitivity), 1 - Mathf.Pow(LerpSmoothing, deltaTime * cameraSpeed));
         rotation_degrees.X = Mathf.Clamp(rotation_degrees.X, VerticalAngleLimit.X, VerticalAngleLimit.Y);
-        rotation_degrees.Y = Mathf.Lerp(rotation_degrees.Y, rotation_degrees.Y - (deltaTime* cam_input.X * mouse_sensitivity + stick_input.X * stick_sensitivity), deltaTime * cameraSpeed);
+        rotation_degrees.Y = Mathf.Lerp(rotation_degrees.Y, rotation_degrees.Y - (deltaTime* cam_input.X * mouse_sensitivity + stick_input.X * stick_sensitivity), 1 - Mathf.Pow(LerpSmoothing, deltaTime * cameraSpeed));
         rotation_degrees.Y = Mathf.Wrap(rotation_degrees.Y, 0f, 360f);
         return rotation_degrees;
     }

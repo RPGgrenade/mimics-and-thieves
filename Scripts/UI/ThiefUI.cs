@@ -89,13 +89,19 @@ public partial class ThiefUI : CanvasLayer
     private void Mouse()
     {
         UsingController = false;
-        Input.MouseMode = Input.MouseModeEnum.ConfinedHidden;
+        if(Paused)
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        else
+            Input.MouseMode = Input.MouseModeEnum.Captured;
         updateIcons();
     }
     private void Controller()
     {
         UsingController = true;
-        Input.MouseMode = Input.MouseModeEnum.Captured;
+        if (Paused)
+            Input.MouseMode = Input.MouseModeEnum.Hidden;
+        else
+            Input.MouseMode = Input.MouseModeEnum.Captured;
         updateIcons();
     }
 

@@ -21,6 +21,7 @@ camera = NodePath("Camera3D")
 mouse_sensitivity = 0.25
 stick_sensitivity = 1.5
 VerticalAngleLimit = Vector2(-70, 30)
+LerpSmoothing = 0.1
 CameraAcceleration = 90.0
 CameraSpeed = 60.0
 EvasionRay = NodePath("Camera3D/Evasion")
